@@ -31,4 +31,20 @@ describe Sector do
       @sector.should_not be_valid
     end
   end
+
+  describe "retrieval" do
+    before :each do
+      @sector = FactoryGirl.create(:sector)
+    end
+
+    it "should be able to retrieve by public_id" do
+      found_sector = Sector.find_by_public_id(@sector.public_id)
+      found_sector.should == @sector
+    end
+
+    it "should fail to retrieve a non-existent public_id" do
+      found_sector = Sector.find_by_public_id(@sector.public_id + 1)
+      found_sector.should == nil
+    end
+  end
 end

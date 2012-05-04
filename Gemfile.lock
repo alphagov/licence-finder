@@ -49,7 +49,10 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     mime-types (1.18)
+    mocha (0.11.3)
+      metaclass (~> 0.0.1)
     mongo (1.6.2)
       bson (~> 1.6.2)
     mongoid (2.4.9)
@@ -114,6 +117,7 @@ DEPENDENCIES
   bson_ext (~> 1.5)
   database_cleaner
   factory_girl_rails (~> 3.2.0)
+  mocha (~> 0.11.3)
   mongoid (~> 2.4)
   rails (= 3.2.3)
   rspec-rails (~> 2.10.0)

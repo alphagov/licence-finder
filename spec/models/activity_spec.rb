@@ -29,4 +29,20 @@ describe Activity do
       @activity.should_not be_valid
     end
   end
+
+  describe "find_by_public_id" do
+    before :each do
+      @activity = FactoryGirl.create(:activity)
+    end
+
+    it "should be able to retrieve by public_id" do
+      found_activity = Activity.find_by_public_id(@activity.public_id)
+      found_activity.should == @activity
+    end
+
+    it "should fail to retrieve a non-existent public_id" do
+      found_activity = Activity.find_by_public_id(@activity.public_id + 1)
+      found_activity.should == nil
+    end
+  end
 end

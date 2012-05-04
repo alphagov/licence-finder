@@ -25,5 +25,10 @@ describe Sector do
         @sector.safely.save
       end.should raise_error(Mongo::OperationFailure)
     end
+
+    it "should require a name" do
+      @sector.name = ''
+      @sector.should_not be_valid
+    end
   end
 end

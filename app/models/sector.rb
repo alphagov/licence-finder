@@ -4,4 +4,6 @@ class Sector
   index :public_id, :unique => true
   field :name, :type => String
   field :activities, :type => Array
+
+  validates :name, :presence => true
 end

@@ -46,18 +46,38 @@ describe Sector do
   end
 
   describe "retrieval" do
-    before :each do
-      @sector = FactoryGirl.create(:sector)
+    describe "#find_by_public_id" do
+      before :each do
+        @sector = FactoryGirl.create(:sector)
+      end
+
+      it "should be able to retrieve by public_id" do
+        found_sector = Sector.find_by_public_id(@sector.public_id)
+        found_sector.should == @sector
+      end
+
+      it "should fail to retrieve a non-existent public_id" do
+        found_sector = Sector.find_by_public_id(@sector.public_id + 1)
+        found_sector.should == nil
+      end
     end
 
-    it "should be able to retrieve by public_id" do
-      found_sector = Sector.find_by_public_id(@sector.public_id)
-      found_sector.should == @sector
-    end
+    describe "#find_by_public_ids" do
+      before :each do
+        @s1 = FactoryGirl.create(:sector, :public_id => 12)
+        @s2 = FactoryGirl.create(:sector, :public_id => 13)
+        @s3 = FactoryGirl.create(:sector, :public_id => 14)
+      end
 
-    it "should fail to retrieve a non-existent public_id" do
-      found_sector = Sector.find_by_public_id(@sector.public_id + 1)
-      found_sector.should == nil
+      it "should return the sectors for the given id's" do
+        sectors = Sector.find_by_public_ids([12, 14])
+        sectors.to_a.should =~ [@s1, @s3]
+      end
+
+      it "should skip any non-existent sectors" do
+        sectors = Sector.find_by_public_ids([12, 34, 13])
+        sectors.to_a.should =~ [@s1, @s2]
+      end
     end
   end
 end

@@ -12,4 +12,8 @@ class Sector
   def self.find_by_public_id(public_id)
     where(public_id: public_id).first
   end
+
+  def self.find_by_public_ids(public_ids)
+    self.any_in public_id: public_ids
+  end
 end

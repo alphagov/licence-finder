@@ -23,6 +23,10 @@ describe "Finding a licence" do
     check 'Gooey Sector'
     click_on 'Next step'
 
-    i_should_be_on "/licence-finder/activities"
+    i_should_be_on "/licence-finder/activities", :ignore_query => true
+
+    page.should have_content "Fooey Sector"
+    page.should have_content "Gooey Sector"
+    page.should_not have_content "Kablooey Sector"
   end
 end

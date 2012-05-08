@@ -58,4 +58,29 @@ describe LicenceFinderController do
 
     end
   end
+
+  describe "GET 'activities'" do
+    context "with some sectors specified" do
+      before :each do
+        Sector.stubs(:find_by_public_ids).returns(:some_sectors)
+        Activity.stubs(:find_by_sectors).returns(:some_activities)
+      end
+
+      def do_get
+        get :activities, :sectors => "1234,2345,3456"
+      end
+
+      it "returns http success" do
+        do_get
+        response.should be_success
+      end
+
+      it "fetches the given sectors and assigns them to @sectors" do
+        Sector.expects(:find_by_public_ids).with([1234,2345,3456]).returns(:some_sectors)
+        do_get
+        assigns[:sectors].should == :some_sectors
+      end
+    end
+
+  end
 end

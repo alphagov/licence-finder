@@ -16,4 +16,8 @@ class LicenceFinderController < ApplicationController
       redirect_to :action => 'sectors'
     end
   end
+
+  def activities
+    @sectors = Sector.find_by_public_ids(params[:sectors].split(',').map(&:to_i))
+  end
 end

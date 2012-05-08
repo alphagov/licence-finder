@@ -5,6 +5,7 @@ LicenceFinder::Application.routes.draw do
   # See how all your routes lay out with "rake routes"
 
   get "/licence-finder" => "licence_finder#start"
+  get "/licence-finder/sectors", :as => :sectors
 
   root :to => redirect("/licence-finder", :status => 302)
 

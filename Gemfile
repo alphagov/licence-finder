@@ -31,6 +31,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 3.2.0'
   gem 'database_cleaner'
   gem 'mocha', '~> 0.11.3', :require => false
+  gem 'capybara', '~> 1.1.2'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

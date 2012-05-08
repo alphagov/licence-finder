@@ -8,6 +8,12 @@ gem 'rails', '3.2.3'
 gem "mongoid", "~> 2.4"
 gem "bson_ext", "~> 1.5"
 
+if ENV['SLIMMER_DEV']
+  gem "slimmer", :path => '../slimmer'
+else
+  gem "slimmer", '~> 1.1.39'
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

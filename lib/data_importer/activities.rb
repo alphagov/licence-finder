@@ -22,8 +22,8 @@ class DataImporter::Activities < DataImporter
     if sector.activities.nil?
       sector.activities = Array.new
     end
-    if ! sector.activities.include? activity.id
-      sector.activities << activity.id
+    unless sector.activities.include? activity
+      sector.activities << activity
       sector.safely.save!
     end
   end

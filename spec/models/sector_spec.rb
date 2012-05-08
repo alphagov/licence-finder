@@ -4,13 +4,11 @@ describe Sector do
   it "should use the correct field types on the model" do
     Sector.safely.create!(
       :public_id => 42,
-      :name => "Some Sector",
-      :activities => [1, 34, 42]
+      :name => "Some Sector"
     )
     sector = Sector.first
     sector.public_id.should == 42
     sector.name.should == "Some Sector"
-    sector.activities.should == [1, 34, 42]
   end
 
   describe "validations" do
@@ -29,6 +27,21 @@ describe Sector do
     it "should require a name" do
       @sector.name = ''
       @sector.should_not be_valid
+    end
+  end
+
+  describe "associations" do
+    it "has many activities" do
+      a1 = FactoryGirl.create(:activity)
+      a2 = FactoryGirl.create(:activity)
+
+      s = FactoryGirl.build(:sector)
+      s.activities << a1
+      s.activities << a2
+      s.save!
+
+      s.reload
+      s.activities.should == [a1, a2]
     end
   end
 

@@ -30,6 +30,21 @@ describe Activity do
     end
   end
 
+  describe "associations" do
+    it "has many sectors" do
+      s1 = FactoryGirl.create(:sector)
+      s2 = FactoryGirl.create(:sector)
+
+      a = FactoryGirl.build(:activity)
+      a.sectors << s1
+      a.sectors << s2
+      a.save!
+
+      a.reload
+      a.sectors.should == [s1, s2]
+    end
+  end
+
   describe "find_by_public_id" do
     before :each do
       @activity = FactoryGirl.create(:activity)

@@ -24,7 +24,7 @@ describe DataImporter::Activities do
       imported_activity2.name.should == "Use CCTV systems"
 
       sector.reload
-      sector.activities.should == [imported_activity1.id, imported_activity2.id]
+      sector.activities.should == [imported_activity1, imported_activity2]
     end
 
     it "should avoid importing the same activity id more than once" do

@@ -11,4 +11,8 @@ class Licence
 
   validates :name, :presence => true
   validates :regulation_area, :presence => true
+
+  def self.find_by_public_id(public_id)
+    where(public_id: public_id).first
+  end
 end

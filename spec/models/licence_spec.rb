@@ -35,4 +35,20 @@ describe Licence do
       @licence.should_not be_valid
     end
   end
+
+  describe "find_by_public_id" do
+    before :each do
+      @licence = FactoryGirl.create(:licence)
+    end
+
+    it "should be able to retrieve by public_id" do
+      found_licence = Licence.find_by_public_id(@licence.public_id)
+      found_licence.should == @licence
+    end
+
+    it "should fail to retrieve a non-existent public_id" do
+      found_licence = Licence.find_by_public_id(@licence.public_id + 1)
+      found_licence.should == nil
+    end
+  end
 end

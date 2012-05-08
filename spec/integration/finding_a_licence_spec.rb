@@ -19,5 +19,10 @@ describe "Finding a licence" do
     i_should_see_field('Kablooey Sector', :type => :checkbox)
     i_should_see_field('Gooey Sector', :type => :checkbox)
 
+    check 'Fooey Sector'
+    check 'Gooey Sector'
+    click_on 'Next step'
+
+    i_should_be_on "/licence-finder/activities"
   end
 end

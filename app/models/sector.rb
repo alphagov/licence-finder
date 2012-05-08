@@ -4,6 +4,8 @@ class Sector
   index :public_id, :unique => true
   field :name, :type => String
   field :activities, :type => Array
+  field :layer1_id, :type => Integer # Only for the purpose of importing
+  field :layer2_id, :type => Integer # Only for the purpose of importing
 
   validates :name, :presence => true
 

@@ -17,6 +17,8 @@ describe DataImporter::Sectors do
       imported_sector = Sector.find_by_public_id(1000011)
       imported_sector.public_id.should == 1000011
       imported_sector.name.should == "Animal farming support services"
+      imported_sector.layer1_id.should == 1000001
+      imported_sector.layer2_id.should == 1000002
     end
 
     it "should avoid importing the same sector id twice" do

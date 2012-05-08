@@ -14,6 +14,8 @@ class DataImporter::Sectors < DataImporter
       layer3 = Sector.new
       layer3.public_id = row['LAYER3_OID'].to_i
       layer3.name = row['LAYER3']
+      layer3.layer1_id = row['LAYER1_OID'].to_i
+      layer3.layer2_id = row['LAYER2_OID'].to_i
       Rails.logger.debug "Creating Layer3 sector #{layer3.id}(#{layer3.name})"
       layer3.safely.save!
     end

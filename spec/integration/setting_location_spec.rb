@@ -7,19 +7,21 @@ describe "Setting business location" do
     s2 = FactoryGirl.create(:sector, name: "Balooey Sector")
 
     a1 = FactoryGirl.create(:activity, name: "Fooey Activity", sectors: [s1])
-    a2 = FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [s2])
-    a3 = FactoryGirl.create(:activity, :name => "Kabloom", :sectors => [s1, s2])
+    a2 = FactoryGirl.create(:activity, name: "Kablooey Activity", sectors: [s2])
+    a3 = FactoryGirl.create(:activity, name: "Kabloom", sectors: [s1, s2])
 
     visit "/licence-finder/location?sectors=#{s1.public_id}&activities=#{a1.public_id}"
 
     page.should have_content "Fooey Sector"
     page.should have_content "Fooey Activity"
 
-    page.should have_xpath('//select[@id="location"]')
-    page.should have_xpath('//select[@id="location"]//option[@value="england"]')
-    page.should have_xpath('//select[@id="location"]//option[@value="scotland"]')
-    page.should have_xpath('//select[@id="location"]//option[@value="wales"]')
-    page.should have_xpath('//select[@id="location"]//option[@value="northern_ireland"]')
+    page.all(:xpath, '//select[@id="location"]//option/@value').map(&:text).should == [
+      '',
+      'england',
+      'scotland',
+      'wales',
+      'northern_ireland'
+    ]
 
     select('England', from: 'location')
 

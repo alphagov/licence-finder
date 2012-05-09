@@ -1,1 +1,24 @@
-<h3>Licences</h3>
+<h3>Selected sectors:</h3>
+<ul id="sectors">
+  <% @sectors.each do |sector| %>
+    <li><%= sector.name %></li>
+  <% end %>
+</ul>
+
+<h3>Selected activities:</h3>
+<ul id="activities">
+  <% @activities.each do |activity| %>
+    <li><%= activity.name %></li>
+  <% end %>
+</ul>
+
+<h3>Location:</h3>
+<div id="location"><%= @location %></div>
+
+<h3>Selected licences:</h3>
+<ul id="licences">
+  <% @licences.each do |licence| %>
+    <li><%= licence.name %></li>
+  <% end %>
+</ul>
+

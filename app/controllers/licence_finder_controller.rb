@@ -41,6 +41,10 @@ class LicenceFinderController < ApplicationController
   end
 
   def licences
+    @sectors = Sector.find_by_public_ids(@sector_ids)
+    @activities = Activity.find_by_public_ids(@activity_ids)
+    @location = params[:location]
+    @licences = Licence.find_by_sectors_activities_and_location(@sectors, @activities, params[:location])
   end
 
   protected

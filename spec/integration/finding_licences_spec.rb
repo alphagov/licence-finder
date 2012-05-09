@@ -7,11 +7,23 @@ describe "Finding licences" do
     s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")
     s3 = FactoryGirl.create(:sector, :name => "Gooey Sector")
 
-    FactoryGirl.create(:activity, :name => "Fooey Activity", :sectors => [s1])
-    FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [s2])
-    FactoryGirl.create(:activity, :name => "Kabloom", :sectors => [s1, s2])
-    FactoryGirl.create(:activity, :name => "Gooey Activity", :sectors => [s3])
-    FactoryGirl.create(:activity, :name => "Transmogrifying", :sectors => [s1, s3])
+    a1 = FactoryGirl.create(:activity, :name => "Fooey Activity", :sectors => [s1])
+    a2 = FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [s2])
+    a3 = FactoryGirl.create(:activity, :name => "Kabloom", :sectors => [s1, s2])
+    a4 = FactoryGirl.create(:activity, :name => "Gooey Activity", :sectors => [s3])
+    a5 = FactoryGirl.create(:activity, :name => "Transmogrifying", :sectors => [s1, s3])
+
+    l1 = FactoryGirl.create(:licence, :name => "Licence One")
+    l2 = FactoryGirl.create(:licence, :name => "Licence Two")
+    l3 = FactoryGirl.create(:licence, :name => "Licence Three")
+    l4 = FactoryGirl.create(:licence, :name => "Licence Four", :da_england => false, :da_scotland => true)
+
+    FactoryGirl.create(:licence_link, :sector => s1, :activity => a1, :licence => l1)
+    FactoryGirl.create(:licence_link, :sector => s1, :activity => a2, :licence => l2)
+    FactoryGirl.create(:licence_link, :sector => s2, :activity => a1, :licence => l3)
+    FactoryGirl.create(:licence_link, :sector => s1, :activity => a1, :licence => l4)
+
+
 
     visit "/licence-finder"
 
@@ -71,8 +83,8 @@ describe "Finding licences" do
     i_should_be_on "/licence-finder/location", :ignore_query => true
 
     within(:css, 'ul#sectors') do
-      page.should have_content "Fooey Sector"
-      page.should have_content "Gooey Sector"
+      page.should have_content "Fooey Sector" # s1
+      page.should have_content "Gooey Sector" # s3
       # They should be in alphabetical order
       page.all('li').map(&:text).should == [
         'Fooey Sector',
@@ -81,8 +93,8 @@ describe "Finding licences" do
     end
 
     within(:css, 'ul#activities') do
-      page.should have_content 'Fooey Activity'
-      page.should have_content 'Gooey Activity'
+      page.should have_content 'Fooey Activity' # a1
+      page.should have_content 'Gooey Activity' # a4
       # They should be in alphabetical order
       page.all('li').map(&:text).should == [
         'Fooey Activity',
@@ -95,5 +107,27 @@ describe "Finding licences" do
     click_on 'Set location'
 
     i_should_be_on "/licence-finder/licences", :ignore_query => true
+
+    within(:css, 'ul#sectors') do
+      page.all('li').map(&:text).should == [
+        'Fooey Sector',
+        'Gooey Sector',
+      ]
+    end
+
+    within(:css, 'ul#activities') do
+      page.all('li').map(&:text).should == [
+        'Fooey Activity',
+        'Gooey Activity',
+      ]
+    end
+
+    page.find('#location').text.should == "england"
+
+    within(:css, 'ul#licences') do
+      page.all('li').map(&:text).should == [
+        'Licence One'
+      ]
+    end
   end
 end

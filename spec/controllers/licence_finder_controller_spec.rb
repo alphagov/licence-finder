@@ -199,4 +199,39 @@ describe LicenceFinderController do
       end
     end
   end
+
+  describe "GET 'licences'" do
+    context "with sectors, activities and location specified" do
+      before :each do
+        Sector.stubs(:find_by_public_ids).returns(:some_sectors)
+        Activity.stubs(:find_by_public_ids).returns(:some_activities)
+        Licence.stubs(:find_by_sectors_activities_and_location).returns(:some_licences)
+      end
+
+      it "fetches the appropriate licences and assigns them to @licences" do
+        Sector.expects(:find_by_public_ids).with([123,321]).returns(:some_sectors)
+        Activity.expects(:find_by_public_ids).with([234,432]).returns(:some_activities)
+        Licence.expects(:find_by_sectors_activities_and_location).with(:some_sectors, :some_activities, "england").returns(:some_licences)
+        get :licences, :sectors => '123_321', :activities => '234_432', :location => "england"
+        assigns[:sectors].should == :some_sectors
+        assigns[:activities].should == :some_activities
+        assigns[:location].should == "england"
+        assigns[:licences].should == :some_licences
+      end
+    end
+
+    context "with valid sectors and invalid activities" do
+      it "should redirect back to the activities form" do
+        get :licences, :sectors => '123_321', :activities => '', :location => 'anything'
+        response.should redirect_to(activities_path(:sectors => '123_321'))
+      end
+    end
+
+    context "with no valid sectors" do
+      it "should redirect back to the sectors form" do
+        get :licences, :sectors => '', :activities => '', :location => 'anything'
+        response.should redirect_to(sectors_path)
+      end
+    end
+  end
 end

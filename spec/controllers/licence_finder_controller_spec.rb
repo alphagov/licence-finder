@@ -164,22 +164,38 @@ describe LicenceFinderController do
   end
 
   describe "POST 'business_location_submit'" do
-    context "with sectors, activities and valid location" do
-      it "should pass through all parameters and redirects to the licences action" do
-        post :business_location_submit, :sectors => '123,321', :activities => '234,432', :location => "england"
-        response.should redirect_to(licences_path(:sectors => '123,321', :activities => '234,432', :location => "england"))
+    context "with valid sectors and activities" do
+      context "with a valid location" do
+        it "should pass through all parameters and redirects to the licences action" do
+          post :business_location_submit, :sectors => '123,321', :activities => '234,432', :location => "england"
+          response.should redirect_to(licences_path(:sectors => '123,321', :activities => '234,432', :location => "england"))
+        end
+      end
+      context "with no location" do
+        it "should pass through sectors and activities and redirect to business_location" do
+          post :business_location_submit, :sectors => '123,321', :activities => '234,432'
+          response.should redirect_to(business_location_path(:sectors => '123,321', :activities => '234,432'))
+        end
+      end
+      context "with an invalid location" do
+        it "should pass through sectors and activities and redirect to business_location" do
+          post :business_location_submit, :sectors => '123,321', :activities => '234,432', :location => 'invalid'
+          response.should redirect_to(business_location_path(:sectors => '123,321', :activities => '234,432'))
+        end
       end
     end
-    context "with valid sectors and activities no location" do
-      it "should pass through sectors and activities and redirect to business_location" do
-        post :business_location_submit, :sectors => '123,321', :activities => '234,432'
-        response.should redirect_to(business_location_path(:sectors => '123,321', :activities => '234,432'))
+
+    context "with valid sectors and invalid activities" do
+      it "should redirect back to the activities form" do
+        post :business_location_submit, :sectors => '123,321', :activities => '', :location => 'anything'
+        response.should redirect_to(activities_path(:sectors => '123,321'))
       end
     end
-    context "with valid sectors and activities and an invalid location" do
-      it "should pass through sectors and activities and redirect to business_location" do
-        post :business_location_submit, :sectors => '123,321', :activities => '234,432', :location => 'invalid'
-        response.should redirect_to(business_location_path(:sectors => '123,321', :activities => '234,432'))
+
+    context "with no valid sectors" do
+      it "should redirect back to the sectors form" do
+        post :business_location_submit, :sectors => '', :activities => '', :location => 'anything'
+        response.should redirect_to(sectors_path)
       end
     end
   end

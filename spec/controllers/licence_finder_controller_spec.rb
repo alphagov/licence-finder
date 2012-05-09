@@ -29,17 +29,17 @@ describe LicenceFinderController do
     context "with some sectors selected" do
       it "combines the sector_ids into a single param, and redirects to the activities action" do
         post :sectors_submit, :sector_ids => ["1234", "2345", "32456"]
-        response.should redirect_to(activities_path(:sectors => "1234,2345,32456"))
+        response.should redirect_to(activities_path(:sectors => "1234_2345_32456"))
       end
 
       it "should order the sector_ids numerically" do
         post :sectors_submit, :sector_ids => ["1234", "345", "32456"]
-        response.should redirect_to(activities_path(:sectors => "345,1234,32456"))
+        response.should redirect_to(activities_path(:sectors => "345_1234_32456"))
       end
 
       it "should sanitise any non-numeric entries" do
         post :sectors_submit, :sector_ids => ["1234", "foo", "32456", "", "-1"]
-        response.should redirect_to(activities_path(:sectors => "1234,32456"))
+        response.should redirect_to(activities_path(:sectors => "1234_32456"))
       end
     end
 
@@ -68,7 +68,7 @@ describe LicenceFinderController do
       end
 
       def do_get
-        get :activities, :sectors => "1234,2345,3456"
+        get :activities, :sectors => "1234_2345_3456"
       end
 
       it "returns http success" do
@@ -96,30 +96,30 @@ describe LicenceFinderController do
   describe "POST 'activities_submit'" do
     context "with sectors and some activities selected" do
       it "passes through the sectors, combines the activity_ids into a single param, and redirects to the location action" do
-        post :activities_submit, :sectors => '123,321', :activity_ids => %w(234 432)
-        response.should redirect_to(business_location_path(:sectors => '123,321', :activities => '234,432'))
+        post :activities_submit, :sectors => '123_321', :activity_ids => %w(234 432)
+        response.should redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
       end
 
       it "should order the activity_ids numerically" do
-        post :activities_submit, :sectors => '123,321', :activity_ids => %w(432 234)
-        response.should redirect_to(business_location_path(:sectors => '123,321', :activities => '234,432'))
+        post :activities_submit, :sectors => '123_321', :activity_ids => %w(432 234)
+        response.should redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
       end
 
       it "should sanitise any non-numeric entries" do
-        post :activities_submit, :sectors => '123,321', :activity_ids => %w(234 foo 432 -1)
-        response.should redirect_to(business_location_path(:sectors => '123,321', :activities => '234,432'))
+        post :activities_submit, :sectors => '123_321', :activity_ids => %w(234 foo 432 -1)
+        response.should redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
       end
     end
 
     context "with sectors but no valid activities selected" do
       it "redirects to the activities action with the sectors selected" do
-        post :activities_submit, :sectors => '123,321'
-        response.should redirect_to(activities_path(:sectors => '123,321'))
+        post :activities_submit, :sectors => '123_321'
+        response.should redirect_to(activities_path(:sectors => '123_321'))
       end
 
       it "redirects to the activities action with no numeric activity_ids" do
-        post :activities_submit, :sectors => '123,321', :activity_ids => %w(foo -1)
-        response.should redirect_to(activities_path(:sectors => '123,321'))
+        post :activities_submit, :sectors => '123_321', :activity_ids => %w(foo -1)
+        response.should redirect_to(activities_path(:sectors => '123_321'))
       end
     end
 
@@ -141,7 +141,7 @@ describe LicenceFinderController do
       end
 
       def do_get
-        get :business_location, :sectors => '123,321', :activities => '234,432'
+        get :business_location, :sectors => '123_321', :activities => '234_432'
       end
 
       it "returns http success" do
@@ -167,28 +167,28 @@ describe LicenceFinderController do
     context "with valid sectors and activities" do
       context "with a valid location" do
         it "should pass through all parameters and redirects to the licences action" do
-          post :business_location_submit, :sectors => '123,321', :activities => '234,432', :location => "england"
-          response.should redirect_to(licences_path(:sectors => '123,321', :activities => '234,432', :location => "england"))
+          post :business_location_submit, :sectors => '123_321', :activities => '234_432', :location => "england"
+          response.should redirect_to(licences_path(:sectors => '123_321', :activities => '234_432', :location => "england"))
         end
       end
       context "with no location" do
         it "should pass through sectors and activities and redirect to business_location" do
-          post :business_location_submit, :sectors => '123,321', :activities => '234,432'
-          response.should redirect_to(business_location_path(:sectors => '123,321', :activities => '234,432'))
+          post :business_location_submit, :sectors => '123_321', :activities => '234_432'
+          response.should redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
         end
       end
       context "with an invalid location" do
         it "should pass through sectors and activities and redirect to business_location" do
-          post :business_location_submit, :sectors => '123,321', :activities => '234,432', :location => 'invalid'
-          response.should redirect_to(business_location_path(:sectors => '123,321', :activities => '234,432'))
+          post :business_location_submit, :sectors => '123_321', :activities => '234_432', :location => 'invalid'
+          response.should redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
         end
       end
     end
 
     context "with valid sectors and invalid activities" do
       it "should redirect back to the activities form" do
-        post :business_location_submit, :sectors => '123,321', :activities => '', :location => 'anything'
-        response.should redirect_to(activities_path(:sectors => '123,321'))
+        post :business_location_submit, :sectors => '123_321', :activities => '', :location => 'anything'
+        response.should redirect_to(activities_path(:sectors => '123_321'))
       end
     end
 

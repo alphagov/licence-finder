@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Finding a licence" do
+describe "Finding licences" do
 
   specify "Simple happy path through the app" do
     s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
@@ -9,8 +9,8 @@ describe "Finding a licence" do
 
     FactoryGirl.create(:activity, :name => "Fooey Activity", :sectors => [s1])
     FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [s2])
-    FactoryGirl.create(:activity, :name => "Gooey Activity", :sectors => [s3])
     FactoryGirl.create(:activity, :name => "Kabloom", :sectors => [s1, s2])
+    FactoryGirl.create(:activity, :name => "Gooey Activity", :sectors => [s3])
     FactoryGirl.create(:activity, :name => "Transmogrifying", :sectors => [s1, s3])
 
     visit "/licence-finder"

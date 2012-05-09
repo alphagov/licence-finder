@@ -19,5 +19,6 @@ class LicenceFinderController < ApplicationController
 
   def activities
     @sectors = Sector.find_by_public_ids(params[:sectors].split(',').map(&:to_i))
+    @activities = Activity.find_by_sectors(@sectors)
   end
 end

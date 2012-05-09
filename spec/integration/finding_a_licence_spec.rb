@@ -3,9 +3,15 @@ require 'spec_helper'
 describe "Finding a licence" do
 
   specify "Simple happy path through the app" do
-    FactoryGirl.create(:sector, :name => "Fooey Sector")
-    FactoryGirl.create(:sector, :name => "Kablooey Sector")
-    FactoryGirl.create(:sector, :name => "Gooey Sector")
+    s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
+    s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")
+    s3 = FactoryGirl.create(:sector, :name => "Gooey Sector")
+
+    FactoryGirl.create(:activity, :name => "Fooey Activity", :sectors => [s1])
+    FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [s2])
+    FactoryGirl.create(:activity, :name => "Gooey Activity", :sectors => [s3])
+    FactoryGirl.create(:activity, :name => "Kabloom", :sectors => [s1, s2])
+    FactoryGirl.create(:activity, :name => "Transmogrifying", :sectors => [s1, s3])
 
     visit "/licence-finder"
 
@@ -28,5 +34,14 @@ describe "Finding a licence" do
     page.should have_content "Fooey Sector"
     page.should have_content "Gooey Sector"
     page.should_not have_content "Kablooey Sector"
+
+    within(:css, 'ul#activities') do
+      page.all(:css, "li").map(&:text).should == [
+        'Fooey Activity',
+        'Gooey Activity',
+        'Kabloom',
+        'Transmogrifying',
+      ]
+    end
   end
 end

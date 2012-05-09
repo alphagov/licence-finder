@@ -80,6 +80,12 @@ describe LicenceFinderController do
         do_get
         assigns[:sectors].should == :some_sectors
       end
+
+      it "fetches the activities pertaining to the given sectors and assigns them to @activities" do
+        Activity.expects(:find_by_sectors).with(:some_sectors).returns(:some_activities)
+        do_get
+        assigns[:activities].should == :some_activities
+      end
     end
 
   end

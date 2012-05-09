@@ -11,6 +11,10 @@ class Activity
     where(public_id: public_id).first
   end
 
+  def self.find_by_public_ids(public_ids)
+    self.any_in public_id: public_ids
+  end
+
   def self.find_by_sectors(sectors)
     activity_ids = sectors.map(&:activity_ids).flatten
     self.any_in _id: activity_ids

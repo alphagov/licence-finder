@@ -18,4 +18,7 @@ class LicenceLink
       :unique => true
   )
 
+  def self.find_by_sectors_and_activities(sectors, activities)
+    where(:sector_id.in => sectors.map(&:id), :activity_id.in => activities.map(&:id))
+  end
 end

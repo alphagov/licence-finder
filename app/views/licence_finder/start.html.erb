@@ -1,4 +1,16 @@
-<h1>LicenceFinder#start</h1>
-<p>Find me in app/views/licence_finder/start.html.erb</p>
-
-<%= link_to 'Get started', sectors_path %>
+<div class="article-container group">
+  <article role="article" class="group">
+    <div class="inner">
+      <div class="intro">
+        <p>Many activities and businesses require licences to operate legally.</p>
+        <p>To find the right licences for you, we need to know some information about the activities you will be carrying out.</p>
+        <p>You can use this tool to find out which licences you may be obliged to apply for.</p>
+        <p class="get-started">
+        <%= link_to sectors_path, :class => "big button" do %>
+          Get started <span class="indicator"></span>
+        <% end %>
+        </p>
+      </div>
+    </div>
+  </article>
+</div>

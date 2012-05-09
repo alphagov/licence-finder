@@ -21,4 +21,23 @@ class LicenceFinderController < ApplicationController
     @sectors = Sector.find_by_public_ids(params[:sectors].split(',').map(&:to_i))
     @activities = Activity.find_by_sectors(@sectors).ascending(:name)
   end
+
+  def location
+    @sectors = Sector.find_by_public_ids(params[:sectors].split(',').map(&:to_i))
+    @activities = Activity.find_by_public_ids(params[:activities].split(',').map(&:to_i))
+  end
+
+  def location_submit
+    next_params = {sectors: params[:sectors], activities: params[:activities]}
+    if %w(england scotland wales northern_ireland).include? params[:location]
+      redirect_to({action: 'licences', location: params[:location]}.merge(next_params))
+    else
+      redirect_to({action: 'location'}.merge(next_params))
+    end
+
+  end
+
+  def licences
+
+  end
 end

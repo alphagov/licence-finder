@@ -10,4 +10,9 @@ class Activity
   def self.find_by_public_id(public_id)
     where(public_id: public_id).first
   end
+
+  def self.find_by_sectors(sectors)
+    activity_ids = sectors.map(&:activity_ids).flatten
+    self.any_in _id: activity_ids
+  end
 end

@@ -63,7 +63,8 @@ describe LicenceFinderController do
     context "with some sectors specified" do
       before :each do
         Sector.stubs(:find_by_public_ids).returns(:some_sectors)
-        Activity.stubs(:find_by_sectors).returns(:some_activities)
+        Activity.stubs(:find_by_sectors).returns(Activity)
+        Activity.stubs(:ascending)
       end
 
       def do_get
@@ -81,8 +82,10 @@ describe LicenceFinderController do
         assigns[:sectors].should == :some_sectors
       end
 
-      it "fetches the activities pertaining to the given sectors and assigns them to @activities" do
-        Activity.expects(:find_by_sectors).with(:some_sectors).returns(:some_activities)
+      it "fetches the activities pertaining to the given sectors ordered by name and assigns them to @activities" do
+        scope = stub()
+        scope.expects(:ascending).with(:name).returns(:some_activities)
+        Activity.expects(:find_by_sectors).with(:some_sectors).returns(scope)
         do_get
         assigns[:activities].should == :some_activities
       end

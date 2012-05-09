@@ -25,6 +25,12 @@ describe "Finding licences" do
       i_should_see_field('Fooey Sector', :type => :checkbox)
       i_should_see_field('Kablooey Sector', :type => :checkbox)
       i_should_see_field('Gooey Sector', :type => :checkbox)
+      # They should be in alphabetical order
+      page.all('li label').map(&:text).should == [
+        'Fooey Sector',
+        'Gooey Sector',
+        'Kablooey Sector',
+      ]
     end
 
     check 'Fooey Sector'
@@ -37,6 +43,11 @@ describe "Finding licences" do
       page.should have_content "Fooey Sector"
       page.should have_content "Gooey Sector"
       page.should_not have_content "Kablooey Sector"
+      # They should be in alphabetical order
+      page.all('li').map(&:text).should == [
+        'Fooey Sector',
+        'Gooey Sector',
+      ]
     end
 
     within(:css, 'ul#activities') do
@@ -44,6 +55,13 @@ describe "Finding licences" do
       i_should_see_field('Gooey Activity', :type => :checkbox)
       i_should_see_field('Kabloom', :type => :checkbox)
       i_should_see_field('Transmogrifying', :type => :checkbox)
+      # They should be in alphabetical order
+      page.all('li label').map(&:text).should == [
+        'Fooey Activity',
+        'Gooey Activity',
+        'Kabloom',
+        'Transmogrifying',
+      ]
     end
 
     check 'Fooey Activity'
@@ -55,11 +73,21 @@ describe "Finding licences" do
     within(:css, 'ul#sectors') do
       page.should have_content "Fooey Sector"
       page.should have_content "Gooey Sector"
+      # They should be in alphabetical order
+      page.all('li').map(&:text).should == [
+        'Fooey Sector',
+        'Gooey Sector',
+      ]
     end
 
     within(:css, 'ul#activities') do
       page.should have_content 'Fooey Activity'
       page.should have_content 'Gooey Activity'
+      # They should be in alphabetical order
+      page.all('li').map(&:text).should == [
+        'Fooey Activity',
+        'Gooey Activity',
+      ]
     end
 
     select('England', from: 'location')

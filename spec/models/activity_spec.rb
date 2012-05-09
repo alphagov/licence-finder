@@ -62,6 +62,24 @@ describe Activity do
       end
     end
 
+    describe "find_by_public_ids" do
+      before :each do
+        @a1 = FactoryGirl.create(:activity, public_id: 10)
+        @a2 = FactoryGirl.create(:activity, public_id: 11)
+        @a3 = FactoryGirl.create(:activity, public_id: 12)
+      end
+
+      it "should return the activities for the given id's" do
+        found_activities = Activity.find_by_public_ids([10, 11])
+        found_activities.to_a.should =~ [@a1, @a2]
+      end
+
+      it "should skip any non-existent activities" do
+        found_activities = Activity.find_by_public_ids([10, 12, 13])
+        found_activities.to_a.should =~ [@a1, @a3]
+      end
+    end
+
     describe "find_by_sectors" do
       before :each do
         @s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")

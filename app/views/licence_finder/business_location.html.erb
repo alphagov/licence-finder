@@ -14,8 +14,8 @@
 
 <h3>Location:</h3>
 <%= form_tag business_location_path do %>
-  <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(',')) %>
-  <%= hidden_field_tag(:activities, @activities.map(&:public_id).join(',')) %>
+  <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
+  <%= hidden_field_tag(:activities, @activities.map(&:public_id).join(controller.class::SEPARATOR)) %>
   <%= select_tag(:location, options_for_select([['Select one...', ''], %w(England england), %w(Scotland scotland), %w(Wales wales), ['Northern Ireland', 'northern_ireland']])) %>
   <%= submit_tag 'Set location' %>
 <% end %>

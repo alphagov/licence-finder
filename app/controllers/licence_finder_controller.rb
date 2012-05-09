@@ -1,4 +1,5 @@
 class LicenceFinderController < ApplicationController
+  SEPARATOR = '_'
 
   before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors]
   before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities]
@@ -12,7 +13,7 @@ class LicenceFinderController < ApplicationController
 
   # Only used by non-JS path
   def sectors_submit
-    redirect_to :action => 'activities', :sectors => @sector_ids.join(',')
+    redirect_to :action => 'activities', :sectors => @sector_ids.join(SEPARATOR)
   end
 
   def activities
@@ -21,7 +22,7 @@ class LicenceFinderController < ApplicationController
   end
 
   def activities_submit
-    redirect_to :action => 'business_location', :sectors => @sector_ids.join(','), :activities => @activity_ids.join(',')
+    redirect_to :action => 'business_location', :sectors => @sector_ids.join(SEPARATOR), :activities => @activity_ids.join(SEPARATOR)
   end
 
   def business_location
@@ -31,7 +32,7 @@ class LicenceFinderController < ApplicationController
 
   # is this action necessary?
   def business_location_submit
-    next_params = {sectors: @sector_ids.join(','), activities: @activity_ids.join(',')}
+    next_params = {sectors: @sector_ids.join(SEPARATOR), activities: @activity_ids.join(SEPARATOR)}
     if %w(england scotland wales northern_ireland).include? params[:location]
       redirect_to({action: 'licences', location: params[:location]}.merge(next_params))
     else
@@ -54,13 +55,13 @@ class LicenceFinderController < ApplicationController
   def extract_and_validate_activity_ids
     @activity_ids = extract_ids(:activity)
     if @activity_ids.empty?
-      redirect_to :action => 'activities', :sectors => @sector_ids.join(',')
+      redirect_to :action => 'activities', :sectors => @sector_ids.join(SEPARATOR)
     end
   end
 
   def extract_ids(param_base)
     if params[param_base.to_s.pluralize].present?
-      ids = params[param_base.to_s.pluralize].split(',').map(&:to_i).reject {|n| n < 1 }
+      ids = params[param_base.to_s.pluralize].split(SEPARATOR).map(&:to_i).reject {|n| n < 1 }
     else
       ids = Array.wrap(params["#{param_base}_ids"]).map(&:to_i).reject {|n| n < 1 }
     end

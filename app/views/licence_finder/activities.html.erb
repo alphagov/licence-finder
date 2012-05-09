@@ -8,7 +8,7 @@
 
 <h3>Activities:</h3>
 <%= form_tag activities_path do %>
-<%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(',')) %>
+<%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
 <ul id="activities">
   <% @activities.each do |activity| %>
     <li>

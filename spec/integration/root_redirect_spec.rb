@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Redirectin the root URL" do
+describe "Redirecting the root URL" do
 
   specify "visiting the root URL redirects me to the licence-finder start page" do
     visit "/"

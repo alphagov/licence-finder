@@ -2,15 +2,17 @@
 <html>
   <head>
     <title><%= yield :title %> | GOV.UK</title>
-    <%= stylesheet_link_tag "licence-finder" %>
-    <%= javascript_include_tag "licence-finder", defer: true %>
     <%= yield :section_meta_tags %>
     <%= yield :head %>
-    <%= csrf_meta_tags %>
   </head>
   <body class="citizen">
     <div id="wrapper" class="answer licence-finder">
       <section id="content">
+        <header class="page-header group">
+          <hgroup>
+            <h1><span>Quick answer</span> Licence finder</h1>
+          </hgroup>
+        </header>
         <%= yield %>
       </section>
     </div>

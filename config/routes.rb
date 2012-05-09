@@ -8,8 +8,9 @@ LicenceFinder::Application.routes.draw do
   get "/licence-finder/sectors" => "licence_finder#sectors", :as => :sectors
   post "/licence-finder/sectors" => "licence_finder#sectors_submit"
   get "/licence-finder/activities" => "licence_finder#activities", :as => :activities
-  get "/licence-finder/location" => "licence_finder#location", :as => :location
-  post "/licence-finder/location" => "licence_finder#location_submit"
+  post "/licence-finder/activities" => "licence_finder#activities_submit"
+  get "/licence-finder/location" => "licence_finder#business_location", :as => :business_location
+  post "/licence-finder/location" => "licence_finder#business_location_submit", :as => :business_location_submit
   get "/licence-finder/licences" => "licence_finder#licences", :as => :licences
 
   root :to => redirect("/licence-finder", :status => 302)

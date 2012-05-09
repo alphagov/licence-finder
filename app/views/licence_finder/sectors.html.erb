@@ -1,6 +1,6 @@
 
 <%= form_tag sectors_path do %>
-<ul>
+<ul id="sectors">
   <% @sectors.each do |sector| %>
   <li>
     <%= check_box_tag 'sector_ids[]', sector.public_id, false, :id => "sector_#{sector.public_id}" %>

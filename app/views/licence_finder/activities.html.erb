@@ -1,14 +1,21 @@
 
 <h3>Selected sectors:</h3>
-<ul>
+<ul id="sectors">
   <% @sectors.each do |sector| %>
     <li><%= sector.name %></li>
   <% end %>
 </ul>
 
 <h3>Activities:</h3>
+<%= form_tag activities_path do %>
+<%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(',')) %>
 <ul id="activities">
   <% @activities.each do |activity| %>
-    <li><%= activity.name %></li>
+    <li>
+      <%= check_box_tag 'activity_ids[]', activity.public_id, false, :id => "sector_#{activity.public_id}" %>
+      <%= label_tag "sector_#{activity.public_id}", activity.name %>
+    </li>
   <% end %>
 </ul>
+<%= submit_tag 'Next step' %>
+<% end %>

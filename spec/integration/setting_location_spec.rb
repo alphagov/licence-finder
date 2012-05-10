@@ -10,7 +10,7 @@ describe "Setting business location" do
     a2 = FactoryGirl.create(:activity, name: "Kablooey Activity", sectors: [s2])
     a3 = FactoryGirl.create(:activity, name: "Kabloom", sectors: [s1, s2])
 
-    visit "/licence-finder/location?sectors=#{s1.public_id}&activities=#{a1.public_id}"
+    visit "/#{APP_SLUG}/location?sectors=#{s1.public_id}&activities=#{a1.public_id}"
 
     page.should have_content "Fooey Sector"
     page.should have_content "Fooey Activity"
@@ -27,7 +27,7 @@ describe "Setting business location" do
 
     click_on 'Set location'
 
-    i_should_be_on "/licence-finder/licences", ignore_query: true
+    i_should_be_on "/#{APP_SLUG}/licences", ignore_query: true
   end
 
   it "should complain if no sectors are provided"

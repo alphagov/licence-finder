@@ -25,13 +25,13 @@ describe "Finding licences" do
 
 
 
-    visit "/licence-finder"
+    visit "/#{APP_SLUG}"
 
     page.should have_link('Get started')
 
     click_on 'Get started'
 
-    i_should_be_on "/licence-finder/sectors"
+    i_should_be_on "/#{APP_SLUG}/sectors"
 
     within(:css, 'ul#sectors') do
       i_should_see_field('Fooey Sector', :type => :checkbox)
@@ -49,7 +49,7 @@ describe "Finding licences" do
     check 'Gooey Sector'
     click_on 'Next step'
 
-    i_should_be_on "/licence-finder/activities", :ignore_query => true
+    i_should_be_on "/#{APP_SLUG}/activities", :ignore_query => true
 
     within(:css, 'ul#sectors') do
       page.should have_content "Fooey Sector"
@@ -80,7 +80,7 @@ describe "Finding licences" do
     check 'Gooey Activity'
     click_on 'Next step'
 
-    i_should_be_on "/licence-finder/location", :ignore_query => true
+    i_should_be_on "/#{APP_SLUG}/location", :ignore_query => true
 
     within(:css, 'ul#sectors') do
       page.should have_content "Fooey Sector" # s1
@@ -106,7 +106,7 @@ describe "Finding licences" do
 
     click_on 'Set location'
 
-    i_should_be_on "/licence-finder/licences", :ignore_query => true
+    i_should_be_on "/#{APP_SLUG}/licences", :ignore_query => true
 
     within(:css, 'ul#sectors') do
       page.all('li').map(&:text).should == [

@@ -4,7 +4,7 @@ describe "Start page" do
 
   specify "Inspecting the start page" do
 
-    visit "/licence-finder"
+    visit "/#{APP_SLUG}"
 
     within 'section#content' do
       within 'header' do

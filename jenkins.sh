@@ -1,4 +1,4 @@
-#!/bin/bash -x -e
+#!/bin/bash -xe
 
 export RAILS_ENV=test
 export DISPLAY=":99"

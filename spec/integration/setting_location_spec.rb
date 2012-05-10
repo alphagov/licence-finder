@@ -12,16 +12,36 @@ describe "Setting business location" do
 
     visit "/#{APP_SLUG}/location?sectors=#{s1.public_id}&activities=#{a1.public_id}"
 
-    page.should have_content "Fooey Sector"
-    page.should have_content "Fooey Activity"
+    within_section 'completed questions' do
+      page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
+        "What kind of activities or business do you need a licence for?",
+        'What will your activities or business involve doing?',
+      ]
+    end
+    within_section 'completed question 1' do
+      page.all('.answer li').map(&:text).should == [
+        'Fooey Sector',
+      ]
+    end
+    within_section 'completed question 2' do
+      page.all('.answer li').map(&:text).should == [
+        'Fooey Activity',
+      ]
+    end
 
-    page.all(:xpath, '//select[@id="location"]//option/@value').map(&:text).should == [
-      '',
-      'england',
-      'scotland',
-      'wales',
-      'northern_ireland'
-    ]
+    within_section 'current question' do
+      page.should have_content('Where will your activities or business be located?')
+
+      page.all(:xpath, '//select[@id="location"]//option/@value').map(&:text).should == [
+        '',
+        'england',
+        'scotland',
+        'wales',
+        'northern_ireland'
+      ]
+    end
+
+    page.should_not have_selector(*selector_of_section('upcoming questions'))
 
     select('England', from: 'location')
 

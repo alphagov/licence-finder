@@ -6,7 +6,7 @@
       What kind of activities or business do you need a licence for?
     </h2>
     <%= form_tag sectors_path do %>
-      <ul id="sectors">
+      <ul>
         <% @sectors.each do |sector| %>
           <li>
             <%= check_box_tag 'sector_ids[]', sector.public_id, false, :id => "sector_#{sector.public_id}" %>

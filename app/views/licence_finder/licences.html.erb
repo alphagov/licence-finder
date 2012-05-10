@@ -1,24 +1,59 @@
-<h3>Selected sectors:</h3>
-<ul id="sectors">
-  <% @sectors.each do |sector| %>
-    <li><%= sector.name %></li>
-  <% end %>
-</ul>
+<div class="done-questions">
+  <div class="start-again"><%= link_to 'Start again', start_path %></div>
+  <ol>
+    <li class="done">
+      <h3 class="question">
+        <span class="question-number">1</span>
+        What kind of activities or business do you need a licence for?
+      </h3>
+      <div class="answer">
+        <ul>
+          <% @sectors.each do |sector| %>
+            <li><%= sector.name %></li>
+          <% end %>
+        </ul>
+      </div>
+      <p class="undo"><%= link_to 'Change this answer', '#' %></p>
+    </li>
+    <li class="done">
+      <h3 class="question">
+        <span class="question-number">2</span>
+        What will your activities or business involve doing?
+      </h3>
+      <div class="answer">
+        <ul>
+          <% @activities.each do |activity| %>
+            <li><%= activity.name %></li>
+          <% end %>
+        </ul>
+      </div>
+      <p class="undo"><%= link_to 'Change this answer', '#' %></p>
+    </li>
+    <li class="done">
+      <h3 class="question">
+        <span class="question-number">3</span>
+        Where will your activities or business be located?
+      </h3>
+      <div class="answer">
+        <ul>
+          <li><%= @location.humanize.titleize %></li>
+        </ul>
+      </div>
+      <p class="undo"><%= link_to 'Change this answer', '#' %></p>
+    </li>
+  </ol>
+</div>
 
-<h3>Selected activities:</h3>
-<ul id="activities">
-  <% @activities.each do |activity| %>
-    <li><%= activity.name %></li>
-  <% end %>
-</ul>
+<div class="article-container">
+  <article class="results">
+    <div class="inner group">
+      <h2>Selected Licences:</h2>
 
-<h3>Location:</h3>
-<div id="location"><%= @location %></div>
-
-<h3>Selected licences:</h3>
-<ul id="licences">
-  <% @licences.each do |licence| %>
-    <li><%= licence.name %></li>
-  <% end %>
-</ul>
-
+      <ul>
+        <% @licences.each do |licence| %>
+          <li><%= licence.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </article>
+</div>

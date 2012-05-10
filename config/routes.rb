@@ -4,7 +4,7 @@ LicenceFinder::Application.routes.draw do
 
   # See how all your routes lay out with "rake routes"
 
-  get "#{APP_SLUG}" => "licence_finder#start"
+  get "#{APP_SLUG}" => "licence_finder#start", :as => :start
   get "#{APP_SLUG}/sectors" => "licence_finder#sectors", :as => :sectors
   post "#{APP_SLUG}/sectors" => "licence_finder#sectors_submit"
   get "#{APP_SLUG}/activities" => "licence_finder#activities", :as => :activities

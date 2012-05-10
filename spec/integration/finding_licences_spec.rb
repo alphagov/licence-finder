@@ -33,7 +33,7 @@ describe "Finding licences" do
 
     i_should_be_on "/#{APP_SLUG}/sectors"
 
-    within(:css, 'ul#sectors') do
+    within_section 'current question' do
       i_should_see_field('Fooey Sector', :type => :checkbox)
       i_should_see_field('Kablooey Sector', :type => :checkbox)
       i_should_see_field('Gooey Sector', :type => :checkbox)
@@ -51,18 +51,18 @@ describe "Finding licences" do
 
     i_should_be_on "/#{APP_SLUG}/activities", :ignore_query => true
 
-    within(:css, 'ul#sectors') do
+    within_section 'completed question 1' do
       page.should have_content "Fooey Sector"
       page.should have_content "Gooey Sector"
       page.should_not have_content "Kablooey Sector"
       # They should be in alphabetical order
-      page.all('li').map(&:text).should == [
+      page.all('.answer li').map(&:text).should == [
         'Fooey Sector',
         'Gooey Sector',
       ]
     end
 
-    within(:css, 'ul#activities') do
+    within_section 'current question' do
       i_should_see_field('Fooey Activity', :type => :checkbox)
       i_should_see_field('Gooey Activity', :type => :checkbox)
       i_should_see_field('Kabloom', :type => :checkbox)
@@ -82,21 +82,21 @@ describe "Finding licences" do
 
     i_should_be_on "/#{APP_SLUG}/location", :ignore_query => true
 
-    within(:css, 'ul#sectors') do
+    within_section 'completed question 1' do
       page.should have_content "Fooey Sector" # s1
       page.should have_content "Gooey Sector" # s3
       # They should be in alphabetical order
-      page.all('li').map(&:text).should == [
+      page.all('.answer li').map(&:text).should == [
         'Fooey Sector',
         'Gooey Sector',
       ]
     end
 
-    within(:css, 'ul#activities') do
+    within_section 'completed question 2' do
       page.should have_content 'Fooey Activity' # a1
       page.should have_content 'Gooey Activity' # a4
       # They should be in alphabetical order
-      page.all('li').map(&:text).should == [
+      page.all('.answer li').map(&:text).should == [
         'Fooey Activity',
         'Gooey Activity',
       ]
@@ -108,23 +108,25 @@ describe "Finding licences" do
 
     i_should_be_on "/#{APP_SLUG}/licences", :ignore_query => true
 
-    within(:css, 'ul#sectors') do
-      page.all('li').map(&:text).should == [
+    within_section 'completed question 1' do
+      page.all('.answer li').map(&:text).should == [
         'Fooey Sector',
         'Gooey Sector',
       ]
     end
 
-    within(:css, 'ul#activities') do
-      page.all('li').map(&:text).should == [
+    within_section 'completed question 2' do
+      page.all('.answer li').map(&:text).should == [
         'Fooey Activity',
         'Gooey Activity',
       ]
     end
 
-    page.find('#location').text.should == "england"
+    within_section 'completed question 3' do
+      page.should have_content('England')
+    end
 
-    within(:css, 'ul#licences') do
+    within_section 'results' do
       page.all('li').map(&:text).should == [
         'Licence One'
       ]

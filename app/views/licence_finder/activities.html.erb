@@ -1,21 +1,51 @@
-
-<h3>Selected sectors:</h3>
-<ul id="sectors">
-  <% @sectors.each do |sector| %>
-    <li><%= sector.name %></li>
-  <% end %>
-</ul>
-
-<h3>Activities:</h3>
-<%= form_tag activities_path do %>
-<%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
-<ul id="activities">
-  <% @activities.each do |activity| %>
-    <li>
-      <%= check_box_tag 'activity_ids[]', activity.public_id, false, :id => "sector_#{activity.public_id}" %>
-      <%= label_tag "sector_#{activity.public_id}", activity.name %>
+<div class="done-questions">
+  <div class="start-again"><%= link_to 'Start again', start_path %></div>
+  <ol>
+    <li class="done">
+      <h3 class="question">
+        <span class="question-number">1</span>
+        What kind of activities or business do you need a licence for?
+      </h3>
+      <div class="answer">
+        <ul>
+          <% @sectors.each do |sector| %>
+            <li><%= sector.name %></li>
+          <% end %>
+        </ul>
+      </div>
+      <p class="undo"><%= link_to 'Change this answer', sectors_path(:sectors => @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %></p>
     </li>
-  <% end %>
-</ul>
-<%= submit_tag 'Next step' %>
-<% end %>
+  </ol>
+</div>
+
+<div class="step current">
+  <div class="current-question group">
+    <h2>
+      <span class="question-number">2</span>
+      What will your activities or business involve doing?
+    </h2>
+    <%= form_tag activities_path do %>
+      <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
+      <ul id="activities">
+        <% @activities.each do |activity| %>
+          <li>
+            <%= check_box_tag 'activity_ids[]', activity.public_id, false, :id => "sector_#{activity.public_id}" %>
+            <%= label_tag "sector_#{activity.public_id}", activity.name %>
+          </li>
+        <% end %>
+      </ul>
+      <%= submit_tag 'Next step' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="upcoming-questions">
+  <ol>
+    <li class="upcoming">
+      <h3 class="question">
+        <span class="question-number">3</span>
+        Where will your activities or business be located?
+      </h3>
+    </li>
+  </ol>
+</div>

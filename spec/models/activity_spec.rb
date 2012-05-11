@@ -106,4 +106,9 @@ describe Activity do
       end
     end
   end
+
+  specify "to_s returns the name" do
+    a = FactoryGirl.build(:activity, :name => "Foo Activity")
+    a.to_s.should == "Foo Activity"
+  end
 end

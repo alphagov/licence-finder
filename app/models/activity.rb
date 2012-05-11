@@ -19,4 +19,8 @@ class Activity
     activity_ids = sectors.map(&:activity_ids).flatten
     self.any_in _id: activity_ids
   end
+
+  def to_s
+    self.name
+  end
 end

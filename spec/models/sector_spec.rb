@@ -80,4 +80,9 @@ describe Sector do
       end
     end
   end
+
+  specify "to_s returns the name" do
+    s = FactoryGirl.build(:sector, :name => "Foo Sector")
+    s.to_s.should == "Foo Sector"
+  end
 end

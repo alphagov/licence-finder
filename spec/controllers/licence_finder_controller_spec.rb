@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe LicenceFinderController do
+  before :each do
+    @question1 = 'What kind of activities or business do you need a licence for?'
+    @question2 = 'What will your activities or business involve doing?'
+    @question3 = 'Where will your activities or business be located?'
+  end
 
   describe "GET 'start'" do
     it "returns http success" do
@@ -10,18 +15,22 @@ describe LicenceFinderController do
   end
 
   describe "GET 'sectors'" do
-    it "returns http success" do
-      get :sectors
-      response.should be_success
-    end
-
     it "assigns all sectors ordered alphabetically by name" do
       @s1 = FactoryGirl.create(:sector, :name => "Alpha")
       @s2 = FactoryGirl.create(:sector, :name => "Charlie")
       @s3 = FactoryGirl.create(:sector, :name => "Bravo")
 
       get :sectors
+      response.should be_success
       assigns[:sectors].to_a.should == [@s1, @s3, @s2]
+    end
+
+    it "sets up the questions correctly" do
+      get :sectors
+      assigns[:current_question_number].should == 1
+      assigns[:completed_questions].should == []
+      assigns[:current_question].should == @question1
+      assigns[:upcoming_questions].should == [@question2, @question3]
     end
   end
 
@@ -88,6 +97,14 @@ describe LicenceFinderController do
         Activity.expects(:find_by_sectors).with(:some_sectors).returns(scope)
         do_get
         assigns[:activities].should == :some_activities
+      end
+
+      it "sets up the questions correctly" do
+        do_get
+        assigns[:current_question_number].should == 2
+        assigns[:completed_questions].should == [ [@question1, :some_sectors] ]
+        assigns[:current_question].should == @question2
+        assigns[:upcoming_questions].should == [@question3]
       end
     end
 
@@ -160,6 +177,14 @@ describe LicenceFinderController do
         do_get
         assigns[:activities].should == :some_activities
       end
+
+      it "sets up the questions correctly" do
+        do_get
+        assigns[:current_question_number].should == 3
+        assigns[:completed_questions].should == [ [@question1, :some_sectors], [@question2, :some_activities] ]
+        assigns[:current_question].should == @question3
+        assigns[:upcoming_questions].should == []
+      end
     end
   end
 
@@ -207,16 +232,24 @@ describe LicenceFinderController do
         Activity.stubs(:find_by_public_ids).returns(:some_activities)
         Licence.stubs(:find_by_sectors_activities_and_location).returns(:some_licences)
       end
+      def do_get
+        get :licences, :sectors => '123_321', :activities => '234_432', :location => "northern_ireland"
+      end
 
       it "fetches the appropriate licences and assigns them to @licences" do
         Sector.expects(:find_by_public_ids).with([123,321]).returns(:some_sectors)
         Activity.expects(:find_by_public_ids).with([234,432]).returns(:some_activities)
-        Licence.expects(:find_by_sectors_activities_and_location).with(:some_sectors, :some_activities, "england").returns(:some_licences)
-        get :licences, :sectors => '123_321', :activities => '234_432', :location => "england"
+        Licence.expects(:find_by_sectors_activities_and_location).with(:some_sectors, :some_activities, "northern_ireland").returns(:some_licences)
+        do_get
         assigns[:sectors].should == :some_sectors
         assigns[:activities].should == :some_activities
-        assigns[:location].should == "england"
+        assigns[:location].should == "northern_ireland"
         assigns[:licences].should == :some_licences
+      end
+
+      it "sets up the questions correctly" do
+        do_get
+        assigns[:completed_questions].should == [ [@question1, :some_sectors], [@question2, :some_activities], [@question3, ['Northern Ireland']] ]
       end
     end
 

@@ -1,37 +1,16 @@
 
-<div class="step current">
-  <div class="current-question group">
-    <h2>
-      <span class="question-number">1</span>
-      What kind of activities or business do you need a licence for?
-    </h2>
-    <%= form_tag sectors_path do %>
-      <ul>
-        <% @sectors.each do |sector| %>
-          <li>
-            <%= check_box_tag 'sector_ids[]', sector.public_id, false, :id => "sector_#{sector.public_id}" %>
-            <%= label_tag "sector_#{sector.public_id}", sector.name %>
-          </li>
-        <% end %>
-      </ul>
-      <%= submit_tag 'Next step' %>
-    <% end %>
-  </div>
-</div>
+<%= current_question do %>
+  <%= form_tag sectors_path do %>
+    <ul>
+      <% @sectors.each do |sector| %>
+        <li>
+          <%= check_box_tag 'sector_ids[]', sector.public_id, false, :id => "sector_#{sector.public_id}" %>
+          <%= label_tag "sector_#{sector.public_id}", sector.name %>
+        </li>
+      <% end %>
+    </ul>
+    <%= submit_tag 'Next step' %>
+  <% end %>
+<% end %>
 
-<div class="upcoming-questions">
-  <ol>
-    <li class="upcoming">
-      <h3 class="question">
-        <span class="question-number">2</span>
-        What will your activities or business involve doing?
-      </h3>
-    </li>
-    <li class="upcoming">
-      <h3 class="question">
-        <span class="question-number">3</span>
-        Where will your activities or business be located?
-      </h3>
-    </li>
-  </ol>
-</div>
+<%= render partial: 'upcoming_questions' %>

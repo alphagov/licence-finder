@@ -1,5 +1,10 @@
 class LicenceFinderController < ApplicationController
   SEPARATOR = '_'
+  QUESTIONS = [
+    'What kind of activities or business do you need a licence for?',
+    'What will your activities or business involve doing?',
+    'Where will your activities or business be located?',
+  ]
 
   before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors]
   before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities]
@@ -9,6 +14,7 @@ class LicenceFinderController < ApplicationController
 
   def sectors
     @sectors = Sector.ascending(:name)
+    setup_questions
   end
 
   # Only used by non-JS path
@@ -19,6 +25,7 @@ class LicenceFinderController < ApplicationController
   def activities
     @sectors = Sector.find_by_public_ids(@sector_ids)
     @activities = Activity.find_by_sectors(@sectors).ascending(:name)
+    setup_questions [@sectors]
   end
 
   def activities_submit
@@ -28,6 +35,7 @@ class LicenceFinderController < ApplicationController
   def business_location
     @sectors = Sector.find_by_public_ids(@sector_ids)
     @activities = Activity.find_by_public_ids(@activity_ids)
+    setup_questions [@sectors, @activities]
   end
 
   # is this action necessary?
@@ -45,9 +53,17 @@ class LicenceFinderController < ApplicationController
     @activities = Activity.find_by_public_ids(@activity_ids)
     @location = params[:location]
     @licences = Licence.find_by_sectors_activities_and_location(@sectors, @activities, params[:location])
+    setup_questions [@sectors, @activities, [@location.titleize]]
   end
 
   protected
+
+  def setup_questions(answers=[])
+    @current_question_number = answers.size + 1
+    @completed_questions = QUESTIONS[0...(@current_question_number - 1)].zip(answers)
+    @current_question = QUESTIONS[@current_question_number - 1]
+    @upcoming_questions = QUESTIONS[(@current_question_number)..-1]
+  end
 
   def extract_and_validate_sector_ids
     @sector_ids = extract_ids(:sector)

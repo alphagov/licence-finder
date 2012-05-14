@@ -1,4 +1,7 @@
+require "slimmer/headers"
+
 class LicenceFinderController < ApplicationController
+  include Slimmer::Headers
   SEPARATOR = '_'
   QUESTIONS = [
     'What kind of activities or business do you need a licence for?',
@@ -8,6 +11,7 @@ class LicenceFinderController < ApplicationController
 
   before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors]
   before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities]
+  before_filter :set_analytics_headers
 
   def start
   end
@@ -86,5 +90,13 @@ class LicenceFinderController < ApplicationController
       ids = Array.wrap(params["#{param_base}_ids"]).map(&:to_i).reject {|n| n < 1 }
     end
     ids.sort
+  end
+
+  def set_analytics_headers
+    set_slimmer_headers(
+      format:      "licence-finder",
+      proposition: "business",
+      need_id:     "B90"
+    )
   end
 end

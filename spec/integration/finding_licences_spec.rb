@@ -34,15 +34,7 @@ describe "Finding licences" do
     i_should_be_on "/#{APP_SLUG}/sectors"
 
     within_section 'current question' do
-      i_should_see_add_link "Fooey Sector"
-      i_should_see_add_link "Kablooey Sector"
-      i_should_see_add_link "Gooey Sector"
-      # They should be in alphabetical order
-      page.all('li .sector-name').map(&:text).should == [
-        'Fooey Sector',
-        'Gooey Sector',
-        'Kablooey Sector',
-      ]
+      i_should_see_add_links_in_order ["Fooey Sector", "Gooey Sector", "Kablooey Sector"]
     end
     click_add_link('Fooey Sector')
     click_add_link('Gooey Sector')

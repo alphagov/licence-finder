@@ -18,15 +18,7 @@ describe "Sector selection page" do
       page.should have_content("What kind of activities or business do you need a licence for?")
 
       within '.business-sector-results' do
-        i_should_see_add_link "Fooey Sector"
-        i_should_see_add_link "Gooey Sector"
-        i_should_see_add_link "Kablooey Sector"
-
-        page.all('li .sector-name').map(&:text).should == [
-          'Fooey Sector',
-          'Gooey Sector',
-          'Kablooey Sector'
-        ]
+        i_should_see_add_links_in_order ["Fooey Sector", "Gooey Sector", "Kablooey Sector"]
       end
 
       within '.business-sector-picked' do

@@ -17,8 +17,8 @@ class LicenceFinderController < ApplicationController
   end
 
   def sectors
-    @picked_sectors = Sector.find_by_public_ids(extract_ids(:sector)).ascending(:name).to_a
     @sectors = Sector.ascending(:name)
+    @picked_sectors = Sector.find_by_public_ids(extract_ids(:sector)).ascending(:name).to_a
     setup_questions
   end
 

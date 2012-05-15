@@ -44,8 +44,8 @@ describe "Finding licences" do
         'Kablooey Sector',
       ]
     end
-    find(:xpath, "//ul[@class = 'search-picker']/li[./span/text() = 'Fooey Sector']//a").click
-    find(:xpath, "//ul[@class = 'search-picker']/li[./span/text() = 'Gooey Sector']//a").click
+    click_add_link('Fooey Sector')
+    click_add_link('Gooey Sector')
     click_on 'Next step'
 
     i_should_be_on "/#{APP_SLUG}/activities", :ignore_query => true
@@ -62,21 +62,11 @@ describe "Finding licences" do
     end
 
     within_section 'current question' do
-      i_should_see_field('Fooey Activity', :type => :checkbox)
-      i_should_see_field('Gooey Activity', :type => :checkbox)
-      i_should_see_field('Kabloom', :type => :checkbox)
-      i_should_see_field('Transmogrifying', :type => :checkbox)
-      # They should be in alphabetical order
-      page.all('li label').map(&:text).should == [
-        'Fooey Activity',
-        'Gooey Activity',
-        'Kabloom',
-        'Transmogrifying',
-      ]
+      i_should_see_add_links_in_order ["Fooey Activity", "Gooey Activity", "Kabloom", "Transmogrifying"]
     end
 
-    check 'Fooey Activity'
-    check 'Gooey Activity'
+    click_add_link('Fooey Activity')
+    click_add_link('Gooey Activity')
     click_on 'Next step'
 
     i_should_be_on "/#{APP_SLUG}/location", :ignore_query => true

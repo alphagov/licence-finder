@@ -117,6 +117,19 @@ describe LicenceFinderController do
         assigns[:current_question].should == @question2
         assigns[:upcoming_questions].should == [@question3]
       end
+
+      it "extracts the union of selected activities ordered alphabetically by name" do
+        a1 = FactoryGirl.create(:activity, :public_id => 1234, :name => "Alpha")
+        a2 = FactoryGirl.create(:activity, :public_id => 2345, :name => "Charlie")
+        a3 = FactoryGirl.create(:activity, :public_id => 3456, :name => "Bravo")
+        scope1 = stub()
+        scope1.expects(:ascending).with(:name).returns(:some_activities)
+        Activity.expects(:find_by_sectors).with(:some_sectors).returns(scope1)
+
+        get :activities, :sectors => "1234_2345_3456", :activity_ids => %w(1234 2345 3456)
+
+        assigns[:picked_activities].should == [a1, a3, a2]
+      end
     end
 
   end

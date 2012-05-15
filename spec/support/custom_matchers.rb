@@ -18,15 +18,34 @@ module CustomMatchers
   end
 
   def i_should_see_add_link(label)
-    element = find(:xpath, "//li[span/text() = '#{label}']")
-    element.should_not be_nil
-    element.should have_xpath("a[text() = 'Add']")
+    check_add_remove_link("Add", label)
+  end
+
+  def i_should_see_add_links_in_order(labels)
+    check_add_remove_links_in_order("Add", labels)
   end
 
   def i_should_see_remove_link(label)
+    check_add_remove_link("Remove", label)
+  end
+
+  def i_should_see_remove_links_in_order(labels)
+    check_add_remove_links_in_order("Remove", labels)
+  end
+
+  private
+
+  def check_add_remove_link(type, label)
     element = find(:xpath, "//li[span/text() = '#{label}']")
     element.should_not be_nil
-    element.should have_xpath("a[text() = 'Remove']")
+    element.should have_xpath("a[text() = '#{type}']")
+  end
+
+  def check_add_remove_links_in_order(type, labels)
+    labels.each do |label|
+      check_add_remove_link(type, label)
+    end
+    page.all(:xpath, "//li[a/text() = '#{type}']/span/text()").map(&:text).should == labels
   end
 
 end

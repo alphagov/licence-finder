@@ -2,7 +2,7 @@
 <%= current_question do %>
   <%= form_tag sectors_path do %>
     <div class="business-sector-results">
-      <p class="hint">Add all the categories that apply to you</p>
+      <p class="hint">Add all the sectors that apply to you</p>
         <ul class="search-picker">
           <% (@sectors - @picked_sectors).each do |sector| %>
             <li>

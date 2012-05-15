@@ -3,15 +3,34 @@
 <%= current_question do %>
   <%= form_tag activities_path do %>
     <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
-    <ul id="activities">
-      <% @activities.each do |activity| %>
-        <li>
-          <%= check_box_tag 'activity_ids[]', activity.public_id, false, :id => "sector_#{activity.public_id}" %>
-          <%= label_tag "sector_#{activity.public_id}", activity.name %>
-        </li>
+    <div class="business-activity-results">
+      <p class="hint">Add all the categories that apply to you</p>
+      <ul class="search-picker">
+        <% (@activities - @picked_activities).each do |activity| %>
+          <li>
+            <span class="activity-name"><%= activity.name %></span>
+            <%= link_to_add activity %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="business-activity-picked">
+      <h3>Find licences for</h3>
+      <% if @picked_activities.empty? %>
+        <p class="hint">Your chosen activities will appear here</p>
+      <% else %>
+        <ul>
+        <% @picked_activities.each do |activity| %>
+          <li>
+            <%=  hidden_field_tag 'activity_ids[]', activity.public_id %>
+            <span class="activity-name"><%= activity.name %></span>
+            <%= link_to_remove activity %>
+          </li>
+        <% end %>
+        </ul>
+        <%= submit_tag 'Next step', :class => "button medium" %>
       <% end %>
-    </ul>
-    <%= submit_tag 'Next step' %>
+    </div>
   <% end %>
 <% end %>
 

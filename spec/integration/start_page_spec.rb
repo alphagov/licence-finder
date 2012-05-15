@@ -13,7 +13,12 @@ describe "Start page" do
       end
 
       within 'article[role=article]' do
-        page.should have_link("Get started", :href => sectors_path)
+        within 'div.intro' do
+          page.should have_link("Get started", :href => sectors_path)
+        end
+        within 'div.popular-licences' do
+          page.should have_content("High demand licences")
+        end
       end
     end
   end

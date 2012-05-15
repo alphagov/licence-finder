@@ -17,6 +17,18 @@ module CustomMatchers
     end
   end
 
+  def i_should_see_add_link(label)
+    element = find(:xpath, "//li[span/text() = '#{label}']")
+    element.should_not be_nil
+    element.should have_xpath("a[text() = 'Add']")
+  end
+
+  def i_should_see_remove_link(label)
+    element = find(:xpath, "//li[span/text() = '#{label}']")
+    element.should_not be_nil
+    element.should have_xpath("a[text() = 'Remove']")
+  end
+
 end
 
 RSpec.configuration.include CustomMatchers, :type => :request

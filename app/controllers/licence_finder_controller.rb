@@ -13,6 +13,7 @@ class LicenceFinderController < ApplicationController
   end
 
   def sectors
+    @picked_sectors = Sector.find_by_public_ids(extract_ids(:sector)).ascending(:name).to_a
     @sectors = Sector.ascending(:name)
     setup_questions
   end
@@ -80,11 +81,11 @@ class LicenceFinderController < ApplicationController
   end
 
   def extract_ids(param_base)
+    ids = []
     if params[param_base.to_s.pluralize].present?
-      ids = params[param_base.to_s.pluralize].split(SEPARATOR).map(&:to_i).reject {|n| n < 1 }
-    else
-      ids = Array.wrap(params["#{param_base}_ids"]).map(&:to_i).reject {|n| n < 1 }
+      ids += params[param_base.to_s.pluralize].split(SEPARATOR).map(&:to_i).reject {|n| n < 1 }
     end
+    ids += Array.wrap(params["#{param_base}_ids"]).map(&:to_i).reject {|n| n < 1 }
     ids.sort
   end
 end

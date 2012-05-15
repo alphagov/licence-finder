@@ -32,6 +32,17 @@ describe LicenceFinderController do
       assigns[:current_question].should == @question1
       assigns[:upcoming_questions].should == [@question2, @question3]
     end
+
+    it "extracts the union of selected sectors ordered alphabetically by name" do
+      @s1 = FactoryGirl.create(:sector, :public_id => 1234, :name => "Alpha")
+      @s2 = FactoryGirl.create(:sector, :public_id => 3456, :name => "Charlie")
+      @s3 = FactoryGirl.create(:sector, :public_id => 2345, :name => "Bravo")
+
+      get :sectors, :sector_ids => %w(1234 3456), :sectors => '2345_4567'
+      response.should be_success
+      assigns[:picked_sectors].should == [@s1, @s3, @s2]
+    end
+
   end
 
   describe "POST 'sectors_submit'" do

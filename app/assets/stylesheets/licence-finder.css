@@ -59,3 +59,23 @@ li.upcoming h3 {
   font-size: 1em;
   margin: 0 0.5em 0 0;
 }
+
+.business-sector-results, .business-activity-results {
+    float: left;
+    margin-right: 5%;
+    width: 50%;
+}
+
+.business-sector-picked, .business-activity-picked {
+    background-color: #96c6e2;
+    float: left;
+    padding: 1em 5%;
+    width: 35%;
+}
+.business-sector-picked ul li, .business-activity-picked ul li {
+    list-style-type: disc;
+}
+
+.search-picker li {
+    list-style-type: disc;
+}

@@ -34,19 +34,18 @@ describe "Finding licences" do
     i_should_be_on "/#{APP_SLUG}/sectors"
 
     within_section 'current question' do
-      i_should_see_field('Fooey Sector', :type => :checkbox)
-      i_should_see_field('Kablooey Sector', :type => :checkbox)
-      i_should_see_field('Gooey Sector', :type => :checkbox)
+      i_should_see_add_link "Fooey Sector"
+      i_should_see_add_link "Kablooey Sector"
+      i_should_see_add_link "Gooey Sector"
       # They should be in alphabetical order
-      page.all('li label').map(&:text).should == [
+      page.all('li .sector-name').map(&:text).should == [
         'Fooey Sector',
         'Gooey Sector',
         'Kablooey Sector',
       ]
     end
-
-    check 'Fooey Sector'
-    check 'Gooey Sector'
+    find(:xpath, "//ul[@class = 'search-picker']/li[./span/text() = 'Fooey Sector']//a").click
+    find(:xpath, "//ul[@class = 'search-picker']/li[./span/text() = 'Gooey Sector']//a").click
     click_on 'Next step'
 
     i_should_be_on "/#{APP_SLUG}/activities", :ignore_query => true

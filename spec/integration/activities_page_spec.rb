@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Activity selection page" do
-  def set_up_activities
+  before(:each) do
     @s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
     @s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")
     @s3 = FactoryGirl.create(:sector, :name => "Gooey Sector")
@@ -14,9 +14,7 @@ describe "Activity selection page" do
   end
 
   specify "inspecting the page" do
-    set_up_activities
-
-    visit "/#{APP_SLUG}/activities?sectors=#{[@s1,@s3].map(&:public_id).join('_')}"
+    visit licence_finder_url_for("activities", [@s1, @s3])
 
     within_section 'completed questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
@@ -50,8 +48,6 @@ describe "Activity selection page" do
   end
 
   specify "with activities selected" do
-    set_up_activities
-
     visit "/#{APP_SLUG}/activities?sectors=#{[@s1,@s3].map(&:public_id).join('_')}&activity_ids[]=#{@a1.public_id}&activity_ids[]=#{@a3.public_id}"
 
     within_section 'current question' do
@@ -62,6 +58,16 @@ describe "Activity selection page" do
         page.should_not have_content("Your chosen activities will appear here")
         i_should_see_remove_links_in_order ["Fooey Activity", "Kabloom"]
       end
+    end
+  end
+
+  specify "going back to previous sections" do
+    {1 => "sectors"}.each do |question, section|
+      visit licence_finder_url_for("activities", [@s1, @s3])
+
+      click_change_answer question
+
+      i_should_be_on licence_finder_url_for(section, [@s1, @s3])
     end
   end
 end

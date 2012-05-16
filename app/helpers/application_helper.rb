@@ -13,6 +13,11 @@ module ApplicationHelper
     create_add_remove_link("Remove", model){|a, b| a - b}
   end
 
+  def change_answer_url(action)
+    new_params = params.reject {|k, v| %(action controller).include?(k) }
+    url_for action: action, params: new_params
+  end
+
   protected
 
   def create_add_remove_link(name, model, &block)

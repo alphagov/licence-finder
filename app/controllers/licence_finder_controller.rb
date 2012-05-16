@@ -8,6 +8,7 @@ class LicenceFinderController < ApplicationController
     'What will your activities or business involve doing?',
     'Where will your activities or business be located?',
   ]
+  ACTIONS = %w(sectors activities business_location)
 
   before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors]
   before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities]
@@ -66,7 +67,7 @@ class LicenceFinderController < ApplicationController
 
   def setup_questions(answers=[])
     @current_question_number = answers.size + 1
-    @completed_questions = QUESTIONS[0...(@current_question_number - 1)].zip(answers)
+    @completed_questions = QUESTIONS[0...(@current_question_number - 1)].zip(answers, ACTIONS)
     @current_question = QUESTIONS[@current_question_number - 1]
     @upcoming_questions = QUESTIONS[(@current_question_number)..-1]
   end

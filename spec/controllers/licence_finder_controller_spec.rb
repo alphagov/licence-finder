@@ -113,7 +113,7 @@ describe LicenceFinderController do
       it "sets up the questions correctly" do
         do_get
         assigns[:current_question_number].should == 2
-        assigns[:completed_questions].should == [ [@question1, :some_sectors] ]
+        assigns[:completed_questions].should == [ [@question1, :some_sectors, 'sectors'] ]
         assigns[:current_question].should == @question2
         assigns[:upcoming_questions].should == [@question3]
       end
@@ -205,7 +205,10 @@ describe LicenceFinderController do
       it "sets up the questions correctly" do
         do_get
         assigns[:current_question_number].should == 3
-        assigns[:completed_questions].should == [ [@question1, :some_sectors], [@question2, :some_activities] ]
+        assigns[:completed_questions].should == [
+            [@question1, :some_sectors, 'sectors'],
+            [@question2, :some_activities, 'activities']
+        ]
         assigns[:current_question].should == @question3
         assigns[:upcoming_questions].should == []
       end
@@ -273,7 +276,11 @@ describe LicenceFinderController do
 
       it "sets up the questions correctly" do
         do_get
-        assigns[:completed_questions].should == [ [@question1, :some_sectors], [@question2, :some_activities], [@question3, ['Northern Ireland']] ]
+        assigns[:completed_questions].should == [
+            [@question1, :some_sectors, 'sectors'],
+            [@question2, :some_activities, 'activities'],
+            [@question3, ['Northern Ireland'], 'business_location']
+        ]
       end
     end
 

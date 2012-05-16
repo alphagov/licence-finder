@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Business location page" do
-  def set_up
+  before(:each) do
     @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")
     @s2 = FactoryGirl.create(:sector, name: "Balooey Sector")
 
@@ -10,11 +10,8 @@ describe "Business location page" do
     @a3 = FactoryGirl.create(:activity, name: "Kabloom", sectors: [@s1, @s2])
   end
 
-  it "should allow user to set location" do
-    set_up
-    sectors = [@s1, @s2].map(&:public_id).join('_')
-    activities = [@a1, @a2].map(&:public_id).join('_')
-    visit "/#{APP_SLUG}/location?sectors=#{sectors}&activities=#{activities}"
+  specify "inspecting the page" do
+    visit licence_finder_url_for("location", [@s1, @s2], [@a1, @a2])
 
     within_section 'completed questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
@@ -54,6 +51,16 @@ describe "Business location page" do
     click_on 'Set location'
 
     i_should_be_on "/#{APP_SLUG}/licences", ignore_query: true
+  end
+
+  specify "going back to previous sections" do
+    {1 => "sectors", 2 => "activities"}.each do |question, section|
+      visit licence_finder_url_for('location', [@s1, @s2], [@a1, @a2])
+
+      click_change_answer question
+
+      i_should_be_on licence_finder_url_for(section, [@s1, @s2], [@a1, @a2])
+    end
   end
 
   it "should complain if no sectors are provided"

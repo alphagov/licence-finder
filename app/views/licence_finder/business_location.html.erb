@@ -4,7 +4,13 @@
   <%= form_tag business_location_path do %>
     <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
     <%= hidden_field_tag(:activities, @activities.map(&:public_id).join(controller.class::SEPARATOR)) %>
-    <%= select_tag(:location, options_for_select([['Select one...', ''], %w(England england), %w(Scotland scotland), %w(Wales wales), ['Northern Ireland', 'northern_ireland']])) %>
-    <%= submit_tag 'Set location' %>
+
+    <fieldset class="find-location-for-service">
+      <div class="ask_location">
+        Select your location
+        <%= select_tag(:location, options_for_select([['Select one...', ''], %w(England england), %w(Scotland scotland), %w(Wales wales), ['Northern Ireland', 'northern_ireland']])) %>
+      </div>
+    </fieldset>
+    <%= submit_tag 'Set location', :class => 'button medium' %>
   <% end %>
 <% end %>

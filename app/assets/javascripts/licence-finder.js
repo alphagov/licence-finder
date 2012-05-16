@@ -1,0 +1,4 @@
+$(function() {
+ // licence finder whizzy
+
+});

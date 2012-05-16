@@ -1,16 +1,20 @@
 require "spec_helper"
 
-describe "Setting business location" do
+describe "Business location page" do
+  def set_up
+    @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")
+    @s2 = FactoryGirl.create(:sector, name: "Balooey Sector")
+
+    @a1 = FactoryGirl.create(:activity, name: "Fooey Activity", sectors: [@s1])
+    @a2 = FactoryGirl.create(:activity, name: "Kablooey Activity", sectors: [@s2])
+    @a3 = FactoryGirl.create(:activity, name: "Kabloom", sectors: [@s1, @s2])
+  end
 
   it "should allow user to set location" do
-    s1 = FactoryGirl.create(:sector, name: "Fooey Sector")
-    s2 = FactoryGirl.create(:sector, name: "Balooey Sector")
-
-    a1 = FactoryGirl.create(:activity, name: "Fooey Activity", sectors: [s1])
-    a2 = FactoryGirl.create(:activity, name: "Kablooey Activity", sectors: [s2])
-    a3 = FactoryGirl.create(:activity, name: "Kabloom", sectors: [s1, s2])
-
-    visit "/#{APP_SLUG}/location?sectors=#{s1.public_id}&activities=#{a1.public_id}"
+    set_up
+    sectors = [@s1, @s2].map(&:public_id).join('_')
+    activities = [@a1, @a2].map(&:public_id).join('_')
+    visit "/#{APP_SLUG}/location?sectors=#{sectors}&activities=#{activities}"
 
     within_section 'completed questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
@@ -21,11 +25,13 @@ describe "Setting business location" do
     within_section 'completed question 1' do
       page.all('.answer li').map(&:text).should == [
         'Fooey Sector',
+        'Balooey Sector'
       ]
     end
     within_section 'completed question 2' do
       page.all('.answer li').map(&:text).should == [
         'Fooey Activity',
+        'Kablooey Activity'
       ]
     end
 

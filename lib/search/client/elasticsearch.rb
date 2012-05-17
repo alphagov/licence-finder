@@ -13,13 +13,9 @@ class Search
       end
 
       def index(sectors)
-        @indexer.import sectors do |sector_chunk|
-          sector_chunk.each { |sector| to_document sector }
+        sectors.each do |sector|
+          @indexer.store to_document(sector)
         end
-      end
-
-      def post_index
-        @indexer.refresh
       end
 
       def to_document(sector)
@@ -29,6 +25,10 @@ class Search
           public_id: sector.public_id,
           title: sector.name
         }
+      end
+
+      def post_index
+        @indexer.refresh
       end
     end
   end

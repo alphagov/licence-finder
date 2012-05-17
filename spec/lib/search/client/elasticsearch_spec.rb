@@ -31,10 +31,19 @@ describe Search::Client::Elasticsearch do
       @client.pre_index
     end
 
-    # Warning this is not very well tested!
     it "should index provided sectors" do
-      @es_indexer.expects(:import).with(:some_sectors)
-      @client.index(:some_sectors)
+      s1 = FactoryGirl.create(:sector, public_id: 1, name: "Sector One")
+      s2 = FactoryGirl.create(:sector, public_id: 2, name: "Sector Two")
+      s3 = FactoryGirl.create(:sector, public_id: 3, name: "Sector Three")
+      indexing = sequence('indexing')
+      @client.expects(:to_document).with(s1).returns(:doc1).in_sequence(indexing)
+      @es_indexer.expects(:store).with(:doc1).in_sequence(indexing)
+      @client.expects(:to_document).with(s2).returns(:doc2).in_sequence(indexing)
+      @es_indexer.expects(:store).with(:doc2).in_sequence(indexing)
+      @client.expects(:to_document).with(s3).returns(:doc3).in_sequence(indexing)
+      @es_indexer.expects(:store).with(:doc3).in_sequence(indexing)
+
+      @client.index [s1, s2, s3]
     end
 
     it "should convert a sector to a hash with the correct fields set" do

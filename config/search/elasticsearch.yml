@@ -1,0 +1,38 @@
+development:
+    url:   'http://localhost:9200'
+    index: licence-finder
+    type:  sector
+
+test:
+    url:   'http://localhost:9200'
+    index: licence-finder
+    type:  sector
+
+create:
+    settings:
+        analysis:
+            analyzer:
+                my_start:
+                    tokenizer: whitespace
+                    filter: [asciifolding, lowercase, my_edge]
+                my_sort:
+                    tokenizer: keyword
+                    filter: [asciifolding, lowercase]
+            filter:
+                my_edge:
+                    type: edgeNGram
+                    min_gram: 1
+                    max_gram: 10
+                    side: front
+    mappings:
+        sector:
+            properties:
+                public_id:
+                    type:  string
+                    store: yes
+                    index: not_analyzed
+                title:
+                    type: multi_field
+                    fields:       {type: string, store: yes, index: analyzed}
+                    sortable:     {type: string, store: no,  index: analyzed, analyzer: my_sort}
+                    autocomplete: {type: string, store: no,  index: analyzed, analyzer: my_start}

@@ -1,0 +1,5 @@
+development:
+    client: elasticsearch
+
+test:
+    client: elasticsearch

@@ -4,7 +4,6 @@ class Search
       def initialize(config)
         @config   = config
         @indexer  = Tire::Index.new(config[:index])
-        @searcher = Tire::Search::Search.new(config[:index])
       end
 
       def pre_index
@@ -29,6 +28,16 @@ class Search
 
       def post_index
         @indexer.refresh
+      end
+
+      def search(query)
+        # this only returns public_ids to keep the public
+        #interface as abstract as possible
+        Tire.search(@config[:index], query: {
+            text: {
+                title: query
+            }
+        }).results.map(&:public_id)
       end
     end
   end

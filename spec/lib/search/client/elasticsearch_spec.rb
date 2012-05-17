@@ -11,15 +11,12 @@ describe Search::Client::Elasticsearch do
     }
     @es_indexer = stub()
     Tire::Index.stubs(:new).returns(@es_indexer)
-    @es_searcher = stub()
-    Tire::Search::Search.stubs(:new).returns(@es_searcher)
     @client = Search::Client::Elasticsearch.new(@es_config)
   end
 
   describe "initialization" do
     it "should initialize the indexer and searcher with the index name" do
       Tire::Index.expects(:new).with('test-index')
-      Tire::Search::Search.expects(:new).with('test-index')
       Search::Client::Elasticsearch.new(@es_config)
     end
   end
@@ -35,7 +32,7 @@ describe Search::Client::Elasticsearch do
       s1 = FactoryGirl.create(:sector, public_id: 1, name: "Sector One")
       s2 = FactoryGirl.create(:sector, public_id: 2, name: "Sector Two")
       s3 = FactoryGirl.create(:sector, public_id: 3, name: "Sector Three")
-      indexing = sequence('indexing')
+      indexing = sequence("indexing")
       @client.expects(:to_document).with(s1).returns(:doc1).in_sequence(indexing)
       @es_indexer.expects(:store).with(:doc1).in_sequence(indexing)
       @client.expects(:to_document).with(s2).returns(:doc2).in_sequence(indexing)
@@ -54,6 +51,20 @@ describe Search::Client::Elasticsearch do
     it "should commit after re-indexing" do
       @es_indexer.expects(:refresh)
       @client.post_index
+    end
+  end
+
+  describe "searching" do
+    it "should search the title with a text query and just return ids" do
+      d1 = stub()
+      d1.expects(:public_id).returns(123)
+      d2 = stub()
+      d2.expects(:public_id).returns(234)
+      response = stub()
+      response.expects(:results).returns([d1, d2])
+
+      Tire.expects(:search).with(@es_config[:index], {query: { text: { title: :query}}}).returns(response)
+      @client.search(:query).should == [123, 234]
     end
   end
 end

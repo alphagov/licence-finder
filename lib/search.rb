@@ -8,4 +8,12 @@ class Search
     @client.index(Sector.all)
     @client.post_index
   end
+
+  def search(query)
+    public_ids = @client.search(query)
+
+    Sector.find_by_public_ids(public_ids).to_a.sort do |a, b|
+      public_ids.index(a.public_id) <=> public_ids.index(b.public_id)
+    end
+  end
 end

@@ -60,7 +60,7 @@ li.upcoming h3 {
   margin: 0 0.5em 0 0;
 }
 
-.business-sector-results, .business-activity-results {
+.business-sector-results, .business-activity-results, .search-container {
     float: left;
     margin-right: 5%;
     width: 50%;

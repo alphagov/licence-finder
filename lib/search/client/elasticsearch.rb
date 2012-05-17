@@ -4,6 +4,11 @@ class Search
       def initialize(config)
         @config   = config
         @indexer  = Tire::Index.new(config[:index])
+
+      end
+
+      def delete_index
+        @indexer.delete
       end
 
       def pre_index

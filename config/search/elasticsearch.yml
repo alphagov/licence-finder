@@ -5,7 +5,7 @@ development:
 
 test:
     url:   'http://localhost:9200'
-    index: licence-finder
+    index: licence-finder-test
     type:  sector
 
 create:

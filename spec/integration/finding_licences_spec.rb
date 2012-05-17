@@ -23,7 +23,7 @@ describe "Finding licences" do
     FactoryGirl.create(:licence_link, :sector => s2, :activity => a1, :licence => l3)
     FactoryGirl.create(:licence_link, :sector => s1, :activity => a1, :licence => l4)
 
-
+    $search.index_all
 
     visit "/#{APP_SLUG}"
 
@@ -33,8 +33,11 @@ describe "Finding licences" do
 
     i_should_be_on "/#{APP_SLUG}/sectors"
 
+    fill_in "Search", with: "sector"
+    click_on "Search"
+
     within_section 'current question' do
-      i_should_see_add_links_in_order ["Fooey Sector", "Gooey Sector", "Kablooey Sector"]
+      i_should_see_add_links ["Fooey Sector", "Gooey Sector", "Kablooey Sector"]
     end
     click_add_link('Fooey Sector')
     click_add_link('Gooey Sector')
@@ -112,5 +115,7 @@ describe "Finding licences" do
         'Licence One'
       ]
     end
+
+    $search.delete_index
   end
 end

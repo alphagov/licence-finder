@@ -15,14 +15,27 @@ describe LicenceFinderController do
   end
 
   describe "GET 'sectors'" do
-    it "assigns all sectors ordered alphabetically by name" do
+
+    it "should return no sectors if no query is provided" do
       @s1 = FactoryGirl.create(:sector, :name => "Alpha")
       @s2 = FactoryGirl.create(:sector, :name => "Charlie")
       @s3 = FactoryGirl.create(:sector, :name => "Bravo")
 
       get :sectors
       response.should be_success
-      assigns[:sectors].to_a.should == [@s1, @s3, @s2]
+      assigns[:sectors].should == []
+    end
+
+    it "should return all sectors returned from the search" do
+      @s1 = FactoryGirl.create(:sector, :name => "Alpha")
+      @s2 = FactoryGirl.create(:sector, :name => "Charlie")
+      @s3 = FactoryGirl.create(:sector, :name => "Bravo")
+
+      $search.expects(:search).with("test query").returns([@s1, @s2, @s3])
+
+      get :sectors, q: "test query"
+      response.should be_success
+      assigns[:sectors].to_a.should == [@s1, @s2, @s3]
     end
 
     it "sets up the questions correctly" do

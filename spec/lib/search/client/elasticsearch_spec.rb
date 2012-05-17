@@ -54,6 +54,14 @@ describe Search::Client::Elasticsearch do
     end
   end
 
+  describe "deleting" do
+    it "should delete the index" do
+      @es_indexer.expects(:delete)
+
+      @client.delete_index
+    end
+  end
+
   describe "searching" do
     it "should search the title with a text query and just return ids" do
       d1 = stub()

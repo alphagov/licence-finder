@@ -9,6 +9,10 @@ class Search
     @client.post_index
   end
 
+  def delete_index
+    @client.delete_index
+  end
+
   def search(query)
     public_ids = @client.search(query)
 

@@ -1,16 +1,20 @@
 require 'spec_helper'
 
 describe "Sector selection page" do
-  def set_up_sectors
+  before(:each) do
     s1 = FactoryGirl.create(:sector, :public_id => 123, :name => "Fooey Sector")
     s2 = FactoryGirl.create(:sector, :public_id => 234, :name => "Kablooey Sector")
     s3 = FactoryGirl.create(:sector, :public_id => 345, :name => "Gooey Sector")
+
+    $search.index_all
+  end
+
+  after(:each) do
+    $search.delete_index
   end
 
   specify "inspecting the page" do
-    set_up_sectors
-
-    visit "/#{APP_SLUG}/sectors"
+    visit "/#{APP_SLUG}/sectors?q=sector"
 
     page.should_not have_selector(*selector_of_section('completed questions'))
 
@@ -18,7 +22,7 @@ describe "Sector selection page" do
       page.should have_content("What kind of activities or business do you need a licence for?")
 
       within '.business-sector-results' do
-        i_should_see_add_links_in_order ["Fooey Sector", "Gooey Sector", "Kablooey Sector"]
+        i_should_see_add_links ["Fooey Sector", "Gooey Sector", "Kablooey Sector"]
       end
 
       within '.business-sector-picked' do
@@ -36,9 +40,7 @@ describe "Sector selection page" do
   end
 
   specify "with sectors selected" do
-    set_up_sectors
-
-    visit "/#{APP_SLUG}/sectors?sector_ids[]=123&sector_ids[]=234"
+    visit "/#{APP_SLUG}/sectors?q=sector&sector_ids[]=123&sector_ids[]=234"
 
     within_section 'current question' do
       within '.business-sector-results' do
@@ -54,6 +56,16 @@ describe "Sector selection page" do
         i_should_see_remove_link "Kablooey Sector"
       end
     end
+  end
 
+  specify "with no search query provided" do
+    visit "/#{APP_SLUG}/sectors"
+
+    within_section 'current question' do
+      within '.search-container' do
+        page.should have_css("input#q")
+      end
+      page.should_not have_css(".business-sector-results")
+    end
   end
 end

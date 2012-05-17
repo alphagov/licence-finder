@@ -7,6 +7,7 @@ gem 'rails', '3.2.3'
 
 gem "mongoid", "~> 2.4"
 gem "bson_ext", "~> 1.5"
+gem "tire"
 
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'

@@ -4,11 +4,13 @@ describe Licence do
   it "should use the correct field types on the model" do
     Licence.safely.create!(
       :public_id => 42,
+      :correlation_id => 24,
       :name => "Some Licence",
       :regulation_area => "Some Regulation Area"
     )
     licence = Licence.first
     licence.public_id.should == 42
+    licence.correlation_id.should == 24
     licence.name.should == "Some Licence"
   end
 
@@ -20,6 +22,14 @@ describe Licence do
     it "should have a database level uniqueness constraint on public_id" do
       FactoryGirl.create(:licence, :public_id => 42)
       @licence.public_id = 42
+      lambda do
+        @licence.safely.save
+      end.should raise_error(Mongo::OperationFailure)
+    end
+
+    it "should have a database level uniqueness constraint on correlation_id" do
+      FactoryGirl.create(:licence, :correlation_id => 42)
+      @licence.correlation_id = 42
       lambda do
         @licence.safely.save
       end.should raise_error(Mongo::OperationFailure)
@@ -48,6 +58,22 @@ describe Licence do
 
     it "should fail to retrieve a non-existent public_id" do
       found_licence = Licence.find_by_public_id(@licence.public_id + 1)
+      found_licence.should == nil
+    end
+  end
+
+  describe "find_by_correlation_id" do
+    before :each do
+      @licence = FactoryGirl.create(:licence)
+    end
+
+    it "should be able to retrieve by correlation_id" do
+      found_licence = Licence.find_by_correlation_id(@licence.correlation_id)
+      found_licence.should == @licence
+    end
+
+    it "should fail to retrieve a non-existent correlation_id" do
+      found_licence = Licence.find_by_correlation_id(@licence.correlation_id + 1)
       found_licence.should == nil
     end
   end
@@ -88,5 +114,31 @@ describe Licence do
       found_licences = Licence.find_by_sectors_activities_and_location([@s1], [@a1, @a2], :england)
       found_licences.to_a.should =~ [@l1, @l2]
     end
+  end
+
+  describe "auto incrementing public_id" do
+    def create_and_test_licence(correlation_id, public_id, &block)
+      # Surely this can be handled by FactoryGirl?
+      licence = Licence.new
+      licence.correlation_id = correlation_id
+      licence.name = "Test licence"
+      licence.regulation_area = "England"
+      licence.public_id.should == nil
+      block.call(licence)
+      licence.public_id.should == public_id
+
+    end
+    it "should set the public_id to the next free public_id when set_public_id is called" do
+      create_and_test_licence(12, 1) {|licence| licence.set_public_id }
+      create_and_test_licence(13, 2) {|licence| licence.set_public_id }
+      create_and_test_licence(14, 3) {|licence| licence.set_public_id }
+    end
+
+    it "should set the public_id to the next free public_id on save" do
+      create_and_test_licence(12, 1) {|licence| licence.save }
+      create_and_test_licence(13, 2) {|licence| licence.save }
+      create_and_test_licence(14, 3) {|licence| licence.save}
+    end
+
   end
 end

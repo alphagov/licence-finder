@@ -9,13 +9,13 @@ describe DataImporter::Sectors do
 "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
       END
 
-      Sector.find_by_public_id(1000011).should == nil
+      Sector.find_by_correlation_id(1000011).should == nil
 
       importer = DataImporter::Sectors.new(source)
       importer.run
 
-      imported_sector = Sector.find_by_public_id(1000011)
-      imported_sector.public_id.should == 1000011
+      imported_sector = Sector.find_by_correlation_id(1000011)
+      imported_sector.correlation_id.should == 1000011
       imported_sector.name.should == "Animal farming support services"
       imported_sector.layer1_id.should == 1000001
       imported_sector.layer2_id.should == 1000002
@@ -28,12 +28,12 @@ describe DataImporter::Sectors do
 "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
       END
 
-      Sector.find_by_public_id(1000011).should == nil
+      Sector.find_by_correlation_id(1000011).should == nil
 
       importer = DataImporter::Sectors.new(source)
       importer.run
 
-      Sector.where(public_id: 1000011).length.should == 1
+      Sector.where(correlation_id: 1000011).length.should == 1
     end
   end
 

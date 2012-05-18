@@ -4,10 +4,12 @@ describe Sector do
   it "should use the correct field types on the model" do
     Sector.safely.create!(
       :public_id => 42,
+      :correlation_id => 24,
       :name => "Some Sector"
     )
     sector = Sector.first
     sector.public_id.should == 42
+    sector.correlation_id.should == 24
     sector.name.should == "Some Sector"
   end
 
@@ -19,6 +21,14 @@ describe Sector do
     it "should have a database level uniqueness constraint on public_id" do
       FactoryGirl.create(:sector, :public_id => 42)
       @sector.public_id = 42
+      lambda do
+        @sector.safely.save
+      end.should raise_error(Mongo::OperationFailure)
+    end
+
+    it "should have a database level uniqueness constraint on correlation_id" do
+      FactoryGirl.create(:sector, :correlation_id => 42)
+      @sector.correlation_id = 42
       lambda do
         @sector.safely.save
       end.should raise_error(Mongo::OperationFailure)
@@ -79,10 +89,46 @@ describe Sector do
         sectors.to_a.should =~ [@s1, @s2]
       end
     end
+
+    describe "#find_by_correlation_id" do
+      before :each do
+        @sector = FactoryGirl.create(:sector)
+      end
+
+      it "should be able to retrieve by correlation_id" do
+        found_sector = Sector.find_by_correlation_id(@sector.correlation_id)
+        found_sector.should == @sector
+      end
+    end
   end
 
   specify "to_s returns the name" do
     s = FactoryGirl.build(:sector, :name => "Foo Sector")
     s.to_s.should == "Foo Sector"
+  end
+
+  describe "auto incrementing public_id" do
+
+    def create_and_test_sector(correlation_id, public_id, &block)
+      # Surely this can be handled by FactoryGirl?
+      sector = Sector.new
+      sector.correlation_id = correlation_id
+      sector.name = "Test Sector"
+      sector.public_id.should == nil
+      block.call(sector)
+      sector.public_id.should == public_id
+
+    end
+    it "should set the public_id to the next free public_id when set_public_id is called" do
+      create_and_test_sector(12, 1) {|sector| sector.set_public_id }
+      create_and_test_sector(13, 2) {|sector| sector.set_public_id }
+      create_and_test_sector(14, 3) {|sector| sector.set_public_id }
+    end
+
+    it "should set the public_id to the next free public_id on save" do
+      create_and_test_sector(12, 1) {|sector| sector.save }
+      create_and_test_sector(13, 2) {|sector| sector.save }
+      create_and_test_sector(14, 3) {|sector| sector.save}
+    end
   end
 end

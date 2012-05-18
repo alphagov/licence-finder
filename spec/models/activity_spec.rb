@@ -4,10 +4,12 @@ describe Activity do
   it "should use the correct field types on the model" do
     Activity.safely.create!(
       :public_id => 42,
+      :correlation_id => 24,
       :name => "Some Activity"
     )
     activity = Activity.first
     activity.public_id.should == 42
+    activity.correlation_id.should == 24
     activity.name.should == "Some Activity"
   end
 
@@ -19,6 +21,14 @@ describe Activity do
     it "should have a database level uniqueness constraint on public_id" do
       FactoryGirl.create(:activity, :public_id => 42)
       @activity.public_id = 42
+      lambda do
+        @activity.safely.save
+      end.should raise_error(Mongo::OperationFailure)
+    end
+
+    it "should have a database level uniqueness constraint on correlation_id" do
+      FactoryGirl.create(:activity, :correlation_id => 42)
+      @activity.correlation_id = 42
       lambda do
         @activity.safely.save
       end.should raise_error(Mongo::OperationFailure)
@@ -80,6 +90,22 @@ describe Activity do
       end
     end
 
+    describe "find_by_correlation_id" do
+      before :each do
+        @activity = FactoryGirl.create(:activity)
+      end
+
+      it "should be able to retrieve by correlation_id" do
+        found_activity = Activity.find_by_correlation_id(@activity.correlation_id)
+        found_activity.should == @activity
+      end
+
+      it "should fail to retrieve a non-existent correlation_id" do
+        found_activity = Activity.find_by_correlation_id(@activity.correlation_id + 1)
+        found_activity.should == nil
+      end
+    end
+
     describe "find_by_sectors" do
       before :each do
         @s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
@@ -110,5 +136,28 @@ describe Activity do
   specify "to_s returns the name" do
     a = FactoryGirl.build(:activity, :name => "Foo Activity")
     a.to_s.should == "Foo Activity"
+  end
+
+  describe "auto incrementing public_id" do
+    def create_and_test_activity(correlation_id, public_id, &block)
+      activity = Activity.new
+      activity.correlation_id = correlation_id
+      activity.name = "Test Activity"
+      activity.public_id.should == nil
+      block.call(activity)
+      activity.public_id.should == public_id
+    end
+
+    it "should set the public_id to the next free public_id when set_public_id is called" do
+      create_and_test_activity(12, 1) {|activity| activity.set_public_id }
+      create_and_test_activity(13, 2) {|activity| activity.set_public_id }
+      create_and_test_activity(14, 3) {|activity| activity.set_public_id }
+    end
+
+    it "should set the public_id to the next free public_id on save" do
+      create_and_test_activity(12, 1) {|activity| activity.save }
+      create_and_test_activity(13, 2) {|activity| activity.save }
+      create_and_test_activity(14, 3) {|activity| activity.save }
+    end
   end
 end

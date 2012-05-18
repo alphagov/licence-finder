@@ -10,17 +10,17 @@ describe DataImporter::Activities do
 "1000431","Nutritionist services","1002","Use CCTV systems"
       END
 
-      sector = FactoryGirl.create(:sector, public_id: 1000431)
+      sector = FactoryGirl.create(:sector, correlation_id: 1000431)
 
       importer = DataImporter::Activities.new(source)
       importer.run
 
-      imported_activity1 = Activity.find_by_public_id(362)
-      imported_activity1.public_id.should == 362
+      imported_activity1 = Activity.find_by_correlation_id(362)
+      imported_activity1.correlation_id.should == 362
       imported_activity1.name.should == "Practise as a dietitian "
 
-      imported_activity2 = Activity.find_by_public_id(1002)
-      imported_activity2.public_id.should == 1002
+      imported_activity2 = Activity.find_by_correlation_id(1002)
+      imported_activity2.correlation_id.should == 1002
       imported_activity2.name.should == "Use CCTV systems"
 
       sector.reload
@@ -34,12 +34,12 @@ describe DataImporter::Activities do
 "1000431","Nutritionist services","362","Practise as a dietitian "
       END
 
-      sector = FactoryGirl.create(:sector, public_id: 1000431)
+      sector = FactoryGirl.create(:sector, correlation_id: 1000431)
 
       importer = DataImporter::Activities.new(source)
       importer.run
 
-      Activity.where(public_id: 362).length.should == 1
+      Activity.where(correlation_id: 362).length.should == 1
     end
   end
 

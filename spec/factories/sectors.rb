@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :sector do
     sequence(:public_id)
+    sequence(:correlation_id)
     name "Test Sector"
   end
 end

@@ -25,8 +25,28 @@
             <%= link_to_remove sector %>
           </li>
         <% end %>
+<<<<<<< Updated upstream
         </ul>
         <%= submit_tag 'Next step', :class => 'button medium' %>
+=======
+      </ul>
+      <%= link_to "Search for more", {sectors: params[:sectors]}, {class: "button"} %>
+  </div>
+  <% end %>
+  <%= form_tag sectors_path do %>
+  <div class="business-sector-picked" aria-live="polite">
+    <h3>Your chosen sectors</h3>
+    <% if @picked_sectors.empty? %>
+      <p class="hint">Your chosen sectors will appear here</p>
+    <% else %>
+      <ul>
+      <% @picked_sectors.each do |sector| %>
+        <li>
+          <%= hidden_field_tag 'sector_ids[]', sector.public_id %>
+          <span class="sector-name" ><%= sector.name %></span>
+          <%= link_to_remove sector %>
+        </li>
+>>>>>>> Stashed changes
       <% end %>
     </div>
   <% end %>

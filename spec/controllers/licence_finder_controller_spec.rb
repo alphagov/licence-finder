@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe LicenceFinderController do
   before :each do
-    @question1 = 'What kind of activities or business do you need a licence for?'
-    @question2 = 'What will your activities or business involve doing?'
-    @question3 = 'Where will your activities or business be located?'
+    @question1 = 'What is your activity or business?'
+    @question2 = 'What does your activity or business involve?'
+    @question3 = 'Where will your activity or business be located?'
   end
 
   describe "GET 'start'" do

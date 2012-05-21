@@ -85,7 +85,7 @@ describe "Finding licences" do
 
     select('England', from: 'location')
 
-    click_on 'Set location'
+    click_on 'Next step'
 
     i_should_be_on "/#{APP_SLUG}/licences", :ignore_query => true
 

@@ -115,7 +115,6 @@ describe DataImporter::Licences do
       sectors.should_not include(sector3)
     end
     it "should not create a new licence_link if it already exists" do
-      require 'ruby-debug'
       @licence = FactoryGirl.create(:licence, correlation_id: 1, name: "Test Name", da_england: false)
       licence_link = FactoryGirl.create(:licence_link, sector: @sector, activity: @activity, licence: @licence)
 

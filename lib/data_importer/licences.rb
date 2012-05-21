@@ -39,8 +39,6 @@ class DataImporter::Licences < DataImporter
     end
   end
 
-  private
-
   def find_licence_link(sector, activity, licence)
     LicenceLink.where(sector_id: sector.id, activity_id: activity.id, licence_id: licence.id)
   end

@@ -117,27 +117,16 @@ describe Licence do
   end
 
   describe "auto incrementing public_id" do
-    def create_and_test_licence(correlation_id, public_id, &block)
-      # Surely this can be handled by FactoryGirl?
-      licence = Licence.new
-      licence.correlation_id = correlation_id
-      licence.name = "Test licence"
-      licence.regulation_area = "England"
-      licence.public_id.should == nil
-      block.call(licence)
-      licence.public_id.should == public_id
-
-    end
-    it "should set the public_id to the next free public_id when set_public_id is called" do
-      create_and_test_licence(12, 1) {|licence| licence.set_public_id }
-      create_and_test_licence(13, 2) {|licence| licence.set_public_id }
-      create_and_test_licence(14, 3) {|licence| licence.set_public_id }
-    end
-
     it "should set the public_id to the next free public_id on save" do
-      create_and_test_licence(12, 1) {|licence| licence.save }
-      create_and_test_licence(13, 2) {|licence| licence.save }
-      create_and_test_licence(14, 3) {|licence| licence.save}
+      licence = FactoryGirl.build(:licence)
+      licence.public_id.should == nil
+      licence.save!
+      licence.public_id.should == 1
+
+      licence = FactoryGirl.build(:licence)
+      licence.public_id.should == nil
+      licence.save!
+      licence.public_id.should == 2
     end
 
   end

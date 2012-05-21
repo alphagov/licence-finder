@@ -139,25 +139,16 @@ describe Activity do
   end
 
   describe "auto incrementing public_id" do
-    def create_and_test_activity(correlation_id, public_id, &block)
-      activity = Activity.new
-      activity.correlation_id = correlation_id
-      activity.name = "Test Activity"
-      activity.public_id.should == nil
-      block.call(activity)
-      activity.public_id.should == public_id
-    end
-
-    it "should set the public_id to the next free public_id when set_public_id is called" do
-      create_and_test_activity(12, 1) {|activity| activity.set_public_id }
-      create_and_test_activity(13, 2) {|activity| activity.set_public_id }
-      create_and_test_activity(14, 3) {|activity| activity.set_public_id }
-    end
-
     it "should set the public_id to the next free public_id on save" do
-      create_and_test_activity(12, 1) {|activity| activity.save }
-      create_and_test_activity(13, 2) {|activity| activity.save }
-      create_and_test_activity(14, 3) {|activity| activity.save }
+      activity = FactoryGirl.build(:activity)
+      activity.public_id.should == nil
+      activity.save!
+      activity.public_id.should == 1
+
+      activity = FactoryGirl.build(:activity)
+      activity.public_id.should == nil
+      activity.save!
+      activity.public_id.should == 2
     end
   end
 end

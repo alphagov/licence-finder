@@ -109,26 +109,16 @@ describe Sector do
 
   describe "auto incrementing public_id" do
 
-    def create_and_test_sector(correlation_id, public_id, &block)
-      # Surely this can be handled by FactoryGirl?
-      sector = Sector.new
-      sector.correlation_id = correlation_id
-      sector.name = "Test Sector"
+    it "should set the public_id to the next free public_id when saved" do
+      sector = FactoryGirl.build(:sector)
       sector.public_id.should == nil
-      block.call(sector)
-      sector.public_id.should == public_id
+      sector.save!
+      sector.public_id.should == 1
 
-    end
-    it "should set the public_id to the next free public_id when set_public_id is called" do
-      create_and_test_sector(12, 1) {|sector| sector.set_public_id }
-      create_and_test_sector(13, 2) {|sector| sector.set_public_id }
-      create_and_test_sector(14, 3) {|sector| sector.set_public_id }
-    end
-
-    it "should set the public_id to the next free public_id on save" do
-      create_and_test_sector(12, 1) {|sector| sector.save }
-      create_and_test_sector(13, 2) {|sector| sector.save }
-      create_and_test_sector(14, 3) {|sector| sector.save}
+      sector = FactoryGirl.build(:sector)
+      sector.public_id.should == nil
+      sector.save!
+      sector.public_id.should == 2
     end
   end
 end

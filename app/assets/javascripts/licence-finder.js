@@ -77,14 +77,16 @@ $(function() {
 
 	};
 
-	// setup for given step section
-	function setupElements(){
-
-	};
 
 	// manage url
 	function manageURL(){
 		// add each to a url, with an underscore before
+		if(section == "sector"){
+
+		}
+		else{
+			
+		}
 	};
 
 	init();

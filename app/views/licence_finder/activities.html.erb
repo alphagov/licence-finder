@@ -1,5 +1,5 @@
 <%= render :partial => 'completed_questions' %>
-
+<%= javascript_include_tag 'licence-finder', defer: true %>
 <%= current_question do %>
   <%= form_tag activities_path do %>
     <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>

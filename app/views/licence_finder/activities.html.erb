@@ -14,10 +14,10 @@
         <% end %>
       </ul>
     </div>
-    <div class="business-activity-picked">
-      <h3>Find licences for</h3>
+    <div class="business-activity-picked" aria-live="polite">
+      <h3>Your chosen categories</h3>
       <% if @picked_activities.empty? %>
-        <p class="hint">Your chosen activities will appear here</p>
+        <p class="hint">Your chosen categories will appear here</p>
       <% else %>
         <ul>
         <% @picked_activities.each do |activity| %>

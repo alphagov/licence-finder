@@ -27,7 +27,7 @@ describe "Sector selection page" do
 
       within '.business-sector-picked' do
         # none are selected yet
-        page.should have_content("Your chosen categories will appear here")
+        page.should have_content("Your chosen sectors will appear here")
       end
     end
 
@@ -51,7 +51,7 @@ describe "Sector selection page" do
       end
 
       within '.business-sector-picked' do
-        page.should_not have_content("Your chosen categories will appear here")
+        page.should_not have_content("Your chosen sectors will appear here")
         i_should_see_remove_link "Fooey Sector"
         i_should_see_remove_link "Kablooey Sector"
       end

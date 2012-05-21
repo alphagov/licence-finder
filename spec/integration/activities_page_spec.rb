@@ -36,7 +36,7 @@ describe "Activity selection page" do
       end
       within '.business-activity-picked' do
         # none are selected yet
-        page.should have_content("Your chosen activities will appear here")
+        page.should have_content("Your chosen categories will appear here")
       end
     end
 

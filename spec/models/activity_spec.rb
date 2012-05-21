@@ -4,10 +4,12 @@ describe Activity do
   it "should use the correct field types on the model" do
     Activity.safely.create!(
       :public_id => 42,
+      :correlation_id => 24,
       :name => "Some Activity"
     )
     activity = Activity.first
     activity.public_id.should == 42
+    activity.correlation_id.should == 24
     activity.name.should == "Some Activity"
   end
 
@@ -19,6 +21,14 @@ describe Activity do
     it "should have a database level uniqueness constraint on public_id" do
       FactoryGirl.create(:activity, :public_id => 42)
       @activity.public_id = 42
+      lambda do
+        @activity.safely.save
+      end.should raise_error(Mongo::OperationFailure)
+    end
+
+    it "should have a database level uniqueness constraint on correlation_id" do
+      FactoryGirl.create(:activity, :correlation_id => 42)
+      @activity.correlation_id = 42
       lambda do
         @activity.safely.save
       end.should raise_error(Mongo::OperationFailure)
@@ -80,6 +90,22 @@ describe Activity do
       end
     end
 
+    describe "find_by_correlation_id" do
+      before :each do
+        @activity = FactoryGirl.create(:activity)
+      end
+
+      it "should be able to retrieve by correlation_id" do
+        found_activity = Activity.find_by_correlation_id(@activity.correlation_id)
+        found_activity.should == @activity
+      end
+
+      it "should fail to retrieve a non-existent correlation_id" do
+        found_activity = Activity.find_by_correlation_id(@activity.correlation_id + 1)
+        found_activity.should == nil
+      end
+    end
+
     describe "find_by_sectors" do
       before :each do
         @s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
@@ -110,5 +136,27 @@ describe Activity do
   specify "to_s returns the name" do
     a = FactoryGirl.build(:activity, :name => "Foo Activity")
     a.to_s.should == "Foo Activity"
+  end
+
+  describe "auto incrementing public_id" do
+    it "should set the public_id to the next free public_id on save" do
+      activity = FactoryGirl.build(:activity)
+      activity.public_id.should == nil
+      activity.save!
+      activity.public_id.should == 1
+
+      activity = FactoryGirl.build(:activity)
+      activity.public_id.should == nil
+      activity.save!
+      activity.public_id.should == 2
+    end
+
+    it "should use a separate sequence for each model" do
+      activity = FactoryGirl.create(:activity)
+      activity.public_id.should == 1
+      FactoryGirl.create(:licence)
+      activity = FactoryGirl.create(:activity)
+      activity.public_id.should == 2
+    end
   end
 end

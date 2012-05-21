@@ -12,12 +12,12 @@ class DataImporter::Licences < DataImporter
     if sectors.length == 0
       raise "Could not find sector #{row['SECTOR_OID']}, failing."
     end
-    unless activity = Activity.find_by_public_id(row['BUSINESSACT_ID'].to_i)
+    unless activity = Activity.find_by_correlation_id(row['BUSINESSACT_ID'].to_i)
       raise "Could not find activity #{row['BUSINESSACT_ID']}, failing."
     end
-    unless licence = Licence.find_by_public_id(row['LICENCE_OID'].to_i)
+    unless licence = Licence.find_by_correlation_id(row['LICENCE_OID'].to_i)
       licence = Licence.new
-      licence.public_id = row['LICENCE_OID'].to_i
+      licence.correlation_id = row['LICENCE_OID'].to_i
       Rails.logger.debug "Creating licence #{licence.id}(#{licence.name})"
     end
     licence.name = row['LICENCE']
@@ -46,7 +46,7 @@ class DataImporter::Licences < DataImporter
   end
 
   def find_sectors(sector_id)
-    if sector = Sector.find_by_public_id(sector_id)
+    if sector = Sector.find_by_correlation_id(sector_id)
       [sector]
     else
       Sector.any_of({layer1_id: sector_id}, {layer2_id: sector_id})

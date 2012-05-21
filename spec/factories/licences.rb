@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :licence do
-    sequence(:public_id)
+    sequence(:correlation_id)
     name "Test Licence"
     regulation_area "Test Regulation Area"
     da_england true

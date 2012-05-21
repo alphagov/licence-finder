@@ -8,13 +8,13 @@ class DataImporter::Activities < DataImporter
   private
 
   def process_row(row)
-    unless sector = Sector.find_by_public_id(row['SECTOR_OID'].to_i)
+    unless sector = Sector.find_by_correlation_id(row['SECTOR_OID'].to_i)
       Rails.logger.info "Can't find Sector #{row['SECTOR_OID']} (#{row['SECTOR']})"
       return
     end
-    unless activity = Activity.find_by_public_id(row['BUSINSS_ACT_ID'].to_i)
+    unless activity = Activity.find_by_correlation_id(row['BUSINSS_ACT_ID'].to_i)
       activity = Activity.new
-      activity.public_id = row['BUSINSS_ACT_ID'].to_i
+      activity.correlation_id = row['BUSINSS_ACT_ID'].to_i
       activity.name = row['ACTIVITY_TITLE']
       Rails.logger.debug "Creating BusinessActivity #{activity.id}(#{activity.name})"
       activity.safely.save!

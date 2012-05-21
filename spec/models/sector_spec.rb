@@ -4,10 +4,12 @@ describe Sector do
   it "should use the correct field types on the model" do
     Sector.safely.create!(
       :public_id => 42,
+      :correlation_id => 24,
       :name => "Some Sector"
     )
     sector = Sector.first
     sector.public_id.should == 42
+    sector.correlation_id.should == 24
     sector.name.should == "Some Sector"
   end
 
@@ -19,6 +21,14 @@ describe Sector do
     it "should have a database level uniqueness constraint on public_id" do
       FactoryGirl.create(:sector, :public_id => 42)
       @sector.public_id = 42
+      lambda do
+        @sector.safely.save
+      end.should raise_error(Mongo::OperationFailure)
+    end
+
+    it "should have a database level uniqueness constraint on correlation_id" do
+      FactoryGirl.create(:sector, :correlation_id => 42)
+      @sector.correlation_id = 42
       lambda do
         @sector.safely.save
       end.should raise_error(Mongo::OperationFailure)
@@ -79,10 +89,36 @@ describe Sector do
         sectors.to_a.should =~ [@s1, @s2]
       end
     end
+
+    describe "#find_by_correlation_id" do
+      before :each do
+        @sector = FactoryGirl.create(:sector)
+      end
+
+      it "should be able to retrieve by correlation_id" do
+        found_sector = Sector.find_by_correlation_id(@sector.correlation_id)
+        found_sector.should == @sector
+      end
+    end
   end
 
   specify "to_s returns the name" do
     s = FactoryGirl.build(:sector, :name => "Foo Sector")
     s.to_s.should == "Foo Sector"
+  end
+
+  describe "auto incrementing public_id" do
+
+    it "should set the public_id to the next free public_id when saved" do
+      sector = FactoryGirl.build(:sector)
+      sector.public_id.should == nil
+      sector.save!
+      sector.public_id.should == 1
+
+      sector = FactoryGirl.build(:sector)
+      sector.public_id.should == nil
+      sector.save!
+      sector.public_id.should == 2
+    end
   end
 end

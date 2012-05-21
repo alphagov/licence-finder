@@ -1,7 +1,10 @@
+require "public_id"
+
 class Licence
   include Mongoid::Document
-  field :public_id, :type => Integer
-  index :public_id, :unique => true
+  include PublicId
+  field :correlation_id, :type => Integer
+  index :correlation_id, :unique => true
   field :name, :type => String
   field :regulation_area, :type => String
   field :da_england, :type => Boolean
@@ -12,8 +15,8 @@ class Licence
   validates :name, :presence => true
   validates :regulation_area, :presence => true
 
-  def self.find_by_public_id(public_id)
-    where(public_id: public_id).first
+  def self.find_by_correlation_id(correlation_id)
+    where(correlation_id: correlation_id).first
   end
 
   def self.find_by_sectors_activities_and_location(sectors, activities, location)

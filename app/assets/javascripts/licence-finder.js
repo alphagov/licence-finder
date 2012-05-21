@@ -78,17 +78,6 @@ $(function() {
 	};
 
 
-	// manage url
-	function manageURL(){
-		// add each to a url, with an underscore before
-		if(section == "sector"){
-
-		}
-		else{
-			
-		}
-	};
-
 	init();
 
 });

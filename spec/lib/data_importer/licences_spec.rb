@@ -32,6 +32,20 @@ describe DataImporter::Licences do
       imported_licence_link.licence.should == imported_licence
       LicenceLink.all.length.should == 1
     end
+
+    it "should decode any html entities in the data file" do
+      source = StringIO.new(<<-END)
+"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+"1","Some Sector","1","Some Activity","1","Pavement licence (England &amp; Wales)","Copyright","1","0","1","0","0"
+      END
+
+      importer = DataImporter::Licences.new(source)
+      importer.run
+
+      imported_licence = Licence.find_by_correlation_id(1)
+      imported_licence.name.should == "Pavement licence (England & Wales)"
+    end
+
     it "should update the licence if one with the same correlation_id already exists" do
       FactoryGirl.create(:licence, correlation_id: 1, name: "Test Name", da_england: false)
 

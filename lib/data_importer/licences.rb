@@ -1,3 +1,5 @@
+require 'cgi'
+
 class DataImporter::Licences < DataImporter
   FILENAME = 'licences.csv'
 
@@ -20,7 +22,7 @@ class DataImporter::Licences < DataImporter
       licence.correlation_id = row['LICENCE_OID'].to_i
       Rails.logger.debug "Creating licence #{licence.id}(#{licence.name})"
     end
-    licence.name = row['LICENCE']
+    licence.name = CGI.unescape_html( row['LICENCE'] )
     licence.regulation_area = row['REGULATION_AREA']
     licence.da_england = is_applicable_in(row, 'DA_ENGLAND')
     licence.da_scotland = is_applicable_in(row, 'DA_SCOTLAND')

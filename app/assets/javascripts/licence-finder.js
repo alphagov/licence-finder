@@ -1,25 +1,33 @@
 $(function() {
 
+	var section,
+		pluralSection;
+
 	/* Add one thing to another thing, alphabetically */
 	function swapList(elem, targetList, state){
 	
-		var id = $(elem).attr("href").split("sectors=");
+		var id = $(elem).attr("href").split(pluralSection+"=");
 		if(id[1].indexOf("_")){
 			var id = id[1].split("_");
-			var id = id[0]
+			var id = id[0];
 		}
+		
 		else{
 			id = id[1];
-		}
+		};
 
+		if(id.indexOf("&")){
+			var id = id.split("&");
+			var id = id[0];
+		}
 		
 		var plainTextTitle = $(elem).parent().children("span").text();
 
 		if(state == "add"){
-			var toAdd = "<li><input type='hidden' value='"+id+"' name='sector_ids[]' id='sector_ids_'><span class='sector-name'>"+plainTextTitle+"</span> <a href='/licence-finder/sectors?sectors="+id+"'>Remove</a></li>";
+			var toAdd = "<li><input type='hidden' value='"+id+"' name='"+section+"_ids[]' id='"+section+"_ids_'><span class='"+section+"-name'>"+plainTextTitle+"</span> <a href='/licence-finder/"+pluralSection+"?"+pluralSection+"="+id+"'>Remove</a></li>";
 		}
 		else{
-			var toAdd = "<li><span class='sector-name'>"+plainTextTitle+"</span><a href='/licence-finder/sectors?sectors="+id+"'>Add</a></li>";
+			var toAdd = "<li><span class='"+section+"-name'>"+plainTextTitle+"</span> <a href='/licence-finder/"+pluralSection+"?"+pluralSection+"="+id+"'>Add</a></li>";
 		};
 
     var added = false;
@@ -40,23 +48,33 @@ $(function() {
 
 
 	function setupEvents(){
-		$(".business-sector-picked a").off("click");
-		$(".business-sector-picked a").on("click", function(){
+		$(".business-"+section+"-picked a").off("click");
+		$(".business-"+section+"-picked a").on("click", function(){
 			swapList(this, ".search-picker", "remove")
 			return false;
 		});
 		$(".search-picker a").off("click");
 		$(".search-picker a").on("click", function(){
-			swapList(this, ".business-sector-picked ul", "add")
+			swapList(this, ".business-"+section+"-picked ul", "add")
 			return false;
 		});
 	};
 
 	function init(){
-		if($(".business-sector-picked ul").length == 0){
-			$("<ul></ul><input type='submit' value='Next step' name='commit' class='button medium'>").insertAfter(".business-sector-picked h3");
+		if($(".business-sector-picked").length > 0){
+			section = "sector";
+			pluralSection = "sectors"
+		}
+		else{
+			section = "activity";
+			pluralSection = "activities";
+		}
+		
+		if($(".business-"+section+"-picked ul").length == 0){
+			$("<ul></ul><input type='submit' value='Next step' name='commit' class='button medium'>").insertAfter(".business-"+section+"-picked h3");
 		};
 		setupEvents();
+
 	};
 
 	// setup for given step section
@@ -66,7 +84,7 @@ $(function() {
 
 	// manage url
 	function manageURL(){
-
+		// add each to a url, with an underscore before
 	};
 
 	init();

@@ -4,9 +4,9 @@ class LicenceFinderController < ApplicationController
   include Slimmer::Headers
   SEPARATOR = '_'
   QUESTIONS = [
-    'What kind of activities or business do you need a licence for?',
-    'What will your activities or business involve doing?',
-    'Where will your activities or business be located?',
+    'What is your activity or business?',
+    'What does your activity or business involve?',
+    'Where will your activity or business be located?',
   ]
   ACTIONS = %w(sectors activities business_location)
 

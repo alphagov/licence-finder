@@ -150,5 +150,13 @@ describe Activity do
       activity.save!
       activity.public_id.should == 2
     end
+
+    it "should use a separate sequence for each model" do
+      activity = FactoryGirl.create(:activity)
+      activity.public_id.should == 1
+      FactoryGirl.create(:licence)
+      activity = FactoryGirl.create(:activity)
+      activity.public_id.should == 2
+    end
   end
 end

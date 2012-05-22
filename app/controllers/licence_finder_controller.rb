@@ -10,8 +10,7 @@ class LicenceFinderController < ApplicationController
   ]
   ACTIONS = %w(sectors activities business_location)
 
-  before_filter :extract_sector_ids, :only => [:activities, :business_location, :licences]
-  before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors, :activities, :business_location, :licences]
+  before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors]
   before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities]
   before_filter :set_analytics_headers
 
@@ -98,14 +97,14 @@ class LicenceFinderController < ApplicationController
   def extract_and_validate_sector_ids
     extract_sector_ids
     if @sector_ids.empty?
-      redirect_to :action => 'sectors'
+      render :status => :not_found, :text => ""
     end
   end
 
   def extract_and_validate_activity_ids
     @activity_ids = extract_ids(:activity)
     if @activity_ids.empty?
-      redirect_to :action => 'activities', :sectors => @sector_ids.join(SEPARATOR)
+      render :status => :not_found, :text => ""
     end
   end
 

@@ -75,7 +75,6 @@ describe LicenceFinderController do
       def do_get
         get :activities, :sectors => "1234_2345_3456"
       end
-
       it "returns http success" do
         do_get
         response.should be_success
@@ -145,21 +144,21 @@ describe LicenceFinderController do
     end
 
     context "with sectors but no valid activities selected" do
-      it "redirects to the activities action with the sectors selected" do
+      it "returns an appropriate error page" do
         post :activities_submit, :sectors => '123_321'
-        response.should redirect_to(activities_path(:sectors => '123_321'))
+        response.should be_not_found
       end
 
-      it "redirects to the activities action with no numeric activity_ids" do
+      it "no numeric activity_ids returns an appropriate error page" do
         post :activities_submit, :sectors => '123_321', :activity_ids => %w(foo -1)
-        response.should redirect_to(activities_path(:sectors => '123_321'))
+        response.should be_not_found
       end
     end
 
     context "invalid sectors" do
-      it "redirects to the sectors action with no sectors" do
+      it "returns an appropriate error page" do
         post :activities_submit
-        response.should redirect_to(sectors_path)
+        response.should be_not_found
       end
 
       it "redirects to the sectors action with no valid sectors"
@@ -237,16 +236,16 @@ describe LicenceFinderController do
     end
 
     context "with valid sectors and invalid activities" do
-      it "should redirect back to the activities form" do
+      it "should show an error page" do
         post :business_location_submit, :sectors => '123_321', :activities => '', :location => 'anything'
-        response.should redirect_to(activities_path(:sectors => '123_321'))
+        response.should be_not_found
       end
     end
 
     context "with no valid sectors" do
-      it "should redirect back to the sectors form" do
+      it "should show an error page" do
         post :business_location_submit, :sectors => '', :activities => '', :location => 'anything'
-        response.should redirect_to(sectors_path)
+        response.should be_not_found
       end
     end
   end
@@ -284,14 +283,14 @@ describe LicenceFinderController do
     end
 
     context "with valid sectors and invalid activities" do
-      it "should redirect back to the activities form" do
+      it "should show an error page" do
         get :licences, :sectors => '123_321', :activities => '', :location => 'anything'
-        response.should redirect_to(activities_path(:sectors => '123_321'))
+        response.should be_not_found
       end
     end
 
     context "with no valid sectors" do
-      it "should redirect back to the sectors form" do
+      it "should show an error page" do
         get :licences, :sectors => '', :activities => '123_321', :location => 'england'
         response.should be_not_found
       end

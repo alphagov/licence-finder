@@ -68,7 +68,6 @@ describe LicenceFinderController do
         get :activities
         response.should be_not_found
       end
-
     end
   end
 

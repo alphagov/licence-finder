@@ -33,7 +33,9 @@ class LicenceFinderController < ApplicationController
     @sectors = Sector.find_by_public_ids(@sector_ids)
 
     if @sectors.length == 0
-      render :status => 404
+      # FIXME: the downstream router doesn't allow custom 404s, so
+      # this won't work in production.
+      render :status => :not_found
     else
       @activities = Activity.find_by_sectors(@sectors).ascending(:name)
       @picked_activities = Activity.find_by_public_ids(extract_ids(:activity)).ascending(:name).to_a

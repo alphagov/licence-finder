@@ -62,13 +62,6 @@ describe LicenceFinderController do
         response.should redirect_to(activities_path(:sectors => "1234_32456"))
       end
     end
-
-    context "with no valid sectors selected" do
-      it "should return a 404 status code" do
-        get :activities
-        response.should be_not_found
-      end
-    end
   end
 
   describe "GET 'activities'" do
@@ -121,6 +114,13 @@ describe LicenceFinderController do
         get :activities, :sectors => "1234_2345_3456", :activity_ids => %w(1234 2345 3456)
 
         assigns[:picked_activities].should == [a1, a3, a2]
+      end
+    end
+
+    context "with no valid sectors selected" do
+      it "should return a 404 status code" do
+        get :activities
+        response.should be_not_found
       end
     end
 

@@ -73,16 +73,18 @@ class LicenceFinderController < ApplicationController
   end
 
   def extract_and_validate_sector_ids
+    # FIXME: the downstream router doesn't allow custom 404s, so
+    # this won't show anything useful in production.
     @sector_ids = extract_ids(:sector)
     if @sector_ids.empty?
-      redirect_to :action => 'sectors'
+      render :status => :not_found, :text => ""
     end
   end
 
   def extract_and_validate_activity_ids
     @activity_ids = extract_ids(:activity)
     if @activity_ids.empty?
-      redirect_to :action => 'activities', :sectors => @sector_ids.join(SEPARATOR)
+      render :status => :not_found, :text => ""
     end
   end
 

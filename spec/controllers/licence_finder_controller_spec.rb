@@ -64,17 +64,10 @@ describe LicenceFinderController do
     end
 
     context "with no valid sectors selected" do
-      it "redirects to the sectors action" do
-        post :sectors_submit
-        response.should redirect_to(sectors_path)
+      it "should return a 404 status code" do
+        get :activities
+        response.should be_not_found
       end
-
-      it "redirects to the sectors action with no numeric sector_ids" do
-        post :sectors_submit, :sector_ids => ["foo", "", "-1"]
-        response.should redirect_to(sectors_path)
-      end
-
-      it "sets an error somehow"
 
     end
   end

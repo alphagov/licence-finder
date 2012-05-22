@@ -205,6 +205,13 @@ describe LicenceFinderController do
         assigns[:upcoming_questions].should == []
       end
     end
+
+    context "with no valid businesses selected, but valid activities" do
+      it "should return a 404 status code" do
+        get :business_location, :activities => '234_432'
+        response.should be_not_found
+      end
+    end
   end
 
   describe "POST 'business_location_submit'" do
@@ -285,9 +292,10 @@ describe LicenceFinderController do
 
     context "with no valid sectors" do
       it "should redirect back to the sectors form" do
-        get :licences, :sectors => '', :activities => '', :location => 'anything'
-        response.should redirect_to(sectors_path)
+        get :licences, :sectors => '', :activities => '123_321', :location => 'england'
+        response.should be_not_found
       end
     end
+
   end
 end

@@ -5,7 +5,10 @@ $(function() {
 
 	/* Add one thing to another thing, alphabetically */
 	function swapList(elem, targetList, state){
-	
+		if($(".business-"+section+"-picked ul").length == 0){
+			$("<ul></ul><input type='submit' value='Next step' name='commit' class='button medium'>").insertAfter(".business-"+section+"-picked h3");
+			$(".hint").css("display", "none");
+		};
 		var id = $(elem).attr("href").split(pluralSection+"=");
 		if(id[1].indexOf("_")){
 			var id = id[1].split("_");
@@ -70,9 +73,7 @@ $(function() {
 			pluralSection = "activities";
 		}
 		
-		if($(".business-"+section+"-picked ul").length == 0){
-			$("<ul></ul><input type='submit' value='Next step' name='commit' class='button medium'>").insertAfter(".business-"+section+"-picked h3");
-		};
+		
 		setupEvents();
 
 	};

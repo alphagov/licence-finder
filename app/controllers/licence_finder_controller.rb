@@ -30,16 +30,9 @@ class LicenceFinderController < ApplicationController
 
   def activities
     @sectors = Sector.find_by_public_ids(@sector_ids)
-
-    if @sectors.length == 0
-      # FIXME: the downstream router doesn't allow custom 404s, so
-      # this won't work in production.
-      render :status => :not_found, :text => ""
-    else
-      @activities = Activity.find_by_sectors(@sectors).ascending(:name)
-      @picked_activities = Activity.find_by_public_ids(extract_ids(:activity)).ascending(:name).to_a
-      setup_questions [@sectors]
-    end
+    @activities = Activity.find_by_sectors(@sectors).ascending(:name)
+    @picked_activities = Activity.find_by_public_ids(extract_ids(:activity)).ascending(:name).to_a
+    setup_questions [@sectors]
   end
 
   def activities_submit
@@ -48,14 +41,8 @@ class LicenceFinderController < ApplicationController
 
   def business_location
     @sectors = Sector.find_by_public_ids(@sector_ids)
-
-    if @sectors.length == 0
-      # FIXME: see :activities controller conditional
-      render :status => :not_found, :text => ""
-    else
-      @activities = Activity.find_by_public_ids(@activity_ids)
-      setup_questions [@sectors, @activities]
-    end
+    @activities = Activity.find_by_public_ids(@activity_ids)
+    setup_questions [@sectors, @activities]
   end
 
   # is this action necessary?
@@ -70,15 +57,10 @@ class LicenceFinderController < ApplicationController
 
   def licences
     @sectors = Sector.find_by_public_ids(@sector_ids)
-
-    if @sectors.length == 0
-      render :status => :not_found, :text => ""
-    else
-      @activities = Activity.find_by_public_ids(@activity_ids)
-      @location = params[:location]
-      @licences = Licence.find_by_sectors_activities_and_location(@sectors, @activities, params[:location])
-      setup_questions [@sectors, @activities, [@location.titleize]]
-    end
+    @activities = Activity.find_by_public_ids(@activity_ids)
+    @location = params[:location]
+    @licences = Licence.find_by_sectors_activities_and_location(@sectors, @activities, params[:location])
+    setup_questions [@sectors, @activities, [@location.titleize]]
   end
 
   protected
@@ -90,12 +72,10 @@ class LicenceFinderController < ApplicationController
     @upcoming_questions = QUESTIONS[(@current_question_number)..-1]
   end
 
-  def extract_sector_ids
-    @sector_ids = extract_ids(:sector)
-  end
-
   def extract_and_validate_sector_ids
-    extract_sector_ids
+    # FIXME: the downstream router doesn't allow custom 404s, so
+    # this won't show anything useful in production.
+    @sector_ids = extract_ids(:sector)
     if @sector_ids.empty?
       render :status => :not_found, :text => ""
     end

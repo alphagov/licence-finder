@@ -17,7 +17,7 @@ describe "Start page" do
           page.should have_link("Get started", :href => sectors_path)
         end
         within 'div.popular-licences' do
-          page.should have_content("High demand licences")
+          page.should have_content("Popular licences")
         end
       end
     end

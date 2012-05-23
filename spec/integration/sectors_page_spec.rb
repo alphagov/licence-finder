@@ -19,7 +19,7 @@ describe "Sector selection page" do
     page.should_not have_selector(*selector_of_section('completed questions'))
 
     within_section 'current question' do
-      page.should have_content("What kind of activities or business do you need a licence for?")
+      page.should have_content("What is your activity or business?")
 
       within '.business-sector-results' do
         i_should_see_add_links ["Fooey Sector", "Gooey Sector", "Kablooey Sector"]
@@ -33,8 +33,8 @@ describe "Sector selection page" do
 
     within_section 'upcoming questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
-        'What will your activities or business involve doing?',
-        'Where will your activities or business be located?',
+        'What does your activity or business involve?',
+        'Where will your activity or business be located?',
       ]
     end
   end

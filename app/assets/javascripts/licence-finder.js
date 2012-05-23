@@ -6,7 +6,8 @@ $(function() {
 	/* Add one thing to another thing, alphabetically */
 	function swapList(elem, targetList, state){
 		if($(".business-"+section+"-picked ul").length == 0){
-			$("<ul></ul><input type='submit' value='Next step' name='commit' class='button medium'>").insertAfter(".business-"+section+"-picked h3");
+            var picked_sectors = "<ul id='picked-business-sectors'></ul><input type='submit' value='Next step' name='commit' class='button medium'>";
+			$(picked_sectors).insertAfter(".business-"+section+"-picked h3");
 			$(".hint").css("display", "none");
 		};
 		var id = $(elem).attr("href").split(pluralSection+"=");
@@ -33,20 +34,20 @@ $(function() {
 			var toAdd = "<li><span class='"+section+"-name'>"+plainTextTitle+"</span> <a href='/licence-finder/"+pluralSection+"?"+pluralSection+"="+id+"'>Add</a></li>";
 		};
 
-    var added = false;
-    var targetListItems = $(targetList+" li");
+        var added = false;
+        var targetListItems = $(targetList+" li");
 
-   	$(targetListItems).each(function(){
-  		if($(this).text() > plainTextTitle){
-  			$(toAdd).insertBefore($(this));
-  				added = true;
-  				return false;
-  		};
-  	});
-  	
-  	if(!added) $(toAdd).appendTo(targetList);
-  	$(elem).parent().remove();
-  	setupEvents();
+        $(targetListItems).each(function(){
+            if($(this).text() > plainTextTitle){
+                $(toAdd).insertBefore($(this));
+                    added = true;
+                    return false;
+            };
+        });
+
+        if(!added) $(toAdd).appendTo(targetList);
+        $(elem).parent().remove();
+        setupEvents();
 	};
 
 
@@ -63,6 +64,20 @@ $(function() {
 		});
 	};
 
+    function setupSearchForMore() {
+        $("#search-again-button").off("click");
+        $("#search-again-button").on("click", function() {
+            var sectors = $.makeArray(
+                $("#picked-business-sectors input").map(function(i, item) {
+                    return item.value;
+                })
+            ).join("_");
+            window.location.search = "sectors=" + sectors;
+
+            return false;
+        });
+    }
+
 	function init(){
 		if($(".business-sector-picked").length > 0){
 			section = "sector";
@@ -75,6 +90,7 @@ $(function() {
 		
 		
 		setupEvents();
+        setupSearchForMore();
 
 	};
 

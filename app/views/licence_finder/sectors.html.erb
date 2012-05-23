@@ -3,11 +3,10 @@
 
   <% if @sectors.empty? %>
     <div class="search-container">
-      <%= form_tag sectors_path, method: "GET" do %>
+      <%= form_tag sectors_path, method: :get do %>
         <%= hidden_field_tag "sectors", params[:sectors] %>
-        <%= label_tag "q", "Search" %>
         <%= text_field_tag "q", params[:q] %>
-        <%= submit_tag 'Search', class: "button" %>
+        <%= submit_tag 'Search', class: "button", id: "search-button" %>
       <% end %>
     </div>
   <% else %>
@@ -21,7 +20,7 @@
           </li>
         <% end %>
       </ul>
-      <%= link_to "Search for more", {sectors: params[:sectors]}, {class: "button"} %>
+      <%= link_to "Search for more", {sectors: params[:sectors]}, {class: "button", id:"search-again-button"} %>
     </div>
   <% end %>
   <%= form_tag sectors_path do %>
@@ -30,10 +29,10 @@
       <% if @picked_sectors.empty? %>
         <p class="hint">Your chosen sectors will appear here</p>
       <% else %>
-        <ul>
+        <ul id="picked-business-sectors">
           <% @picked_sectors.each do |sector| %>
             <li>
-              <%= hidden_field_tag 'sector_ids[]', sector.public_id %>
+              <%= hidden_field_tag 'sector_ids[]', sector.public_id, id: "sector_id_#{sector.public_id}" %>
               <span class="sector-name" ><%= sector.name %></span>
               <%= link_to_remove sector %>
             </li>

@@ -7,14 +7,14 @@ $(function() {
 	function swapList(elem, targetList, state){
 		if($(".business-"+section+"-picked ul").length == 0){
 			$("<ul></ul><input type='submit' value='Next step' name='commit' class='button medium'>").insertAfter(".business-"+section+"-picked h3");
-			$(".hint").css("display", "none");
 		};
+
 		var id = $(elem).attr("href").split(pluralSection+"=");
 		if(id[1].indexOf("_")){
 			var id = id[1].split("_");
 			var id = id[0];
 		}
-		
+
 		else{
 			id = id[1];
 		};
@@ -23,7 +23,7 @@ $(function() {
 			var id = id.split("&");
 			var id = id[0];
 		}
-		
+
 		var plainTextTitle = $(elem).parent().children("span").text();
 
 		if(state == "add"){
@@ -61,6 +61,21 @@ $(function() {
 			swapList(this, ".business-"+section+"-picked ul", "add")
 			return false;
 		});
+        // this handles adding/removing logic:
+        // adding the initial elements is handled in the swapList function
+        var picked = $(".business-"+section+"-picked ul");
+        if (picked.parent().find('.hint').length == 0) {
+            var el = $('<p class="hint">Your chosen sectors will appear here</p>');
+            $(".business-"+section+"-picked").append(el);
+        }
+        if (picked.length > 0 && picked.find('li').length == 0) {
+            $('.hint').removeAttr('style');
+            $(".business-"+section+"-picked input[type=submit]").css('display', 'none');
+        }
+        else if (picked.length > 0 && picked.find('li').length > 0) {
+            $('.hint').css('display', 'none');
+            $(".business-"+section+"-picked input[type=submit]").removeAttr('style');
+        }
 	};
 
 	function init(){
@@ -72,8 +87,8 @@ $(function() {
 			section = "activity";
 			pluralSection = "activities";
 		}
-		
-		
+
+
 		setupEvents();
 
 	};

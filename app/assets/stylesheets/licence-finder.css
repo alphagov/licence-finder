@@ -418,3 +418,8 @@ li.upcoming h3 {
 .search-picker li:first-child {
 	margin-top: 2.3em;
 }
+
+.intro ul {
+	margin-left:0em;
+	padding-left:0.9em;
+}

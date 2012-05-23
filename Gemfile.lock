@@ -195,6 +195,6 @@ DEPENDENCIES
   rspec-rails (~> 2.10.0)
   ruby-debug19
   slimmer (~> 1.1.39)
-  tire
   therubyracer
+  tire
   uglifier (>= 1.0.3)

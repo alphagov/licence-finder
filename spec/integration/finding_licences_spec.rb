@@ -33,7 +33,7 @@ describe "Finding licences" do
 
     i_should_be_on "/#{APP_SLUG}/sectors"
 
-    fill_in "Search", with: "sector"
+    fill_in "q", with: "sector"
     click_on "Search"
 
     within_section 'current question' do

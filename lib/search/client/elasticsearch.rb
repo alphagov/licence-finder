@@ -4,7 +4,7 @@ class Search
       def initialize(config)
         @config   = config
         @indexer  = Tire::Index.new(config[:index])
-
+        Tire.configure { url config[:url] }
       end
 
       def delete_index

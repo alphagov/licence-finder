@@ -3,3 +3,6 @@ development:
 
 test:
     client: elasticsearch
+
+production:
+    client: elasticsearch

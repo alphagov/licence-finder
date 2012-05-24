@@ -6,11 +6,11 @@ describe "Sector selection page" do
     s2 = FactoryGirl.create(:sector, :public_id => 234, :name => "Kablooey Sector")
     s3 = FactoryGirl.create(:sector, :public_id => 345, :name => "Gooey Sector")
 
-    $search.index_all
+    #$search.index_all
   end
 
   after(:each) do
-    $search.delete_index
+    #$search.delete_index
   end
 
   specify "inspecting the page" do

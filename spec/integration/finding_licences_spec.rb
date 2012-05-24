@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "Finding licences" do
 
   specify "Simple happy path through the app" do
+    pending "Until elasitcsearch is in production"
     s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
     s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")
     s3 = FactoryGirl.create(:sector, :name => "Gooey Sector")

@@ -14,6 +14,7 @@ describe "Sector selection page" do
   end
 
   specify "inspecting the page" do
+    pending "Until elasitcsearch is in production"
     visit "/#{APP_SLUG}/sectors?q=sector"
 
     page.should_not have_selector(*selector_of_section('completed questions'))
@@ -40,6 +41,7 @@ describe "Sector selection page" do
   end
 
   specify "with sectors selected" do
+    pending "Until elasitcsearch is in production"
     visit "/#{APP_SLUG}/sectors?q=sector&sector_ids[]=123&sector_ids[]=234"
 
     within_section 'current question' do

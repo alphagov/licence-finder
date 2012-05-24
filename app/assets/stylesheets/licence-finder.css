@@ -1,7 +1,316 @@
+/*#wrapper.answer header.page-header hgroup {
+  margin-right: 0;
+}
+
+#wrapper.answer.landing-page header.page-header hgroup {
+  margin-right: inherit;
+}*/
+
 /*
- *= require smart-answers
- *= require_self
+	landing page
+*/
+
+.start {
+	display: inline-block;
+}
+
+.start a {
+	font-size: 1.5em;
+	margin: 0.5em 0 0 0;
+}
+
+.get-started {
+/*  margin-top: 1.5em;*/
+}
+
+/*
+  questions
+*/
+
+.hint {
+  color: #666;
+  display: block;
+}
+
+.done-questions {
+  position: relative;
+}
+
+.start-again {
+  background: #fff;
+  position: absolute;
+  right: 0;
+  top: -2.5em;
+  height: 2.5em;
+  width: 11em;
+}
+
+.start-again a {
+  display: block;
+  line-height: 2.5em;
+  text-align: center;
+	text-decoration: none;
+}
+
+.start-again a:hover {
+	text-decoration: underline;
+}
+
+.done-questions ol {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.done-questions ol > li {
+  list-style: none;
+  position: relative;
+  padding: 0.5em 1.5em 0.5em 5em;
+}
+
+.done-questions ol > li.done {
+  background: #CCE0D5;
+  border-bottom: solid 1px #A1D1AE;
+  overflow: hidden;
+}
+
+.done-questions ol > li.done:last-child {
+  border-bottom: none;
+}
+
+.done-questions .question-number {
+  font-weight: normal;
+}
+
+li.done h3 {
+  display: inline;
+  font-size: 1em;
+  margin: 0.5em 0.5em 0 0;
+}
+.lte-ie8 li.done h3 {
+  line-height: 1.5em;
+  position: relative;
+}
+
+li.done .answer {
+  background-color: #4f6f5e;
+  color: #fff;
+  display: inline;
+  padding: 0.1em 0.3em;
+  margin-right: 0.5em;
+}
+
+li.done .undo {
+  display: inline;
+  float: right;
+  font-size: 0.85em;
+  margin: -2em 0 0 0.5em;
+}
+.lte-ie8 li.done .undo {
+  margin: 0;
+  *position: absolute;
+  *bottom: 0.75em;
+  *right: 1em;
+}
+
+li.done .undo a {
+  color: #333;
+  display: block;
+  text-decoration: none;
+}
+.lte-ie8 li.done .undo a {
+  *color: #333;
+}
+
+li.done:hover .undo a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.step.current {
+	background-color: #fff;
+	margin-right: 15em;
+	padding: 0 2em 1em 5em;
+	position: relative;
+}
+
+.current-question {
+  border-top: solid 1px #C9D0D0;
+	margin-top: -1px;
+	padding: 1.5em 0 1.25em 0;
+}
+
+.current-question h2 {
+  border: none;
+  margin-bottom: 0.5em;
+  margin-left:-0.4em;
+  position: relative;
+}
+.lte-ie8 .current-question h2 {
+  line-height: 1.2em;
+}
+
+.question-number {
+  display: inline-block;
+  margin-left: -1.5em;
+  width: 1.5em;
+}
+.lte-ie8 .question-number {
+  display: block;
+  position: absolute;
+}
+
+.done .question-number {
+  margin-left: -1.7em;
+}
+
+.current-question ul {
+  list-style: none;
+  padding: 0;
+}
+
+.current-question ul li {
+  line-height: 1.5em;
+  margin: 0.5em 0;
+}
+
+.question-body + p input.button {
+  margin-top: 0.5em;
+}
+
+
+.current-question label {
+  margin-left: 0.25em;
+}
+
+.current-question select {
+  margin-right: 0.25em;
+}
+
+.next-question {
+  margin: 1.5em 0 0.5em 0;
+}
+
+/*
+	results
+*/
+
+.results .inner {
+  padding-top: 2em;
+}
+
+.results {
+	background-color: #fff;
+  float: none;
+	margin-right: 0;
+	min-height: 0;
+}
+
+.result-info {
+/*  float: left;*/
+/*  margin: 0 0 2.5em 0;*/
+/*  width: 60%;*/
+}
+
+.next-steps {
+  right: -15em;
+  top: 2em;
+}
+
+.next-steps .inner {
+  padding-top: 0;
+  padding-bottom: 1em;
+}
+
+/*.next-steps .inner h2 {
+  background: none;
+  height: auto;
+  margin: 0 0 0.5em 0;
+  padding: 0;
+  top: auto;
+}*/
+
+.next-steps .inner ul {
+  padding: 0 0 0 1.5em;
+}
+
+#wrapper .related.next-steps .inner p,
+#wrapper .related.next-steps .inner li {
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 100%;
+}
+
+.next-steps .inner li {
+  list-style-type: disc;
+  margin: 0.5em 0;
+/*  padding-left: 0;*/
+}
+
+#wrapper .next-steps.related .inner li a {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  font-size: 100%;
+}
+
+/*.next-steps h3 {
+  font-style: normal;
+  margin-bottom: 0.75em;
+  margin-top: 0.25em;
+}*/
+
+.meta-data {
+  background: #fff;
+  float: none;
+  font-size: 1em;
+  margin-right: 15em;
+  padding: 0 5em 0 0;
+  width: auto;
+}
+
+.meta-data .modified-date {
+  font-size: 0.85em;
+}
+
+/*
+  errors messages
+*/
+
+.error {
+  border:1px solid #B01117;
+  background-color:#FFF3CF;
+  color:#B01117;
+  margin: 0 0 -0.5em -0.5em;
+  padding: 0.5em;
+}
+.error ul {
+  margin-bottom: 0;
+}
+.error-message {
+  margin-top: 0;
+  color:#B01117;
+}
+
+/*
+  calculators
+*/
+
+.calculator article {
+  min-height: 0;
+}
+
+@media only screen and (max-width:670px) {
+  .step.current,
+  .meta-data{
+    margin:0;
+  }
+}
+/*
+
+
  */
+
 
 li.done .answer {
   background-color: transparent;
@@ -15,11 +324,24 @@ li.done .answer ul {
 }
 
 li.done .answer ul li {
-  background-color: #4F6F5E;
+  /*background-color: #4F6F5E;*/
   /*display: inline-block;*/
   margin-bottom: 0.25em;
   padding: 0 0.25em;
   /*width: 60%;*/
+  color: #305642;
+  margin-left: -6px;
+  list-style-type: circle;
+  list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);
+}
+
+li.done .answer ul li:first-child {
+	
+	margin-top: 0.8rem;
+}
+
+li.done .answer ul li:last-child {
+	margin-bottom: 10px;
 }
 
 li.done h3 {
@@ -68,18 +390,40 @@ li.upcoming h3 {
 
 .business-sector-picked, .business-activity-picked {
     background-color: #96c6e2;
+    background-color: #CCE0D5;
     float: left;
-    padding: 1em 5%;
+    padding: 0.4em 5%;
+    padding-bottom: 1.3em;
     width: 35%;
+    margin-top:0.3em;
 }
+.business-activity-picked h3, .business-sector-picked h3 {
+	font-size:1em;
+}
+
 .business-sector-picked ul li, .business-activity-picked ul li {
-    list-style-type: disc;
+    /*list-style-type: disc;*/
+    color: #305642;
+    list-style-type: circle;
+  list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);
 }
 
 .search-picker li {
-    list-style-type: disc;
+    padding: 0 0.25em;
+    margin-left: -8px;
+    list-style-type: circle;
+    list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);
 }
 
 .search-container .button {
     margin-left: 5px;
+}
+
+.search-picker li:first-child {
+	margin-top: 2.3em;
+}
+
+.intro ul {
+	margin-left:0em;
+	padding-left:0.9em;
 }

@@ -65,11 +65,12 @@ $(function() {
 		});
         // this handles adding/removing logic:
         // adding the initial elements is handled in the swapList function
-        var picked = $(".business-"+section+"-picked ul");
-        if (picked.parent().find('.hint').length == 0) {
+        var picked = $(".business-"+section+"-picked");
+        if (picked.find('.hint').length == 0) {
             var el = $('<p class="hint">Your chosen sectors will appear here</p>');
             $(".business-"+section+"-picked").append(el);
         }
+        picked = picked.find("ul");
         if (picked.length > 0 && picked.find('li').length == 0) {
             $('.hint').removeAttr('style');
             $(".business-"+section+"-picked input[type=submit]").css('display', 'none');

@@ -173,8 +173,6 @@ describe LicenceFinderController do
         post :activities_submit
         response.should be_not_found
       end
-
-      it "redirects to the sectors action with no valid sectors"
     end
   end
 

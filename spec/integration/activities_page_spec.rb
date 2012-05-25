@@ -70,9 +70,4 @@ describe "Activity selection page" do
       i_should_be_on licence_finder_url_for(section, [@s1, @s3])
     end
   end
-
-  # TODO: normally at this point we could show the user a more
-  # appropriate error page. See licence_finder_controller/activites
-  # for more information.
-  specify "bad sector IDs passed"
 end

@@ -62,8 +62,4 @@ describe "Business location page" do
       i_should_be_on licence_finder_url_for(section, [@s1, @s2], [@a1, @a2])
     end
   end
-
-  it "should complain if no sectors are provided"
-  it "should complain if no activities are provided"
-  it "should complain if the activities provided are not valid for the sectors"
 end

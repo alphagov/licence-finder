@@ -5,11 +5,15 @@
     <div class="inner group">
       <h2>Licences you need to apply for:</h2>
 
+      <% if @licences.empty? %>
+        <p>No licences</p>
+      <% else %>
       <ul>
         <% @licences.each do |licence| %>
           <li><%= licence.name %></li>
         <% end %>
       </ul>
+      <% end %>
     </div>
   </article>
 </div>

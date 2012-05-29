@@ -5,6 +5,9 @@
     <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
     <div class="business-activity-results">
       <p class="hint">Add all the categories that apply to you</p>
+      <% if (@activities - @picked_activities).empty? %>
+        <p>No activities</p>
+      <% else %>
       <ul class="search-picker">
         <% (@activities - @picked_activities).each do |activity| %>
           <li>
@@ -13,6 +16,7 @@
           </li>
         <% end %>
       </ul>
+      <% end %>
     </div>
     <div class="business-activity-picked" aria-live="polite">
       <h3>Your chosen categories</h3>

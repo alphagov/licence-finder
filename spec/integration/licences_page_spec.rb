@@ -55,6 +55,8 @@ describe "Licences page" do
 
     page.should_not have_selector(*selector_of_section('current question'))
     page.should_not have_selector(*selector_of_section('upcoming questions'))
+
+    page.should_not have_content("No licences")
   end
 
   specify "going back to previous sections" do
@@ -65,5 +67,11 @@ describe "Licences page" do
 
       i_should_be_on licence_finder_url_for(section, [@s1], [@a1], 'scotland')
     end
+  end
+
+  specify "no licences for current selection" do
+    visit licence_finder_url_for("licences", [@s3], [@a4], "england")
+
+    page.should have_content("No licences")
   end
 end

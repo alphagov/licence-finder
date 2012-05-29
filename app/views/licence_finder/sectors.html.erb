@@ -7,6 +7,9 @@
         <%= hidden_field_tag "sectors", params[:sectors] %>
         <%= text_field_tag "q", params[:q] %>
         <%= submit_tag 'Search', class: "button", id: "search-button" %>
+        <% if params[:q].present? %>
+        <p>No results</p>
+        <% end %>
       <% end %>
     </div>
   <% else %>

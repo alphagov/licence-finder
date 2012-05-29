@@ -5,6 +5,7 @@ describe "Activity selection page" do
     @s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
     @s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")
     @s3 = FactoryGirl.create(:sector, :name => "Gooey Sector")
+    @s4 = FactoryGirl.create(:sector, :name => "Sector Four")
 
     @a1 = FactoryGirl.create(:activity, :name => "Fooey Activity", :sectors => [@s1])
     @a2 = FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [@s2])
@@ -45,6 +46,8 @@ describe "Activity selection page" do
         'Where will your activity or business be located?',
       ]
     end
+
+    page.should_not have_content("No activities")
   end
 
   specify "with activities selected" do
@@ -69,5 +72,11 @@ describe "Activity selection page" do
 
       i_should_be_on licence_finder_url_for(section, [@s1, @s3])
     end
+  end
+
+  specify "no activities for current selection" do
+    visit licence_finder_url_for("activities", [@s4])
+
+    page.should have_content("No activities")
   end
 end

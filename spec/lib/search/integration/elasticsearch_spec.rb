@@ -8,17 +8,18 @@ describe Search::Client::Elasticsearch do
     s2 = FactoryGirl.create(:sector, :public_id => 234, :name => "Kablooey Sector")
     s3 = FactoryGirl.create(:sector, :public_id => 345, :name => "Gooey Sector")
 
-    @search = $search.clone
-    @search.client.stubs(:extra_terms).returns({
-      123 => %w(foo bar),
-      234 => %w(monkey)
-    })
-
-    @search.index_all
+    pending "Until elasticsearch is in production"
+    #@search = $search.clone
+    #@search.client.stubs(:extra_terms).returns({
+    #  123 => %w(foo bar),
+    #  234 => %w(monkey)
+    #})
+    #
+    #@search.index_all
   end
 
   after(:each) do
-    @search.delete_index
+    #@search.delete_index
   end
 
   it "should return sectors that match on title" do

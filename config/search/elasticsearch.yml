@@ -41,3 +41,7 @@ create:
                     fields:       {type: string, store: yes, index: analyzed}
                     sortable:     {type: string, store: no,  index: analyzed, analyzer: my_sort}
                     autocomplete: {type: string, store: no,  index: analyzed, analyzer: my_start}
+                extra_terms:
+                    type: string
+                    store: yes
+                    index: analyzed

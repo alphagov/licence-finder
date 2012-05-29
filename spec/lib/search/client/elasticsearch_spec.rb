@@ -10,15 +10,8 @@ describe Search::Client::Elasticsearch do
         create: 'test-create'
     }
     @es_indexer = stub()
-    Tire::Index.stubs(:new).returns(@es_indexer)
     @client = Search::Client::Elasticsearch.new(@es_config)
-  end
-
-  describe "initialization" do
-    it "should initialize the indexer and searcher with the index name" do
-      Tire::Index.expects(:new).with('test-index')
-      Search::Client::Elasticsearch.new(@es_config)
-    end
+    @client.stubs(:indexer).returns(@es_indexer)
   end
 
   describe "indexing" do
@@ -45,7 +38,13 @@ describe Search::Client::Elasticsearch do
 
     it "should convert a sector to a hash with the correct fields set" do
       document = @client.to_document(FactoryGirl.build(:sector, public_id: 123, name: "Test Sector"))
-      document.should == {_id: 123, type: "test-type", public_id: 123, title: "Test Sector"}
+      document.should == {_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: []}
+    end
+
+    it "should add extra_terms to document when available" do
+      @client.stubs(:extra_terms).returns({123 => %w(foo bar monkey)})
+      document = @client.to_document(FactoryGirl.build(:sector, public_id: 123, name: "Test Sector"))
+      document.should == {_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: %w(foo bar monkey)}
     end
 
     it "should commit after re-indexing" do
@@ -71,7 +70,14 @@ describe Search::Client::Elasticsearch do
       response = stub()
       response.expects(:results).returns([d1, d2])
 
-      Tire.expects(:search).with(@es_config[:index], {query: { text: { title: :query}}}).returns(response)
+      Tire.expects(:search).with(@es_config[:index], {
+          query: {
+              query_string: {
+                  fields: %w(title extra_terms),
+                  query: :query
+              }
+          }
+      }).returns(response)
       @client.search(:query).should == [123, 234]
     end
   end

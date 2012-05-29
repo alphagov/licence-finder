@@ -6,15 +6,15 @@ describe "Sector selection page" do
     s2 = FactoryGirl.create(:sector, :public_id => 234, :name => "Kablooey Sector")
     s3 = FactoryGirl.create(:sector, :public_id => 345, :name => "Gooey Sector")
 
-    $search.index_all
+    pending "Until elasticsearch is in production"
+    #$search.index_all
   end
 
   after(:each) do
-    $search.delete_index
+    #$search.delete_index
   end
 
   specify "inspecting the page" do
-    pending "Until elasitcsearch is in production"
     visit "/#{APP_SLUG}/sectors?q=sector"
 
     page.should_not have_selector(*selector_of_section('completed questions'))
@@ -41,7 +41,6 @@ describe "Sector selection page" do
   end
 
   specify "with sectors selected" do
-    pending "Until elasitcsearch is in production"
     visit "/#{APP_SLUG}/sectors?q=sector&sector_ids[]=123&sector_ids[]=234"
 
     within_section 'current question' do

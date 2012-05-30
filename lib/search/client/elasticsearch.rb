@@ -6,15 +6,21 @@ class Search
       def initialize(config)
         super
         @config   = config
+        configure
+      end
+
+      def configure
+        url = @config[:url]
+        Tire.configure { url url }
+        logger = @config[:logger]
+        if logger
+          Tire.configure { logger logger }
+        end
       end
 
       def indexer
         return @indexer unless @indexer.nil?
         @indexer = Tire::Index.new(@config[:index])
-        url = @config[:url]
-        Tire.configure { url url }
-        Tire.configure { logger 'log/elasticsearch.log', :level => 'debug' }
-        @indexer
       end
 
       def delete_index

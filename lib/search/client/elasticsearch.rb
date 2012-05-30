@@ -29,7 +29,7 @@ class Search
 
       def pre_index
         indexer.delete
-        indexer.create(@config[:create])
+        raise unless indexer.create(@config[:create])
       end
 
       def index(sectors)

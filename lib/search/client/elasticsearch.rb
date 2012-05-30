@@ -13,6 +13,7 @@ class Search
         @indexer = Tire::Index.new(@config[:index])
         url = @config[:url]
         Tire.configure { url url }
+        Tire.configure { logger 'log/elasticsearch.log', :level => 'debug' }
         @indexer
       end
 

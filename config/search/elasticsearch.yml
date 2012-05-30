@@ -13,6 +13,8 @@ production:
     index: licence-finder
     type:  sector
 
+extra_terms_filename: extra-terms.csv
+
 create:
     settings:
         analysis:

@@ -17,7 +17,7 @@ describe Search::Client::Elasticsearch do
   describe "indexing" do
     it "should delete and create index with mapping before re-indexing" do
       @es_indexer.expects(:delete)
-      @es_indexer.expects(:create).with("test-create")
+      @es_indexer.expects(:create).with("test-create").returns(true)
       @client.pre_index
     end
 

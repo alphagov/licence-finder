@@ -13,52 +13,53 @@ production:
     index: licence-finder
     type:  sector
 
-extra_terms_filename: extra-terms.csv
+all_envs:
+    extra_terms_filename: extra-terms.csv
 
-create:
-    settings:
-        analysis:
-            analyzer:
-                my_start:
-                    tokenizer: whitespace
-                    filter: [asciifolding, lowercase, my_edge]
-                my_sort:
-                    tokenizer: keyword
-                    filter: [asciifolding, lowercase]
-                my_snowball:
-                    tokenizer: standard
-                    filter: [standard, lowercase, stop, my_synonym, my_snowball]
-                    type: snowball
-                    language: English
-            filter:
-                my_edge:
-                    type: edgeNGram
-                    min_gram: 1
-                    max_gram: 10
-                    side: front
-                my_snowball:
-                    type: snowball
-                    language: English
-                my_synonym:
-                    type: synonym
-                    synonyms:
-                        - "cafe, restaurants"
-    mappings:
-        sector:
-            properties:
-                public_id:
-                    type:  string
-                    store: yes
-                    index: not_analyzed
-                title:
-                    type: multi_field
-                    fields:
-                        title:        {type: string, store: yes, index: analyzed, analyzer: my_snowball}
-                        sortable:     {type: string, store: no,  index: analyzed, analyzer: my_snowball}
-                        autocomplete: {type: string, store: no,  index: analyzed, analyzer: my_snowball}
-                extra_terms:
-                    type: string
-                    store: yes
-                    index: analyzed
-                    analyzer: my_snowball
+    create:
+        settings:
+            analysis:
+                analyzer:
+                    my_start:
+                        tokenizer: whitespace
+                        filter: [asciifolding, lowercase, my_edge]
+                    my_sort:
+                        tokenizer: keyword
+                        filter: [asciifolding, lowercase]
+                    my_snowball:
+                        tokenizer: standard
+                        filter: [standard, lowercase, stop, my_synonym, my_snowball]
+                filter:
+                    my_edge:
+                        type: edgeNGram
+                        min_gram: 1
+                        max_gram: 10
+                        side: front
+                    my_snowball:
+                        type: snowball
+                        language: English
+                    my_synonym:
+                        type: synonym
+                        synonyms:
+                            - "cafe, restaurant"
+                            - "photography, photographic"
+                            - "cleaner, clean"
+        mappings:
+            sector:
+                properties:
+                    public_id:
+                        type:  string
+                        store: yes
+                        index: not_analyzed
+                    title:
+                        type: multi_field
+                        fields:
+                            title:        {type: string, store: yes, index: analyzed, analyzer: my_snowball}
+                            sortable:     {type: string, store: no,  index: analyzed, analyzer: my_snowball}
+                            autocomplete: {type: string, store: no,  index: analyzed, analyzer: my_snowball}
+                    extra_terms:
+                        type: string
+                        store: yes
+                        index: analyzed
+                        analyzer: my_snowball
 

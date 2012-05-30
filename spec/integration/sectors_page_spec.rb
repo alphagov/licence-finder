@@ -6,13 +6,13 @@ describe "Sector selection page" do
     s2 = FactoryGirl.create(:sector, :public_id => 234, :name => "Kablooey Sector")
     s3 = FactoryGirl.create(:sector, :public_id => 345, :name => "Gooey Sector")
 
-    pending "Until elasticsearch is in production"
+    #pending "Until elasticsearch is in production"
     #@search = $search.clone
-    #@search.index_all
+    $search.index_all
   end
 
   after(:each) do
-    #@search.delete_index
+    $search.delete_index
   end
 
   specify "inspecting the page" do
@@ -78,6 +78,27 @@ describe "Sector selection page" do
       within '.search-container' do
         page.should have_css("input#q")
         page.should have_content("No results")
+      end
+    end
+  end
+
+  specify "remove an added sector" do
+    visit "/#{APP_SLUG}/sectors?q=sector&sectors=123_234"
+
+    within_section 'current question' do
+      within '.business-sector-picked' do
+        page.should_not have_content("Your chosen sectors will appear here")
+        i_should_see_remove_link "Fooey Sector"
+        i_should_see_remove_link "Kablooey Sector"
+
+        page.find(:xpath, "//li[span/text() = 'Fooey Sector']/a").click
+      end
+    end
+
+    within_section 'current question' do
+      within '.business-sector-picked' do
+        page.find(:xpath, "//li[span/text() = 'Fooey Sector']").should be_nil
+        i_should_see_remove_link "Kablooey Sector"
       end
     end
   end

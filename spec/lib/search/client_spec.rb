@@ -21,8 +21,8 @@ describe Search::Client do
   describe "with a stubbed out path" do
     before(:each) do
       source = StringIO.new(<<-END)
-"123","foo, bar, monkey"
-"321","bottle, mouse, keyboard"
+123,foo, bar, monkey
+321,bottle, mouse, keyboard
       END
       @client = Search::Client.new()
       @client.stubs(:extra_terms_handle).returns(source)

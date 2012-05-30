@@ -19,7 +19,7 @@ class Search
       @extra_terms = Hash.new
       begin
         CSV.new(extra_terms_handle).each do |row|
-          @extra_terms[row[0].to_i] = row[1].split(",").map(&:strip)
+          @extra_terms[row[0].to_i] = row[1..-1].map(&:strip)
         end
       rescue
       end

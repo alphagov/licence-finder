@@ -15,6 +15,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+# If changing this, make sure the asset_prefix is also changed in the deploy scripts.
 APP_SLUG = 'licence-finder'
 
 module LicenceFinder

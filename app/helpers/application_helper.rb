@@ -30,9 +30,9 @@ module ApplicationHelper
 
   def extract_public_ids(new_params, key_name, model, block)
     block.call(
-      new_params.values_at("#{key_name}_ids").flatten.reject(&:nil?),
+      new_params.values_at("#{key_name}_ids").flatten.reject(&:nil?) + new_params["#{key_name.pluralize}"].to_s.split("_"),
       [model.public_id.to_s]
-    ) + new_params["#{key_name.pluralize}"].to_s.split("_")
+    )
   end
 
   def model_key_name(model)

@@ -83,21 +83,23 @@ describe "Sector selection page" do
   end
 
   specify "remove an added sector" do
-    visit "/#{APP_SLUG}/sectors?q=sector&sectors=123_234"
+    visit "/#{APP_SLUG}/sectors?sectors=123_234"
 
     within_section 'current question' do
       within '.business-sector-picked' do
         page.should_not have_content("Your chosen sectors will appear here")
         i_should_see_remove_link "Fooey Sector"
         i_should_see_remove_link "Kablooey Sector"
-
-        page.find(:xpath, "//li[span/text() = 'Fooey Sector']/a").click
       end
+    end
+
+    within :xpath, "//li[span/text() = 'Fooey Sector']" do
+      click_on "Remove"
     end
 
     within_section 'current question' do
       within '.business-sector-picked' do
-        page.find(:xpath, "//li[span/text() = 'Fooey Sector']").should be_nil
+        page.should_not have_xpath(".//li[span/text() = 'Fooey Sector']")
         i_should_see_remove_link "Kablooey Sector"
       end
     end

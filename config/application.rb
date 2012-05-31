@@ -15,6 +15,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+APP_SLUG = 'licence-finder'
+
 module LicenceFinder
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -61,5 +63,8 @@ module LicenceFinder
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.assets.prefix = "#{APP_SLUG}/assets"
+    config.assets.precompile += ['licence-finder.css', 'licence-finder.js']
   end
 end

@@ -6,13 +6,12 @@ describe "Sector selection page" do
     s2 = FactoryGirl.create(:sector, :public_id => 234, :name => "Kablooey Sector")
     s3 = FactoryGirl.create(:sector, :public_id => 345, :name => "Gooey Sector")
 
-    #pending "Until elasticsearch is in production"
-    #@search = $search.clone
-    $search.index_all
+    pending "Until elasticsearch is in production"
+    #$search.index_all
   end
 
   after(:each) do
-    $search.delete_index
+    #$search.delete_index
   end
 
   specify "inspecting the page" do

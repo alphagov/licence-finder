@@ -38,13 +38,13 @@ describe Search::Client::Elasticsearch do
 
     it "should convert a sector to a hash with the correct fields set" do
       document = @client.to_document(FactoryGirl.build(:sector, public_id: 123, name: "Test Sector"))
-      document.should == {_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: []}
+      document.should == {_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: [], activities: []}
     end
 
     it "should add extra_terms to document when available" do
       @client.stubs(:extra_terms).returns({123 => %w(foo bar monkey)})
       document = @client.to_document(FactoryGirl.build(:sector, public_id: 123, name: "Test Sector"))
-      document.should == {_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: %w(foo bar monkey)}
+      document.should == {_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: %w(foo bar monkey), activities: []}
     end
 
     it "should commit after re-indexing" do
@@ -73,7 +73,7 @@ describe Search::Client::Elasticsearch do
       Tire.expects(:search).with(@es_config[:index], {
           query: {
               query_string: {
-                  fields: %w(title extra_terms),
+                  fields: %w(title extra_terms activities),
                   query: :query
               }
           }

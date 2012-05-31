@@ -8,6 +8,8 @@ gem "bson_ext", "~> 1.5"
 gem "tire"
 
 gem 'router-client', '~> 3.0.1', :require => 'router'
+gem 'gds-api-adapters', '~> 0.0.47'
+gem 'rummageable', '~> 0.1.3'
 
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'

@@ -44,7 +44,8 @@ class Search
           type: @config[:type],
           public_id: sector.public_id,
           title: sector.name,
-          extra_terms: extra_terms_for_sector(sector)
+          extra_terms: extra_terms_for_sector(sector),
+          activities: activities_for_sector(sector)
         }
       end
 
@@ -57,7 +58,7 @@ class Search
         # interface as abstract as possible
         Tire.search(@config[:index], query: {
             query_string: {
-                fields: %w(title extra_terms),
+                fields: %w(title extra_terms activities),
                 query: query
             }
         }).results.map(&:public_id)

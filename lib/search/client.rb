@@ -29,5 +29,11 @@ class Search
     def extra_terms_for_sector(sector)
       extra_terms[sector.public_id] || []
     end
+
+    def activities_for_sector(sector)
+      sector.activities.map do |activity|
+        activity.name
+      end
+    end
   end
 end

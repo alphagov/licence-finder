@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://gems.gemfury.com/vo6ZrmjBQu5szyywDszE/
   specs:
     PriorityQueue (0.1.2)
     actionmailer (3.2.3)
@@ -120,6 +121,10 @@ GEM
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    router-client (3.0.1)
+      activesupport
+      builder
+      null_logger
     rspec (2.10.0)
       rspec-core (~> 2.10.0)
       rspec-expectations (~> 2.10.0)
@@ -192,6 +197,7 @@ DEPENDENCIES
   mocha (~> 0.11.3)
   mongoid (~> 2.4)
   rails (= 3.2.3)
+  router-client (~> 3.0.1)
   rspec-rails (~> 2.10.0)
   ruby-debug19
   slimmer (~> 1.1.39)

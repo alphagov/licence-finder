@@ -27,20 +27,11 @@ class LicenceFinderController < ApplicationController
     setup_questions
   end
 
-  # Only used by non-JS path
-  def sectors_submit
-    redirect_to :action => 'activities', :sectors => @sector_ids.join(SEPARATOR)
-  end
-
   def activities
     @sectors = Sector.find_by_public_ids(@sector_ids)
     @activities = Activity.find_by_sectors(@sectors).ascending(:name)
     @picked_activities = Activity.find_by_public_ids(extract_ids(:activity)).ascending(:name).to_a
     setup_questions [@sectors]
-  end
-
-  def activities_submit
-    redirect_to :action => 'business_location', :sectors => @sector_ids.join(SEPARATOR), :activities => @activity_ids.join(SEPARATOR)
   end
 
   def business_location
@@ -97,7 +88,6 @@ class LicenceFinderController < ApplicationController
     if params[param_base.to_s.pluralize].present?
       ids += params[param_base.to_s.pluralize].split(SEPARATOR).map(&:to_i).reject {|n| n < 1 }
     end
-    ids += Array.wrap(params["#{param_base}_ids"]).map(&:to_i).reject {|n| n < 1 }
     ids.sort
   end
 

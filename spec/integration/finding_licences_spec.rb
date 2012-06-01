@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Finding licences" do
 
   specify "Simple happy path through the app" do
-    pending "Until elasitcsearch is in production"
+    #pending "Until elasitcsearch is in production"
     s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
     s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")
     s3 = FactoryGirl.create(:sector, :name => "Gooey Sector")
@@ -24,7 +24,7 @@ describe "Finding licences" do
     FactoryGirl.create(:licence_link, :sector => s2, :activity => a1, :licence => l3)
     FactoryGirl.create(:licence_link, :sector => s1, :activity => a1, :licence => l4)
 
-    #$search.index_all
+    $search.index_all
 
     visit "/#{APP_SLUG}"
 
@@ -117,6 +117,6 @@ describe "Finding licences" do
       ]
     end
 
-    #$search.delete_index
+    $search.delete_index
   end
 end

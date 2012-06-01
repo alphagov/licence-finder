@@ -46,35 +46,15 @@ describe LicenceFinderController do
       assigns[:upcoming_questions].should == [@question2, @question3]
     end
 
-    it "extracts the union of selected sectors ordered alphabetically by name" do
-      @s1 = FactoryGirl.create(:sector, :public_id => 1234, :name => "Alpha")
+    it "extracts selected sectors ordered alphabetically by name" do
       @s2 = FactoryGirl.create(:sector, :public_id => 3456, :name => "Charlie")
       @s3 = FactoryGirl.create(:sector, :public_id => 2345, :name => "Bravo")
 
-      get :sectors, :sector_ids => %w(1234 3456), :sectors => '2345_4567'
+      get :sectors, :sectors => '3456_2345_4567'
       response.should be_success
-      assigns[:picked_sectors].should == [@s1, @s3, @s2]
+      assigns[:picked_sectors].should == [@s3, @s2]
     end
 
-  end
-
-  describe "POST 'sectors_submit'" do
-    context "with some sectors selected" do
-      it "combines the sector_ids into a single param, and redirects to the activities action" do
-        post :sectors_submit, :sector_ids => ["1234", "2345", "32456"]
-        response.should redirect_to(activities_path(:sectors => "1234_2345_32456"))
-      end
-
-      it "should order the sector_ids numerically" do
-        post :sectors_submit, :sector_ids => ["1234", "345", "32456"]
-        response.should redirect_to(activities_path(:sectors => "345_1234_32456"))
-      end
-
-      it "should sanitise any non-numeric entries" do
-        post :sectors_submit, :sector_ids => ["1234", "foo", "32456", "", "-1"]
-        response.should redirect_to(activities_path(:sectors => "1234_32456"))
-      end
-    end
   end
 
   describe "GET 'activities'" do
@@ -123,7 +103,7 @@ describe LicenceFinderController do
         scope1.expects(:ascending).with(:name).returns(:some_activities)
         Activity.expects(:find_by_sectors).with(:some_sectors).returns(scope1)
 
-        get :activities, :sectors => "1234_2345_3456", :activity_ids => %w(1234 2345 3456)
+        get :activities, :sectors => "1234_2345_3456", :activities => "1234_2345_3456"
 
         assigns[:picked_activities].should == [a1, a3, a2]
       end
@@ -136,44 +116,6 @@ describe LicenceFinderController do
       end
     end
 
-  end
-
-  describe "POST 'activities_submit'" do
-    context "with sectors and some activities selected" do
-      it "passes through the sectors, combines the activity_ids into a single param, and redirects to the location action" do
-        post :activities_submit, :sectors => '123_321', :activity_ids => %w(234 432)
-        response.should redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
-      end
-
-      it "should order the activity_ids numerically" do
-        post :activities_submit, :sectors => '123_321', :activity_ids => %w(432 234)
-        response.should redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
-      end
-
-      it "should sanitise any non-numeric entries" do
-        post :activities_submit, :sectors => '123_321', :activity_ids => %w(234 foo 432 -1)
-        response.should redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
-      end
-    end
-
-    context "with sectors but no valid activities selected" do
-      it "returns an appropriate error page" do
-        post :activities_submit, :sectors => '123_321'
-        response.should be_not_found
-      end
-
-      it "no numeric activity_ids returns an appropriate error page" do
-        post :activities_submit, :sectors => '123_321', :activity_ids => %w(foo -1)
-        response.should be_not_found
-      end
-    end
-
-    context "invalid sectors" do
-      it "returns an appropriate error page" do
-        post :activities_submit
-        response.should be_not_found
-      end
-    end
   end
 
   describe "GET 'business_location'" do

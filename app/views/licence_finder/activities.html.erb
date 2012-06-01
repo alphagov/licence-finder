@@ -3,14 +3,14 @@
 <%= current_question do %>
   <%= form_tag activities_path do %>
     <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
-    <div class="business-activity-results">
+    <div class="business-activity-results search-picker">
       <p class="hint">Add all the categories that apply to you</p>
       <% if (@activities - @picked_activities).empty? %>
         <p>No activities</p>
       <% else %>
-      <ul class="search-picker">
+      <ul>
         <% (@activities - @picked_activities).each do |activity| %>
-          <li>
+          <li data-public-id="<%= activity.public_id %>">
             <span class="activity-name"><%= activity.name %></span>
             <%= link_to_add activity %>
           </li>
@@ -18,21 +18,19 @@
       </ul>
       <% end %>
     </div>
-    <div class="business-activity-picked" aria-live="polite">
+    <div class="business-activity-picked picked-items" aria-live="polite" data-next-url="<%= business_location_path(sectors: params[:sectors], activities: params[:activities]) %>">
       <h3>Your chosen categories</h3>
-      <% if @picked_activities.empty? %>
-        <p class="hint">Your chosen categories will appear here</p>
-      <% else %>
-        <ul>
+      <p class="<% if @picked_activities.empty? %>hint<% else %>hidden<% end %>">Your chosen categories will appear here</p>
+      <ul id="picked-business-activities">
         <% @picked_activities.each do |activity| %>
-          <li>
-            <%=  hidden_field_tag 'activity_ids[]', activity.public_id %>
+          <li data-public-id="<%= activity.public_id %>">
             <span class="activity-name"><%= activity.name %></span>
             <%= link_to_remove activity %>
           </li>
         <% end %>
-        </ul>
-        <%= submit_tag 'Next step', :class => "button medium" %>
+      </ul>
+      <% unless @picked_activities.empty? %>
+        <%= link_to 'Next step', business_location_path(sectors: params[:sectors], activities: params[:activities]), class: 'button medium', id: "next-step"  %>
       <% end %>
     </div>
   <% end %>

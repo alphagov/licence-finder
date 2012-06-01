@@ -51,7 +51,7 @@ describe "Activity selection page" do
   end
 
   specify "with activities selected" do
-    visit "/#{APP_SLUG}/activities?sectors=#{[@s1,@s3].map(&:public_id).join('_')}&activity_ids[]=#{@a1.public_id}&activity_ids[]=#{@a3.public_id}"
+    visit "/#{APP_SLUG}/activities?sectors=#{[@s1,@s3].map(&:public_id).join('_')}&activities=#{@a1.public_id}_#{@a3.public_id}"
 
     within_section 'current question' do
       within '.business-activity-results' do

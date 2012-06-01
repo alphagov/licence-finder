@@ -53,7 +53,7 @@ module CustomMatchers
 
   def check_add_remove_links_in_order(type, labels)
     check_add_remove_links(type, labels)
-    page.all(:xpath, "//li[a/text() = '#{type}']/span/text()").map(&:text).should == labels
+    page.all(:xpath, "//li[a/text() = '#{type}']/span").map(&:text).should == labels
   end
 
 end

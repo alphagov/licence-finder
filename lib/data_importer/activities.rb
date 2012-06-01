@@ -8,9 +8,10 @@ class DataImporter::Activities < DataImporter
   private
 
   def process_row(row)
+    counter = 0
     unless sector = Sector.find_by_correlation_id(row['SECTOR_OID'].to_i)
       Rails.logger.info "Can't find Sector #{row['SECTOR_OID']} (#{row['SECTOR']})"
-      return
+      return 0
     end
     unless activity = Activity.find_by_correlation_id(row['BUSINSS_ACT_ID'].to_i)
       activity = Activity.new
@@ -18,6 +19,7 @@ class DataImporter::Activities < DataImporter
       activity.name = row['ACTIVITY_TITLE']
       Rails.logger.debug "Creating BusinessActivity #{activity.id}(#{activity.name})"
       activity.safely.save!
+      counter += 1
     end
     if sector.activities.nil?
       sector.activities = Array.new
@@ -26,5 +28,6 @@ class DataImporter::Activities < DataImporter
       sector.activities << activity
       sector.safely.save!
     end
+    counter
   end
 end

@@ -10,6 +10,7 @@ class DataImporter::Licences < DataImporter
   private
 
   def process_row(row)
+    counter = 0
     sectors = find_sectors(row['SECTOR_OID'].to_i)
     if sectors.length == 0
       raise "Could not find sector #{row['SECTOR_OID']}, failing."
@@ -21,6 +22,7 @@ class DataImporter::Licences < DataImporter
       licence = Licence.new
       licence.correlation_id = row['LICENCE_OID'].to_i
       Rails.logger.debug "Creating licence #{licence.id}(#{licence.name})"
+      counter += 1
     end
     licence.name = CGI.unescape_html( row['LICENCE'] )
     licence.regulation_area = row['REGULATION_AREA']
@@ -39,6 +41,7 @@ class DataImporter::Licences < DataImporter
         licence_join.safely.save!
       end
     end
+    counter
   end
 
   def find_licence_link(sector, activity, licence)

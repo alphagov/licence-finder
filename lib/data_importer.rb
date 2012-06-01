@@ -20,9 +20,18 @@ class DataImporter
   end
 
   def run
+    counter = 0
     CSV.new(@filehandle, headers: true).each do |row|
-      process_row(row)
+      counter += process_row(row)
+      done(counter, "\r")
     end
+    done(counter, "\n")
+  end
+
+  private
+
+  def done(counter, nl)
+    print "Imported #{counter} #{self.class.name.split('::').last}.#{nl}"
   end
 end
 

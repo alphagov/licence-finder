@@ -52,7 +52,9 @@ describe DataImporter do
       )
       importer.expects(:process_row).with(row2).returns(1)
 
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
     end
   end
 end

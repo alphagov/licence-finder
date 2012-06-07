@@ -15,7 +15,9 @@ describe DataImporter::Licences do
       END
 
       importer = DataImporter::Licences.new(source)
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
 
       imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.correlation_id.should == 1
@@ -40,7 +42,9 @@ describe DataImporter::Licences do
       END
 
       importer = DataImporter::Licences.new(source)
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
 
       imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.name.should == "Pavement licence (England & Wales)"
@@ -55,7 +59,9 @@ describe DataImporter::Licences do
       END
 
       importer = DataImporter::Licences.new(source)
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
 
       imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.correlation_id.should == 1
@@ -70,7 +76,9 @@ describe DataImporter::Licences do
 
       importer = DataImporter::Licences.new(source)
       lambda do
-        importer.run
+        silence_stream(STDOUT) do
+          importer.run
+        end
       end.should raise_error
       imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.should == nil
@@ -83,7 +91,9 @@ describe DataImporter::Licences do
 
       importer = DataImporter::Licences.new(source)
       lambda do
-        importer.run
+        silence_stream(STDOUT) do
+          importer.run
+        end
       end.should raise_error
       imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.should == nil
@@ -99,7 +109,9 @@ describe DataImporter::Licences do
       END
 
       importer = DataImporter::Licences.new(source)
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
 
       imported_links = LicenceLink.all
       imported_links.length.should == 2
@@ -119,7 +131,9 @@ describe DataImporter::Licences do
       END
 
       importer = DataImporter::Licences.new(source)
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
 
       imported_links = LicenceLink.all
       imported_links.length.should == 2
@@ -138,7 +152,9 @@ describe DataImporter::Licences do
       END
 
       importer = DataImporter::Licences.new(source)
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
 
       LicenceLink.first.should == licence_link
     end
@@ -152,7 +168,9 @@ describe DataImporter::Licences do
       END
 
       importer = DataImporter::Licences.new(source)
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
 
       imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.da_england.should == true

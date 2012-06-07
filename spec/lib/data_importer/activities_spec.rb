@@ -13,7 +13,9 @@ describe DataImporter::Activities do
       sector = FactoryGirl.create(:sector, correlation_id: 1000431)
 
       importer = DataImporter::Activities.new(source)
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
 
       imported_activity1 = Activity.find_by_correlation_id(362)
       imported_activity1.correlation_id.should == 362
@@ -37,7 +39,9 @@ describe DataImporter::Activities do
       sector = FactoryGirl.create(:sector, correlation_id: 1000431)
 
       importer = DataImporter::Activities.new(source)
-      importer.run
+      silence_stream(STDOUT) do
+        importer.run
+      end
 
       Activity.where(correlation_id: 362).length.should == 1
     end

@@ -31,20 +31,49 @@ describe LicenceFacade do
     end
   end
 
-  describe "title" do
+  describe "attribute accessors" do
     before :each do
-      @l = FactoryGirl.create(:licence)
+      @licence = FactoryGirl.create(:licence)
     end
 
-    it "should return the title from publisher if present" do
-      lf = LicenceFacade.new(@l, OpenStruct.new(:title => "Publisher title"))
-      lf.title.should == "Publisher title"
+    context "with publisher data" do
+      before :each do
+        @pub_data = OpenStruct.new(:licence_identifier => @licence.public_id.to_s,
+                                   :title => "Publisher title",
+                                   :slug => "licence-slug",
+                                   :licence_short_description => "Short description of licence")
+        @lf = LicenceFacade.new(@licence, @pub_data)
+      end
+
+      it "should be published" do
+        @lf.published?.should == true
+      end
+
+      it "should return the publisher title" do
+        @lf.title.should == @pub_data.title
+      end
+
+      it "should return the frontend url" do
+        @lf.url.should == "/#{@pub_data.slug}"
+      end
     end
 
-    it "should return the wrapped licence's name if no publisher data" do
-      lf = LicenceFacade.new(@l)
+    context "without publisher data" do
+      before :each do
+        @lf = LicenceFacade.new(@licence, nil)
+      end
 
-      lf.title.should == @l.name
+      it "should not be published?" do
+        @lf.published?.should == false
+      end
+
+      it "should return the licence name" do
+        @lf.title.should == @licence.name
+      end
+
+      it "should return nil for the url" do
+        @lf.url.should == nil
+      end
     end
   end
 end

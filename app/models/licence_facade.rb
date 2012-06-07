@@ -16,7 +16,15 @@ class LicenceFacade
     @publisher_data = publisher_data
   end
 
+  def published?
+    @publisher_data.present?
+  end
+
   def title
-    @publisher_data ? @publisher_data.title : @licence.name
+    published? ? @publisher_data.title : @licence.name
+  end
+
+  def url
+    published? ? "/#{@publisher_data.slug}" : nil
   end
 end

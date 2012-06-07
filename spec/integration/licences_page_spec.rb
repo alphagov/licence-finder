@@ -48,7 +48,7 @@ describe "Licences page" do
     end
 
     within_section 'results' do
-      page.all('li').map(&:text).should == [
+      page.all('li').map(&:text).map(&:strip).should == [
         'Licence Four'
       ]
     end
@@ -68,6 +68,10 @@ describe "Licences page" do
       # should use the title from publisher, instead of local one
       page.should have_content("Licence 1")
       page.should_not have_content("Licence One")
+
+      within_section "list item containing Licence 1" do
+        page.should have_link("Licence 1", :href => "/licence-one")
+      end
 
       page.should have_content("Licence Two")
     end

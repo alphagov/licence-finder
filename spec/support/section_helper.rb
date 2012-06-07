@@ -14,6 +14,9 @@ module SectionHelper
 
     when 'results'
       [:css, 'article.results']
+
+    when /^list item containing (.*)$/
+      [:xpath, ".//li[contains(., '#{$1}')]"]
     else
       raise "Can't find mapping from \"#{section_name}\" to a section."
     end

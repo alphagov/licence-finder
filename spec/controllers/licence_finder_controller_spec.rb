@@ -55,6 +55,31 @@ describe LicenceFinderController do
       assigns[:picked_sectors].should == [@s3, @s2]
     end
 
+    it "should return slimmer headers" do
+      $search.expects(:search).with("test query").returns([])
+      get :sectors, q: "test query"
+      response.headers["X-Slimmer-Need-ID"].should == "B90"
+      response.headers["X-Slimmer-Format"].should == "licence-finder"
+      response.headers["X-Slimmer-Proposition"].should == "business"
+      response.headers["X-Slimmer-Result-Count"].should == "0"
+    end
+
+    it "should not return result count if no query was provided" do
+      get :sectors
+      response.headers["X-Slimmer-Result-Count"].should be_nil
+    end
+
+    it "should return slimmer result count when available" do
+      @s1 = FactoryGirl.create(:sector, :name => "Alpha")
+      @s2 = FactoryGirl.create(:sector, :name => "Charlie")
+      @s3 = FactoryGirl.create(:sector, :name => "Bravo")
+
+      $search.expects(:search).with("test query").returns([@s1, @s2, @s3])
+
+      get :sectors, q: "test query"
+      response.should be_success
+      response.headers["X-Slimmer-Result-Count"].should == "3"
+    end
   end
 
   describe "GET 'activities'" do
@@ -106,6 +131,14 @@ describe LicenceFinderController do
         get :activities, :sectors => "1234_2345_3456", :activities => "1234_2345_3456"
 
         assigns[:picked_activities].should == [a1, a3, a2]
+      end
+
+      it "should core return slimmer headers but no result count" do
+        do_get
+        response.headers["X-Slimmer-Need-ID"].should == "B90"
+        response.headers["X-Slimmer-Format"].should == "licence-finder"
+        response.headers["X-Slimmer-Proposition"].should == "business"
+        response.headers["X-Slimmer-Result-Count"].should == nil
       end
     end
 

@@ -12,7 +12,7 @@ class LicenceFinderController < ApplicationController
 
   before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors]
   before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities]
-  before_filter :set_analytics_headers
+  after_filter :set_analytics_headers
 
   def start
   end
@@ -92,10 +92,14 @@ class LicenceFinderController < ApplicationController
   end
 
   def set_analytics_headers
-    set_slimmer_headers(
+    headers = {
       format:      "licence-finder",
       proposition: "business",
       need_id:     "B90"
-    )
+    }
+    if @sectors and params[:q].present?
+      headers[:result_count] = @sectors.length
+    end
+    set_slimmer_headers(headers)
   end
 end

@@ -54,7 +54,8 @@ class LicenceFinderController < ApplicationController
     @sectors = Sector.find_by_public_ids(@sector_ids)
     @activities = Activity.find_by_public_ids(@activity_ids)
     @location = params[:location]
-    @licences = Licence.find_by_sectors_activities_and_location(@sectors, @activities, params[:location])
+    licences = Licence.find_by_sectors_activities_and_location(@sectors, @activities, params[:location])
+    @licences = LicenceFacade.create_for_licences(licences)
     setup_questions [@sectors, @activities, [@location.titleize]]
   end
 

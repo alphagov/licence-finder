@@ -209,20 +209,22 @@ describe LicenceFinderController do
         Sector.stubs(:find_by_public_ids).returns(:some_sectors)
         Activity.stubs(:find_by_public_ids).returns(:some_activities)
         Licence.stubs(:find_by_sectors_activities_and_location).returns(:some_licences)
+        LicenceFacade.stubs(:create_for_licences).returns(:some_licence_facades)
       end
       def do_get
         get :licences, :sectors => '123_321', :activities => '234_432', :location => "northern_ireland"
       end
 
-      it "fetches the appropriate licences and assigns them to @licences" do
+      it "fetches the appropriate licences, wraps them in a facade and assigns them to @licences" do
         Sector.expects(:find_by_public_ids).with([123,321]).returns(:some_sectors)
         Activity.expects(:find_by_public_ids).with([234,432]).returns(:some_activities)
         Licence.expects(:find_by_sectors_activities_and_location).with(:some_sectors, :some_activities, "northern_ireland").returns(:some_licences)
+        LicenceFacade.expects(:create_for_licences).with(:some_licences).returns(:some_licence_facades)
         do_get
         assigns[:sectors].should == :some_sectors
         assigns[:activities].should == :some_activities
         assigns[:location].should == "northern_ireland"
-        assigns[:licences].should == :some_licences
+        assigns[:licences].should == :some_licence_facades
       end
 
       it "sets up the questions correctly" do

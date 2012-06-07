@@ -59,6 +59,20 @@ describe "Licences page" do
     page.should_not have_content("No licences")
   end
 
+  specify "seeing licence details from publisher on results page" do
+    publisher_has_licence :licence_identifier => @l1.public_id.to_s, :slug => 'licence-one', :title => 'Licence 1'
+
+    visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
+
+    within_section 'results' do
+      # should use the title from publisher, instead of local one
+      page.should have_content("Licence 1")
+      page.should_not have_content("Licence One")
+
+      page.should have_content("Licence Two")
+    end
+  end
+
   specify "going back to previous sections" do
     {1 => "sectors", 2 => "activities", 3 => "location"}.each do |question, section|
       visit licence_finder_url_for('licences', [@s1], [@a1], 'scotland')

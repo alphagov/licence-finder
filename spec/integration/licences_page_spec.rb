@@ -60,7 +60,8 @@ describe "Licences page" do
   end
 
   specify "seeing licence details from publisher on results page" do
-    publisher_has_licence :licence_identifier => @l1.public_id.to_s, :slug => 'licence-one', :title => 'Licence 1'
+    publisher_has_licence :licence_identifier => @l1.public_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
+          :licence_short_description => "Short description of licence"
 
     visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
@@ -71,6 +72,7 @@ describe "Licences page" do
 
       within_section "list item containing Licence 1" do
         page.should have_link("Licence 1", :href => "/licence-one")
+        page.should have_content("Short description of licence")
       end
 
       page.should have_content("Licence Two")

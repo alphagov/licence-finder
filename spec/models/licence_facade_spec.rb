@@ -56,6 +56,10 @@ describe LicenceFacade do
       it "should return the frontend url" do
         @lf.url.should == "/#{@pub_data.slug}"
       end
+
+      it "should return the publisher short description" do
+        @lf.short_description.should == @pub_data.licence_short_description
+      end
     end
 
     context "without publisher data" do
@@ -73,6 +77,10 @@ describe LicenceFacade do
 
       it "should return nil for the url" do
         @lf.url.should == nil
+      end
+
+      it "should return nil for the short_description" do
+        @lf.short_description.should == nil
       end
     end
   end

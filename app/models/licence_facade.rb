@@ -27,4 +27,8 @@ class LicenceFacade
   def url
     published? ? "/#{@publisher_data.slug}" : nil
   end
+
+  def short_description
+    published? ? @publisher_data.licence_short_description : nil
+  end
 end

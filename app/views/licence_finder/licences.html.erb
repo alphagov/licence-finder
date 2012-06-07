@@ -13,6 +13,7 @@
           <li>
             <%- if licence.published? -%>
               <%= link_to licence.title, licence.url %>
+              <p><%= licence.short_description %></p>
             <%- else -%>
               <%= licence.title %>
             <%- end -%>

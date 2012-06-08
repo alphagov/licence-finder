@@ -19,14 +19,12 @@ $(function() {
         var params = {};
 
         // check there are any GET params at all
-        if (window.location.search.indexOf('&') !== -1) {
-            $(window.location.search.substr(1).split('&')).each(function(i, pair)  {
-                if (pair !== "") {
-                    pair = pair.split('=');
-                    params[pair[0]] = pair[1];
-                }
-            });
-        }
+        $(window.location.search.substr(1).split('&')).each(function(i, pair)  {
+            if (pair !== "") {
+                pair = pair.split('=');
+                params[pair[0]] = pair[1];
+            }
+        });
 
         return params;
     }

@@ -1,39 +1,38 @@
 <%= render :partial => 'completed_questions' %>
 <%= javascript_include_tag 'licence-finder', defer: true %>
 <%= current_question do %>
-  <%= form_tag activities_path do %>
-    <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
+  <div class="search-container">
     <div class="business-activity-results search-picker">
       <p class="hint">Add all the categories that apply to you</p>
       <% if (@activities - @picked_activities).empty? %>
         <p>No activities</p>
       <% else %>
-      <ul>
-        <% (@activities - @picked_activities).each do |activity| %>
-          <li data-public-id="<%= activity.public_id %>">
-            <span class="activity-name"><%= activity.name %></span>
-            <%= link_to_add activity %>
-          </li>
-        <% end %>
-      </ul>
+        <ul>
+          <% (@activities - @picked_activities).each do |activity| %>
+            <li data-public-id="<%= activity.public_id %>">
+              <span class="activity-name"><%= activity.name %></span>
+              <%= link_to_add activity %>
+            </li>
+          <% end %>
+        </ul>
       <% end %>
     </div>
-    <div class="business-activity-picked picked-items" aria-live="polite" data-next-url="<%= business_location_path(sectors: params[:sectors], activities: params[:activities]) %>">
-      <h3>Your chosen categories</h3>
-      <p class="<% if @picked_activities.empty? %>hint<% else %>hidden<% end %>">Your chosen categories will appear here</p>
-      <ul id="picked-business-activities">
-        <% @picked_activities.each do |activity| %>
-          <li data-public-id="<%= activity.public_id %>">
-            <span class="activity-name"><%= activity.name %></span>
-            <%= link_to_remove activity %>
-          </li>
-        <% end %>
-      </ul>
-      <% unless @picked_activities.empty? %>
-        <%= link_to 'Next step', business_location_path(sectors: params[:sectors], activities: params[:activities]), class: 'button medium', id: "next-step"  %>
+  </div>
+  <div class="business-activity-picked picked-items" aria-live="polite" data-next-url="<%= business_location_path(sectors: params[:sectors], activities: params[:activities]) %>">
+    <h3>Your chosen categories</h3>
+    <p class="<% if @picked_activities.empty? %>hint<% else %>hidden<% end %>">Your chosen categories will appear here</p>
+    <ul id="picked-business-activities">
+      <% @picked_activities.each do |activity| %>
+        <li data-public-id="<%= activity.public_id %>">
+          <span class="activity-name"><%= activity.name %></span>
+          <%= link_to_remove activity %>
+        </li>
       <% end %>
-    </div>
-  <% end %>
+    </ul>
+    <% unless @picked_activities.empty? %>
+      <%= link_to 'Next step', business_location_path(sectors: params[:sectors], activities: params[:activities]), class: 'button medium', id: "next-step"  %>
+    <% end %>
+  </div>
 <% end %>
 
 <%= render :partial => 'upcoming_questions' %>

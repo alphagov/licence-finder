@@ -19,8 +19,14 @@ describe DataImporter::Sectors do
       imported_sector = Sector.find_by_correlation_id(1000011)
       imported_sector.correlation_id.should == 1000011
       imported_sector.name.should == "Animal farming support services"
-      imported_sector.layer1_id.should == 1000001
-      imported_sector.layer2_id.should == 1000002
+
+      parent_sectors = imported_sector.parents.to_a
+      parent_sectors.length.should == 1
+      parent_sectors[0].correlation_id.should == 1000002
+
+      gparent_sectors = parent_sectors[0].parents.to_a
+      gparent_sectors.length.should == 1
+      gparent_sectors[0].correlation_id.should == 1000001
     end
 
     it "should avoid importing the same sector id twice" do

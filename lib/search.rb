@@ -7,7 +7,7 @@ class Search
 
   def index_all
     @client.pre_index
-    @client.index(Sector.all)
+    @client.index(Sector.find_layer3_sectors)
     @client.post_index
   end
 

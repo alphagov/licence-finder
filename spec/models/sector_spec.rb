@@ -121,4 +121,44 @@ describe Sector do
       sector.public_id.should == 2
     end
   end
+
+  describe "other layers" do
+    it "should be able to find all layer 1 sectors" do
+      FactoryGirl.create(:sector, layer: 1)
+      FactoryGirl.create(:sector, layer: 2)
+      FactoryGirl.create(:sector, layer: 3)
+      Sector.find_layer1_sectors().length.should == 1
+    end
+
+    it "should be able to find all layer 3 sectors" do
+      FactoryGirl.create(:sector, layer: 1)
+      FactoryGirl.create(:sector, layer: 2)
+      FactoryGirl.create(:sector, layer: 3)
+      Sector.find_layer3_sectors().length.should == 1
+    end
+
+    it "should be able to find child sectors" do
+      s1 = FactoryGirl.create(:sector, layer: 1)
+      s2 = FactoryGirl.create(:sector, layer: 2, parents: [s1])
+      s3 = FactoryGirl.create(:sector, layer: 3, parents: [s2])
+      s4 = FactoryGirl.create(:sector, layer: 2, parents: [s1])
+      FactoryGirl.create(:sector, layer: 2)
+
+      s1.children.to_a.should =~ [s2, s4]
+      s2.children.to_a.should == [s3]
+      s3.children.to_a.should == []
+    end
+
+    it "should be able find parent sectors" do
+      s1 = FactoryGirl.create(:sector, layer: 1)
+      s2 = FactoryGirl.create(:sector, layer: 2, parents: [s1])
+      s3 = FactoryGirl.create(:sector, layer: 3, parents: [s1, s2])
+      s4 = FactoryGirl.create(:sector, layer: 2, parents: [s1])
+      FactoryGirl.create(:sector, layer: 2)
+
+      s1.parents.to_a.should == []
+      s2.parents.to_a.should == [s1]
+      s3.parents.to_a.should =~ [s1, s2]
+    end
+  end
 end

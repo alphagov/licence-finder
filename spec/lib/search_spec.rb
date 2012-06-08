@@ -10,7 +10,7 @@ describe Search do
 
   it "should index all sectors with the configured client" do
     @client.expects(:pre_index)
-    Sector.expects(:all).returns(:all_sectors)
+    Sector.expects(:find_layer3_sectors).returns(:all_sectors)
     @client.expects(:index).with(:all_sectors)
     @client.expects(:post_index)
 

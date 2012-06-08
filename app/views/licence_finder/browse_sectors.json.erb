@@ -1,0 +1,26 @@
+<%# FIXME can I fix this? %>
+<% if !@grandchild_sectors.empty? %>
+    <% sectors = @grandchild_sectors.to_a %>
+    <% view = "grandchild" %>
+<% elsif !@child_sectors.empty? %>
+    <% sectors = @child_sectors.to_a %>
+    <% view = "child" %>
+<% elsif !@sectors.empty? %>
+    <% sectors = @sectors.to_a %>
+<% end %>
+{"sectors": [
+    <% sectors.each do |sector| %>
+        {
+            "public-id": "<%= sector.public_id %>",
+            "name":"<%= sector.name %>"
+             <% if view != "grandchild" %>
+                 <% if view == "child" %>
+                     ,"url": "<%= browse_sector_child_path(:sector_parent => @current_sector.public_id, :sector => sector.public_id) %>"
+                 <% else %>
+                     ,"url": "<%= browse_sector_path(:sector => sector.public_id) %>"
+                 <% end %>
+             <% end %>
+        }
+        <% if sector.public_id != sectors.last.public_id %>,<% end %>
+    <% end %>
+]}

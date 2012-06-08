@@ -49,10 +49,11 @@ class DataImporter::Licences < DataImporter
   end
 
   def find_sectors(sector_id)
-    if sector = Sector.find_by_correlation_id(sector_id)
-      [sector]
+    sector = Sector.find_by_correlation_id(sector_id)
+    if sector.layer < 3
+      sector.children.map {|child| find_sectors(child.correlation_id)}.reduce {|a, b| a+b}
     else
-      Sector.any_of({layer1_id: sector_id}, {layer2_id: sector_id})
+      [sector]
     end
   end
 

@@ -10,8 +10,8 @@ class LicenceFinderController < ApplicationController
   ]
   ACTIONS = %w(sectors activities business_location)
 
-  before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors]
-  before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities]
+  before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
+  before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   after_filter :set_analytics_headers
 
   def start
@@ -57,6 +57,44 @@ class LicenceFinderController < ApplicationController
     licences = Licence.find_by_sectors_activities_and_location(@sectors, @activities, params[:location])
     @licences = LicenceFacade.create_for_licences(licences)
     setup_questions [@sectors, @activities, [@location.titleize]]
+  end
+
+  # FIXME: is there some Ruby/Railsism I can use to factor out these
+  # nil/empty variables?
+  def browse_sector_index
+    # return list of top-level sectors
+    @current_sector = nil
+    @parent_sector = nil
+
+    @sectors = Sector.find_layer1_sectors().ascending(:name).to_a
+    @child_sectors = []
+    @grandchild_sectors = []
+
+    render "browse_sectors"
+ end
+
+  def browse_sector
+    # return list of children of "sector"
+    @current_sector = Sector.find_by_public_id(params[:sector])
+    @parent_sector = nil
+
+    @sectors = Sector.find_layer1_sectors().ascending(:name).to_a
+    @child_sectors = @current_sector.children.ascending(:name).to_a
+    @grandchild_sectors = []
+
+    render "browse_sectors"
+  end
+
+  def browse_sector_child
+    # return list of children of "sector"
+    @current_sector = Sector.find_by_public_id(params[:sector])
+    @parent_sector = Sector.find_by_public_id(params[:sector_parent])
+
+    @sectors = Sector.find_layer1_sectors().ascending(:name).to_a
+    @child_sectors = @parent_sector.children.ascending(:name).to_a
+    @grandchild_sectors = @current_sector.children.ascending(:name).to_a
+
+    render "browse_sectors"
   end
 
   protected

@@ -3,7 +3,7 @@ require 'data_importer'
 
 describe DataImporter::Licences do
   before :each do
-    @sector = FactoryGirl.create(:sector, correlation_id: 1)
+    @sector = FactoryGirl.create(:sector, correlation_id: 1, layer: 3)
     @activity = FactoryGirl.create(:activity, correlation_id: 1)
   end
 
@@ -99,9 +99,11 @@ describe DataImporter::Licences do
       imported_licence.should == nil
     end
     it "should add links for all layer3 sectors if a layer2 sector id is provided" do
-      sector1 = FactoryGirl.create(:sector, correlation_id: 2, layer2_id: 101)
-      sector2 = FactoryGirl.create(:sector, correlation_id: 3, layer2_id: 101)
-      sector3 = FactoryGirl.create(:sector, correlation_id: 4, layer2_id: 102)
+      l2sector1 = FactoryGirl.create(:sector, correlation_id: 101, layer: 2)
+      l2sector2 = FactoryGirl.create(:sector, correlation_id: 111, layer: 2)
+      sector1 = FactoryGirl.create(:sector, correlation_id: 2, parents: [l2sector1], layer: 3)
+      sector2 = FactoryGirl.create(:sector, correlation_id: 3, parents: [l2sector1], layer: 3)
+      sector3 = FactoryGirl.create(:sector, correlation_id: 4, parents: [l2sector2], layer: 3)
 
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
@@ -121,9 +123,11 @@ describe DataImporter::Licences do
       sectors.should_not include(sector3)
     end
     it "should add links for all layer3 sectors if a layer1 sector id is provided" do
-      sector1 = FactoryGirl.create(:sector, correlation_id: 2, layer1_id: 101)
-      sector2 = FactoryGirl.create(:sector, correlation_id: 3, layer1_id: 101)
-      sector3 = FactoryGirl.create(:sector, correlation_id: 4, layer1_id: 102)
+      l1sector = FactoryGirl.create(:sector, correlation_id: 101, layer: 1)
+      l2sector = FactoryGirl.create(:sector, correlation_id: 102, layer: 2, parents:[l1sector])
+      sector1 = FactoryGirl.create(:sector, correlation_id: 2, layer: 3, parents: [l2sector])
+      sector2 = FactoryGirl.create(:sector, correlation_id: 3, layer: 3, parents: [l2sector])
+      sector3 = FactoryGirl.create(:sector, correlation_id: 4, layer: 3, parents: [])
 
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"

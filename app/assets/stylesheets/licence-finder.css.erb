@@ -1,31 +1,19 @@
-/*#wrapper.answer header.page-header hgroup {
-  margin-right: 0;
-}
-
-#wrapper.answer.landing-page header.page-header hgroup {
-  margin-right: inherit;
-}*/
-
 /*
-	landing page
-*/
+  landing page
+  */
 
 .start {
-	display: inline-block;
+  display: inline-block;
 }
 
 .start a {
-	font-size: 1.5em;
-	margin: 0.5em 0 0 0;
-}
-
-.get-started {
-/*  margin-top: 1.5em;*/
+  font-size: 1.5em;
+  margin: 0.5em 0 0 0;
 }
 
 /*
   questions
-*/
+  */
 
 .hint {
   color: #666;
@@ -49,11 +37,11 @@
   display: block;
   line-height: 2.5em;
   text-align: center;
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .start-again a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .done-questions ol {
@@ -129,16 +117,16 @@ li.done:hover .undo a {
 }
 
 .step.current {
-	background-color: #fff;
-	margin-right: 15em;
-	padding: 0 2em 1em 5em;
-	position: relative;
+  background-color: #fff;
+  margin-right: 15em;
+  padding: 0 2em 1em 5em;
+  position: relative;
 }
 
 .current-question {
   border-top: solid 1px #C9D0D0;
-	margin-top: -1px;
-	padding: 1.5em 0 1.25em 0;
+  margin-top: -1px;
+  padding: 1.5em 0 1.25em 0;
 }
 
 .current-question h2 {
@@ -165,12 +153,17 @@ li.done:hover .undo a {
   margin-left: -1.7em;
 }
 
-.current-question ul {
+.current-question ul ul {
+  margin: 0;
+}
+
+/* this is the multiple choice selector */
+.current-question ul.options {
   list-style: none;
   padding: 0;
 }
 
-.current-question ul li {
+.current-question ul.options li {
   line-height: 1.5em;
   margin: 0.5em 0;
 }
@@ -193,24 +186,18 @@ li.done:hover .undo a {
 }
 
 /*
-	results
-*/
+  results
+  */
 
 .results .inner {
   padding-top: 2em;
 }
 
 .results {
-	background-color: #fff;
+  background-color: #fff;
   float: none;
-	margin-right: 0;
-	min-height: 0;
-}
-
-.result-info {
-/*  float: left;*/
-/*  margin: 0 0 2.5em 0;*/
-/*  width: 60%;*/
+  margin-right: 0;
+  min-height: 0;
 }
 
 .next-steps {
@@ -222,14 +209,6 @@ li.done:hover .undo a {
   padding-top: 0;
   padding-bottom: 1em;
 }
-
-/*.next-steps .inner h2 {
-  background: none;
-  height: auto;
-  margin: 0 0 0.5em 0;
-  padding: 0;
-  top: auto;
-}*/
 
 .next-steps .inner ul {
   padding: 0 0 0 1.5em;
@@ -244,7 +223,6 @@ li.done:hover .undo a {
 .next-steps .inner li {
   list-style-type: disc;
   margin: 0.5em 0;
-/*  padding-left: 0;*/
 }
 
 #wrapper .next-steps.related .inner li a {
@@ -253,12 +231,6 @@ li.done:hover .undo a {
   display: inline;
   font-size: 100%;
 }
-
-/*.next-steps h3 {
-  font-style: normal;
-  margin-bottom: 0.75em;
-  margin-top: 0.25em;
-}*/
 
 .meta-data {
   background: #fff;
@@ -275,7 +247,7 @@ li.done:hover .undo a {
 
 /*
   errors messages
-*/
+  */
 
 .error {
   border:1px solid #B01117;
@@ -294,7 +266,7 @@ li.done:hover .undo a {
 
 /*
   calculators
-*/
+  */
 
 .calculator article {
   min-height: 0;
@@ -306,11 +278,6 @@ li.done:hover .undo a {
     margin:0;
   }
 }
-/*
-
-
- */
-
 
 li.done .answer {
   background-color: transparent;
@@ -324,11 +291,8 @@ li.done .answer ul {
 }
 
 li.done .answer ul li {
-  /*background-color: #4F6F5E;*/
-  /*display: inline-block;*/
   margin-bottom: 0.25em;
   padding: 0 0.25em;
-  /*width: 60%;*/
   color: #305642;
   margin-left: -6px;
   list-style-type: circle;
@@ -336,12 +300,11 @@ li.done .answer ul li {
 }
 
 li.done .answer ul li:first-child {
-	
-	margin-top: 0.8rem;
+  margin-top: 0.8rem;
 }
 
 li.done .answer ul li:last-child {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 li.done h3 {
@@ -383,47 +346,50 @@ li.upcoming h3 {
 }
 
 .business-sector-results, .business-activity-results, .search-container {
-    float: left;
-    margin-right: 5%;
-    width: 50%;
+  float: left;
+  margin-right: 5%;
+  width: 50%;
 }
 
 .business-sector-picked, .business-activity-picked {
-    background-color: #96c6e2;
-    background-color: #CCE0D5;
-    float: left;
-    padding: 0.4em 5%;
-    padding-bottom: 1.3em;
-    width: 35%;
-    margin-top:0.3em;
+  background-color: #96c6e2;
+  background-color: #CCE0D5;
+  float: right;
+  padding: 0.4em 5%;
+  padding-bottom: 1.3em;
+  width: 30%;
+  margin-top:0.3em;
 }
 .business-activity-picked h3, .business-sector-picked h3 {
-	font-size:1em;
+  font-size:1em;
 }
 
 .business-sector-picked ul li, .business-activity-picked ul li {
-    /*list-style-type: disc;*/
-    color: #305642;
-    list-style-type: circle;
+  color: #305642;
+  list-style-type: circle;
   list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);
 }
 
+.search-picker {
+  width: auto;
+}
+
 .search-picker li {
-    padding: 0 0.25em;
-    margin-left: -8px;
-    list-style-type: circle;
-    list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);
+  padding: 0 0.25em;
+  margin-left: -8px;
+  list-style-type: circle;
+  list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);
 }
 
 .search-container .button {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .search-picker li:first-child {
-	margin-top: 2.3em;
+  margin-top: 2.3em;
 }
 
 .intro ul {
-	margin-left:0em;
-	padding-left:0.9em;
+  margin-left:0em;
+  padding-left:0.9em;
 }

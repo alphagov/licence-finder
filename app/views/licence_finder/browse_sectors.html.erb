@@ -1,0 +1,45 @@
+<%= javascript_include_tag 'licence-finder', defer: true %>
+
+<div class="article-container">
+  <article class="results">
+    <div class="inner group">
+      <h2>Browse sectors</h2>
+
+      <% if @sectors.empty? %>
+        <p>No sectors</p>
+      <% else %>
+         <ul id="sector-navigation">
+           <% @sectors.each do |sector| %>
+             <li>
+               <% if (@current_sector && sector.public_id == @current_sector.public_id) || (@parent_sector && sector.public_id == @parent_sector.public_id) %>
+                 <strong data-public-id="<%= sector.public_id %>" data-old-url="<%= browse_sector_path(:sector => sector.public_id) %>"><%= sector.name %></strong>
+                 <% if !@child_sectors.empty? %>
+                   <ul>
+                     <% @child_sectors.each do |c_sector| %>
+                       <li>
+                         <% if (@current_sector && c_sector.public_id == @current_sector.public_id) || (@parent_sector && c_sector.public_id == @parent_sector.public_id) %>
+                           <strong data-public-id="<%= c_sector.public_id %>" data-old-url="<%= browse_sector_child_path(:sector_parent => sector.public_id, :sector => c_sector.public_id) %>"><%= c_sector.name %></strong>
+                           <% if !@grandchild_sectors.empty? %>
+                             <ul>
+                               <% @grandchild_sectors.each do |g_sector| %>
+                                 <li><%= g_sector.name %> <%= link_to_add g_sector %></li>
+                               <% end %>
+                             </ul>
+                           <% end %>
+                         <% else %>
+                           <%= link_to c_sector.name, browse_sector_child_path(:sector_parent => sector.public_id, :sector => c_sector.public_id), {"data-public-id" => c_sector.public_id} %>
+                         <% end %>
+                       </li>
+                     <% end %>
+                   </ul>
+                 <% end %>
+               <% else %>
+                 <%= link_to sector.name, browse_sector_path(:sector => sector.public_id), {"data-public-id" => sector.public_id} %>
+               <% end %>
+             </li>
+           <% end %>
+         </ul>
+      <% end %>
+    </div>
+  </article>
+</div>

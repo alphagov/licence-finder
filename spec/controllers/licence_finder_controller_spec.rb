@@ -285,4 +285,38 @@ describe LicenceFinderController do
     end
 
   end
+
+  describe "GET 'browse sectors'" do
+    context 'With nested sectors' do
+      before :each do
+        @s1 = FactoryGirl.create(:sector, layer: 1, name: 'First top level')
+        @s2 = FactoryGirl.create(:sector, layer: 2, name: 'First child', parents: [@s1])
+        @s3 = FactoryGirl.create(:sector, layer: 3, name: 'First grand child', parents: [@s2])
+        @s4 = FactoryGirl.create(:sector, layer: 2, name: 'Second child', parents: [@s1])
+        @s5 = FactoryGirl.create(:sector, layer: 3, name: 'Second grand child', parents: [@s4])
+        @s6 = FactoryGirl.create(:sector, layer: 1, name: 'Second top level')
+      end
+
+      it 'Should show top level sectors' do
+        get :browse_sector_index
+        assigns[:sectors].should == [@s1, @s6]
+        assigns[:child_sectors].should == []
+        assigns[:grandchild_sectors].should == []
+      end
+
+      it 'Should show children of top level sectors' do
+        get :browse_sector, :sector => @s1.public_id
+        assigns[:sectors].should == [@s1, @s6]
+        assigns[:child_sectors].should == [@s2, @s4]
+        assigns[:grandchild_sectors].should == []
+      end
+
+      it 'Should show grandchildren of top level sectors' do
+        get :browse_sector_child, :sector_parent => @s1.public_id, :sector => @s2.public_id
+        assigns[:sectors].should == [@s1, @s6]
+        assigns[:child_sectors].should == [@s2, @s4]
+        assigns[:grandchild_sectors].should == [@s3]
+      end
+    end
+  end
 end

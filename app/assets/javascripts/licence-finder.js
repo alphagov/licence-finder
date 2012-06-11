@@ -11,7 +11,9 @@ $(function() {
 
     function extractIds() {
         return $.makeArray(
-            $(".picked-items li[data-public-id]").map(function(i, li) { return $(li).data("public-id"); })
+            $(".picked-items li[data-public-id]").map(function(i, li) {
+                return $(li).data("public-id");
+            })
         );
     }
 
@@ -74,7 +76,8 @@ $(function() {
              .append($('<a href="">' + event.data.linkText + '</a>'));
         targetList.append(newli);
         $('li', targetList).each(function() {
-            $('a', this).attr('href', createAddRemoveUrl($(this).data('public-id')));
+            $('a', this).attr(
+                'href',createAddRemoveUrl($(this).data('public-id')));
         });
         oldli.remove();
 
@@ -93,7 +96,7 @@ $(function() {
         if (event.data.target === ".picked-items") {
             $(".hint", target).removeClass("hint").addClass("hidden");
             if ($("#next-step").length === 0) {
-                target.append('<a href="" class="button medium" id="next-step">Next step</a>');
+                target.append('<a class="button medium" id="next-step">Next step</a>');
             }
         } else if (source.find("li").length === 0) {
             $(".hidden", source).removeClass("hidden").addClass("hint");
@@ -101,7 +104,8 @@ $(function() {
         }
         $("#next-step").attr("href", createNextUrl());
         if (pageName === "sectors") {
-            $("#search-again-button").attr("href", window.location.pathname + "?sectors=" + extractIds().join("_"));
+            $("#search-again-button").attr(
+                "href", window.location.pathname + "?sectors=" + extractIds().join("_"));
             $("#hidden-sectors").attr("value", extractIds().join("_"));
         }
     }
@@ -112,6 +116,7 @@ $(function() {
         target: ".picked-items",
         sortTarget: true
     }, swapper);
+
     // event handler to remove a list item from the picked list.
     $(".picked-items").on("click", "li[data-public-id] a", {
         linkText: "Add",
@@ -167,20 +172,20 @@ $(function() {
 
                         var children = data.sectors,
                             name = $a.text(),
-                            $strong = $('<strong data-public-id="' + publicId + '" data-old-url="'+$a.attr('href')+'">' + name + '</strong>'),
+                            $strong = $('<strong data-public-id="' + publicId + '" data-old-url="' + $a.attr('href')+'">' + name + '</strong>'),
                             ul = $('<ul />');
                         for (i=0, l=children.length; i<l; i++) {
                             var leaf = children[i],
                                 elString;
 
                             if (typeof leaf.url !== 'undefined') {
-                                elString = '<a data-public-id="'+leaf['public-id']+'" href="'+leaf.url+'">'+leaf.name+'</a>';
+                                elString = '<a data-public-id="' + leaf['public-id'] + '" href="' + leaf.url + '">' + leaf.name + '</a>';
                             }
                             else {
-                                elString = '<span class="sector-name">' + leaf.name + '</span> <a href="'+createAddRemoveUrl(leaf['public-id'])+'" class="add">Add</a>';
+                                elString = '<span class="sector-name">' + leaf.name + '</span> <a href="' + createAddRemoveUrl(leaf['public-id']) + '" class="add">Add</a>';
                             }
 
-                            ul.append('<li data-public-id="'+leaf['public-id']+'">' + elString + '</li>');
+                            ul.append('<li data-public-id="' + leaf['public-id'] + '">' + elString + '</li>');
                         }
 
                         $a.replaceWith($strong);

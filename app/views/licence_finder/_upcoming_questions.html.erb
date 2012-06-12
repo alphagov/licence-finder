@@ -4,8 +4,7 @@
       <%- @upcoming_questions.each_with_index do |question, index| %>
         <li class="upcoming">
           <h3 class="question">
-            <span class="question-number"><%= @current_question_number + index + 1 %></span>
-            <%= question %>
+            <span class="question-number"><%= @current_question_number + index + 1 %></span><%= question %>
           </h3>
         </li>
       <%- end -%>

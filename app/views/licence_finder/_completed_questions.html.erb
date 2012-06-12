@@ -5,8 +5,7 @@
       <%- @completed_questions.each_with_index do |question_details, index| -%>
         <li class="done">
           <h3 class="question">
-            <span class="question-number"><%= index + 1 %></span>
-            <%= question_details[0] %>
+            <span class="question-number"><%= index + 1 %></span><%= question_details[0] %>
           </h3>
           <div class="answer">
             <ul>

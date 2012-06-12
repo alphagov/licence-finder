@@ -1,29 +1,34 @@
-<%= current_question do %>
+<% content_for :page_title, "Choose your activities and business sectors | Licence Finder" %>
 
-  <div class="search-container">
+<%= current_question do %>
+  <div class="something-generic search-container">
     <% if !@sectors.empty? %>
-    <div class="business-sector-results search-picker">
-      <p class="hint">Add all the sectors that apply to you</p>
-      <ul>
-        <% (@sectors - @picked_sectors).each do |sector| %>
-          <li data-public-id="<%= sector.public_id %>">
-            <span class="sector-name"><%= sector.name %></span>
-            <%= link_to_add sector %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% elsif params[:q].present? %>
-    <p>No results</p>
-  <% end %>
+      <div class="search-results search-picker">
+        <p class="hint">Add all the sectors that apply to you:</p>
+        <ul>
+          <% (@sectors - @picked_sectors).each do |sector| %>
+            <li data-public-id="<%= sector.public_id %>">
+              <span class="sector-name"><%= sector.name %></span>
+              <%= link_to_add sector %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% elsif params[:q].present? %>
+      <p>No results</p>
+    <% end %>
     <%= form_tag sectors_path, method: :get do %>
       <%= hidden_field_tag "sectors", params[:sectors], id: "hidden-sectors" %>
       <label class="visuallyhidden" for="search-sectors">Search for sectors</label>
       <%= text_field_tag "q", params[:q], id: "search-sectors" %>
       <%= submit_tag 'Search', class: "button", id: "search-button" %>
     <% end %>
-    <p>Or <%= link_to "browse activities and businesses", browse_sector_index_path, {"id" => 'browse-sectors'} %>.</p>
   </div>
+
+  <div class="something-generic browse-container">
+    <p class="or-browse">Or <%= link_to "browse activities and businesses", browse_sector_index_path, {"id" => 'browse-sectors'} %>.</p>
+  </div>
+
   <div class="business-sector-picked picked-items" aria-live="polite">
     <h3>Your chosen sectors</h3>
     <p class="<% if @picked_sectors.empty? %>hint<% else %>hidden<% end %>">Your chosen sectors will appear here</p>
@@ -36,7 +41,9 @@
       <% end %>
     </ul>
     <% unless @picked_sectors.empty? %>
-      <%= link_to 'Next step', activities_path(sectors: params[:sectors]), class: 'button medium', id: "next-step"  %>
+      <div class="button-container">
+        <%= link_to 'Next step', activities_path(sectors: params[:sectors]), class: 'button medium', id: "next-step"  %>
+      </div>
     <% end %>
   </div>
 <% end %>

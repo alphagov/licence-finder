@@ -7,7 +7,22 @@
  plusplus: true
 */
 $(function() {
-    var pageName = window.location.pathname.split("/").pop();
+
+    // $('el:bottom-offscreen') will return true if the element's
+    // bottom box border is off the screen
+    $.expr.filters['bottom-offscreen'] = function(el) {
+        var $window = $(window),
+            $el = $(el),
+            bottomOfWindow = ($window.scrollTop() + $window.height()),
+            elBottom = $el.offset().top + $el.height();
+        return (elBottom > bottomOfWindow);
+    };
+
+
+
+
+    var pageName = window.location.pathname.split("/").pop(),
+        browseUrl;
 
     function extractIds() {
         return $.makeArray(
@@ -96,7 +111,7 @@ $(function() {
         if (event.data.target === ".picked-items") {
             $(".hint", target).removeClass("hint").addClass("hidden");
             if ($("#next-step").length === 0) {
-                target.append('<a class="button medium" id="next-step">Next step</a>');
+                target.append('<div class="button-container"><a class="button medium" id="next-step">Next step</a></div>');
             }
         } else if (source.find("li").length === 0) {
             $(".hidden", source).removeClass("hidden").addClass("hint");
@@ -111,7 +126,7 @@ $(function() {
     }
 
     // event handler to add a list item to the picked list.
-    $(".search-container").on("click", "li[data-public-id] a.add", {
+    $(".search-container, .browse-container").on("click", "li[data-public-id] a.add", {
         linkText: "Remove",
         target: ".picked-items",
         sortTarget: true
@@ -128,18 +143,20 @@ $(function() {
     function collapseOpenList(el) {
         var publicId = el.data('public-id'),
             url = el.attr('href');
-        if (el.is('strong')) {
+        if (el.is('li.open>a')) {
             url = el.data('old-url');
             el.siblings('ul').remove();
             var a = $('<a href="'+url+'" data-public-id="'+publicId+'">'+el.text()+'</a>');
             el.replaceWith(a);
+
+            a.parent().removeClass('open');
         }
     }
     function cleanOpenLists(el) {
         // removes all non-related "open" lists
         var parentLists = el.parentsUntil('#sector-navigation', 'ul');
         if (parentLists.length > 0) {
-            $('#sector-navigation strong').each(function() {
+            $('#sector-navigation li.open>a').each(function() {
                 var parents = $(this).closest('ul');
                 if (parents.length > 0) {
                     if (!$.inArray(parents[0], parentLists)) {
@@ -149,14 +166,14 @@ $(function() {
             });
         }
         else {
-            $('#sector-navigation strong').each(function() {
+            $('#sector-navigation li.open>a').each(function() {
                 collapseOpenList($(this));
             });
         }
     }
 
     function initSectorBrowsing() {
-        $('#sector-navigation').on('click', 'li>a:not(.add)', function(e) {
+        $('#sector-navigation').on('click', 'li:not(.open)>a:not(.add)', function(e) {
             e.preventDefault();
             var $a = $(this),
                 url = $a.attr('href') + '.json',
@@ -172,7 +189,7 @@ $(function() {
 
                         var children = data.sectors,
                             name = $a.text(),
-                            $strong = $('<strong data-public-id="' + publicId + '" data-old-url="' + $a.attr('href')+'">' + name + '</strong>'),
+                            $openA = $('<a data-public-id="' + publicId + '" data-old-url="' + $a.attr('href')+'">' + name + '</a>'),
                             ul = $('<ul />');
                         for (i=0, l=children.length; i<l; i++) {
                             var leaf = children[i],
@@ -188,8 +205,35 @@ $(function() {
                             ul.append('<li data-public-id="' + leaf['public-id'] + '">' + elString + '</li>');
                         }
 
-                        $a.replaceWith($strong);
-                        ul.insertAfter($strong);
+                        // insert correct parent URL on open links
+                        var $parentLink = $a.closest('ul'),
+                            parentUrl = browseUrl;
+
+                        if ($parentLink.first()) {
+                            var parentLink = $parentLink.first().siblings('a').first();
+                            if (parentLink.length > 0) {
+                                parentUrl = $(parentLink[0]).attr('data-old-url');
+                            }
+                        }
+
+                        $a.parent().addClass('open');
+                        $openA.attr('href', parentUrl);
+
+                        $a.replaceWith($openA);
+                        ul.insertAfter($openA);
+
+                        $openA.on('click', function(e) {
+                            e.preventDefault();
+                            collapseOpenList($(this));
+                        });
+
+                        // scroll to top of page, taking top bar and a
+                        // few extra pixels into account
+                        if ($openA.siblings('ul:first').is(':bottom-offscreen')) {
+                            $('html, body').animate({
+                                scrollTop: $openA.offset().top - $('#global-header').height() - 15
+                            }, 500);
+                        }
                     }
                 }
             });
@@ -205,12 +249,14 @@ $(function() {
         var $a = $(this),
             url = $a.attr('href') + '.json';
 
+        browseUrl = $a.attr('href');
+
         $.ajax(url, {
             dataType: 'json',
             cache: false,
             success: function(data) {
                 if (typeof data.sectors !== 'undefined') {
-                    var heading = $('<h3>All activities and businesses</h3>'),
+                    var heading = $('<h3>All activities and businesses:</h3>'),
                         sectorList = $('<ul id="sector-navigation"></ul>'),
                         i, l;
                     for (i=0, l=data.sectors.length; i<l; i++) {

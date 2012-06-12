@@ -1,3 +1,16 @@
+/*ul {
+  margin: 0;
+  padding: 0;
+}*/
+
+.hint {
+  margin-top: 0.5em;
+}
+
+.button.medium {
+  padding: 0.25em 0.5em;
+}
+
 /*
   landing page
   */
@@ -9,6 +22,22 @@
 .start a {
   font-size: 1.5em;
   margin: 0.5em 0 0 0;
+}
+
+article .intro {
+  padding: 1em 2em 2em 2em;
+}
+
+/*
+  header and main content styles
+  */
+
+header.page-header hgroup {
+  margin: 0;
+}
+
+.start-page header.page-header hgroup {
+  margin-right: 15em;
 }
 
 /*
@@ -67,33 +96,26 @@
   border-bottom: none;
 }
 
-.done-questions .question-number {
+/*.done-questions .question-number {
   font-weight: normal;
-}
+}*/
 
 li.done h3 {
-  display: inline;
   font-size: 1em;
-  margin: 0.5em 0.5em 0 0;
-}
-.lte-ie8 li.done h3 {
-  line-height: 1.5em;
-  position: relative;
+  margin-bottom: 1em;
 }
 
 li.done .answer {
   background-color: #4f6f5e;
   color: #fff;
-  display: inline;
-  padding: 0.1em 0.3em;
-  margin-right: 0.5em;
 }
 
 li.done .undo {
-  display: inline;
-  float: right;
   font-size: 0.85em;
-  margin: -2em 0 0 0.5em;
+  margin: 0;
+  position: absolute;
+  top: 1em;
+  right: 2em;
 }
 .lte-ie8 li.done .undo {
   margin: 0;
@@ -118,7 +140,6 @@ li.done:hover .undo a {
 
 .step.current {
   background-color: #fff;
-  margin-right: 15em;
   padding: 0 2em 1em 5em;
   position: relative;
 }
@@ -131,27 +152,25 @@ li.done:hover .undo a {
 
 .current-question h2 {
   border: none;
-  margin-bottom: 0.5em;
-  margin-left:-0.4em;
+  font-size: 1em;
+  margin-bottom: 0.75em;
   position: relative;
-}
-.lte-ie8 .current-question h2 {
-  line-height: 1.2em;
 }
 
 .question-number {
   display: inline-block;
-  margin-left: -1.5em;
-  width: 1.5em;
+  /*font-weight: normal;*/
+  margin-left: -2em;
+  width: 2em;
 }
 .lte-ie8 .question-number {
   display: block;
   position: absolute;
 }
 
-.done .question-number {
+/*.done .question-number {
   margin-left: -1.7em;
-}
+}*/
 
 .current-question ul ul {
   margin: 0;
@@ -200,38 +219,6 @@ li.done:hover .undo a {
   min-height: 0;
 }
 
-.next-steps {
-  right: -15em;
-  top: 2em;
-}
-
-.next-steps .inner {
-  padding-top: 0;
-  padding-bottom: 1em;
-}
-
-.next-steps .inner ul {
-  padding: 0 0 0 1.5em;
-}
-
-#wrapper .related.next-steps .inner p,
-#wrapper .related.next-steps .inner li {
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 100%;
-}
-
-.next-steps .inner li {
-  list-style-type: disc;
-  margin: 0.5em 0;
-}
-
-#wrapper .next-steps.related .inner li a {
-  margin: 0;
-  padding: 0;
-  display: inline;
-  font-size: 100%;
-}
-
 .meta-data {
   background: #fff;
   float: none;
@@ -264,54 +251,36 @@ li.done:hover .undo a {
   color:#B01117;
 }
 
-/*
-  calculators
-  */
-
-.calculator article {
-  min-height: 0;
-}
-
-@media only screen and (max-width:670px) {
-  .step.current,
-  .meta-data{
-    margin:0;
-  }
-}
-
 li.done .answer {
   background-color: transparent;
   display: inline-block;
   width: 60%;
 }
 
-li.done .answer ul {
-  display: inline;
-  padding: 0;
+li.done .answer ul,
+.search-picker ul,
+.picked-items ul {
+  margin: 0 0 0 -2.4em;
+  padding-left: 2.1em;
+}
+
+.picked-items ul li,
+.search-picker ul li {
+  padding-left: 0.3em;
+  margin-bottom: 0.25em;
+  /*list-style-type: circle;*/
+  /*list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);*/
+  list-style-type: none;
+}
+
+li.done .answer ul li,
+.picked-items ul li {
+  color: #305642;
 }
 
 li.done .answer ul li {
-  margin-bottom: 0.25em;
-  padding: 0 0.25em;
-  color: #305642;
-  margin-left: -6px;
-  list-style-type: circle;
-  list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);
-}
-
-li.done .answer ul li:first-child {
-  margin-top: 0.8rem;
-}
-
-li.done .answer ul li:last-child {
-  margin-bottom: 10px;
-}
-
-li.done h3 {
-  display: block;
   margin-bottom: 0.5em;
 }
-
 
 .upcoming-questions ol {
   margin: 0;
@@ -336,38 +305,65 @@ li.done h3 {
   border-bottom: none;
 }
 
-.upcoming-questions .question-number {
-  font-weight: normal;
-}
 li.upcoming h3 {
   display: inline;
   font-size: 1em;
   margin: 0 0.5em 0 0;
 }
 
-.business-sector-results, .business-activity-results, .search-container {
+.something-generic {
+  clear: left;
   float: left;
-  margin-right: 5%;
-  width: 50%;
+  width: 45%;
 }
 
-.business-sector-picked, .business-activity-picked {
-  background-color: #96c6e2;
-  background-color: #CCE0D5;
-  float: right;
-  padding: 0.4em 5%;
-  padding-bottom: 1.3em;
-  width: 30%;
-  margin-top:0.3em;
+.browse-container {
+  margin-top: 0.5em;
 }
-.business-activity-picked h3, .business-sector-picked h3 {
+
+.browse-container .or-browse {
+  margin: 0;
+}
+
+.picked-items {
+  background-color: #CCE0D5;
+  /*float: right;*/
+  margin-left: 55%;
+  padding: 0.5em 3.5% 1.5em 3.5%;
+  width: 38%;
+}
+
+.picked-items h3 {
   font-size:1em;
 }
 
-.business-sector-picked ul li, .business-activity-picked ul li {
-  color: #305642;
-  list-style-type: circle;
-  list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);
+.picked-items ul {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.picked-items ul li {
+  overflow: hidden;
+  padding-right: 0.25em;
+}
+
+.picked-items ul li:nth-child(even) {
+  background-color: #d5ecea;
+}
+
+.picked-items ul li span {
+  display: inline-block;
+  width: 75%;
+}
+
+.picked-items ul li a {
+  float: right;
+  padding-left: 0.25em;
+}
+
+.picked-items .button-container {
+  margin-top: 1.5em;
+  text-align: right;
 }
 
 .search-picker {
@@ -375,21 +371,92 @@ li.upcoming h3 {
 }
 
 .search-picker li {
-  padding: 0 0.25em;
-  margin-left: -8px;
-  list-style-type: circle;
-  list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);
+  /*list-style-type: circle;*/
+  /*list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);*/
+  list-style-type: none;
+  margin-bottom: 0.25em;
+  padding-right: 0.25em;
+}
+
+.search-picker li:nth-child(even),
+#sector-navigation ul ul li:nth-child(even) {
+  background-color: #f8f7ee;
+}
+
+.search-picker ul li span {
+  display: inline-block;
+  width: 85%;
 }
 
 .search-container .button {
-  margin-left: 5px;
+  margin-left: 0.5em;
 }
 
-.search-picker li:first-child {
-  margin-top: 2.3em;
+.search-results {
+  margin-bottom: 2em;
 }
 
-.intro ul {
-  margin-left:0em;
-  padding-left:0.9em;
+.search-results ul li {
+  overflow: hidden;
+}
+
+.browse-container h3 {
+  font-size: 1em;
+  font-weight: normal;
+  margin-top: 0.25em;
+}
+
+/* sector navigation widget */
+#sector-navigation,
+#sector-navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  zoom: 1;
+}
+
+#sector-navigation li {
+  display: block;
+  margin: 0.25em 0;
+  overflow: hidden;
+  clear: both; /* clear under floated "add" links */
+}
+
+/*#sector-navigation a,
+#sector-navigation span {
+  display: block;
+  margin: 0.25em 0;
+}*/
+
+/*#sector-navigation span {
+  display: inline-block;
+}*/
+
+a.add {
+  float: right;
+  padding-left: 0.25em;
+}
+
+#sector-navigation li.open ul {
+  padding-left: 1em;
+}
+
+#sector-navigation li a {
+  background-image: url(<%= asset_path "expand-collapse-arrow.png" %>);
+  background-position: 0 5px;
+  background-repeat: no-repeat;
+  padding-left: 1em;
+}
+
+#sector-navigation li.open > a {
+  background-position: 0 -86px;
+}
+
+#sector-navigation li a.add {
+  background-image: none;
+}
+
+#sector-navigation ul ul li {
+  padding: 0 0.25em;
 }

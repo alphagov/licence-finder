@@ -82,4 +82,15 @@ describe "Sector browse page" do
     page.should_not have_content @s3.name
   end
 
+  specify "clicking on an open sector closes its children", :js => true do
+    visit "/#{APP_SLUG}/browse-sectors"
+
+    click_on @s1.name
+    click_on @s2.name
+    page.should have_content @s3.name
+
+    click_on @s2.name
+    page.should_not have_content @s3.name
+  end
+
 end

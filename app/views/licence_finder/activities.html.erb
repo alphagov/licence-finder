@@ -1,8 +1,8 @@
 <%= render :partial => 'completed_questions' %>
 <%= current_question do %>
-  <div class="search-container">
+  <div class="something-generic search-container">
     <div class="business-activity-results search-picker">
-      <p class="hint">Add all the categories that apply to you</p>
+      <p class="hint">Add all the categories that apply to you:</p>
       <% if (@activities - @picked_activities).empty? %>
         <p>No activities</p>
       <% else %>
@@ -29,7 +29,9 @@
       <% end %>
     </ul>
     <% unless @picked_activities.empty? %>
-      <%= link_to 'Next step', business_location_path(sectors: params[:sectors], activities: params[:activities]), class: 'button medium', id: "next-step"  %>
+      <div class="button-container">
+        <%= link_to 'Next step', business_location_path(sectors: params[:sectors], activities: params[:activities]), class: 'button medium', id: "next-step"  %>
+      </div>
     <% end %>
   </div>
 <% end %>

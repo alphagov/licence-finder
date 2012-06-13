@@ -4,9 +4,9 @@ class LicenceFacade
   extend GdsApi::Helpers
 
   def self.create_for_licences(licences)
-    publisher_data = publisher_api.licences_for_ids(licences.map(&:public_id))
+    publisher_data = publisher_api.licences_for_ids(licences.map(&:correlation_id))
     licences.map do |l|
-      new(l, publisher_data.find {|d| l.public_id.to_s == d.licence_identifier })
+      new(l, publisher_data.find {|d| l.correlation_id.to_s == d.licence_identifier })
     end
   end
 

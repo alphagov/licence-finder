@@ -19,14 +19,6 @@ describe Licence do
       @licence = FactoryGirl.build(:licence)
     end
 
-    it "should have a database level uniqueness constraint on public_id" do
-      FactoryGirl.create(:licence, :public_id => 42)
-      @licence.public_id = 42
-      lambda do
-        @licence.safely.save
-      end.should raise_error(Mongo::OperationFailure)
-    end
-
     it "should have a database level uniqueness constraint on correlation_id" do
       FactoryGirl.create(:licence, :correlation_id => 42)
       @licence.correlation_id = 42
@@ -43,22 +35,6 @@ describe Licence do
     it "should require a regulation_area" do
       @licence.regulation_area = ''
       @licence.should_not be_valid
-    end
-  end
-
-  describe "find_by_public_id" do
-    before :each do
-      @licence = FactoryGirl.create(:licence)
-    end
-
-    it "should be able to retrieve by public_id" do
-      found_licence = Licence.find_by_public_id(@licence.public_id)
-      found_licence.should == @licence
-    end
-
-    it "should fail to retrieve a non-existent public_id" do
-      found_licence = Licence.find_by_public_id(@licence.public_id + 1)
-      found_licence.should == nil
     end
   end
 
@@ -116,18 +92,4 @@ describe Licence do
     end
   end
 
-  describe "auto incrementing public_id" do
-    it "should set the public_id to the next free public_id on save" do
-      licence = FactoryGirl.build(:licence)
-      licence.public_id.should == nil
-      licence.save!
-      licence.public_id.should == 1
-
-      licence = FactoryGirl.build(:licence)
-      licence.public_id.should == nil
-      licence.save!
-      licence.public_id.should == 2
-    end
-
-  end
 end

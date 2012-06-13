@@ -1,8 +1,5 @@
-require "public_id"
-
 class Licence
   include Mongoid::Document
-  include PublicId
   field :correlation_id, :type => Integer
   index :correlation_id, :unique => true
   field :name, :type => String

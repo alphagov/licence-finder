@@ -7,10 +7,7 @@
         <p class="hint">Add all the sectors that apply to you:</p>
         <ul>
           <% (@sectors - @picked_sectors).each do |sector| %>
-            <li data-public-id="<%= sector.public_id %>">
-              <span class="sector-name"><%= sector.name %></span>
-              <%= link_to_add sector %>
-            </li>
+            <%= link_to_add sector %>
           <% end %>
         </ul>
       </div>
@@ -34,10 +31,7 @@
     <p class="<% if @picked_sectors.empty? %>hint<% else %>hidden<% end %>">Your chosen sectors will appear here</p>
     <ul id="picked-business-sectors">
       <% @picked_sectors.each do |sector| %>
-        <li data-public-id="<%= sector.public_id %>">
-          <span class="sector-name" ><%= sector.name %></span>
-          <%= link_to_remove sector %>
-        </li>
+        <%= link_to_remove sector %>
       <% end %>
     </ul>
     <% unless @picked_sectors.empty? %>

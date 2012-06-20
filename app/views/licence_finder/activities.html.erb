@@ -8,10 +8,7 @@
       <% else %>
         <ul>
           <% (@activities - @picked_activities).each do |activity| %>
-            <li data-public-id="<%= activity.public_id %>">
-              <span class="activity-name"><%= activity.name %></span>
-              <%= link_to_add activity %>
-            </li>
+            <%= link_to_add activity %>
           <% end %>
         </ul>
       <% end %>
@@ -22,10 +19,7 @@
     <p class="<% if @picked_activities.empty? %>hint<% else %>hidden<% end %>">Your chosen categories will appear here</p>
     <ul id="picked-business-activities">
       <% @picked_activities.each do |activity| %>
-        <li data-public-id="<%= activity.public_id %>">
-          <span class="activity-name"><%= activity.name %></span>
-          <%= link_to_remove activity %>
-        </li>
+        <%= link_to_remove activity %>
       <% end %>
     </ul>
     <% unless @picked_activities.empty? %>

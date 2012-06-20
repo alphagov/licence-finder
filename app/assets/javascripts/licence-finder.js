@@ -18,9 +18,6 @@ $(function() {
         return (elBottom > bottomOfWindow);
     };
 
-
-
-
     var pageName = window.location.pathname.split("/").pop(),
         browseUrl;
 
@@ -81,7 +78,7 @@ $(function() {
     function swapper(event) {
         event.preventDefault();
         var oldli = $(this).parent(), // the list item that is being moved
-            newli = $('<li data-public-id="' + oldli.data("public-id") + '"></li>'), // the target list item
+            newli = $('<li id="'+oldli.attr('id')+'" data-public-id="' + oldli.data("public-id") + '"></li>'), // the target list item
             source = $(event.delegateTarget), // container for list that item is coming from
             target = $(event.data.target), // container for list that item is going to
             targetList = $("ul", target);
@@ -91,8 +88,9 @@ $(function() {
              .append($('<a href="">' + event.data.linkText + '</a>'));
         targetList.append(newli);
         $('li', targetList).each(function() {
-            $('a', this).attr(
-                'href',createAddRemoveUrl($(this).data('public-id')));
+            $('a', this)
+                .attr('href', createAddRemoveUrl($(this).data('public-id')))
+                .attr('aria-labelledby', newli.attr('id'));
         });
         oldli.remove();
 
@@ -199,10 +197,10 @@ $(function() {
                                 elString = '<a data-public-id="' + leaf['public-id'] + '" href="' + leaf.url + '">' + leaf.name + '</a>';
                             }
                             else {
-                                elString = '<span class="sector-name">' + leaf.name + '</span> <a href="' + createAddRemoveUrl(leaf['public-id']) + '" class="add">Add</a>';
+                                elString = '<span class="sector-name">' + leaf.name + '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" class="add">Add</a>';
                             }
 
-                            ul.append('<li data-public-id="' + leaf['public-id'] + '">' + elString + '</li>');
+                            ul.append('<li id="sector-'+leaf['public-id']+'" data-public-id="' + leaf['public-id'] + '">' + elString + '</li>');
                         }
 
                         // insert correct parent URL on open links

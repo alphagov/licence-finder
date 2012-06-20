@@ -3,6 +3,8 @@ require 'ostruct'
 namespace :panopticon do
   desc "Register application metadata with panopticon"
   task :register => :environment do
+    # TODO: remove when ready to go live
+    return if ENV['FACTER_govuk_platform'] == "production"
     require 'gds_api/panopticon'
     logger = GdsApi::Base.logger = Logger.new(STDERR).tap { |l| l.level = Logger::INFO }
     logger.info "Registering with panopticon..."

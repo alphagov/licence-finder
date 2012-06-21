@@ -35,7 +35,7 @@ describe "Business location page" do
     within_section 'current question' do
       page.should have_content('Where will your activity or business be located?')
 
-      page.all(:xpath, '//select[@id="location"]//option/@value').map(&:text).should == [
+      page.all(:xpath, '//select[@id="select-location"]//option/@value').map(&:text).should == [
         '',
         'england',
         'scotland',
@@ -46,9 +46,9 @@ describe "Business location page" do
 
     page.should_not have_selector(*selector_of_section('upcoming questions'))
 
-    select('England', from: 'location')
+    select('England', from: 'select-location')
 
-    click_on 'Next step'
+    click_on 'Find licences'
 
     i_should_be_on "/#{APP_SLUG}/licences", ignore_query: true
   end

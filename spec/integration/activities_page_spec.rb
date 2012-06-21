@@ -37,7 +37,7 @@ describe "Activity selection page" do
       end
       within '.business-activity-picked' do
         # none are selected yet
-        page.should have_content("Your chosen categories will appear here")
+        page.should have_content("Your chosen activities will appear here")
       end
     end
 
@@ -58,7 +58,6 @@ describe "Activity selection page" do
         i_should_see_add_links_in_order ["Gooey Activity", "Transmogrifying"]
       end
       within '.business-activity-picked' do
-        page.should_not have_content("Your chosen activities will appear here")
         i_should_see_remove_links_in_order ["Fooey Activity", "Kabloom"]
       end
     end

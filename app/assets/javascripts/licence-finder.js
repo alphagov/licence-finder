@@ -88,9 +88,12 @@ $(function() {
              .append($('<a href="">' + event.data.linkText + '</a>'));
         targetList.append(newli);
         $('li', targetList).each(function() {
-            $('a', this)
-                .attr('href', createAddRemoveUrl($(this).data('public-id')))
+            var $link = $('a', this);
+            $link.attr('href', createAddRemoveUrl($(this).data('public-id')))
                 .attr('aria-labelledby', newli.attr('id'));
+            if ($(this).is('.search-picker li') && !$link.hasClass('add')) {
+                $link.addClass('add');
+            }
         });
         oldli.remove();
 

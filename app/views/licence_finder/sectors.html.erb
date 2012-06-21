@@ -1,7 +1,7 @@
 <% content_for :page_title, "Choose your activities and business sectors | Licence Finder" %>
 
 <%= current_question do %>
-  <div class="something-generic search-container">
+  <div class="search-container">
     <% if !@sectors.empty? %>
       <div class="search-results search-picker">
         <p class="hint">Add all the sectors that apply to you:</p>
@@ -22,7 +22,7 @@
     <% end %>
   </div>
 
-  <div class="something-generic browse-container">
+  <div class="browse-container">
     <p class="or-browse">Or <%= link_to "browse activities and businesses", browse_sector_index_path, {"id" => 'browse-sectors'} %>.</p>
   </div>
 

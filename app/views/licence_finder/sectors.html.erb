@@ -1,7 +1,7 @@
 <% content_for :page_title, "Choose your activities and business sectors | Licence Finder" %>
 
 <%= current_question do %>
-  <div class="search-container">
+  <div class="search-container" role="search">
     <%= form_tag sectors_path, method: :get do %>
       <%= hidden_field_tag "sectors", params[:sectors], id: "hidden-sectors" %>
       <label class="visuallyhidden" for="search-sectors">Search for sectors</label>
@@ -11,7 +11,7 @@
 
     <% if !@sectors.empty? %>
       <div class="search-results search-picker">
-        <h3>Search results for "<%= params[:q] %>"</h3>
+        <h3 class="visuallyhidden">Search results for "<%= params[:q] %>"</h3>
         <p class="hint">Add all the sectors that apply to you:</p>
         <ul>
           <% (@sectors - @picked_sectors).each do |sector| %>

@@ -1,13 +1,26 @@
 require 'gds_api/helpers'
+require 'gds_api/exceptions'
 
 class LicenceFacade
   extend GdsApi::Helpers
 
   def self.create_for_licences(licences)
-    publisher_data = publisher_api.licences_for_ids(licences.map(&:correlation_id))
+    publisher_data = get_publisher_data(licences)
     licences.map do |l|
       new(l, publisher_data.find {|d| l.correlation_id.to_s == d.licence_identifier })
     end
+  end
+
+  def self.get_publisher_data(licences)
+    data = publisher_api.licences_for_ids(licences.map(&:correlation_id))
+    if data.nil?
+      data = []
+      Rails.logger.warn "Error fetching licence details from publisher"
+    end
+    data
+  rescue GdsApi::TimedOutException
+    Rails.logger.warn "Timeout fetching licence details from publisher"
+    []
   end
 
   attr_reader :licence, :publisher_data

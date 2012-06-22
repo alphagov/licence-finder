@@ -29,6 +29,44 @@ describe LicenceFacade do
       result[1].licence.should == @l2
       result[1].publisher_data.should == pub_data2
     end
+
+    context "when publisher api returns nil" do
+      before :each do
+        GdsApi::Publisher.any_instance.stubs(:licences_for_ids).returns(nil)
+      end
+
+      it "should continue with no publisher data" do
+        result = LicenceFacade.create_for_licences([@l1, @l2])
+        result[0].licence.should == @l1
+        result[0].publisher_data.should == nil
+        result[1].licence.should == @l2
+        result[1].publisher_data.should == nil
+      end
+
+      it "should log the error" do
+        Rails.logger.expects(:warn).with("Error fetching licence details from publisher")
+        LicenceFacade.create_for_licences([@l1, @l2])
+      end
+    end
+
+    context "when publisher times out" do
+      before :each do
+        GdsApi::Publisher.any_instance.stubs(:licences_for_ids).raises(GdsApi::TimedOutException)
+      end
+
+      it "should continue with no publisher data" do
+        result = LicenceFacade.create_for_licences([@l1, @l2])
+        result[0].licence.should == @l1
+        result[0].publisher_data.should == nil
+        result[1].licence.should == @l2
+        result[1].publisher_data.should == nil
+      end
+
+      it "should log the error" do
+        Rails.logger.expects(:warn).with("Timeout fetching licence details from publisher")
+        LicenceFacade.create_for_licences([@l1, @l2])
+      end
+    end
   end
 
   describe "attribute accessors" do

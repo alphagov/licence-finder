@@ -1,6 +1,11 @@
 /* see multi-step.css.erb in the static repo for most of these styles */
 
 /* there are nested lists in our complete steps */
+li.done .answer {
+  display: block;
+  margin-bottom: 1em;
+}
+
 li.done .answer ul,
 .search-picker ul,
 .picked-items ul {
@@ -127,4 +132,8 @@ a.add {
 
 #sector-navigation ul ul li {
   padding: 0 0.25em;
+}
+
+.search-container .button {
+  margin-left: 0.5em;
 }

@@ -80,6 +80,30 @@ describe "Licences page" do
       end
     end
 
+    specify "handle lack of links gracefully" do
+      publisher_has_licence :licence_identifier => @l1.correlation_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
+            :licence_short_description => "Short description of licence"
+
+      visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
+
+      within_section "results" do
+        page.should have_content "Further information may not yet be available for some licences"
+      end
+    end
+
+    specify "don't show graceful text if we have many links" do
+      publisher_has_licence :licence_identifier => @l1.correlation_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
+            :licence_short_description => "Short description of licence"
+      publisher_has_licence :licence_identifier => @l2.correlation_id.to_s, :slug => 'licence-two', :title => 'Licence 2',
+            :licence_short_description => "Short description of licence 2"
+
+      visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
+
+      within_section "results" do
+        page.should_not have_content "Further information may not yet be available for some licences"
+      end
+    end
+
     specify "gracefully handling publisher errors" do
       WebMock.stub_request(:get, %r[\A#{GdsApi::TestHelpers::Publisher::PUBLISHER_ENDPOINT}/licences]).
         to_return(:status => [500, "Internal Server Error"])

@@ -12,6 +12,7 @@ class LicenceFacade
   end
 
   def self.get_publisher_data(licences)
+    return [] if licences.empty?
     data = publisher_api.licences_for_ids(licences.map(&:correlation_id))
     if data.nil?
       data = []

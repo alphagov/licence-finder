@@ -4,7 +4,14 @@
   <article class="results">
     <div class="inner group">
       <% if @licences.empty? %>
-        <p>No licences found that match your search.</p>
+        <p>
+          No licences were found that match your search.
+        </p>
+        <p class="get-started">
+          <%= link_to sectors_path, :class => "big button" do %>
+            Start again <span class="indicator"></span>
+          <% end %>
+        </p>
       <% else %>
         <h2>Licences you may need to apply for:</h2>
         <% if ! @licences.all? { |licence| licence.published? } %>

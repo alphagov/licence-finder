@@ -1,262 +1,6 @@
-/*ul {
-  margin: 0;
-  padding: 0;
-}*/
+/* see multi-step.css.erb in the static repo for most of these styles */
 
-.hint {
-  margin-top: 0.5em;
-}
-
-.button.medium {
-  padding: 0.25em 0.5em;
-}
-
-/*
-  landing page
-  */
-
-.start {
-  display: inline-block;
-}
-
-.start a {
-  font-size: 1.5em;
-  margin: 0.5em 0 0 0;
-}
-
-article .intro {
-  padding: 1em 2em 2em 2em;
-}
-
-/*
-  header and main content styles
-  */
-
-header.page-header hgroup {
-  margin: 0;
-}
-
-.start-page header.page-header hgroup {
-  margin-right: 15em;
-}
-
-/*
-  questions
-  */
-
-.hint {
-  color: #666;
-  display: block;
-}
-
-.done-questions {
-  position: relative;
-}
-
-.start-again {
-  background: #fff;
-  position: absolute;
-  right: 0;
-  top: -2.5em;
-  height: 2.5em;
-  width: 11em;
-}
-
-.start-again a {
-  display: block;
-  line-height: 2.5em;
-  text-align: center;
-  text-decoration: none;
-}
-
-.start-again a:hover {
-  text-decoration: underline;
-}
-
-.done-questions ol {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.done-questions ol > li {
-  list-style: none;
-  position: relative;
-  padding: 0.5em 1.5em 0.5em 5em;
-}
-
-.done-questions ol > li.done {
-  background: #CCE0D5;
-  border-bottom: solid 1px #A1D1AE;
-  overflow: hidden;
-}
-
-.done-questions ol > li.done:last-child {
-  border-bottom: none;
-}
-
-/*.done-questions .question-number {
-  font-weight: normal;
-}*/
-
-li.done h3 {
-  font-size: 1em;
-  margin-bottom: 1em;
-}
-
-li.done .answer {
-  background-color: #4f6f5e;
-  color: #fff;
-}
-
-li.done .undo {
-  font-size: 0.85em;
-  margin: 0;
-  position: absolute;
-  top: 1em;
-  right: 2em;
-}
-.lte-ie8 li.done .undo {
-  margin: 0;
-  *position: absolute;
-  *bottom: 0.75em;
-  *right: 1em;
-}
-
-li.done .undo a {
-  color: #333;
-  display: block;
-  text-decoration: none;
-}
-.lte-ie8 li.done .undo a {
-  *color: #333;
-}
-
-li.done:hover .undo a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-.step.current {
-  background-color: #fff;
-  padding: 0 2em 1em 5em;
-  position: relative;
-}
-
-.current-question {
-  border-top: solid 1px #C9D0D0;
-  margin-top: -1px;
-  padding: 1.5em 0 1.25em 0;
-}
-
-.current-question h2 {
-  border: none;
-  font-size: 1em;
-  margin-bottom: 0.75em;
-  position: relative;
-}
-
-.question-number {
-  display: inline-block;
-  /*font-weight: normal;*/
-  margin-left: -2em;
-  width: 2em;
-}
-.lte-ie8 .question-number {
-  display: block;
-  position: absolute;
-}
-
-/*.done .question-number {
-  margin-left: -1.7em;
-}*/
-
-.current-question ul ul {
-  margin: 0;
-}
-
-/* this is the multiple choice selector */
-.current-question ul.options {
-  list-style: none;
-  padding: 0;
-}
-
-.current-question ul.options li {
-  line-height: 1.5em;
-  margin: 0.5em 0;
-}
-
-.question-body + p input.button {
-  margin-top: 0.5em;
-}
-
-
-.current-question label {
-  margin-left: 0.25em;
-}
-
-.current-question select {
-  margin-right: 0.25em;
-}
-
-.next-question {
-  margin: 1.5em 0 0.5em 0;
-}
-
-/*
-  results
-  */
-
-.results .inner {
-  padding-top: 2em;
-}
-
-.results {
-  background-color: #fff;
-  float: none;
-  margin-right: 0;
-  min-height: 0;
-}
-
-.meta-data {
-  background: #fff;
-  float: none;
-  font-size: 1em;
-  margin-right: 15em;
-  padding: 0 5em 0 0;
-  width: auto;
-}
-
-.meta-data .modified-date {
-  font-size: 0.85em;
-}
-
-/*
-  errors messages
-  */
-
-.error {
-  border:1px solid #B01117;
-  background-color:#FFF3CF;
-  color:#B01117;
-  margin: 0 0 -0.5em -0.5em;
-  padding: 0.5em;
-}
-.error ul {
-  margin-bottom: 0;
-}
-.error-message {
-  margin-top: 0;
-  color:#B01117;
-}
-
-li.done .answer {
-  background-color: transparent;
-  display: inline-block;
-  width: 60%;
-}
-
+/* there are nested lists in our complete steps */
 li.done .answer ul,
 .search-picker ul,
 .picked-items ul {
@@ -264,78 +8,46 @@ li.done .answer ul,
   padding-left: 2.1em;
 }
 
-.picked-items ul li,
-.search-picker ul li {
-  padding-left: 0.3em;
-  margin-bottom: 0.25em;
-  /*list-style-type: circle;*/
-  /*list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);*/
-  list-style-type: none;
+.step.current,
+.article-container.finished {
+  margin-right: 0;
 }
 
-li.done .answer ul li,
-.picked-items ul li {
-  color: #305642;
-}
-
-li.done .answer ul li {
-  margin-bottom: 0.5em;
-}
-
-.upcoming-questions ol {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.upcoming-questions ol > li {
-  list-style: none;
-  position: relative;
-  padding: 0.5em 1.5em 0.5em 5em;
-}
-
-.upcoming-questions ol > li.upcoming {
-  background: #f0e7d7;
-  border-bottom: solid 1px #dac39c;
-  overflow: hidden;
-}
-
-.upcoming-questions ol > li.upcoming:last-child {
-  border-bottom: none;
-}
-
-li.upcoming h3 {
-  display: inline;
+.current-question h2 {
   font-size: 1em;
-  margin: 0 0.5em 0 0;
 }
 
-.browse-container,
-.search-container {
-  clear: left;
-  float: left;
-  width: 45%;
+.done {
+  position: relative;
+  padding-right: 10em; /* this is to keep the .undo away from the text inside */
 }
 
-.browse-container {
-  margin-top: 0.5em;
+li.done h3 {
+  margin-bottom: 1em;
+  display: block;
 }
 
-.browse-container .or-browse {
-  margin: 0;
+.done .undo {
+  position: absolute;
+  top: 0.5em;
+  right: 1.5em;
+}
+
+a.add {
+  float: right;
+  padding-left: 0.25em;
+}
+
+.search-picker li:nth-child(even),
+#sector-navigation ul ul li:nth-child(even) {
+  background-color: #f8f7ee;
 }
 
 .picked-items {
-  background-color: #D5ECEA;
-  /*float: right;*/
+  background-color: #d5ecea;
   margin-left: 55%;
   padding: 0.5em 3.5% 1.5em 3.5%;
   width: 38%;
-}
-
-.picked-items h3 {
-  font-size:1em;
 }
 
 .picked-items ul {
@@ -343,9 +55,12 @@ li.upcoming h3 {
   margin-bottom: 0.75em;
 }
 
-.picked-items ul li {
-  overflow: hidden;
-  padding-right: 0.25em;
+.picked-items ul li,
+.search-picker ul li {
+  padding: 0.25em 0.3em;
+  margin-bottom: 0.25em;
+  list-style-type: none;
+  overflow: hidden; /* contain floats */
 }
 
 .picked-items ul li:nth-child(even) {
@@ -367,97 +82,9 @@ li.upcoming h3 {
   text-align: right;
 }
 
-.search-picker {
-  width: auto;
-}
-
-.search-picker li {
-  /*list-style-type: circle;*/
-  /*list-style-image: url(https://djb1962t8apu5.cloudfront.net/static/bullet-disc-5px-ba51fe28267600cde9bfb058f0a4e6b6.gif);*/
-  list-style-type: none;
-  margin-bottom: 0.25em;
-  padding-right: 0.25em;
-}
-
-.search-picker li:nth-child(even),
-#sector-navigation ul ul li:nth-child(even) {
-  background-color: #f8f7ee;
-}
-
-.search-picker ul li span {
-  display: inline-block;
-  width: 85%;
-}
-
-.search-container .button {
-  margin-left: 0.5em;
-}
-
-.search-results {
-  margin-bottom: 2em;
-}
-
-.search-results ul li {
-  overflow: hidden;
-}
-
-.browse-container h3 {
-  font-size: 1em;
-  font-weight: normal;
-  margin-top: 0.25em;
-}
-
-/* sector navigation widget */
-#sector-navigation,
-#sector-navigation ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-  zoom: 1;
-}
-
-#sector-navigation li {
-  display: block;
-  margin: 0.25em 0;
-  overflow: hidden;
-  clear: both; /* clear under floated "add" links */
-}
-
-/*#sector-navigation a,
-#sector-navigation span {
-  display: block;
-  margin: 0.25em 0;
-}*/
-
-/*#sector-navigation span {
-  display: inline-block;
-}*/
-
-a.add {
-  float: right;
-  padding-left: 0.25em;
-}
-
-#sector-navigation li.open ul {
-  padding-left: 1em;
-}
-
-#sector-navigation li a {
-  background-image: url(<%= asset_path "expand-collapse-arrow.png" %>);
-  background-position: 0 5px;
-  background-repeat: no-repeat;
-  padding-left: 1em;
-}
-
-#sector-navigation li.open > a {
-  background-position: 0 -86px;
-}
-
-#sector-navigation li a.add {
-  background-image: none;
-}
-
-#sector-navigation ul ul li {
-  padding: 0 0.25em;
+.browse-container,
+.search-container {
+  clear: left;
+  float: left;
+  width: 45%;
 }

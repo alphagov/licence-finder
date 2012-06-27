@@ -33,7 +33,7 @@ module ApplicationHelper
 
   def create_add_remove_link(name, model, extra_params, &block)
     key_name = model_key_name(model)
-    new_params = params.select {|k, v| %w(sectors activities).include? k.to_s }
+    new_params = params.select {|k, v| %w(sectors activities q).include? k.to_s }
     new_params["#{key_name.pluralize}"] = extract_public_ids(new_params, key_name, model, block).join("_")
     extra_params["aria-labelledby"] = "#{key_name}-#{model.public_id}"
     link_to(name, url_for(new_params.merge(:action => key_name.pluralize)), extra_params)

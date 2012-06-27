@@ -6,7 +6,12 @@
       <% if @licences.empty? %>
         <p>No licences found that match your search.</p>
       <% else %>
-        <h2>Licences you need to apply for:</h2>
+        <h2>Licences you may need to apply for:</h2>
+        <% if ! @licences.all? { |licence| licence.published? } %>
+          <p class="hint">
+            Further information may not yet be available for some licences.
+          </p>
+        <% end %>
         <ul>
           <% @licences.each do |licence| %>
             <li>
@@ -19,6 +24,7 @@
             </li>
           <% end %>
         </ul>
+
       <% end %>
     </div>
   </article>

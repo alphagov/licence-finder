@@ -29,8 +29,8 @@ describe "Licences page" do
     within_section 'completed questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
         'What is your activity or business?',
-        'What does your activity or business involve?',
-        'Where will your activity or business be located?',
+        'What would you like to do?',
+        'Where will you be located?',
       ]
     end
     within_section 'completed question 1' do

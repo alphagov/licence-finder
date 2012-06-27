@@ -3,8 +3,8 @@ require 'spec_helper'
 describe LicenceFinderController do
   before :each do
     @question1 = 'What is your activity or business?'
-    @question2 = 'What does your activity or business involve?'
-    @question3 = 'Where will your activity or business be located?'
+    @question2 = 'What would you like to do?'
+    @question3 = 'Where will you be located?'
   end
 
   describe "GET 'start'" do

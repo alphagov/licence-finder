@@ -30,14 +30,14 @@ describe "Sector selection page" do
 
       within '.business-sector-picked' do
         # none are selected yet
-        page.should have_content("Your chosen sectors will appear here")
+        page.should have_content("Your chosen areas will appear here")
       end
     end
 
     within_section 'upcoming questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
-        'What does your activity or business involve?',
-        'Where will your activity or business be located?',
+        'What would you like to do?',
+        'Where will you be located?'
       ]
     end
   end

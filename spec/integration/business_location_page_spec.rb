@@ -16,7 +16,7 @@ describe "Business location page" do
     within_section 'completed questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
         'What is your activity or business?',
-        'What does your activity or business involve?',
+        'What would you like to do?',
       ]
     end
     within_section 'completed question 1' do
@@ -33,7 +33,7 @@ describe "Business location page" do
     end
 
     within_section 'current question' do
-      page.should have_content('Where will your activity or business be located?')
+      page.should have_content('Where will you be located?')
 
       page.all(:xpath, '//select[@id="select-location"]//option/@value').map(&:text).should == [
         '',

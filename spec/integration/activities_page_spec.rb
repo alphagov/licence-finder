@@ -30,7 +30,7 @@ describe "Activity selection page" do
     end
 
     within_section 'current question' do
-      page.should have_content('What does your activity or business involve?')
+      page.should have_content('What would you like to do?')
 
       within '.business-activity-results' do
         i_should_see_add_links_in_order ["Fooey Activity", "Gooey Activity", "Kabloom", "Transmogrifying"]
@@ -43,7 +43,7 @@ describe "Activity selection page" do
 
     within_section 'upcoming questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
-        'Where will your activity or business be located?',
+        'Where will you be located?',
       ]
     end
 

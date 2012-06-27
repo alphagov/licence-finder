@@ -5,8 +5,8 @@ class LicenceFinderController < ApplicationController
   SEPARATOR = '_'
   QUESTIONS = [
     'What is your activity or business?',
-    'What does your activity or business involve?',
-    'Where will your activity or business be located?',
+    'What would you like to do?',
+    'Where will you be located?',
   ]
   ACTIONS = %w(sectors activities business_location)
 

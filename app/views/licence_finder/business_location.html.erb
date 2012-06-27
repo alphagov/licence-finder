@@ -5,7 +5,7 @@
     <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
     <%= hidden_field_tag(:activities, @activities.map(&:public_id).join(controller.class::SEPARATOR)) %>
     <div class="find-location-for-service">
-      <label for="select-location">Select your location
+      <label for="select-location">Select a location
         <%= select_tag(:location, options_for_select([['Select one...', ''], %w(England england), %w(Scotland scotland), %w(Wales wales), ['Northern Ireland', 'northern_ireland']]), :id => "select-location") %></label>
     </div>
     <%= submit_tag 'Find licences', :class => 'button medium' %>

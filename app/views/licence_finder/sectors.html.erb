@@ -1,10 +1,10 @@
-<% content_for :page_title, "Choose your business sectors | Licence Finder" %>
+<% content_for :page_title, "Choose your areas of interest | Licence Finder" %>
 
 <%= current_question do %>
   <div class="search-container" role="search">
     <%= form_tag sectors_path, method: :get do %>
       <%= hidden_field_tag "sectors", params[:sectors], id: "hidden-sectors" %>
-      <label class="visuallyhidden" for="search-sectors">Search for sectors</label>
+      <label class="visuallyhidden" for="search-sectors">Search for areas</label>
       <%= text_field_tag "q", params[:q], id: "search-sectors" %>
       <%= submit_tag params[:q].present? ? "Search again" : "Search", class: "button", id: "search-button" %>
     <% end %>
@@ -12,7 +12,7 @@
     <% if !@sectors.empty? %>
       <div class="search-results search-picker">
         <h3 class="visuallyhidden">Search results for "<%= params[:q] %>"</h3>
-        <p class="hint">Add all the sectors that apply to you:</p>
+        <p class="hint">Add all the areas that apply to you:</p>
         <ul>
           <% (@sectors - @picked_sectors).each do |sector| %>
             <%= link_to_add sector %>
@@ -25,12 +25,12 @@
   </div>
 
   <div class="browse-container">
-    <p class="or-browse">Or <%= link_to "browse business sectors", browse_sector_index_path, {"id" => 'browse-sectors'} %>.</p>
+    <p class="or-browse">Or <%= link_to "choose your area of interest", browse_sector_index_path, {"id" => 'browse-sectors'} %>.</p>
   </div>
 
   <div class="business-sector-picked picked-items" aria-live="polite">
-    <h3>Your chosen business sectors</h3>
-    <p class="<% if @picked_sectors.empty? %>hint<% else %>hidden<% end %>">Your chosen sectors will appear here</p>
+    <h3>Your chosen areas of interest</h3>
+    <p class="<% if @picked_sectors.empty? %>hint<% else %>hidden<% end %>">Your chosen areas will appear here</p>
     <ul id="picked-business-sectors">
       <% @picked_sectors.each do |sector| %>
         <%= link_to_remove sector %>

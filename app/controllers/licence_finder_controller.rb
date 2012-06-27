@@ -10,11 +10,15 @@ class LicenceFinderController < ApplicationController
   ]
   ACTIONS = %w(sectors activities business_location)
 
+  # These are the correlation_ids
+  POPULAR_LICENCE_IDS = %w(1083741799 1083741393 1084158580 1075329003 1084062657 1075429257 1083741306)
+
   before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   after_filter :set_analytics_headers
 
   def start
+    setup_popular_licences
   end
 
   def sectors
@@ -140,5 +144,10 @@ class LicenceFinderController < ApplicationController
       headers[:result_count] = @sectors.length
     end
     set_slimmer_headers(headers)
+  end
+
+  def setup_popular_licences
+    licences = POPULAR_LICENCE_IDS.map {|id| Licence.find_by_correlation_id(id) }.compact
+    @popular_licences = LicenceFacade.create_for_licences(licences).select(&:published?).first(3)
   end
 end

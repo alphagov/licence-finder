@@ -88,3 +88,43 @@ a.add {
   float: left;
   width: 45%;
 }
+
+/* sector navigation widget */
+#sector-navigation,
+#sector-navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  zoom: 1;
+}
+
+#sector-navigation li {
+  display: block;
+  margin: 0.25em 0;
+  overflow: hidden;
+  clear: both; /* clear under floated "add" links */
+}
+
+#sector-navigation li.open ul {
+  padding-left: 1em;
+}
+
+#sector-navigation li a {
+  background-image: url(<%= asset_path "expand-collapse-arrow.png" %>);
+  background-position: 0 5px;
+  background-repeat: no-repeat;
+  padding-left: 1em;
+}
+
+#sector-navigation li.open > a {
+  background-position: 0 -86px;
+}
+
+#sector-navigation li a.add {
+  background-image: none;
+}
+
+#sector-navigation ul ul li {
+  padding: 0 0.25em;
+}

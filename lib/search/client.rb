@@ -27,7 +27,7 @@ class Search
     end
 
     def extra_terms_for_sector(sector)
-      extra_terms[sector.public_id] || []
+      extra_terms[sector.correlation_id] || []
     end
 
     def activities_for_sector(sector)

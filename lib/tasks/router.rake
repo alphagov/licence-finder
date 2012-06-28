@@ -9,17 +9,19 @@ namespace :router do
 
   task :register_application => :router_environment do
     platform = ENV['FACTER_govuk_platform']
-    # TODO: remove when ready to go live
-    return if platform == "production"
-    url = "licencefinder.#{platform}.alphagov.co.uk"
-    @logger.info "Registering application..."
-    @router.update_application "licencefinder", url
+    # TODO: remove condition when ready to go live
+    unless platform == "production"
+      url = "licencefinder.#{platform}.alphagov.co.uk"
+      @logger.info "Registering application..."
+      @router.update_application "licencefinder", url
+    end
   end
 
   task :register_routes => :router_environment do
-    # TODO: remove when ready to go live
-    return if ENV['FACTER_govuk_platform'] == "production"
-    @router.create_route APP_SLUG, 'prefix', 'licencefinder'
+    # TODO: remove condition when ready to go live
+    unless ENV['FACTER_govuk_platform'] == "production"
+      @router.create_route APP_SLUG, 'prefix', 'licencefinder'
+    end
   end
 
   desc "Register smartanswers application and routes with the router (run this task on server in cluster)"

@@ -22,12 +22,7 @@
         <ul>
           <% @licences.each do |licence| %>
             <li>
-              <%- if licence.published? -%>
-                <%= link_to licence.title, licence.url %>
-                <p><%= licence.short_description %></p>
-              <%- else -%>
-                <%= licence.title %>
-              <%- end -%>
+              <%= render :partial => 'licence', :object => licence %>
             </li>
           <% end %>
         </ul>

@@ -16,6 +16,18 @@
         <% end %>
         </p>
       </div>
+      <%- if @popular_licences.any? -%>
+        <div class="popular-licences">
+          <h2>Popular licences</h2>
+          <ol>
+            <%- @popular_licences.each do |licence| -%>
+              <li>
+                <%= render :partial => 'licence', :object => licence %>
+              </li>
+            <%- end -%>
+          </ol>
+        </div>
+      <%- end -%>
     </div>
   </article>
 </div>

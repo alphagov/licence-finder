@@ -14,6 +14,12 @@ describe LicenceFacade do
       LicenceFacade.create_for_licences([@l1, @l2])
     end
 
+    it "should skip querying publisher if not given any licences" do
+      GdsApi::Publisher.any_instance.unstub(:licences_for_ids) # clear the stub above, otherwise the next line won't work
+      GdsApi::Publisher.any_instance.expects(:licences_for_ids).never()
+      LicenceFacade.create_for_licences([])
+    end
+
     it "should construct Facades for each licence maintaining order" do
       result = LicenceFacade.create_for_licences([@l1, @l2])
       result.map(&:licence).should == [@l1, @l2]

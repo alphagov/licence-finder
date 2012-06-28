@@ -12,6 +12,54 @@ describe LicenceFinderController do
       get 'start'
       response.should be_success
     end
+
+    describe "setting up popular licences" do
+      before :each do
+        LicenceFinderController::POPULAR_LICENCE_IDS.each_with_index do |correlation_id, i|
+          l = FactoryGirl.create(:licence, :correlation_id => correlation_id)
+          instance_variable_set("@l#{i}", l) # @l1 = l
+        end
+      end
+
+      it "should assign facades for the published licences to @popular_licences" do
+        lf1 = stub("lf1", :published? => true)
+        lf2 = stub("lf2", :published? => false)
+        lf3 = stub("lf3", :published? => false)
+        lf4 = stub("lf4", :published? => true)
+        LicenceFacade.expects(:create_for_licences).with([@l0, @l1, @l2, @l3, @l4, @l5, @l6]).
+          returns([lf1, lf2, lf3, lf4])
+
+        get :start
+
+        assigns[:popular_licences].should == [lf1, lf4]
+      end
+
+      it "should only assign the first 3 to @popular_licences" do
+        lf1 = stub("lf1", :published? => true)
+        lf2 = stub("lf2", :published? => false)
+        lf3 = stub("lf3", :published? => true)
+        lf4 = stub("lf4", :published? => true)
+        lf5 = stub("lf5", :published? => true)
+        LicenceFacade.stubs(:create_for_licences).
+          returns([lf1, lf2, lf3, lf4, lf5])
+
+        get :start
+
+        assigns[:popular_licences].should == [lf1, lf3, lf4]
+      end
+
+      it "should cope with licences missing from the local database" do
+        @l1.destroy
+        @l2.destroy
+        lf1 = stub("lf1", :published? => true)
+        LicenceFacade.expects(:create_for_licences).with([@l0, @l3, @l4, @l5, @l6]).
+          returns([lf1])
+
+        get :start
+
+        assigns[:popular_licences].should == [lf1]
+      end
+    end
   end
 
   describe "GET 'sectors'" do

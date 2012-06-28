@@ -7,17 +7,17 @@ describe Search::Client::Elasticsearch do
     WebMock.allow_net_connect!
     $search = Search.create_for_config("elasticsearch", "test")
 
-    s1 = FactoryGirl.create(:sector, :public_id => 123, :name => "Fooey Sector", :layer => 3)
-    s2 = FactoryGirl.create(:sector, :public_id => 234, :name => "Kablooey Sector", :layer => 3)
-    s3 = FactoryGirl.create(:sector, :public_id => 345, :name => "Gooey Sector", :layer => 3)
-    s4 = FactoryGirl.create(:sector, :public_id => 456, :name => "Something else", :layer => 3)
-    a1 = FactoryGirl.create(:activity, :public_id => 7123, :name => "Fooey activity", :sectors => [s2])
-    a2 = FactoryGirl.create(:activity, :public_id => 7124, :name => "Unrelated terms", :sectors => [s3])
+    s1 = FactoryGirl.create(:sector, :public_id => 123, :correlation_id => 987, :name => "Fooey Sector", :layer => 3)
+    s2 = FactoryGirl.create(:sector, :public_id => 234, :correlation_id => 986, :name => "Kablooey Sector", :layer => 3)
+    s3 = FactoryGirl.create(:sector, :public_id => 345, :correlation_id => 985, :name => "Gooey Sector", :layer => 3)
+    s4 = FactoryGirl.create(:sector, :public_id => 456, :correlation_id => 984, :name => "Something else", :layer => 3)
+    a1 = FactoryGirl.create(:activity, :public_id => 7123, :correlation_id => 983, :name => "Fooey activity", :sectors => [s2])
+    a2 = FactoryGirl.create(:activity, :public_id => 7124, :correlation_id => 982, :name => "Unrelated terms", :sectors => [s3])
 
     @search = $search.clone
     @search.client.stubs(:extra_terms).returns({
-      123 => %w(foo bar),
-      234 => %w(monkey)
+      987 => %w(foo bar),
+      986 => %w(monkey)
     })
     @search.index_all
   end

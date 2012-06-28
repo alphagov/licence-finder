@@ -43,8 +43,8 @@ describe Search::Client::Elasticsearch do
 
     it "should add extra_terms to document when available" do
       @client.stubs(:extra_terms).returns({123 => %w(foo bar monkey)})
-      document = @client.to_document(FactoryGirl.build(:sector, public_id: 123, name: "Test Sector"))
-      document.should == {_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: %w(foo bar monkey), activities: []}
+      document = @client.to_document(FactoryGirl.build(:sector, public_id: 321, correlation_id: 123, name: "Test Sector"))
+      document.should == {_id: 321, type: "test-type", public_id: 321, title: "Test Sector", extra_terms: %w(foo bar monkey), activities: []}
     end
 
     it "should commit after re-indexing" do

@@ -36,7 +36,7 @@ describe Search::Client do
     end
 
     it "should find extra terms for a sector" do
-      sector = FactoryGirl.build(:sector, :public_id => 123)
+      sector = FactoryGirl.build(:sector, :public_id => 321, :correlation_id => 123)
       @client.extra_terms_for_sector(sector).should == %w(foo bar monkey)
     end
   end

@@ -29,8 +29,8 @@ describe "Licences page" do
     within_section 'completed questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
         'What is your activity or business?',
-        'What does your activity or business involve?',
-        'Where will your activity or business be located?',
+        'What would you like to do?',
+        'Where will you be located?',
       ]
     end
     within_section 'completed question 1' do
@@ -59,23 +59,63 @@ describe "Licences page" do
     page.should_not have_content("No licences")
   end
 
-  specify "seeing licence details from publisher on results page" do
-    publisher_has_licence :licence_identifier => @l1.correlation_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
-          :licence_short_description => "Short description of licence"
+  describe "getting licence details from publisher" do
+    specify "seeing licence details from publisher on results page" do
+      publisher_has_licence :licence_identifier => @l1.correlation_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
+            :licence_short_description => "Short description of licence"
 
-    visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
+      visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
-    within_section 'results' do
-      # should use the title from publisher, instead of local one
-      page.should have_content("Licence 1")
-      page.should_not have_content("Licence One")
+      within_section 'results' do
+        # should use the title from publisher, instead of local one
+        page.should have_content("Licence 1")
+        page.should_not have_content("Licence One")
 
-      within_section "list item containing Licence 1" do
-        page.should have_link("Licence 1", :href => "/licence-one")
-        page.should have_content("Short description of licence")
+        within_section "list item containing Licence 1" do
+          page.should have_link("Licence 1", :href => "/licence-one")
+          page.should have_content("Short description of licence")
+        end
+
+        page.should have_content("Licence Two")
       end
+    end
 
-      page.should have_content("Licence Two")
+    specify "handle lack of links gracefully" do
+      publisher_has_licence :licence_identifier => @l1.correlation_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
+            :licence_short_description => "Short description of licence"
+
+      visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
+
+      within_section "results" do
+        page.should have_content "Further information may not yet be available for some licences"
+      end
+    end
+
+    specify "don't show graceful text if we have many links" do
+      publisher_has_licence :licence_identifier => @l1.correlation_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
+            :licence_short_description => "Short description of licence"
+      publisher_has_licence :licence_identifier => @l2.correlation_id.to_s, :slug => 'licence-two', :title => 'Licence 2',
+            :licence_short_description => "Short description of licence 2"
+
+      visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
+
+      within_section "results" do
+        page.should_not have_content "Further information may not yet be available for some licences"
+      end
+    end
+
+    specify "gracefully handling publisher errors" do
+      WebMock.stub_request(:get, %r[\A#{GdsApi::TestHelpers::Publisher::PUBLISHER_ENDPOINT}/licences]).
+        to_return(:status => [500, "Internal Server Error"])
+
+      visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
+
+      within_section 'results' do
+        page.all('li').map(&:text).map(&:strip).should == [
+          'Licence One',
+          'Licence Two',
+        ]
+      end
     end
   end
 

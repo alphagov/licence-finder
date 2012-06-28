@@ -3,10 +3,12 @@ require 'spec_helper'
 describe "Finding licences" do
 
   specify "Simple happy path through the app" do
-    pending "Until elasitcsearch is in production"
-    s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
-    s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")
-    s3 = FactoryGirl.create(:sector, :name => "Gooey Sector")
+    WebMock.allow_net_connect!
+    $search = Search.create_for_config("elasticsearch", "test")
+
+    s1 = FactoryGirl.create(:sector, :name => "Fooey Sector", :layer => 3)
+    s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector", :layer => 3)
+    s3 = FactoryGirl.create(:sector, :name => "Gooey Sector", :layer => 3)
 
     a1 = FactoryGirl.create(:activity, :name => "Fooey Activity", :sectors => [s1])
     a2 = FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [s2])
@@ -89,7 +91,7 @@ describe "Finding licences" do
 
     select('England', from: 'location')
 
-    click_on 'Next step'
+    click_on 'Find licences'
 
     i_should_be_on "/#{APP_SLUG}/licences", :ignore_query => true
 
@@ -112,7 +114,7 @@ describe "Finding licences" do
     end
 
     within_section 'results' do
-      page.all('li').map(&:text).should == [
+      page.all('li').map(&:text).map(&:strip).should == [
         'Licence One'
       ]
     end

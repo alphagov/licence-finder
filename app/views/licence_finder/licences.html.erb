@@ -3,23 +3,35 @@
 <div class="article-container">
   <article class="results">
     <div class="inner group">
-      <h2>Licences you need to apply for:</h2>
-
       <% if @licences.empty? %>
-        <p>No licences</p>
+        <p>
+          No licences were found that match your search.
+        </p>
+        <p class="get-started">
+          <%= link_to sectors_path, :class => "big button" do %>
+            Start again <span class="indicator"></span>
+          <% end %>
+        </p>
       <% else %>
-      <ul>
-        <% @licences.each do |licence| %>
-          <li>
-            <%- if licence.published? -%>
-              <%= link_to licence.title, licence.url %>
-              <p><%= licence.short_description %></p>
-            <%- else -%>
-              <%= licence.title %>
-            <%- end -%>
-          </li>
+        <h2>Licences you may need to apply for:</h2>
+        <% if ! @licences.all? { |licence| licence.published? } %>
+          <p class="hint">
+            Further information may not yet be available for some licences.
+          </p>
         <% end %>
-      </ul>
+        <ul>
+          <% @licences.each do |licence| %>
+            <li>
+              <%- if licence.published? -%>
+                <%= link_to licence.title, licence.url %>
+                <p><%= licence.short_description %></p>
+              <%- else -%>
+                <%= licence.title %>
+              <%- end -%>
+            </li>
+          <% end %>
+        </ul>
+
       <% end %>
     </div>
   </article>

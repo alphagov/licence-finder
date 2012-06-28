@@ -30,20 +30,20 @@ describe "Activity selection page" do
     end
 
     within_section 'current question' do
-      page.should have_content('What does your activity or business involve?')
+      page.should have_content('What would you like to do?')
 
       within '.business-activity-results' do
         i_should_see_add_links_in_order ["Fooey Activity", "Gooey Activity", "Kabloom", "Transmogrifying"]
       end
       within '.business-activity-picked' do
         # none are selected yet
-        page.should have_content("Your chosen categories will appear here")
+        page.should have_content("Your chosen activities will appear here")
       end
     end
 
     within_section 'upcoming questions' do
       page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
-        'Where will your activity or business be located?',
+        'Where will you be located?',
       ]
     end
 
@@ -58,7 +58,6 @@ describe "Activity selection page" do
         i_should_see_add_links_in_order ["Gooey Activity", "Transmogrifying"]
       end
       within '.business-activity-picked' do
-        page.should_not have_content("Your chosen activities will appear here")
         i_should_see_remove_links_in_order ["Fooey Activity", "Kabloom"]
       end
     end

@@ -38,6 +38,7 @@ header.page-header hgroup {
 a.add {
   float: right;
   padding-left: 0.25em;
+  *float: none;
 }
 
 .search-picker li:nth-child(even),
@@ -72,6 +73,7 @@ a.add {
   margin-bottom: 0.25em;
   list-style-type: none;
   overflow: hidden; /* contain floats */
+  zoom: 1;
 }
 
 .picked-items ul li:nth-child(even) {
@@ -86,6 +88,7 @@ a.add {
 .picked-items ul li a {
   float: right;
   padding-left: 0.25em;
+  *float: none;
 }
 
 .picked-items .button-container {
@@ -114,6 +117,7 @@ a.add {
   display: block;
   margin: 0.25em 0;
   overflow: hidden;
+  zoom: 1;
   clear: both; /* clear under floated "add" links */
 }
 

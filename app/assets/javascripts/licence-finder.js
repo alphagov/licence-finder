@@ -45,11 +45,12 @@ $(function() {
 
     function createAddRemoveUrl(id) {
         var ids = extractIds(),
-            params = extractParams();
-        if (ids.indexOf(id) === -1) {
+            params = extractParams(),
+            index = $.inArray(id, ids);
+        if (index === -1) {
             ids.push(id);
         } else {
-            ids.splice(ids.indexOf(id), 1);
+            ids.splice(index, 1);
         }
 
         if (ids.length > 0) {

@@ -67,5 +67,8 @@ module LicenceFinder
 
     config.assets.prefix = "#{APP_SLUG}/assets"
     config.assets.precompile += ['licence-finder.css', 'licence-finder.js']
+
+    # Disable Rack::Cache
+    config.action_dispatch.rack_cache = nil
   end
 end

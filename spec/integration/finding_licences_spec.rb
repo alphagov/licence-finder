@@ -113,7 +113,7 @@ describe "Finding licences" do
       page.should have_content('England')
     end
 
-    within_section 'results' do
+    within_section 'outcome' do
       page.all('li').map(&:text).map(&:strip).should == [
         'Licence One'
       ]

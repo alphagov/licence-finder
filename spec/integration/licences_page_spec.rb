@@ -47,7 +47,7 @@ describe "Licences page" do
       page.should have_content('Scotland')
     end
 
-    within_section 'results' do
+    within_section 'outcome' do
       page.all('li').map(&:text).map(&:strip).should == [
         'Licence Four'
       ]
@@ -66,7 +66,7 @@ describe "Licences page" do
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
-      within_section 'results' do
+      within_section 'outcome' do
         # should use the title from publisher, instead of local one
         page.should have_content("Licence 1")
         page.should_not have_content("Licence One")
@@ -86,7 +86,7 @@ describe "Licences page" do
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
-      within_section "results" do
+      within_section "outcome" do
         page.should have_content "Further information may not yet be available for some licences"
       end
     end
@@ -99,7 +99,7 @@ describe "Licences page" do
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
-      within_section "results" do
+      within_section "outcome" do
         page.should_not have_content "Further information may not yet be available for some licences"
       end
     end
@@ -110,7 +110,7 @@ describe "Licences page" do
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
-      within_section 'results' do
+      within_section 'outcome' do
         page.all('li').map(&:text).map(&:strip).should == [
           'Licence One',
           'Licence Two',

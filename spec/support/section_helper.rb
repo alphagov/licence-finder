@@ -12,8 +12,8 @@ module SectionHelper
     when 'upcoming questions'
       [:css, '.upcoming-questions']
 
-    when 'results'
-      [:css, 'article.results']
+    when 'outcome'
+      [:css, 'article.outcome']
 
     when /^list item containing (.*)$/
       [:xpath, ".//li[contains(., '#{$1}')]"]

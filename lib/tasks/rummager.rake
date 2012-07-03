@@ -3,15 +3,14 @@ namespace :rummager do
   task :index => :environment do
     # TODO: remove condition when ready to go live
     unless ENV['FACTER_govuk_platform'] == "production"
-      # TODO: Update copy here
       Rummageable.index [{
-        "title"             => 'Licence Finder',
-        "description"       => "Find licences",
+        "title"             => 'Licence finder',
+        "description"       => "Licence finder helps UK citizens find and apply for licences of all types.",
         "format"            => "licence_finder",
-        "section"           => "licences",
-        "subsection"        => "other",
+        "section"           => "business",
+        "subsection"        => "licences",
         "link"              => "/#{APP_SLUG}",
-        "indexable_content" => "Licence finder find licences",
+        "indexable_content" => "Licence finder helps UK citizens find and apply for licences of all types including temporary events notice, occasional licence, skip licence, and food premesis registration.",
       }]
     end
   end

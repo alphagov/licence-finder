@@ -1,17 +1,26 @@
 /* see multi-step.css.erb in the static repo for most of these styles */
 
+#search-sectors {
+  margin-left: 0;
+}
+
 /* there are nested lists in our complete steps */
 li.done .answer {
   display: block;
-  margin-bottom: 1em;
-  margin-top: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0;
 }
 
 li.done .answer ul,
 .search-picker ul,
 .picked-items ul {
-  margin: 0 0 0 -2.4em;
+  margin: 0 0 0 -2.1em;
   padding-left: 2.1em;
+}
+
+.search-picker ul,
+.picked-items ul {
+  margin: 0 0 0 -2.4em;
 }
 
 .step.current,
@@ -20,13 +29,17 @@ header.page-header hgroup {
   margin-right: 0;
 }
 
+.step.current .hint:first-child {
+  margin-top: 0.25em;
+}
+
 /* reset margin on start */
 .start-page header.page-header hgroup {
   margin-right: 15em;
 }
 
 .current-question h2 {
-  font-size: 1em;
+  /*font-size: 1em;*/
 }
 
 .done {
@@ -107,6 +120,18 @@ a.add {
   clear: left;
   float: left;
   width: 45%;
+}
+
+.browse-container {
+  margin-top: 1.25em;
+}
+
+.browse-container .or-browse {
+  margin-top: 0;
+}
+
+.browse-container h3 {
+  margin-top: 0;
 }
 
 /* sector navigation widget */

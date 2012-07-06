@@ -5,7 +5,9 @@
     <meta name="description" content="<%= content_for?(:page_description) ? yield(:page_description) : "Licence finder helps UK citizens find and apply for licences of all types." %>">
     <%= stylesheet_link_tag "licence-finder" %>
     <%= javascript_include_tag 'licence-finder', defer: true %>
-    <%= yield :section_meta_tags %>
+    <meta name="x-section-name" content="Business" />
+    <meta name="x-section-link" content="/browse/business" />
+    <meta name="x-section-format" content="licence_finder" />
     <%= yield :head %>
   </head>
   <body class="citizen">

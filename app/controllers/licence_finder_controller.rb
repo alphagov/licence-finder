@@ -138,6 +138,7 @@ class LicenceFinderController < ApplicationController
     headers = {
       format:      "licence-finder",
       proposition: "business",
+      section:     "business",
       need_id:     "B90"
     }
     if @sectors and params[:q].present?

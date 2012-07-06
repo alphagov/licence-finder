@@ -3,12 +3,12 @@ namespace :rummager do
   task :index => :environment do
     Rummageable.index [{
       "title"             => 'Licence finder',
-      "description"       => "Licence finder helps UK citizens find and apply for licences of all types.",
+      "description"       => "Find out which licences you might need for your activity or business.",
       "format"            => "licence_finder",
       "section"           => "business",
       "subsection"        => "licences",
       "link"              => "/#{APP_SLUG}",
-      "indexable_content" => "Licence finder helps UK citizens find and apply for licences of all types including temporary events notice, occasional licence, skip licence, and food premesis registration.",
+      "indexable_content" => "Find out which licences you might need for your activity or business, including temporary events notice, occasional licence, skip licence, and food premesis registration.",
     }]
   end
 end

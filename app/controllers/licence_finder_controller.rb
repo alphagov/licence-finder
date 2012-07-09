@@ -75,7 +75,7 @@ class LicenceFinderController < ApplicationController
     @grandchild_sectors = []
 
     render "browse_sectors"
- end
+  end
 
   def browse_sector
     # return list of children of "sector"

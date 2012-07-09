@@ -93,4 +93,15 @@ describe "Sector browse page" do
     page.should_not have_content @s3.name
   end
 
+  specify "granchild sectors will have rel=\"nofollow\" attributes on 'Add' links", :js => true do
+    visit "/#{APP_SLUG}/browse-sectors"
+
+    click_on @s1.name
+    page.should have_content @s2.name
+
+    click_on @s2.name
+    page.should have_content @s3.name
+
+    all("a.add").each { |a| assert_equal "nofollow", a[:rel] }
+  end
 end

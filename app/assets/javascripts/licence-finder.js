@@ -201,7 +201,7 @@ $(function() {
                                 elString = '<a data-public-id="' + leaf['public-id'] + '" href="' + leaf.url + '">' + leaf.name + '</a>';
                             }
                             else {
-                                elString = '<span class="sector-name">' + leaf.name + '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" class="add">Add</a>';
+                                elString = '<span class="sector-name">' + leaf.name + '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" rel="nofollow" class="add">Add</a>';
                             }
 
                             ul.append('<li id="sector-'+leaf['public-id']+'" data-public-id="' + leaf['public-id'] + '">' + elString + '</li>');

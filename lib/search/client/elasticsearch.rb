@@ -3,6 +3,12 @@ require "search/client"
 class Search
   class Client
     class Elasticsearch < Search::Client
+      ESCAPE_LUCENE_CHARS = /
+        ( [-+!\(\)\{\}\[\]^"~*?:\\] # A special character
+          | &&                        # Boolean &&
+          | \|\|                      # Boolean ||
+        )/x
+
       def initialize(config)
         super
         @config   = config
@@ -54,6 +60,10 @@ class Search
       end
 
       def search(query)
+        return [] if query.match(ESCAPE_LUCENE_CHARS) && query.length <= 2
+
+        query = escape_lucene_chars(query)
+
         # this only returns public_ids to keep the public
         # interface as abstract as possible
         Tire.search(@config[:index], query: {
@@ -67,12 +77,7 @@ class Search
       # The Lucene documentation declares special characters to be:
       #   + - && || ! ( ) { } [ ] ^ " ~ * ? : \
       def escape_lucene_chars(s)
-        escape_characters_regex = /
-          ( [-+!\(\)\{\}\[\]^"~*?:\\] # A special character
-            | &&                        # Boolean &&
-            | \|\|                      # Boolean ||
-          )/x
-        s.gsub(escape_characters_regex) { |char| "\\#{char}"}
+        s.gsub(ESCAPE_LUCENE_CHARS) { |char| "\\#{char}"}
       end
 
       def downcase_ending_keywords(s)

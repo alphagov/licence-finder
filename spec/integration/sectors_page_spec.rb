@@ -105,7 +105,7 @@ describe "Sector selection page" do
   end
 
   specify "special characters should be escaped" do
-    visit "/#{APP_SLUG}/sectors?q=%20b"
+    visit "/#{APP_SLUG}/sectors?q=%26%26"
 
     within_section 'current question' do
       within '.search-container' do

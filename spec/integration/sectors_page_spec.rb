@@ -103,4 +103,15 @@ describe "Sector selection page" do
       end
     end
   end
+
+  specify "special characters should be escaped" do
+    visit "/#{APP_SLUG}/sectors?q=%20b"
+
+    within_section 'current question' do
+      within '.search-container' do
+        page.should have_css("input#search-sectors")
+        page.should have_content("No results")
+      end
+    end
+  end
 end

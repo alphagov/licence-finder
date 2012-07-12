@@ -63,6 +63,22 @@ class Search
             }
         }).results.map(&:public_id)
       end
+
+      # The Lucene documentation declares special characters to be:
+      #   + - && || ! ( ) { } [ ] ^ " ~ * ? : \
+      def escape_lucene_chars(s)
+        escape_characters_regex = /
+          ( [-+!\(\)\{\}\[\]^"~*?:\\] # A special character
+            | &&                        # Boolean &&
+            | \|\|                      # Boolean ||
+          )/x
+        s.gsub(escape_characters_regex) { |char| "\\#{char}"}
+      end
+
+      def downcase_ending_keywords(s)
+        escape_keywords_regex = /(AND$ | OR$ | NOT$)/x
+        s.gsub(escape_keywords_regex) { |keyword| keyword.downcase }
+      end
     end
   end
 end

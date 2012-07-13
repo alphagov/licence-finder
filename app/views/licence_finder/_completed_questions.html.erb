@@ -7,7 +7,7 @@
           <h3 class="question">
             <span class="question-number"><%= index + 1 %></span><%= question_details[0] %>
           </h3>
-          <div class="answer">
+          <div class="answer multiple">
             <ul>
               <% question_details[1].each do |answer| %>
                 <li><%= answer.to_s %></li>

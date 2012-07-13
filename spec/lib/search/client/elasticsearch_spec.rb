@@ -74,11 +74,31 @@ describe Search::Client::Elasticsearch do
           query: {
               query_string: {
                   fields: %w(title extra_terms activities),
-                  query: :query
+                  query: "query"
               }
           }
       }).returns(response)
-      @client.search(:query).should == [123, 234]
+      @client.search("query").should == [123, 234]
+    end
+  end
+
+  describe "Lucene search escaping characters" do
+    it "should return valid strings back" do
+      @client.escape_lucene_chars("blargh").should == "blargh"
+      @client.escape_lucene_chars("Testing").should == "Testing"
+    end
+
+    it "should remove expected special chars" do
+      %w(+ - && || ! ( ) { } [ ] ^ " ~ * ? \ :).each { |char|
+        char.strip!
+        @client.escape_lucene_chars("#{char}blargh").should == "\\#{char}blargh"
+      }
+    end
+
+    it "should downcase search keywords" do
+      @client.downcase_ending_keywords("bleh AND").should == "bleh and"
+      @client.downcase_ending_keywords("bleh OR").should == "bleh or"
+      @client.downcase_ending_keywords("bleh NOT").should == "bleh not"
     end
   end
 end

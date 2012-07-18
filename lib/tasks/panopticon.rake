@@ -9,7 +9,16 @@ namespace :panopticon do
 
     registerer = GdsApi::Panopticon::Registerer.new(owning_app: "licencefinder")
 
-    record = OpenStruct.new(slug: APP_SLUG, title: "Licence Finder", need_id: "B90", section: "business")
+    record = OpenStruct.new(
+        slug: APP_SLUG, 
+        title: "Licence Finder", 
+        description: "Find out which licences you might need for your activity or business.",
+        need_id: "B90", 
+        section: "business",
+        paths: [APP_SLUG],
+        prefixes: [APP_SLUG],
+        live: true, 
+        indexable_content: "Find out which licences you might need for your activity or business, including temporary events notice, occasional licence, skip licence, and food premises registration.")
     registerer.register(record)
   end
 end

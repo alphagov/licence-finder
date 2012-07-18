@@ -12,6 +12,7 @@ namespace :panopticon do
     record = OpenStruct.new(
         slug: APP_SLUG, 
         title: "Licence Finder", 
+        description: "Find out which licences you might need for your activity or business.",
         need_id: "B90", 
         section: "business",
         paths: [APP_SLUG],

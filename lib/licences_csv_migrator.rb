@@ -13,8 +13,10 @@ class LicencesCsvMigrator
     begin
       migrated_csv = open_migrated_file
       unmigrated_csv = open_unmigrated_file
+      licence_data = read_licence_data
+      mappings = read_mappings
       
-      new(migrated_csv, unmigrated_csv).run
+      new(migrated_csv, unmigrated_csv, licence_data, mappings).run
       
     ensure
       migrated_csv.close
@@ -33,22 +35,29 @@ class LicencesCsvMigrator
   def self.open_unmigrated_file
     CSV.open(data_file_path(UNMIGRATED_FILENAME), "w", force_quotes: true)
   end  
+  
+  def self.read_licence_data
+    CSV.read(self.class.data_file_path(LICENCES_FILENAME), headers: true)
+  end
+  
+  def self.read_mappings
+    CSV.read(self.class.data_file_path(MAPPING_FILENAME), headers: true)
+  end
     
   def self.data_file_path(filename)
     Rails.root.join('data', filename)
   end
 
-  def initialize(migrated_csv, unmigrated_csv)
+  def initialize(migrated_csv, unmigrated_csv, licence_data, mappings)
     @migrated_csv = migrated_csv
     @unmigrated_csv = unmigrated_csv
-    @licence_mappings = load_mappings
-    @licence_data = CSV.read(self.class.data_file_path(LICENCES_FILENAME), headers: true)
+    @licence_data = licence_data
+    @licence_mappings = load_mappings(mappings)
   end
   
-  def load_mappings
+  def load_mappings(csv_data)
     licence_mappings = {}
-    data = CSV.read(self.class.data_file_path(MAPPING_FILENAME), headers: true)
-    data.each do |row|
+    csv_data.each do |row|
       licence_mappings[row['GDS ID']] = row['Legal_Ref_No']  
     end
     licence_mappings

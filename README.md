@@ -10,3 +10,7 @@ Load the data into MongoDB
 Load the data into Elasticsearch
 
     bundle exec rake search:index
+    
+Migrating your Licence data to use legal_ref_id instead of correlation_id
+  
+    bundle exec rake licence_migrate

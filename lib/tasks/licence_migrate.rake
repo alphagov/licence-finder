@@ -8,6 +8,10 @@ namespace :licence_migrate do
   desc "Migrate licence OID to legal ref no."
   task :all => :environment do
     LicencesCsvMigrator.migrate
+    # TODO: Do we really want to overwrite the licences.csv file
+    # given we end up with a smaller subset of licences because
+    # of incomplete mappings?
+    # LicencesCsvMigrator.move_files
     LicenceDataMigrator.migrate
   end
   

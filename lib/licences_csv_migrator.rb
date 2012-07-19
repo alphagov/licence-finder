@@ -37,11 +37,11 @@ class LicencesCsvMigrator
   end  
   
   def self.read_licence_data
-    CSV.read(self.class.data_file_path(LICENCES_FILENAME), headers: true)
+    CSV.read(data_file_path(LICENCES_FILENAME), headers: true)
   end
   
   def self.read_mappings
-    CSV.read(self.class.data_file_path(MAPPING_FILENAME), headers: true)
+    CSV.read(data_file_path(MAPPING_FILENAME), headers: true)
   end
     
   def self.data_file_path(filename)
@@ -95,7 +95,7 @@ class LicencesCsvMigrator
   end
 
   def done(counter, nl)
-    print "Migrated #{counter} Licences.#{nl}"
+    print "Migrated #{counter} LICENCE_OIDs from #{LICENCES_FILENAME}, saved to #{MIGRATED_FILENAME}, unmigrated entries can be found in #{UNMIGRATED_FILENAME}.#{nl}"
   end
   
 end

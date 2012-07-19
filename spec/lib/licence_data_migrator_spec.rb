@@ -22,7 +22,11 @@ describe LicenceDataMigrator do
     it "should update the legal_ref_id on licence records" do
       l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 1083741393)
       l2 = FactoryGirl.create(:licence, name: "Licence Two", correlation_id: 1075329002)
-      @migrator.run
+      
+      silence_stream(STDOUT) do
+        @migrator.run
+      end
+      
       l1.reload
       l2.reload
       l1.legal_ref_id.should == 1040001
@@ -31,7 +35,11 @@ describe LicenceDataMigrator do
     
     it "should not update the legal_ref_id where no suitable mapping exists" do
       l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 9999999999, legal_ref_id: 42)
-      @migrator.run
+      
+      silence_stream(STDOUT) do
+        @migrator.run
+      end
+      
       l1.legal_ref_id.should == 42
     end
   end

@@ -31,7 +31,9 @@ describe LicencesCsvMigrator do
   
   describe "run" do
     before(:all) do
-      @migrator.run
+      silence_stream(STDOUT) do
+        @migrator.run
+      end
     end
     it "add rows matching a mapping to migrated_csv" do
       @migrated_csv.first['LICENCE_OID'].should == "1040001"

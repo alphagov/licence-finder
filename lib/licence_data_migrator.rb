@@ -35,12 +35,10 @@ class LicenceDataMigrator
       
       legal_ref_id = @licence_mappings[licence.correlation_id.to_s]
       
-      if legal_ref_id
+      licence.legal_ref_id = legal_ref_id
+      licence.save!
       
-        licence.update_attribute("legal_ref_id", legal_ref_id.to_i)
-        counter += 1
-        
-      end
+      counter += 1 if legal_ref_id
       
       done(counter, "\r")
       

@@ -19,8 +19,8 @@ describe DataImporter::Licences do
         importer.run
       end
 
-      imported_licence = Licence.find_by_correlation_id(1)
-      imported_licence.correlation_id.should == 1
+      imported_licence = Licence.find_by_legal_ref_id(1)
+      imported_licence.legal_ref_id.should == 1
       imported_licence.name.should == "Licences to play music in a theatre (All UK)"
       imported_licence.regulation_area.should == "Copyright"
       imported_licence.da_england == true
@@ -46,12 +46,12 @@ describe DataImporter::Licences do
         importer.run
       end
 
-      imported_licence = Licence.find_by_correlation_id(1)
+      imported_licence = Licence.find_by_legal_ref_id(1)
       imported_licence.name.should == "Pavement licence (England & Wales)"
     end
 
-    it "should update the licence if one with the same correlation_id already exists" do
-      FactoryGirl.create(:licence, correlation_id: 1, name: "Test Name", da_england: false)
+    it "should update the licence if one with the same legal_ref_id already exists" do
+      FactoryGirl.create(:licence, legal_ref_id: 1, name: "Test Name", da_england: false)
 
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
@@ -63,8 +63,8 @@ describe DataImporter::Licences do
         importer.run
       end
 
-      imported_licence = Licence.find_by_correlation_id(1)
-      imported_licence.correlation_id.should == 1
+      imported_licence = Licence.find_by_legal_ref_id(1)
+      imported_licence.legal_ref_id.should == 1
       imported_licence.name.should == "Licences to play music in a theatre (All UK)"
       imported_licence.da_england.should be_true
     end
@@ -80,7 +80,7 @@ describe DataImporter::Licences do
           importer.run
         end
       end.should raise_error
-      imported_licence = Licence.find_by_correlation_id(1)
+      imported_licence = Licence.find_by_legal_ref_id(1)
       imported_licence.should == nil
     end
     it "should fail early if the activity does not exist" do
@@ -95,7 +95,7 @@ describe DataImporter::Licences do
           importer.run
         end
       end.should raise_error
-      imported_licence = Licence.find_by_correlation_id(1)
+      imported_licence = Licence.find_by_legal_ref_id(1)
       imported_licence.should == nil
     end
     it "should add links for all layer3 sectors if a layer2 sector id is provided" do
@@ -147,7 +147,7 @@ describe DataImporter::Licences do
       sectors.should_not include(sector3)
     end
     it "should not create a new licence_link if it already exists" do
-      @licence = FactoryGirl.create(:licence, correlation_id: 1, name: "Test Name", da_england: false)
+      @licence = FactoryGirl.create(:licence, legal_ref_id: 1, name: "Test Name", da_england: false)
       licence_link = FactoryGirl.create(:licence_link, sector: @sector, activity: @activity, licence: @licence)
 
       source = StringIO.new(<<-END)
@@ -176,7 +176,7 @@ describe DataImporter::Licences do
         importer.run
       end
 
-      imported_licence = Licence.find_by_correlation_id(1)
+      imported_licence = Licence.find_by_legal_ref_id(1)
       imported_licence.da_england.should == true
       imported_licence.da_scotland.should == true
       imported_licence.da_wales.should == true

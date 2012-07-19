@@ -50,7 +50,7 @@ class LicenceDataMigrator
   end
 
   def done(counter, nl)
-    print "Migrated #{counter} Licences out of #{Licence.count}.#{nl}"
+    print "Migrated #{counter} Licences.#{nl}"
   end
   
 end

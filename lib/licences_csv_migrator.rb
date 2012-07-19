@@ -95,7 +95,7 @@ class LicencesCsvMigrator
   end
 
   def done(counter, nl)
-    print "Migrated #{counter} LICENCE_OIDs from #{LICENCES_FILENAME}, saved to #{MIGRATED_FILENAME}, unmigrated entries can be found in #{UNMIGRATED_FILENAME}.#{nl}"
+    print "Migrated #{counter} LICENCE_OIDs.#{nl}"
   end
   
 end

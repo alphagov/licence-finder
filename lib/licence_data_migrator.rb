@@ -33,15 +33,13 @@ class LicenceDataMigrator
     
     Licence.all.each do |licence|
       
-      puts "\nLooking up #{licence.correlation_id}\n"
-      
       legal_ref_id = @licence_mappings[licence.correlation_id.to_s]
       
       if legal_ref_id
       
-        puts "\nFound #{legal_ref_id}\n"
         licence.update_attribute("legal_ref_id", legal_ref_id.to_i)
         counter += 1
+        
       end
       
       done(counter, "\r")

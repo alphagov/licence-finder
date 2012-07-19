@@ -12,7 +12,7 @@ gem 'router-client', '~> 3.0.1', :require => 'router'
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
 else
-  gem 'gds-api-adapters', '~> 0.0.50'
+  gem 'gds-api-adapters', '~> 0.2.0'
 end
 
 gem 'rummageable', '~> 0.1.3'
@@ -20,7 +20,7 @@ gem 'rummageable', '~> 0.1.3'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '~> 1.1.39'
+  gem "slimmer", '~> 1.1.45'
 end
 
 group :assets do

@@ -95,7 +95,7 @@ class LicencesCsvMigrator
   end
 
   def done(counter, nl)
-    print "Migrated #{counter} LICENCE_OIDs.#{nl}"
+    print "Replaced #{counter} LICENCE_OIDs.#{nl}"
   end
   
 end

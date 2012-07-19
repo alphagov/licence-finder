@@ -34,6 +34,7 @@ end
 
 group :development do
   gem "ruby-debug19"
+  gem "curb"
 end
 
 group :development, :test do

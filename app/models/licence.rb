@@ -1,7 +1,10 @@
 class Licence
   include Mongoid::Document
+  # Deprecated attr left here for smoother migration.
   field :correlation_id, :type => Integer
   index :correlation_id, :unique => true
+  field :legal_ref_id, :type => Integer
+  index :legal_ref_id, :unique => true
   field :name, :type => String
   field :regulation_area, :type => String
   field :da_england, :type => Boolean
@@ -11,9 +14,9 @@ class Licence
 
   validates :name, :presence => true
   validates :regulation_area, :presence => true
-
-  def self.find_by_correlation_id(correlation_id)
-    where(correlation_id: correlation_id).first
+  
+  def self.find_by_legal_ref_id(legal_ref_id)
+    where(legal_ref_id: legal_ref_id).first
   end
 
   def self.find_by_sectors_activities_and_location(sectors, activities, location)

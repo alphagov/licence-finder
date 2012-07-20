@@ -66,6 +66,10 @@ class LicencesCsvMigrator
   def run
       
     counter = 0
+    @unmigrated_correlation_ids = []
+    
+    @migrated_csv << @licence_data.headers
+    @unmigrated_csv << @licence_data.headers
     
     @licence_data.each do |row|
       
@@ -89,7 +93,10 @@ class LicencesCsvMigrator
       @migrated_csv << row
       counter += 1
     else
-      @unmigrated_csv << row
+      unless @unmigrated_correlation_ids.include?(row['LICENCE_OID'])
+        @unmigrated_correlation_ids << row['LICENCE_OID']
+        @unmigrated_csv << row
+      end
     end
     counter
   end

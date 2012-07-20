@@ -33,7 +33,7 @@ describe LicenceDataMigrator do
       l2.legal_ref_id.should == 1610001
     end
     
-    it "should not update the legal_ref_id where no suitable mapping exists" do
+    it "should not nullify the legal_ref_id where no suitable mapping exists" do
       l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 9999999999, legal_ref_id: 42)
       
       silence_stream(STDOUT) do

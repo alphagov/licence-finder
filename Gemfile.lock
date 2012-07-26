@@ -101,8 +101,8 @@ GEM
     null_logger (0.0.1)
     plek (0.1.24)
       builder
-    poltergeist (0.6.0)
-      capybara (~> 1.0)
+    poltergeist (0.7.0)
+      capybara (~> 1.1)
       childprocess (~> 0.3)
       faye-websocket (~> 0.4, >= 0.4.4)
       http_parser.rb (~> 0.5.3)
@@ -219,7 +219,7 @@ DEPENDENCIES
   lograge
   mocha (~> 0.11.3)
   mongoid (~> 2.4)
-  poltergeist (~> 0.6.0)
+  poltergeist (~> 0.7.0)
   rails (= 3.2.6)
   router-client (~> 3.0.1)
   rspec-rails (~> 2.11.0)

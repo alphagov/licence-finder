@@ -43,6 +43,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'mocha', '~> 0.11.3', :require => false
   gem 'capybara', '~> 1.1.2'
-  gem 'poltergeist', "~> 0.6.0"
+  gem 'poltergeist', "~> 0.7.0"
   gem 'webmock', '~> 1.8.7', :require => false
 end

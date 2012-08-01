@@ -24,6 +24,9 @@ else
   gem "slimmer", '~> 1.1.45'
 end
 
+gem 'aws-ses', :require => 'aws/ses' # Needed by exception_notification
+gem 'exception_notification'
+
 group :assets do
   #gem 'sass-rails',   '~> 3.2.3'
   #gem 'coffee-rails', '~> 3.2.1'

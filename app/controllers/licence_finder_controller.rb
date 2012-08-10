@@ -1,4 +1,5 @@
 require "slimmer/headers"
+require 'statsd'
 
 class LicenceFinderController < ApplicationController
   include Slimmer::Headers
@@ -22,6 +23,7 @@ class LicenceFinderController < ApplicationController
   end
 
   def sectors
+    Statsd.new('localhost').increment('licence-finder.starts')
     @picked_sectors = Sector.find_by_public_ids(extract_ids(:sector)).ascending(:name).to_a
     if params[:q].present?
       @sectors = $search.search(params[:q])
@@ -55,6 +57,7 @@ class LicenceFinderController < ApplicationController
   end
 
   def licences
+    Statsd.new('localhost').increment('licence-finder.finishes')
     @sectors = Sector.find_by_public_ids(@sector_ids)
     @activities = Activity.find_by_public_ids(@activity_ids)
     @location = params[:location]

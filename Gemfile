@@ -6,6 +6,7 @@ gem 'rails', '3.2.7'
 gem "mongoid", "~> 2.4"
 gem "bson_ext", "~> 1.5"
 gem "tire"
+gem "statsd-ruby"
 
 gem 'router-client', '~> 3.0.1', :require => 'router'
 

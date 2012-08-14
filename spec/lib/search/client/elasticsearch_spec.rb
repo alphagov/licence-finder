@@ -11,13 +11,13 @@ describe Search::Client::Elasticsearch do
     }
     @es_indexer = stub()
     @client = Search::Client::Elasticsearch.new(@es_config)
-    @client.stubs(:indexer).returns(@es_indexer)
+    @client.stub(:indexer).and_return(@es_indexer)
   end
 
   describe "indexing" do
     it "should delete and create index with mapping before re-indexing" do
-      @es_indexer.expects(:delete)
-      @es_indexer.expects(:create).with("test-create").returns(true)
+      @es_indexer.should_receive(:delete)
+      @es_indexer.should_receive(:create).with("test-create").and_return(true)
       @client.pre_index
     end
 
@@ -25,13 +25,13 @@ describe Search::Client::Elasticsearch do
       s1 = FactoryGirl.create(:sector, public_id: 1, name: "Sector One")
       s2 = FactoryGirl.create(:sector, public_id: 2, name: "Sector Two")
       s3 = FactoryGirl.create(:sector, public_id: 3, name: "Sector Three")
-      indexing = sequence("indexing")
-      @client.expects(:to_document).with(s1).returns(:doc1).in_sequence(indexing)
-      @es_indexer.expects(:store).with(:doc1).in_sequence(indexing)
-      @client.expects(:to_document).with(s2).returns(:doc2).in_sequence(indexing)
-      @es_indexer.expects(:store).with(:doc2).in_sequence(indexing)
-      @client.expects(:to_document).with(s3).returns(:doc3).in_sequence(indexing)
-      @es_indexer.expects(:store).with(:doc3).in_sequence(indexing)
+      # indexing = sequence("indexing")
+      @client.should_receive(:to_document).with(s1).and_return(:doc1)
+      @es_indexer.should_receive(:store).with(:doc1)
+      @client.should_receive(:to_document).with(s2).and_return(:doc2)
+      @es_indexer.should_receive(:store).with(:doc2)
+      @client.should_receive(:to_document).with(s3).and_return(:doc3)
+      @es_indexer.should_receive(:store).with(:doc3)
 
       @client.index [s1, s2, s3]
     end
@@ -42,20 +42,20 @@ describe Search::Client::Elasticsearch do
     end
 
     it "should add extra_terms to document when available" do
-      @client.stubs(:extra_terms).returns({123 => %w(foo bar monkey)})
+      @client.stub(:extra_terms).and_return({123 => %w(foo bar monkey)})
       document = @client.to_document(FactoryGirl.build(:sector, public_id: 321, correlation_id: 123, name: "Test Sector"))
       document.should == {_id: 321, type: "test-type", public_id: 321, title: "Test Sector", extra_terms: %w(foo bar monkey), activities: []}
     end
 
     it "should commit after re-indexing" do
-      @es_indexer.expects(:refresh)
+      @es_indexer.should_receive(:refresh)
       @client.post_index
     end
   end
 
   describe "deleting" do
     it "should delete the index" do
-      @es_indexer.expects(:delete)
+      @es_indexer.should_receive(:delete)
 
       @client.delete_index
     end
@@ -64,20 +64,20 @@ describe Search::Client::Elasticsearch do
   describe "searching" do
     it "should search the title with a text query and just return ids" do
       d1 = stub()
-      d1.expects(:public_id).returns(123)
+      d1.should_receive(:public_id).and_return(123)
       d2 = stub()
-      d2.expects(:public_id).returns(234)
+      d2.should_receive(:public_id).and_return(234)
       response = stub()
-      response.expects(:results).returns([d1, d2])
+      response.should_receive(:results).and_return([d1, d2])
 
-      Tire.expects(:search).with(@es_config[:index], {
+      Tire.should_receive(:search).with(@es_config[:index], {
           query: {
               query_string: {
                   fields: %w(title extra_terms activities),
                   query: "query"
               }
           }
-      }).returns(response)
+      }).and_return(response)
       @client.search("query").should == [123, 234]
     end
   end

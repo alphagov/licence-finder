@@ -50,12 +50,12 @@ describe DataImporter::Activities do
   describe "open_data_file" do
     it "should open the input data file" do
       tmpfile = Tempfile.new("activities.csv")
-      DataImporter::Activities.expects(:data_file_path).with("activities.csv").returns(tmpfile.path)
+      DataImporter::Activities.should_receive(:data_file_path).with("activities.csv").and_return(tmpfile.path)
 
       DataImporter::Activities.open_data_file
     end
     it "should fail if the input data file does not exist" do
-      DataImporter::Activities.expects(:data_file_path).with("activities.csv").returns("/example/activities.csv")
+      DataImporter::Activities.should_receive(:data_file_path).with("activities.csv").and_return("/example/activities.csv")
 
       lambda do
         DataImporter::Activities.open_data_file

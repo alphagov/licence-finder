@@ -15,7 +15,7 @@ describe Search::Client::Elasticsearch do
     a2 = FactoryGirl.create(:activity, :public_id => 7124, :correlation_id => 982, :name => "Unrelated terms", :sectors => [s3])
 
     @search = $search.clone
-    @search.client.stubs(:extra_terms).returns({
+    @search.client.stub(:extra_terms).and_return({
       987 => %w(foo bar),
       986 => %w(monkey)
     })

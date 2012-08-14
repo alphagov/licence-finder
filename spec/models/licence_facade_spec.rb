@@ -4,19 +4,19 @@ describe LicenceFacade do
 
   describe "create_for_licences" do
     before :each do
-      GdsApi::Publisher.any_instance.stubs(:licences_for_ids).returns([])
+      GdsApi::Publisher.any_instance.stub(:licences_for_ids).and_return([])
       @l1 = FactoryGirl.create(:licence)
       @l2 = FactoryGirl.create(:licence)
     end
 
     it "should query publisher for licence details" do
-      GdsApi::Publisher.any_instance.expects(:licences_for_ids).with([@l1.correlation_id, @l2.correlation_id]).returns([])
+      GdsApi::Publisher.any_instance.should_receive(:licences_for_ids).with([@l1.correlation_id, @l2.correlation_id]).and_return([])
       LicenceFacade.create_for_licences([@l1, @l2])
     end
 
     it "should skip querying publisher if not given any licences" do
       GdsApi::Publisher.any_instance.unstub(:licences_for_ids) # clear the stub above, otherwise the next line won't work
-      GdsApi::Publisher.any_instance.expects(:licences_for_ids).never()
+      GdsApi::Publisher.any_instance.should_not_receive(:licences_for_ids)
       LicenceFacade.create_for_licences([])
     end
 
@@ -27,7 +27,7 @@ describe LicenceFacade do
 
     it "should add the publisher details to each Facade where details exist" do
       pub_data2 = OpenStruct.new(:licence_identifier => @l2.correlation_id.to_s)
-      GdsApi::Publisher.any_instance.stubs(:licences_for_ids).returns([pub_data2])
+      GdsApi::Publisher.any_instance.should_receive(:licences_for_ids).and_return([pub_data2])
 
       result = LicenceFacade.create_for_licences([@l1, @l2])
       result[0].licence.should == @l1
@@ -38,7 +38,7 @@ describe LicenceFacade do
 
     context "when publisher api returns nil" do
       before :each do
-        GdsApi::Publisher.any_instance.stubs(:licences_for_ids).returns(nil)
+        GdsApi::Publisher.any_instance.stub(:licences_for_ids).and_return(nil)
       end
 
       it "should continue with no publisher data" do
@@ -50,14 +50,14 @@ describe LicenceFacade do
       end
 
       it "should log the error" do
-        Rails.logger.expects(:warn).with("Error fetching licence details from publisher")
+        Rails.logger.should_receive(:warn).with("Error fetching licence details from publisher")
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end
 
     context "when publisher times out" do
       before :each do
-        GdsApi::Publisher.any_instance.stubs(:licences_for_ids).raises(GdsApi::TimedOutException)
+        GdsApi::Publisher.any_instance.stub(:licences_for_ids).and_raise(GdsApi::TimedOutException)
       end
 
       it "should continue with no publisher data" do
@@ -69,7 +69,7 @@ describe LicenceFacade do
       end
 
       it "should log the error" do
-        Rails.logger.expects(:warn).with("Timeout fetching licence details from publisher")
+        Rails.logger.should_receive(:warn).with("Timeout fetching licence details from publisher")
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end

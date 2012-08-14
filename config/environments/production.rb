@@ -43,7 +43,7 @@ LicenceFinder::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = Plek.current.find('cdn')
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
@@ -53,6 +53,9 @@ LicenceFinder::Application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
+  
+  # Enable lograge
+  config.lograge.enabled = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)

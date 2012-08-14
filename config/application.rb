@@ -15,7 +15,6 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-# If changing this, make sure the asset_prefix is also changed in the deploy scripts.
 APP_SLUG = 'licence-finder'
 
 module LicenceFinder
@@ -65,7 +64,7 @@ module LicenceFinder
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.prefix = "#{APP_SLUG}/assets"
+    config.assets.prefix = 'licencefinder' # this has to match the path configured in puppet and deploy scripts.
     config.assets.precompile += ['licence-finder.css', 'licence-finder.js']
 
     # Disable Rack::Cache

@@ -1,0 +1,86 @@
+legal ref nr,Formality_name,LGSL_ID,Legislation,Numeric_Admins,New code?
+1910001,Miscellaneous Payments,349,None - special formality to pay fee shortfalls,7,349-7-1
+120002,Animal boarding establishments,374,Welfare of Animals Act (NI) 1972,4,374-4-1
+1030001,Nursing agency,381,Care Standards Act 2000,1,381-1-1
+1030003,Nurse agency,381,Regulation of Care (Scotland) Act 2001,3,381-3-1
+1940001,Occupation of the road in connection with building work,382,Highways Act 1980,5,382-5-1
+940121,Massage and special treatment premises licensing,389,London Local Authorities Act 1991,1,389-1-1
+9999994,Application to demonstrate form creation,390,<----- This shows where legislation goes- can be 200 characters max----->,7,remove
+780002,Indoor sports entertainment licence,393,"Civic Government (Scotland) Act 1982, Section 41A",3,393-3-1
+1590071,Street trading licence,400,City of Newcastle Upon Tyne Act 2000,5,400-5-1
+930151,Market stall licence,616,City of London (Various Powers) Act 1987 Part III,1,616-1-1
+350003,Club licensing,646,Registration of Clubs (NI) Order 1196,4,646-4-1
+1580301,Street collection licence,647,"Police, Factories etc- (Miscellaneous Provisions) Act 1916",5,647-5-1
+1580302,Charitable collection permit,647,"Civic Government (Scotland) Act 1982, Section 119 and The Public Charitable Collections (Scotland) Regulations 1984, as amended by The Public Charitable Collections (Scotland) Amendment Regulations 1988-",3,647-3-1
+290011,Car boot sale authorisation,679,County of Cleveland Act 1987,1,679-1-1
+1610111,"Tattooists, piercing and electrolysis licence",680,London Local Authorities Act 1991,1,680-1-1
+1480001,Second hand dealers,682,County of Cleveland Act 1987,1,682-1-1
+660001,Hairdresser registration,694,Greater London Council (General Powers) Act 1967,1,694-1-1
+660221,Hairdresser registration,694,West Glamorgan Act 1987,2,694-2-1
+140201,Animal movement (sheep/goat) notification,706,"Disease Control (Interim Measures) (Scotland) Order SSI 2002/34, as most recently amended by The Disease Control (Interim Measures) (Scotland) Amendment (No- 3) Order 2007",3,706-3-1
+142003,Animal Movement,706,tbd,3,706-3-1
+410002,Cooling tower notification,707,Notification of cooling towers and evaporative condensers regulations (NI) 1994,4,707-4-1
+270001,Busking licence,797,London Local Authorities Act 2000,1,797-1-1
+1300004,Day care facilities for under 12s,920,Children (NI) Order 1995,4,920-4-1
+1930001,Dispensation to allow the display of fireworks late at night,1068,Fireworks (Scotland) Regulations 2004,3,1068-3-1
+280001,Camp site licence,1108,Public Health Act 1936,5,1108-5-1
+1290002,Adult placement,1164,tbd,2,1164-2-1
+130001,Animal by-products approval,1173,Regulation (EC) No- 1774/2002 (the 'EU Animal By-Products Regulation'),5,1173-5-1
+130003,Animal by-products approval,1173,Regulation (EC) No- 1774/2002 (the 'EU Animal By-Products Regulation'),3,1173-3-1
+160003,Approval of course leading to external qualification,1178,Education (Scotland) Act (1996),3,1178-3-1
+160004,Approval of course leading to external qualification,1178,Education (Northern Ireland) Order 1998,4,1178-4-1
+261501,"Builder, competent person accreditor",1186,"Building Act Competent Person Building Regulations 2000 (SI 2531/2000) as amended by the Building (Amendment) Regulations 2001 (SI 3335/2001) and the Building (Amendment) Regulations 2002 (SI 440/2002) using powers in Schedule 1, para 4(a) of the Building",5,1186-5-1
+310001,Chemical supply and storage (pesticide spraying etc),1190,Control Of Pesticides Regulations 1986  and Control of pesticides (Amendment) Regulations 1997,6,1190-6-1
+310002,Chemical supply and storage (pesticide spraying etc),1190,Control of Pesticides Regulations (NI) 1987(as amended);  Plant Protection Products Regulations (NI) 2005 (as amended),4,1190-4-1
+340001,Claims management,1192,Compensation Act 2006,7,1192-7-1
+360001,Company registration,1194,"Companies Act 1986 and Companies Act 2006, Various EC Regulations/Directives",7,1194-7-1
+400001,Licensed Conveyancers,1197,Administration of Justice Act 1985 & Legal Services Act 2007,5,1197-5-1
+400002,Conveyancers,1197,Law Reform (Miscellaneous Provisions) (Scotland) Act 1990,3,1197-3-1
+1310002,Domiciliary care agencies,1204,tbd,2,1204-2-1
+1310003,Care at home services,1204,Regulation of Care (Scotland) Act 2001,3,1204-3-1
+481001,Emissions trading scheme,1207,Greenhouse Gas Emissions Trading Scheme (E&W) Regulations 2005,5,1207-5-1
+481002,Emissions trading scheme,1207,Greenhouse Gas Emissions Trading Scheme (Scotland) Regulations 2005,3,1207-3-1
+481003,Emissions trading scheme,1207,Greenhouse Gas Emissions Trading Scheme (NI) Regulations 2005,4,1207-4-1
+491003,Energy assessor,1209,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1209-4-1
+1360001,Gas appliances or fittings work,1214,Gas Safety (Installation and Use) Regulations SI 1998/2451,6,1214-6-1
+750001,Application to register as a children's social care provider: children's home,1223,Care Standards Act 2000,1,1223-1-1
+21000234,Insolvency practitioner licence,1225,Insolvency Practitioners Regulations 2005,7,1225-7-1
+21000256,Insolvency practitioner authorisation,1225,Insolvency Act 1986,7,1225-7-4
+860001,Licence to kill or take certain birds and animals,1231,Wildlife and Countryside Act 1981,1,1231-1-1
+860002,Licence to kill or take certain birds and animals,1231,Wildlife and Countryside Act 1981,2,1231-2-1
+860003,Protected species licensing,1231,"Wildlife and Countryside Act 1981, Protection of Badgers Act 1992, Conservation (Natural Habitats &c-) Regulations 1994",3,1231-3-1
+861001,Licence to kill or take certain birds and animals outside 12 mile limit,1231,"Offshore Marine Conservation (Natural Habitats, &c-) Regulations 2007",7,1231-7-1
+910003,"Marine construction works, land reclamation,beach replenishment licence (FEPA)",1235,"Food and Environment Protection Act 1985 (FEPA) Part II, Deposits in the Sea",4,1235-4-1
+651001,Guard dog kennels,1236,"Dogs (Northern Ireland) Order 1983, Section 10",4,1236-4-1
+890002,"Local air pollution control authorisation (LAPPC), Part C",1237,Pollution prevention and control regulations (NI) 2003 and relevant amending legislation,4,1237-4-1
+1370002,Reporting of pollution inventory data,1250,Pollution Prevention and Control (Scotland) Regulations 2000,3,1250-3-1
+1370003,Reporting of pollution inventory data,1250,Pollution Prevention & Control Regulations (NI) 2003 (S-R-2003 No-46),4,1250-4-1
+1320002,Residential care homes,1251,Regulation of Care (Scotland) Act 2001,3,1251-3-1
+1320003,Residential care homes,1251,Care Standards Act 2000 / The Care Homes (Wales) Regulations,2,1251-2-1
+1330002,Residential family centre,1252,tbd,2,1252-2-1
+1531002,Social landlords,1259,tbd,3,1259-3-1
+1531003,Social landlords,1259,Private Tenancies (NI) Order 2006,4,1259-4-1
+1640002,Transportation & supply of water,1265,Water Industry Act 1991 (c- 56),4,1265-4-1
+1741001,Waste electrical and electronic equipment accreditation  scheme,1274,UK Waste Electrical and Electronic Equipment (WEEE) Regulations 2006 and Electronic Equipment (Amendment) Regulations 2007,5,1274-5-1
+1741002,Waste electrical and electronic equipment accreditation  scheme,1274,UK Waste Electrical and Electronic Equipment (WEEE) Regulations 2006,3,1274-3-1
+1741003,Waste electrical and electronic equipment accreditation  scheme,1274,Waste Electrical and Electronic Equipment Regs (NI) 2006,4,1274-4-1
+1770001,Waste management,1275,"Waste Management Licensing Regulations 1994, Environmental Permitting(E&W) Regulations (2007)",5,1275-5-1
+180002,Food premises approval,1293,Regulation (EC) No 853/2004,4,1293-4-1
+180003,Food premises approval,1293,Food Hygiene (Scotland) Regulations 2006 / Regulation (EC) No 853/2004,3,1293-3-1
+180004,Food premises approval,1293,Food Hygiene (Wales) Regulations 2006 / Regulation (EC) No 853/2004,2,1293-2-1
+941001,"Massage and special treatment, therapist registration",1294,London Local Authorities Act 1991,1,1294-1-1
+1400003,Streetworks and running pipes/cables under road,1295,tbd,4,1295-4-1
+371001,Land drainage consents,1324,Land Drainage Act 1991,5,1324-5-1
+1761001,Hazardous Waste Disposal,1325,Hazardous Waste (England and Wales) Regulations 2005 (NB Amended in England in 2009),5,1325-5-1
+1761003,Hazardous Waste Disposal,1325,"Hazardous Waste (NI) Regulations 2005, The Controlled Waste (Duty of Care) (Amendment) Regulations (Northern Ireland) 2004",4,1325-4-1
+1551001,PPC - Dry cleaning,1328,tbd,3,1328-3-1
+1635001,Transmissible spongiform encephalopathies testing,1331,Transmissible Spongiform Encephalopathies (Scotland) Regulations 2006,3,1331-3-1
+1820001,Postal operators,1346,Postal Services Act 2000,7,1346-7-1
+1980001,Application for the Childcare Register: childcare provider on domestic or non-domestic premises,1352,Childcare Act 2006,1,1352-1-1
+870001,"Licence to buy and sell salmon, trout, pike, eel or pollan",9000,Legislation Sections 113 and 114 of Fisheries Act (NI) 1966,4,9000-4-1
+491302,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+491303,Commercial (Non-Domestic) Energy Assessor ,9995,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+491403,Operational Ratings Assessor (Production of Display Energy Certificates),9996,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+491503,Air Conditioning System Energy Assessor,9997,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+491103,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+491203,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore

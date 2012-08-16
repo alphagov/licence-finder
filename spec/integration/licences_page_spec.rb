@@ -61,7 +61,7 @@ describe "Licences page" do
 
   describe "getting licence details from publisher" do
     specify "seeing licence details from publisher on results page" do
-      publisher_has_licence :licence_identifier => @l1.legal_ref_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
+      publisher_has_licence :licence_identifier => @l1.gds_id, :slug => 'licence-one', :title => 'Licence 1',
             :licence_short_description => "Short description of licence"
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
@@ -92,9 +92,9 @@ describe "Licences page" do
     end
 
     specify "don't show graceful text if we have many links" do
-      publisher_has_licence :licence_identifier => @l1.legal_ref_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
+      publisher_has_licence :licence_identifier => @l1.gds_id, :slug => 'licence-one', :title => 'Licence 1',
             :licence_short_description => "Short description of licence"
-      publisher_has_licence :licence_identifier => @l2.legal_ref_id.to_s, :slug => 'licence-two', :title => 'Licence 2',
+      publisher_has_licence :licence_identifier => @l2.gds_id, :slug => 'licence-two', :title => 'Licence 2',
             :licence_short_description => "Short description of licence 2"
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')

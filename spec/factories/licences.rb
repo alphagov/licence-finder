@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :licence do
-    sequence(:correlation_id) # deprecated attr should be removed once licences are migrated.
-    sequence(:legal_ref_id)
+    sequence(:correlation_id)
+    sequence(:gds_id) { |n| "#{n}-3-1" }
     name "Test Licence"
     regulation_area "Test Regulation Area"
     da_england true

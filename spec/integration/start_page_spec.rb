@@ -29,8 +29,8 @@ describe "Start page" do
   context "Seeing popular licences on the start page" do
     before :each do
       @popular_licence_ids = LicenceFinderController::POPULAR_LICENCE_IDS
-      @popular_licence_ids.each do |legal_ref_id|
-        FactoryGirl.create(:licence, :legal_ref_id => legal_ref_id)
+      @popular_licence_ids.each do |gds_id|
+        FactoryGirl.create(:licence, :gds_id => gds_id)
       end
     end
 

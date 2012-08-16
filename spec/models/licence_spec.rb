@@ -4,13 +4,13 @@ describe Licence do
   it "should use the correct field types on the model" do
     Licence.safely.create!(
       :public_id => 42,
-      :legal_ref_id => 24,
+      :gds_id => "24-3-1",
       :name => "Some Licence",
       :regulation_area => "Some Regulation Area"
     )
     licence = Licence.first
     licence.public_id.should == 42
-    licence.legal_ref_id.should == 24
+    licence.gds_id.should == "24-3-1"
     licence.name.should == "Some Licence"
   end
 
@@ -19,9 +19,9 @@ describe Licence do
       @licence = FactoryGirl.build(:licence)
     end
 
-    it "should have a database level uniqueness constraint on legal_ref_id" do
-      FactoryGirl.create(:licence, :legal_ref_id => 42)
-      @licence.legal_ref_id = 42
+    it "should have a database level uniqueness constraint on gds_id" do
+      FactoryGirl.create(:licence, :gds_id => "24-3-1")
+      @licence.gds_id = "24-3-1"
       lambda do
         @licence.safely.save
       end.should raise_error(Mongo::OperationFailure)
@@ -38,18 +38,18 @@ describe Licence do
     end
   end
 
-  describe "find_by_legal_ref_id" do
+  describe "find_by_gds_id" do
     before :each do
       @licence = FactoryGirl.create(:licence)
     end
 
-    it "should be able to retrieve by legal_ref_id" do
-      found_licence = Licence.find_by_legal_ref_id(@licence.legal_ref_id)
+    it "should be able to retrieve by gds_id" do
+      found_licence = Licence.find_by_gds_id(@licence.gds_id)
       found_licence.should == @licence
     end
 
-    it "should fail to retrieve a non-existent legal_ref_id" do
-      found_licence = Licence.find_by_legal_ref_id(@licence.legal_ref_id + 1)
+    it "should fail to retrieve a non-existent gds_id" do
+      found_licence = Licence.find_by_gds_id("24-3-2")
       found_licence.should == nil
     end
   end

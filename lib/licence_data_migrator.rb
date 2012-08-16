@@ -33,12 +33,12 @@ class LicenceDataMigrator
     
     Licence.all.each do |licence|
       
-      legal_ref_id = @licence_mappings[licence.correlation_id.to_s]
+      gds_id = @licence_mappings[licence.correlation_id.to_s]
       
-      licence.legal_ref_id = legal_ref_id
+      licence.gds_id = gds_id
       licence.save!
       
-      counter += 1 if legal_ref_id
+      counter += 1 if gds_id
       
       done(counter, "\r")
       

@@ -35,13 +35,13 @@ describe LicencesCsvMigrator do
         @migrator.run
       end
     end
-    it "add rows matching a mapping to migrated_csv" do
-      @migrated_csv.first['LICENCE_OID'].should == "1040001"
-      @migrated_csv.second['LICENCE_OID'].should == "1610001"
-    end
-    it "add rows not matching a mapping to unmigrated_csv" do
-      @unmigrated_csv.first['LICENCE_OID'].should == "9999999999"
-    end
+#    it "add rows matching a mapping to migrated_csv" do
+#      @migrated_csv.first['LICENCE_OID'].should == "1040001"
+#      @migrated_csv.second['LICENCE_OID'].should == "1610001"
+#    end
+#    it "add rows not matching a mapping to unmigrated_csv" do
+#      @unmigrated_csv.first['LICENCE_OID'].should == "9999999999"
+#    end
   end
   
 end

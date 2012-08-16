@@ -3,7 +3,7 @@ require 'licence_data_migrator'
 
 describe LicenceDataMigrator do
   before(:all) do
-    LicenceDataMigrator.stubs(:load_mappings).returns({
+    LicenceDataMigrator.stub(:load_mappings).and_return({
       "1083741393" => "1040001",
       "1083741799" => "1620001",
       "1084062157" => "1580003",
@@ -29,18 +29,18 @@ describe LicenceDataMigrator do
       
       l1.reload
       l2.reload
-      l1.legal_ref_id.should == 1040001
-      l2.legal_ref_id.should == 1610001
+      l1.gds_id.should == "1040001"
+      l2.gds_id.should == "1610001"
     end
     
-    it "should not nullify the legal_ref_id where no suitable mapping exists" do
-      l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 9999999999, legal_ref_id: 42)
+    it "should not nullify the gds_id where no suitable mapping exists" do
+      l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 9999999999, gds_id: "123-2-1")
       
       silence_stream(STDOUT) do
         @migrator.run
       end
       
-      l1.legal_ref_id.should == 42
+      l1.gds_id.should == "123-2-1"
     end
   end
 end

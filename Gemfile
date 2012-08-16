@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://gems.gemfury.com/vo6ZrmjBQu5szyywDszE/'
 
-gem 'rails', '3.2.7'
+gem 'rails', '~> 3.2.8'
 
 gem "mongoid", "~> 2.4"
 gem "bson_ext", "~> 1.5"
@@ -21,7 +21,7 @@ gem 'lograge'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '~> 1.1.45'
+  gem "slimmer", '~> 1.2.2'
 end
 
 gem 'aws-ses', :require => 'aws/ses' # Needed by exception_notification
@@ -44,7 +44,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.11.0'
   gem 'factory_girl_rails', '~> 3.2.0'
   gem 'database_cleaner'
-  gem 'mocha', '~> 0.11.3', :require => false
   gem 'capybara', '~> 1.1.2'
   gem 'poltergeist', "~> 0.7.0"
   gem 'webmock', '~> 1.8.7', :require => false

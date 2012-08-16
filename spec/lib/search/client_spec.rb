@@ -25,7 +25,7 @@ describe Search::Client do
 321,bottle, mouse, keyboard
       END
       @client = Search::Client.new()
-      @client.stubs(:extra_terms_handle).returns(source)
+      @client.stub(:extra_terms_handle).and_return(source)
     end
 
     it "should provide extra terms" do

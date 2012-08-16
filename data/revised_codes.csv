@@ -1,0 +1,711 @@
+legal ref nr,Formality_name,LGSL_ID,Legislation,Numeric_Admins,New code?
+1910001,Miscellaneous Payments,349,None - special formality to pay fee shortfalls,7,349-7-1
+1910301,Miscellaneous Payments,349,None - special formality to pay fee shortfalls,7,349-7-1
+120001,Animal boarding establishment licence,374,Animal Boarding Establishments Act 1963,6,374-6-1
+120002,Animal boarding establishments,374,Welfare of Animals Act (NI) 1972,4,374-4-1
+120301,Animal boarding establishment licence,374,Animal Boarding Establishments Act 1963,6,374-6-1
+1120001,Pet shop licence,375,Pet Animals Act 1951,6,375-6-1
+1120301,Pet shop licence,375,Pet Animals Act 1951,6,375-6-1
+1460001,Scrap metal dealer registration,378,Scrap Metal Dealers' Act 1964,5,378-5-1
+1460301,Scrap metal dealer registration,378,Scrap Metal Dealers' Act 1964,5,378-5-1
+200001,Auction premises registration,379,Greater London Council (general Powers) act 1984 Part VI,1,379-1-1
+200111,Auction premises registration,379,Landlord and Tenants Act 1954 Part 2,1,379-1-1
+200131,Auction premises registration,379,South Yorkshire Act 1980,1,379-1-1
+200151,Auction premises registration,379,Nottingham City Council Act 2003,1,379-1-1
+200161,Auction premises registration,379,County of Lancashire Act 1984,1,379-1-1
+200171,Auction premises registration,379,Humberside Act 1982,1,379-1-1
+200301,Auction premises registration,379,Greater London Council (general Powers) act 1984 Part VI,1,379-1-1
+200411,Auction premises registration,379,Landlord and Tenants Act 1954 Part 2,1,379-1-1
+200431,Auction premises registration,379,South Yorkshire Act 1980,1,379-1-1
+200451,Auction premises registration,379,Nottingham City Council Act 2003,1,379-1-1
+200461,Auction premises registration,379,County of Lancashire Act 1984,1,379-1-1
+200471,Auction premises registration,379,Humberside Act 1982,1,379-1-1
+1030001,Nursing agency,381,Care Standards Act 2000,1,381-1-1
+1030002,Nursing agency,381,Care Standards Act 2000,2,381-2-1
+1030003,Nurse agency,381,Regulation of Care (Scotland) Act 2001,3,381-3-1
+1030004,Nursing agency,381,tbd,4,381-4-1
+1940001,Occupation of the road in connection with building work,382,Highways Act 1980,5,382-5-1
+1940002,Occupation of the road in connection with building work,382,Roads (Scotland) Act 1984,3,381-3-1
+1940301,Occupation of the road in connection with building work,382,Highways Act 1980,5,382-5-1
+1940302,Occupation of the road in connection with building work,382,Roads (Scotland) Act 1984,3,381-3-1
+1500001,Sex shop and cinema licence,388,Local Government (Miscellaneous Provisions) Act 1982,5,388-5-1
+1500002,Sex establishment / sex cinema,388,Local Government (Miscellaneous Provisions) (Northern Ireland) Order 1985 (No- 1208 (N-I- 15)) Schedule 2,4,388-4-1
+1500003,Sex shop,388,"Civic Government (Scotland) Act 1982, Section 45",3,388-3-1
+1500301,Sex shop and cinema licence,388,Local Government (Miscellaneous Provisions) Act 1982,5,388-5-1
+1500302,Sex establishment / sex cinema,388,Local Government (Miscellaneous Provisions) (Northern Ireland) Order 1985 (No- 1208 (N-I- 15)) Schedule 2,4,388-4-1
+1500303,Sex shop,388,"Civic Government (Scotland) Act 1982, Section 45",3,388-3-1
+940001,Massage and special treatment premises licensing,389,Byelaw under Local Government(Miscellaneous Provisions) Act 1982,5,389-5-1
+940111,Massage and special treatment premises licensing,389,Essex Act 1987,5,389-5-1
+940121,Massage and special treatment premises licensing,389,London Local Authorities Act 1991,1,389-1-1
+940131,Massage and special treatment premises licensing,389,Nottinghamshire County Council Act 1985,1,389-1-1
+940171,Massage and special treatment premises licensing,389,London County Council (General Powers) Act 1920,1,389-1-1
+940172,Massage and special treatment premises licensing,389,Worcester City Council Act 1985,5,389-5-1
+940173,Massage and special treatment premises licensing,389,Birmingham City Council Act 1990,5,389-5-1
+940301,Massage and special treatment premises licensing,389,Byelaw under Local Government(Miscellaneous Provisions) Act 1982,5,389-5-1
+940411,Massage and special treatment premises licensing,389,Essex Act 1987,5,389-5-1
+940421,Massage and special treatment premises licensing,389,London Local Authorities Act 1991,1,389-1-1
+940431,Massage and special treatment premises licensing,389,Nottinghamshire County Council Act 1985,1,389-1-1
+940471,Massage and special treatment premises licensing,389,London County Council (General Powers) Act 1920,1,389-1-1
+940472,Massage and special treatment premises licensing,389,Worcester City Council Act 1985,5,389-5-1
+940473,Massage and special treatment premises licensing,389,Birmingham City Council Act 1990,5,389-5-1
+590001,Food premises registration,390,EC Regulation 852/2004 (Food Premises),7,390-7-1
+590301,Food premises registration,390,EC Regulation 852/2004 (Food Premises),6,remove
+9999994,Application to demonstrate form creation,390,<----- This shows where legislation goes- can be 200 characters max----->,7,remove
+820001,Late hours catering licence,391,"Civic Government (Scotland) Act 1982, Section 42",3,391-3-1
+820301,Late hours catering licence,391,"Civic Government (Scotland) Act 1982, Section 42",3,391-3-1
+600001,Venison dealer licence,392,Deer (Scotland) Act 1966,3,392-3-1
+780001,Entertainment,393,Local Government (Miscellaneous Provisions) (Northern Ireland)- Order 1985,4,393-4-1
+780002,Indoor sports entertainment licence,393,"Civic Government (Scotland) Act 1982, Section 41A",3,393-3-1
+780301,Entertainment,393,Local Government (Miscellaneous Provisions) (Northern Ireland)- Order 1985,4,393-4-1
+780302,Indoor sports entertainment licence,393,"Civic Government (Scotland) Act 1982, Section 41A",3,393-3-1
+785001,Public entertainment licence,393,"Civic Government (Scotland) Act 1982, Section 41",3,393-3-2
+785301,Public entertainment licence,393,"Civic Government (Scotland) Act 1982, Section 41",3,393-3-2
+1621001,Theatre licence,395,Theatres Act 1968,3,395-3-1
+1621301,Theatre licence,395,Theatres Act 1968,3,395-3-1
+1590001,Street trading licence,400,Local Government (Miscellaneous Provisions) Act 1982,5,400-5-1
+1590002,Street trading licence,400,Street Trading Act (Northern Ireland) 2001,4,400-4-1
+1590003,Street trader's licence,400,"Civic Government (Scotland) Act 1982, Section 39",3,400-3-1
+1590011,Street trading licence,400,London Local Authorities Act 1991 as amended,1,400-1-1
+1590021,Street trading licence,400,London Local Authorities Act 1990,1,400-1-1
+1590031,Street trading licence,400,London Local Authorities Act 1990 as amended,1,400-1-1
+1590041,Street trading licence,400,City of London (Various Powers) Act 1987 Part III,1,400-1-1
+1590051,Street trading licence,400,London Local Authorities Act 1994 as amended,1,400-1-1
+1590061,Street trading licence,400,Hampshire Act 1983 Section 7,1,400-1-1
+1590071,Street trading licence,400,City of Newcastle Upon Tyne Act 2000,5,400-5-1
+1590081,Street trading licence,400,City of Westminster Act 1999,5,400-5-1
+1590301,Street trading licence,400,Local Government (Miscellaneous Provisions) Act 1982,5,400-5-1
+1590302,Street trading licence,400,Street Trading Act (Northern Ireland) 2001,4,400-4-1
+1590303,Street trader's licence,400,"Civic Government (Scotland) Act 1982, Section 39",3,400-3-1
+1590311,Street trading licence,400,London Local Authorities Act 1991 as amended,1,400-1-1
+1590321,Street trading licence,400,London Local Authorities Act 1990,1,400-1-1
+1590331,Street trading licence,400,London Local Authorities Act 1990 as amended,1,400-1-1
+1590341,Street trading licence,400,City of London (Various Powers) Act 1987 Part III,1,400-1-1
+1590351,Street trading licence,400,London Local Authorities Act 1994 as amended,1,400-1-1
+1590361,Street trading licence,400,Hampshire Act 1983 Section 7,1,400-1-1
+1590371,Street trading licence,400,City of Newcastle Upon Tyne Act 2000,5,400-5-1
+1590381,Street trading licence,400,City of Westminster Act 1999,5,400-5-1
+1520001,Skip licence,521,"Highways Act 1980, Section 139",5,521-5-1
+1520002,Skip licence,521,"Roads (Scotland) Act 1984,  Section 85",3,521-3-1
+1520301,Skip licence,521,"Highways Act 1980, Section 139",5,521-5-1
+1520302,Skip licence,521,"Roads (Scotland) Act 1984,  Section 85",3,521-3-1
+930001,Market stall licence,616,Markets and Fairs Clauses Act 1847,5,616-5-1
+930111,Market stall licence,616,By Royal Charter,5,616-5-1
+930121,Market stall licence,616,Local Government (Miscellaneous Provisions) Act 1982,5,616-5-1
+930131,Market stall licence,616,London Local Authorities Act 1990,5,616-5-1
+930141,Market stall licence,616,Local Government (Miscellaneous Provisions) Act 1982,5,616-5-1
+930151,Market stall licence,616,City of London (Various Powers) Act 1987 Part III,1,616-1-1
+930161,Market stall licence,616,London Local Authorities Act 1990 as amended,5,616-5-1
+930171,Market stall licence,616,Byelaws made under S61 of Food and Drugs Act 1955 (as replaced by S60 of Food Act 1984),5,616-5-1
+930181,Market stall licence,616,Highways Act 1980 Section 115E,5,616-5-1
+930201,Market stall licence,616,"Hitchin Market Tolls 1882, Food Act 1984",5,616-5-1
+930211,Market stall licence,616,Local Land Authorities Act 1990,5,616-5-1
+930212,Market stall licence,616,Tyne & Wear Act 1976,5,616-5-1
+930213,Market stall licence,616,Northampton Act 1988,5,616-5-1
+930214,Market stall licence,616,Barnstaple Markets Act 1852,5,616-5-1
+930215,Market stall licence,616,Norwich City Council Act 1984,5,616-5-1
+930216,Market stall licence,616,By Market Charter,5,616-5-1
+930217,Market stall licence,616,Food Act 1984,5,616-5-1
+930218,Market stall licence,616,Sheffield Markets Act 1872,5,616-5-1
+930219,Market stall licence,616,Fenland District Council Market Byelaws 1-10-92,5,616-5-1
+930301,Market stall licence,616,Markets and Fairs Clauses Act 1847,5,616-5-1
+930411,Market stall licence,616,By Royal Charter,5,616-5-1
+930421,Market stall licence,616,Local Government (Miscellaneous Provisions) Act 1982,5,616-5-1
+930431,Market stall licence,616,London Local Authorities Act 1990,5,616-5-1
+930441,Market stall licence,616,Local Government (Miscellaneous Provisions) Act 1982,5,616-5-1
+930451,Market stall licence,616,City of London (Various Powers) Act 1987 Part III,1,616-5-1
+930461,Market stall licence,616,London Local Authorities Act 1990 as amended,5,616-5-1
+930471,Market stall licence,616,Byelaws made under S61 of Food and Drugs Act 1955 (as replaced by S60 of Food Act 1984),5,616-5-1
+930481,Market stall licence,616,Highways Act 1980 Section 115E,5,616-5-1
+930501,Market stall licence,616,"Hitchin Market Tolls 1882, Food Act 1984",5,616-5-1
+930511,Market stall licence,616,Local Land Authorities Act 1990,5,616-5-1
+930512,Market stall licence,616,Tyne & Wear Act 1976,5,616-5-1
+930513,Market stall licence,616,Northampton Act 1988,5,616-5-1
+930514,Market stall licence,616,Barnstaple Markets Act 1852,5,616-5-1
+930515,Market stall licence,616,Norwich City Council Act 1984,5,616-5-1
+930516,Market stall licence,616,By Market Charter,5,616-5-1
+930517,Market stall licence,616,Food Act 1984,5,616-5-1
+930518,Market stall licence,616,Sheffield Markets Act 1872,5,616-5-1
+930519,Market stall licence,616,Fenland District Council Market Byelaws 1-10-92,5,616-5-1
+930814,Market stall licence,616,Barnstaple Markets Act 1852,5,616-5-1
+350001,Club licensing,646,Licensing Act 2003,5,646-5-1
+350003,Club licensing,646,Registration of Clubs (NI) Order 1196,4,646-4-1
+350301,Club licensing,646,Licensing Act 2003,5,646-5-1
+1580001,Street collection licence,647,"Police, Factories etc- (Miscellaneous Provisions) Act 1916",5,647-5-1
+1580002,Charitable collection permit,647,"Civic Government (Scotland) Act 1982, Section 119 and The Public Charitable Collections (Scotland) Regulations 1984, as amended by The Public Charitable Collections (Scotland) Amendment Regulations 1988-",3,647-3-1
+1580003,Street collection,647,"Police, Factories etc- (Miscellaneous Provisions) Act 1916",4,647-4-1
+1580301,Street collection licence,647,"Police, Factories etc- (Miscellaneous Provisions) Act 1916",5,647-5-1
+1580302,Charitable collection permit,647,"Civic Government (Scotland) Act 1982, Section 119 and The Public Charitable Collections (Scotland) Regulations 1984, as amended by The Public Charitable Collections (Scotland) Amendment Regulations 1988-",3,647-3-1
+158000122,Street collection licence,647,"Police, Factories etc- (Miscellaneous Provisions) Act 1916",5,647-5-1
+720001,House to house collection licence,648,House to House Collection Act 1939 and the House to House Regulations 1947,5,648-5-1
+720003,House to house collection,648,House to House Collections Act (NI) 1952,4,648-4-1
+720301,House to house collection licence,648,House to House Collection Act 1939 and the House to House Regulations 1947,5,648-5-1
+72000122,House to house collection licence,648,House to House Collection Act 1939 and the House to House Regulations 1947,5,648-5-1
+1591001,Sunday trading,678,Shops (Sunday Trading &c-) (NI) Order 1997,4,678-4-1
+1591301,Sunday trading,678,Shops (Sunday Trading &c-) (NI) Order 1997,4,678-4-1
+290001,Car boot sale authorisation,679,Local Government (Miscellaneous Provisions) Act 1982,5,679-5-1
+290011,Car boot sale authorisation,679,County of Cleveland Act 1987,1,679-1-1
+290031,Car boot sale authorisation,679,London Local Authorities Act 1991 as amended,1,679-1-1
+290041,Car boot sale authorisation,679,By Royal Charter,5,679-5-1
+290061,Car boot sale authorisation,679,County of Kent Act 2001,5,679-5-1
+290071,Car boot sale authorisation,679,London Local Authorities Act 1996,5,679-5-1
+290072,Car boot sale authorisation,679,Medway Act 2001,5,679-5-1
+290074,Car boot sale authorisation,679,London Local Authority Act 1996,5,679-5-1
+290301,Car boot sale authorisation,679,Local Government (Miscellaneous Provisions) Act 1982,5,679-5-1
+290311,Car boot sale authorisation,679,County of Cleveland Act 1987,1,679-1-1
+290331,Car boot sale authorisation,679,London Local Authorities Act 1991 as amended,1,679-1-1
+290341,Car boot sale authorisation,679,By Royal Charter,5,679-5-1
+290361,Car boot sale authorisation,679,County of Kent Act 2001,5,679-5-1
+290371,Car boot sale authorisation,679,London Local Authorities Act 1996,5,679-5-1
+290372,Car boot sale authorisation,679,Medway Act 2001,5,679-5-1
+290374,Car boot sale authorisation,679,London Local Authority Act 1996,5,679-5-1
+920001,Market operators licence,679,"Civic Government (Scotland) Act 1982, Section 40",3,679-3-1
+920301,Market operators licence,679,"Civic Government (Scotland) Act 1982, Section 40",3,679-3-1
+2000001,Market Operator,679,"The Sales, Markets and Lairs order (Northern Ireland) 1975",4,679-4-1
+1610001,"Tattooists, piercing and electrolysis licence",680,Local Government (Miscellaneous Provisions) Act 1982,5,680-5-1
+1610002,"Tattooists, piercing and electrolysis licence",680,Local Government (Miscellaneous Provisions) (Northern Ireland) Order 1985 (No- 1208 (N-I- 15)),4,680-4-1
+1610003,Skin piercing and tattooing,680,"Civic Government (Scotland) Act 1982, Section 44",3,680-3-1
+1610111,"Tattooists, piercing and electrolysis licence",680,London Local Authorities Act 1991,1,680-1-1
+1610161,"Tattooists, piercing and electrolysis licence",680,Local Government (Miscellaneous Provisions) Act 1982 as amended by local byelaw,5,680-5-1
+1610162,"Tattooists, piercing and electrolysis licence",680,City of Newcastle Upon Tyne Act 2000,5,680-5-1
+1610163,"Tattooists, piercing and electrolysis licence",680,Local Government (Miscellaneous Provisions) Act 1982 as amended by the Local Government Act 2003,5,680-5-1
+1610301,"Tattooists, piercing and electrolysis licence",680,Local Government (Miscellaneous Provisions) Act 1982,5,680-5-1
+1610302,"Tattooists, piercing and electrolysis licence",680,Local Government (Miscellaneous Provisions) (Northern Ireland) Order 1985 (No- 1208 (N-I- 15)),4,680-4-1
+1610303,Skin piercing and tattooing,680,"Civic Government (Scotland) Act 1982, Section 44",3,680-3-1
+1610411,"Tattooists, piercing and electrolysis licence",680,London Local Authorities Act 1991,1,680-1-1
+1610461,"Tattooists, piercing and electrolysis licence",680,Local Government (Miscellaneous Provisions) Act 1982 as amended by local byelaw,5,680-5-1
+1610462,"Tattooists, piercing and electrolysis licence",680,City of Newcastle Upon Tyne Act 2000,5,680-5-1
+1610463,"Tattooists, piercing and electrolysis licence",680,Local Government (Miscellaneous Provisions) Act 1982 as amended by the Local Government Act 2003,5,680-5-1
+1480001,Second hand dealers,682,County of Cleveland Act 1987,1,682-1-1
+1480002,Second hand dealers registration,682,Civic Government (Scotland) Act 1982 (sections 24 to 27),3,682-3-1
+1480111,Second hand dealers,682,County of Lancashire Act 1984,1,682-1-1
+1480121,Second hand dealers,682,County of Merseyside Act 1980,1,682-1-1
+1480141,Second hand dealers,682,Greater Manchester Act 1981,1,682-1-1
+1480151,Second hand dealers,682,Humberside Act 1982,1,682-1-1
+1480171,Second hand dealers,682,Medway Act 2001,1,682-1-1
+1480191,Second hand dealers,682,Nottingham City Council Act 2003,1,682-1-1
+1480201,Second hand dealers,682,South Yorkshire Act 1980,1,682-1-1
+1480202,Second hand dealers,682,City of Newcastle Upon Tyne Act 2000,1,682-1-1
+1480203,Second hand dealers,682,Worcester City Council Act 1985,1,682-1-1
+1480301,Second hand dealers,682,County of Cleveland Act 1987,1,682-1-1
+1480302,Second hand dealers registration,682,Civic Government (Scotland) Act 1982 (sections 28 and 30),3,682-3-1
+1480411,Second hand dealers,682,County of Lancashire Act 1984,1,682-1-1
+1480421,Second hand dealers,682,County of Merseyside Act 1980,1,682-1-1
+1480441,Second hand dealers,682,Greater Manchester Act 1981,1,682-1-1
+1480451,Second hand dealers,682,Humberside Act 1982,1,682-1-1
+1480471,Second hand dealers,682,Medway Act 2001,1,682-1-1
+1480491,Second hand dealers,682,Nottingham City Council Act 2003,1,682-1-1
+1480501,Second hand dealers,682,South Yorkshire Act 1980,1,682-1-1
+1480502,Second hand dealers,682,City of Newcastle Upon Tyne Act 2000,1,682-1-1
+1480503,Second hand dealers,682,Worcester City Council Act 1985,1,682-1-1
+660001,Hairdresser registration,694,Greater London Council (General Powers) Act 1967,1,694-1-1
+660002,Hairdresser licence,694,Hairdressers Act 1939 (Northern Ireland),4,694-4-1
+660111,Hairdresser registration,694,Berkshire Act 1986,1,694-1-1
+660121,Hairdresser registration,694,County of Cleveland Act 1987,1,694-1-1
+660131,Hairdresser registration,694,County of Kent Act 1981,1,694-1-1
+660141,Hairdresser registration,694,County of Merseyside Act 1980,1,694-1-1
+660151,Hairdresser registration,694,Greater Manchester Act 1981,1,694-1-1
+660161,Hairdresser registration,694,Hampshire Act 1983,1,694-1-1
+660181,Hairdresser registration,694,Leicestershire Act 1985,1,694-1-1
+660191,Hairdresser registration,694,Plymouth City Council Act 1987,1,694-1-1
+660201,Hairdresser registration,694,South Yorkshire Act 1980,1,694-1-1
+660211,Hairdresser registration,694,Staffordshire Act 1983,1,694-1-1
+660221,Hairdresser registration,694,West Glamorgan Act 1987,2,694-2-1
+660231,Hairdresser registration,694,West Midlands County Council Act 1980,1,694-1-1
+660241,Hairdresser registration,694,Byelaws made under section 77 of the Public Health Act 1961,5,694-5-1
+660242,Hairdresser registration,694,Worcester City Council Act 1985,1,694-1-1
+660301,Hairdresser registration,694,Greater London Council (General Powers) Act 1967,1,694-1-1
+660302,Hairdresser licence,694,Hairdressers Act 1939 (Northern Ireland),4,694-4-1
+660411,Hairdresser registration,694,Berkshire Act 1986,1,694-1-1
+660421,Hairdresser registration,694,County of Cleveland Act 1987,1,694-1-1
+660431,Hairdresser registration,694,County of Kent Act 1981,1,694-1-1
+660441,Hairdresser registration,694,County of Merseyside Act 1980,1,694-1-1
+660451,Hairdresser registration,694,Greater Manchester Act 1981,1,694-1-1
+660461,Hairdresser registration,694,Hampshire Act 1983,1,694-1-1
+660481,Hairdresser registration,694,Leicestershire Act 1985,1,694-1-1
+660491,Hairdresser registration,694,Plymouth City Council Act 1987,1,694-1-1
+660501,Hairdresser registration,694,South Yorkshire Act 1980,1,694-1-1
+660511,Hairdresser registration,694,Staffordshire Act 1983,1,694-1-1
+660521,Hairdresser registration,694,West Glamorgan Act 1987,2,694-2-1
+660531,Hairdresser registration,694,West Midlands County Council Act 1980,1,694-1-1
+660541,Hairdresser registration,694,Byelaws made under section 77 of the Public Health Act 1961,5,694-5-1
+660542,Hairdresser registration,694,Worcester City Council Act 1985,1,694-1-1
+1510001,Skip operator licence,695,"Highways Act 1980, Section 139",5,695-5-1
+1510301,Skip operator licence,695,"Highways Act 1980, Section 139",5,695-5-1
+1390001,Riding establishment licence,696,Riding Establishments Act 1964,6,696-6-1
+1390002,Riding establishment,696,Welfare of Animals Act(NI) 1972,4,696-4-1
+1390301,Riding establishment licence,696,Riding Establishments Act 1964,6,696-6-1
+1810001,Zoo licence,699,Zoo Licensing Act 1981,6,699-6-1
+1810002,Zoo licence,699,Zoos Licensing Regulations (Northern Ireland) 2003,4,696-4-1
+1810301,Zoo licence,699,Zoo Licensing Act 1981,6,699-6-1
+140004,Animal movement notification ,706,"Council Regulation (EC) 21/2004- The Sheep and Goats (Records, Identification and Movement) Order (Northern Ireland) 2005 (S-R- 535) & for Cattle Council Regulation (EC) No- 1760/2000",4,706-4-1
+140201,Animal movement (sheep/goat) notification,706,"Disease Control (Interim Measures) (Scotland) Order SSI 2002/34, as most recently amended by The Disease Control (Interim Measures) (Scotland) Amendment (No- 3) Order 2007",3,706-3-1
+142001,Animal Movement,706,Disease Control (England) Order 2003,1,706-1-1
+142002,Animal Movement,706,tbd,2,706-2-1
+142003,Animal Movement,706,tbd,3,706-3-1
+410001,Cooling tower notification,707,Notification of Cooling Towers and Evaporative Condensers Regulations 1992,6,707-6-1
+410002,Cooling tower notification,707,Notification of cooling towers and evaporative condensers regulations (NI) 1994,4,707-4-1
+410301,Cooling tower notification,707,Notification of Cooling Towers and Evaporative Condensers Regulations 1992,6,707-6-1
+410302,Cooling tower notification,707,Notification of cooling towers and evaporative condensers regulations (NI) 1994,4,707-4-1
+1140002,Pollution prevention and control(PPC)- Part B,708,Pollution Prevention and Control (Scotland) Regulations 2000,3,708-3-1
+240001,Boat hire licence,739,"Civic Government (Scotland) Act 1982, Section 38",3,739-3-1
+240301,Boat hire licence,739,"Civic Government (Scotland) Act 1982, Section 38",3,739-3-1
+1470001,Pleasure boats,739,Public Health Acts Amendment Act 1907 section 94,5,739-5-1
+1470002,Pleasure boats,739,Public Health Acts Amendment Act 1907 section 94,4,739-4-1
+1470011,Pleasure boats,739,Cheshire County Council Act 1980,5,739-5-1
+1470301,Pleasure boats,739,Public Health Acts Amendment Act 1907 section 94,5,739-5-1
+1470302,Pleasure boats,739,Public Health Acts Amendment Act 1907 section 94,4,739-4-1
+1470311,Pleasure boats,739,Cheshire County Council Act 1980,5,739-5-1
+1600001,Permission to place tables and chairs in the road,742,"Roads (Scotland) Act 1984,  Section 59",3,742-3-1
+1600002,Ability to place tables and chairs in the road,742,"Highways Act 1980, Section 115B /115E",5,742-5-1
+1600301,Permission to place tables and chairs in the road,742,"Roads (Scotland) Act 1984,  Section 59",3,742-3-1
+1600302,Ability to place tables and chairs in the road,742,"Highways Act 1980, Section 115B /115E",5,742-5-1
+300001,Caravan and camping site licence,743,Caravan Sites and Control of Development Act 1960,6,743-6-1
+300002,Caravan and camping site licence,743,Caravans Act Northern Ireland 1963; s-269,4,746-4-1
+300301,Caravan and camping site licence,743,Caravan Sites and Control of Development Act 1960,6,743-6-1
+300302,Caravan and camping site licence,743,Caravans Act Northern Ireland 1963; s-269,4,746-4-1
+1050001,Application to use street or pavement space for displays,744,"Highways Act 1980, Section 115B /115E",5,744-5-1
+1050002,Application to use street or pavement space for displays,744,"Roads (Scotland) Act 1984,  Section 59",3,744-3-1
+1050301,Application to use street or pavement space for displays,744,"Highways Act 1980, Section 115B /115E",5,744-5-1
+1050302,Application to use street or pavement space for displays,744,"Roads (Scotland) Act 1984,  Section 59",3,744-3-1
+270001,Busking licence,797,London Local Authorities Act 2000,1,797-1-1
+270111,Busking licence,797,Test Local Act,1,remove
+270121,Busking licence,797,London Government Act 1963,1,797-1-1
+270131,Busking licence,797,Section 145 of the Local Government Act 1972,5,797-5-1
+270141,Busking licence,797,Byelaw in pursuance of section 249 of the Local Government Act 1933,5,797-5-1
+270301,Busking licence,797,London Local Authorities Act 2000,1,797-1-1
+270411,Busking licence,797,Test Local Act,1,remove
+270421,Busking licence,797,London Government Act 1963,1,797-1-1
+270431,Busking licence,797,Section 145 of the Local Government Act 1972,5,797-5-1
+270441,Busking licence,797,Byelaw in pursuance of section 249 of the Local Government Act 1933,5,797-5-1
+1570001,Petroleum storage licence,810,Petroleum (Consolidation) Act 1928 as amended,6,810-6-1
+1570002,Petroleum storage licence,810,Petroleum (Consolidation) Acts (Northern Ireland) 1929 and 1937,4,810-4-1
+1570301,Petroleum storage licence,810,Petroleum (Consolidation) Act 1928 as amended,6,810-6-1
+1570302,Petroleum storage licence,810,Petroleum (Consolidation) Acts (Northern Ireland) 1929 and 1937,4,810-4-1
+1440001,Safety certificates for sports grounds,842,Safety of Sports Grounds Act 1975 (c- 52),6,842-6-1
+1440002,Safety certificates for sports grounds,842,Safety Of Sports Grounds (Northern Ireland) Order 2006,4,842-4-1
+1440301,Safety certificates for sports grounds,842,Safety of Sports Grounds Act 1975 (c- 52),6,842-6-1
+1440302,Safety certificates for sports grounds,842,Safety Of Sports Grounds (Northern Ireland) Order 2006,4,842-4-1
+1790001,Weighbridge operator certificate,843,Weights and Measures Act 1985,6,843-6-1
+1790301,Weighbridge operator certificate,843,Weights and Measures Act 1985,6,843-6-1
+1160001,Premises licence,860,Licensing Act 2003,5,860-5-1
+1160301,Premises licence,860,Licensing Act 2003,5,860-5-1
+1170001,Premises licence,860,Licensing (Scotland) Act 2005,3,860-3-1
+1170301,Premises licence,860,Licensing (Scotland) Act 2005,3,860-3-1
+990002,Motor salvage operator registration,866,Vehicles (Crime) Act 2001,5,866-5-1
+990302,Motor salvage operator registration,866,Vehicles (Crime) Act 2001,5,866-5-1
+710001,House in multiple occupation licence,898,Housing Act 2004,5,898-5-1
+710002,House in multiple occupation licence,898,Housing (Scotland) Act 2006,3,898-3-1
+710003,House in multiple occupancy,898,Housing(Northern Ireland) Order 2003,4,898-4-1
+710301,House in multiple occupation licence,898,Housing Act 2004,5,898-5-1
+710302,House in multiple occupation licence,898,"Government (Scotland) Act 1982, Section 44 and SSI 2000/177 and SSI 2003/463- ",3,898-3-1
+1300001,Application for the Early Years Register: childcare provider on domestic or non-domestic premises,920,Childcare Act 2006,1,920-1-1
+1300002,Day nurseries,920,part XA of the Children Act 1989,2,920-2-1
+1300003,Day nurseries,920,Regulation of Care (Scotland) Act 2001,3,920-3-1
+1300004,Day care facilities for under 12s,920,Children (NI) Order 1995,4,920-4-1
+130000423,Day care facilities for under 12s,920,Children (NI) Order 1995,4,920-4-1
+130000424,Day care facilities for under 12s,920,Children (NI) Order 1995,4,920-4-1
+130000425,Day care facilities for under 12s,920,Children (NI) Order 1995,4,920-4-1
+130000426,Day care facilities for under 12s,920,Children (NI) Order 1995,4,920-4-1
+130000427,Day care facilities for under 12s,920,Children (NI) Order 1995,4,920-4-1
+610001,Knife dealer licence,1067,Section 27A and Schedule 1 of Civic Government Act 1982,3,1067-3-1
+800001,Itinerant metal dealer licence,1067,"Civic Government (Scotland) Act 1982, Section 32",3,1067-3-2
+800301,Itinerant metal dealer licence,1067,"Civic Government (Scotland) Act 1982, Section 32",3,1067-3-2
+970001,Metal dealer licence,1067,"Civic Government (Scotland) Act 1982, Section 28, 29",3,1067-3-3
+970301,Metal dealer licence,1067,"Civic Government (Scotland) Act 1982, Section 28, 29",3,1067-3-3
+1930001,Dispensation to allow the display of fireworks late at night,1068,Fireworks (Scotland) Regulations 2004,3,1068-3-1
+1930301,Dispensation to allow the display of fireworks late at night,1068,Fireworks (Scotland) Regulations 2004,3,1068-3-1
+1040001,Occasional licence,1071,Licensing (Scotland) Act 2005,3,1071-3-1
+1040301,Occasional licence,1071,Licensing (Scotland) Act 2005,3,1071-3-1
+1620001,Temporary event notice,1071,Licensing Act 2003,5,1071-5-1
+1620301,Temporary event notice,1071,Licensing Act 2003,5,1071-5-1
+1090001,Performing animals registration,1077,Performing Animals (Regulation) Act 1925,6,1077-6-1
+1090301,Performing animals registration,1077,Performing Animals (Regulation) Act 1925,6,1077-6-1
+1800001,Window cleaner,1078,"Civic Government (Scotland) Act 1982, Section 43-",3,1078-3-1
+1800301,Window cleaner,1078,"Civic Government (Scotland) Act 1982, Section 43-",3,1078-3-1
+280001,Camp site licence,1108,Public Health Act 1936,5,1108-5-1
+280301,Camp site licence,1108,Public Health Act 1936,5,1108-5-1
+730001,Hypnotism permit,1160,Hypnotism Act 1952,6,1160-6-1
+730301,Hypnotism permit,1160,Hypnotism Act 1952,6,1160-6-1
+1000001,National registration scheme for private landlords,1161,Antisocial Behaviour etc- (Scotland) Act 2004,3,1161-3-1
+1000301,National registration scheme for private landlords,1161,Antisocial Behaviour etc- (Scotland) Act 2004,3,1161-3-1
+10001,Actuaries,1163,See remarks,6,1163-6-1
+1290001,Adult placement,1164,Care Standards Act 2000,1,1164-1-1
+1290002,Adult placement,1164,tbd,2,1164-2-1
+1290003,Adult placement service,1164,Regulation of Care (Scotland) Act 2001,3,1164-3-1
+1290004,Adult placement,1164,Adult Placement Agencies Regulations (Northern Ireland) 2007,4,1164-4-1
+30001,Adventure Activities Licence,1165,Adventure Activities Licensing Regulations SI 2004/1309,6,1165-6-1
+60001,Air travel organiser's licence (ATOL),1168,Civil Aviation (Air Travel Organisers' Licensing) Regulations SI 1995/1054,7,1168-7-1
+130001,Animal by-products approval,1173,Regulation (EC) No- 1774/2002 (the 'EU Animal By-Products Regulation'),5,1173-5-1
+130002,Animal by-products approval,1173,"Animal By-Products Regulations, (NI) 2003-",4,1173-4-1
+130003,Animal by-products approval,1173,Regulation (EC) No- 1774/2002 (the 'EU Animal By-Products Regulation'),3,1173-3-1
+140501,Animal transport authorisation (long/short),1174,EU 1/2005 Welfare of Animals During Transport and Related Operations,4,1174-4-1
+141001,"Animal transport, long journey vehicle approval",1175,EU 1/2005 Welfare of Animals During Transport and Related Operations,4,1175-4-1
+671001,Money laundering registration of estate agents,1177,Money Laundering Regulations 2007,7,1177-7-1
+673001,Money laundering registration by professional bodies,1177,Money Laundering Regulations 2007,7,1177-7-2
+160001,Approval of course leading to external qualification,1178,Sections 96 and 98 of the Learning and Skills Act 2000,1,1178-1-1
+160002,Approval of course leading to external qualification,1178,"Sections 96, 97 and 99 Learning and Skills Act 2000",2,1178-2-1
+160003,Approval of course leading to external qualification,1178,Education (Scotland) Act (1996),3,1178-3-1
+160004,Approval of course leading to external qualification,1178,Education (Northern Ireland) Order 1998,4,1178-4-1
+170001,Approval of independent school inspectorates,1179,Section 162A Education Act 2002,1,1179-1-1
+170002,Approval of independent school inspector,1179,Section 163 Education Act 2002,2,1179-2-1
+181001,Approval of meat plants with veterinary attendance,1180,Approved Premises Licence under 853/2004,6,1180-8-1
+181002,Approval of meat plants with veterinary attendance,1180,Article 6 (3) of Regulation (EC) No 852/2004,4,1180-4-1
+1240001,Architect,1181,Architects Act 1997,7,1181-7-1
+220001,Authorisation to undertake audit work,1184,"Companies Act 2006, Part 42",7,1184-7-1
+22000134,Authorisation for a firm to undertake UK audit work,1184,"Companies Act 2006, Part 42",7,1184-7-2
+22000135,Authorisation to undertake audit work,1184,"Companies Act 2006, Part 42",7,1184-7-1
+22000137,Authorisation to undertake audit work,1184,"Companies Act 2006, Part 42",7,1184-7-1
+22000156,Audit registration,1184,Companies Act 2006,7,1184-7-3
+230001,Barrister,1185,(Lawyer's Practice) Regulations 2000; European Communities (Recognition of Professional Qualifications) Regulations 2007,5,1185-5-1
+230002,Advocate,1185,the Faculty of Advocates rules,3,1185-3-1
+230003,Barrister,1185,tbd,4,1185-4-1
+261501,"Builder, competent person accreditor",1186,"Building Act Competent Person Building Regulations 2000 (SI 2531/2000) as amended by the Building (Amendment) Regulations 2001 (SI 3335/2001) and the Building (Amendment) Regulations 2002 (SI 440/2002) using powers in Schedule 1, para 4(a) of the Building",5,1186-5-1
+262001,Buildings: Indvidual and corporate approved inspectors,1187,Building Act 1984 Part II & The Building (Approved Inspectors etc-) Regulations 2000,5,1187-5-1
+260001,Application for Business Boat Licence,1188,Transport Act 1962 (Section 43) & British Waterways Act 1995 (Section 17),6,1188-6-1
+310001,Chemical supply and storage (pesticide spraying etc),1190,Control Of Pesticides Regulations 1986  and Control of pesticides (Amendment) Regulations 1997,6,1190-6-1
+310002,Chemical supply and storage (pesticide spraying etc),1190,"Control of Pesticides Regulations (NI) 1987(as amended);  Plant Protection Products Regulations (NI) 2005 (as amended)",4,1190-4-1
+320001,Childminder,1191,part XA of the Children Act 1989,2,1191-2-1
+320002,Application for the Early Years Register: childminder,1191,Childcare Act 2006,1,1191-1-1
+320003,Childminder,1191,Regulation of Care (Scotland) Act 2001,3,1191-3-1
+320004,Childminder,1191,Children's (NI) Order 1995,4,1191-4-1
+1840001,Approval of Home Child Carers,1191,Tax Credits (Approval of Home Childcarer Providers) Scheme (Northern Ireland) 2006 SR 2006 No 64,4,1191-4-2
+32000423,Childminder,1191,Children's (NI) Order 1995,4,1191-4-1
+32000424,Childminder,1191,Children's (NI) Order 1995,4,1191-4-1
+32000425,Childminder,1191,Children (NI) Order 1995,4,1191-4-1
+32000426,Childminder,1191,Children (NI) Order 1995,4,1191-4-1
+32000427,Childminder,1191,Children (NI) Order 1995,4,1191-4-1
+340001,Claims management,1192,Compensation Act 2006,7,1192-7-1
+360001,Company registration,1194,"Companies Act 1986 and Companies Act 2006, Various EC Regulations/Directives",7,1194-7-1
+400001,Licensed Conveyancers,1197,Administration of Justice Act 1985 & Legal Services Act 2007,5,1197-5-1
+400002,Conveyancers,1197,Law Reform (Miscellaneous Provisions) (Scotland) Act 1990,3,1197-3-1
+440001,Discharge of trade effluent permit,1201,Water Industry Act 1991,5,1201-5-1
+460001,Protected wreck site licences,1203,Protection of Wrecks Act 1973,1,1203-1-1
+460002,Diving a designated wreck,1203,Protection of Wrecks Act 1973,4,1203-4-1
+460003,Diving a designated wreck,1203,Protection of Wrecks Act 1973,3,1203-3-1
+460004,Diving a designated wreck,1203,Protection of Wrecks Act 1973,2,1203-2-1
+1310001,Domiciliary care agencies,1204,Care Standards Act 2000,1,1204-1-1
+1310002,Domiciliary care agencies,1204,tbd,2,1204-2-1
+1310003,Care at home services,1204,Regulation of Care (Scotland) Act 2001,3,1204-3-1
+1310004,Domiciliary care agencies,1204,tbd,4,1204-4-1
+480001,Approved Driving Instructor,1205,Road Traffic Act 1988,6,1205-6-1
+480002,Approved Driving Instructor,1205,tbd,4,1205-4-1
+481001,Emissions trading scheme,1207,Greenhouse Gas Emissions Trading Scheme (E&W) Regulations 2005,5,1207-5-1
+481002,Emissions trading scheme,1207,Greenhouse Gas Emissions Trading Scheme (Scotland) Regulations 2005,3,1207-3-1
+481003,Emissions trading scheme,1207,Greenhouse Gas Emissions Trading Scheme (NI) Regulations 2005,4,1207-4-1
+491001,Energy assessor,1209,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1209-5-1
+491002,Energy assessor,1209,"Energy Performance of Buildings (Scotland) Regulations 2008,The Energy Performance of Buildings (Scotland) Amendment Regulations 2008",3,1209-3-1
+491003,Energy assessor,1209,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1209-4-1
+500001,Environmental permitting,1210,"Environmental Permitting (England and Wales) Regulations, 2010",5,1210-5-1
+500301,Environmental permitting,1210,"Environmental Permitting (England and Wales) Regulations, 2010",5,1210-5-1
+401001,Executry practitioners,1211,Law Reform (Miscellaneous Provisions) (Scotland) Act 1990,3,1211-3-1
+570001,Registration of Farriers,1213,Farriers (Registration) Act 1975,7,1213-7-1
+1360001,Gas appliances or fittings work,1214,Gas Safety (Installation and Use) Regulations SI 1998/2451,6,1214-6-1
+620001,Gas shipper,1215,Gas Act 1986,6,1215-6-1
+620002,Gas shipper,1215,Energy Order (NI) 2003,4,1215-4-1
+630001,Gas supplier,1216,Gas Act 1986,6,1216-6-1
+630002,Gas supplier,1216,Energy Order (NI) 2003,4,1216-4-1
+640001,Gas transporter,1217,Gas Act 1986,6,1217-6-1
+640002,Gas transporter,1217,Energy Order (NI) 2003,4,1217-4-1
+650002,"Generation, transmission, distribution and supply of electricity",1218,Energy Order (NI) 2003,4,1218-4-1
+770001,Registration of Independent school,1222,Section 158 of the Education Act 2002,1,1222-1-1
+770002,Independent school standards,1222,"Part X Education Act 2002, Independent School Standards (Wales) Regulations 2003 (SI 2003/3234)",2,1222-2-1
+770003,Registration of Independent school,1222,"Sections 98 to 103A Education (Scotland) Act 1980, as amended",3,1222-3-1
+770004,Application for Registration of an Independent School,1222,Education and Libraries Order 1986 - Articles 38 to 43 and Independent Schools 1974 Regulations-,4,1222-4-1
+750001,Application to register as a children's social care provider: children's home,1223,Care Standards Act 2000,1,1223-1-1
+750002,Independent school (children's home),1223,Care Standards Act 2000,2,1223-2-1
+210002,Insolvency practitioner,1225,Insolvency Practitioners Regulations 2005,5,1225-5-1
+210003,Insolvency practitioner,1225,Art 351 Insolvency (NI) Order 1989,4,1225-4-1
+21000212,Insolvency practitioner,1225,Insolvency Practitioners Regulations 2005,5,1225-5-1
+21000220,Insolvency practitioner,1225,Art 351 Insolvency (NI) Order 1989,4,1225-4-1
+21000234,Insolvency practitioner licence,1225,Insolvency Practitioners Regulations 2005,7,1225-7-1
+21000235,Insolvency practitioner,1225,Art 351 Insolvency (NI) Order 1989,4,1225-4-2
+21000236,Insolvency practitioner,1225,Insolvency Practitioners Regulations 2005,7,1225-7-2
+21000237,Insolvency practitioner,1225,Insolvency Practitioners Regulations 2005,7,1225-7-3
+21000238,Insolvency practitioner,1225,Insolvency Practitioners Regulations 2005,5,1225-5-2
+21000256,Insolvency practitioner authorisation,1225,Insolvency Act 1986,7,1225-7-4
+21000265,Insolvency practitioner,1225,Insolvency Practitioners Regulations 2005,3,1225-3-1
+21000331,Insolvency practitioner,1225,Art 351 Insolvency (NI) Order 1989,4,1225-4-2
+810001,Laser or intense pulsed light treatment,1227,Care Standards Act 2000,1,1227-1-1
+810002,Laser or intense pulsed light treatment,1227,Care Standards Act,2,1227-2-1
+810004,Laser or intense pulsed light treatment,1227,tbd,4,1227-4-1
+830001,Law costs draftsmen,1228,Association of Law Costs Draftsmen Order 2006 (S-I- 2006 no 3333),5,1228-5-1
+840001,Fellow of the Institute of Legal Executives,1229,Legal Services Act 2007,5,1229-5-1
+850001,Disposal of dredged material at sea,1230,Food and Environment Protection Act 1985 Part II,5,1230-5-1
+850002,Licence to dispose of waste in the sea,1230,"The Marine (Scotland) Act 2010, Part 4 Marine Licensing",3,1230-3-1
+850003,Depositing material at sea licence (FEPA),1230,"Food and Environment Protection Act 1985 (FEPA) Part II, Deposits in the Sea",4,1230-4-1
+860001,Licence to kill or take certain birds and animals,1231,Wildlife and Countryside Act 1981,1,1231-1-1
+860002,Licence to kill or take certain birds and animals,1231,Wildlife and Countryside Act 1981,2,1231-2-1
+860003,Protected species licensing,1231,"Wildlife and Countryside Act 1981, Protection of Badgers Act 1992, Conservation (Natural Habitats &c-) Regulations 1994",3,1231-3-1
+860004,Wildlife licence ,1231,Wildlife (Northern Ireland) Order 1985,4,1231-4-1
+861001,Licence to kill or take certain birds and animals outside 12 mile limit,1231,"Offshore Marine Conservation (Natural Habitats, &c-) Regulations 2007",7,1231-7-1
+880001,Listed veterinary nurse,1233,Veterinary Surgeons Act 1966,7,1233-7-1
+910001,Marine works consent,1235,Section 34 of the Coast Protection Act 1949 (as amended by Section 36 of the Merchant Shipping Act 1988 and the Energy Act 2004),5,1235-5-1
+910002,Marine works consent,1235,"The Marine (Scotland) Act 2010, Part 4 Marine Licensing",3,1235-3-1
+910003,"Marine construction works, land reclamation,beach replenishment licence (FEPA)",1235,"Food and Environment Protection Act 1985 (FEPA) Part II, Deposits in the Sea",4,1235-4-1
+651001,Guard dog kennels,1236,"Dogs (Northern Ireland) Order 1983, Section 10",4,1236-4-1
+651301,Guard dog kennels,1236,"Dogs (Northern Ireland) Order 1983, Section 10",4,1236-4-1
+890002,"Local air pollution control authorisation (LAPPC), Part C",1237,Pollution prevention and control regulations (NI) 2003 and relevant amending legislation,4,1237-4-1
+890302,"Local air pollution control authorisation (LAPPC), Part C",1237,Pollution prevention and control regulations (NI) 2003 and relevant amending legislation,4,1237-4-1
+980001,MOT testing authorisation,1239,Road Traffic Act 1988,7,1239-7-1
+1020001,Register as Number Plate Suppliers,1241,Vehicles (Crime) Act 2001,7,1241-7-1
+510001,Estate agency,1242,"Consumers, Estate Agents and Redress Act 2007",7,1242-7-1
+51000130,Estate agency,1242,"Consumers, Estate Agents and Redress Act 2007",7,1242-7-1
+51000131,Estate agency,1242,"Consumers, Estate Agents and Redress Act 2007",7,1242-7-1
+1180001,Processing personal data,1245,Data Protection Act 1998,7,1245-7-1
+1190001,Quarantine kennel,1246,EC Regulation No- 998/2003,6,1246-6-1
+1370001,Reporting of pollution inventory data (part of EPR),1250,Radioactive Substances Act 1993 + Water Industries Act 1991 Pollution Prevention and Control Legislation,5,1250-5-1
+1370002,Reporting of pollution inventory data,1250,Pollution Prevention and Control (Scotland) Regulations 2000,3,1250-3-1
+1370003,Reporting of pollution inventory data,1250,Pollution Prevention & Control Regulations (NI) 2003 (S-R-2003 No-46),4,1250-4-1
+1320001,Registration as a children's home,1251,Care Standards Act 2000,1,1251-1-1
+1320002,Residential care homes,1251,Regulation of Care (Scotland) Act 2001,3,1251-3-1
+1320003,Residential care homes,1251,Care Standards Act 2000 / The Care Homes (Wales) Regulations,2,1251-2-1
+1320004,Residential care homes,1251,"Health and Personal Social Services (Quality, Improvement and Regulation) (Northern Ireland) Order 2003",4,1251-4-1
+1330001,Application to register as a children's social care provider: residential family centre,1252,Care Standards Act 2000,1,1252-1-1
+1330002,Residential family centre,1252,tbd,2,1252-2-1
+1330004,Residential family centre,1252,tbd,4,1252-4-1
+1410001,Road/street works operative,1254,Street Works (Qualifications of Supervisors and Operatives) Regulations 1992-,7,1254-7-1
+1420001,Road/street works supervisor,1255,Street Works (Qualifications of Supervisors and Operatives) Regulations 1992-,7,1255-7-1
+1430001,Safety certificates for regulated stands at sports grounds,1256,Part III of the Fire Safety and Safety of Places of Sport Act 1987 (c-27),6,1256-6-1
+1430002,Safety certificates for regulated stands at sports grounds,1256,Safety Of Sports Grounds (Northern Ireland) Order 2006,4,1256-4-1
+1430301,Safety certificates for regulated stands at sports grounds,1256,Part III of the Fire Safety and Safety of Places of Sport Act 1987 (c-27),6,1256-6-1
+1430302,Safety certificates for regulated stands at sports grounds,1256,Safety Of Sports Grounds (Northern Ireland) Order 2006,4,1256-4-1
+1450002,School approved for special needs,1257,Section 347 Education Act 1996,2,1257-2-1
+1530001,Slaughterman ,1258,Welfare of Animals (Slaughter or Killing) Regulations 1995 (No- 731),6,1258-6-1
+1530002,Slaughterman ,1258,European Communities Act 1972 and also The Welfare of Animals (Slaughter or Killing) Regulations (Northern Ireland) 1996,4,1258-4-1
+1531001,Social landlords,1259,Housing Act 1996,5,1259-5-1
+1531002,Social landlords,1259,tbd,3,1259-3-1
+1531003,Social landlords,1259,Private Tenancies (NI) Order 2006,4,1259-4-1
+1540001,Solicitor,1260,Legal Services Act 2007,5,1260-5-1
+1540002,Solicitor,1260,"Legal Aid & Solicitors (Scotland) Act in 1949, Solicitors (Scotland) Act 1980-",3,1260-3-1
+1540003,Solicitor,1260,1976 Solicitors (Northern Ireland) Order,4,1260-4-1
+1560004,Special school approval,1262,tbd,4,1262-4-1
+1330003,Support services providing day care to adults,1263,Regulation of Care (Scotland) Act 2001,3,1263-3-1
+1640001,Transportation & supply of water,1265,Water Industry Act 1991 (c- 56),5,1265-5-1
+1640002,Transportation & supply of water,1265,Water Industry Act 1991 (c- 56),4,1265-4-1
+1340001,Veterinary surgeon,1268,Veterinary Surgeons Act 1966,7,1268-7-1
+1710001,Waste broker,1270,N/a,5,1270-5-1
+1720001,Waste carrier,1271,Control of Pollution (Amendment)  Act 1989 and Waste (England and Wales) Regulations 2011,5,1271-5-1
+1720002,Waste carrier or broker,1271,Control of Pollution (Amendment) Act 1989 & Controlled Waste (Registration of Carriers and Seizure of Vehicles) Regulations SI 1991/1624,3,1271-3-1
+1720003,Registration carrier / broker of controlled waste ,1271,The Controlled Waste (Registration of Carriers and Seizure of Vehicles Regulations (Northern Ireland) 1999,4,1271-4-1
+1741001,Waste electrical and electronic equipment accreditation  scheme,1274,UK Waste Electrical and Electronic Equipment (WEEE) Regulations 2006 and Electronic Equipment (Amendment) Regulations 2007,5,1274-5-1
+1741002,Waste electrical and electronic equipment accreditation  scheme,1274,UK Waste Electrical and Electronic Equipment (WEEE) Regulations 2006,3,1274-3-1
+1741003,Waste electrical and electronic equipment accreditation  scheme,1274,Waste Electrical and Electronic Equipment Regs (NI) 2006,4,1274-4-1
+1770001,Waste management,1275,"Waste Management Licensing Regulations 1994, Environmental Permitting(E&W) Regulations (2007)",5,1275-5-1
+1770002,Waste management,1275,Environmental Protection Act 1990 (As Amended),3,1275-3-1
+1770003,Waste management licence ,1275,"The Waste Management Licensing Regulations (Northern Ireland) 2003, Schedule 2, Part I ",4,1275-4-1
+1060001,Packaging waste registration,1278,Producer Responsibility Obligations (Packaging Waste) Regulations 2007,5,1278-5-1
+1060002,Waste packaging accreditation,1278,Producer Responsibility Obligations (Packaging Waste) Regulations 2007,3,1278-3-1
+1060003,Waste packaging accreditation,1278,Producer Responsibility Obligations (Packaging Waste) Regulations 2007,4,1278-4-1
+370001,Water discharge consents,1280,Water Resources Act 1991,5,1280-5-1
+370003,Water discharge consent,1280,The Water (Northern Ireland) Order 1999,4,1280-4-1
+441001,Water environment controlled activities (CAR) consents,1280,Regulation 8 of the Water Environment (Controlled Activities) (Scotland) Regulations 2005,3,1280-3-1
+140101,Animal movement (cattle) notification,1292,"Disease Control (Interim Measures) (Scotland) Order SSI 2002/34, as most recently amended by The Disease Control (Interim Measures) (Scotland) Amendment (No- 3) Order 2007",6,1292-6-1
+180001,Food premises approval,1293,Food Hygiene (England) Regulations 2006 / Regulation (EC) No 853/2004,1,1293-1-1
+180002,Food premises approval,1293,Regulation (EC) No 853/2004,4,1293-4-1
+180003,Food premises approval,1293,Food Hygiene (Scotland) Regulations 2006 / Regulation (EC) No 853/2004,3,1293-3-1
+180004,Food premises approval,1293,Food Hygiene (Wales) Regulations 2006 / Regulation (EC) No 853/2004,2,1293-2-1
+180301,Food premises approval,1293,Food Hygiene (England) Regulations 2006 / Regulation (EC) No 853/2004,1,1293-1-1
+180302,Food premises approval,1293,Regulation (EC) No 853/2004,4,1293-4-1
+180303,Food premises approval,1293,Food Hygiene (Scotland) Regulations 2006 / Regulation (EC) No 853/2004,3,1293-3-1
+180304,Food premises approval,1293,Food Hygiene (Wales) Regulations 2006 / Regulation (EC) No 853/2004,2,1293-2-1
+941001,"Massage and special treatment, therapist registration",1294,London Local Authorities Act 1991,1,1294-1-1
+941111,"Massage and special treatment, therapist registration",1294,Byelaw under Local Government(Miscellaneous Provisions) Act 1982,5,1294-5-1
+941131,"Massage and special treatment, therapist registration",1294,Nottinghamshire County Council Act 1985,1,1294-1-1
+941141,"Massage and special treatment, therapist registration",1294,Worcester City Council Act 1985,1,1294-1-1
+941301,"Massage and special treatment, therapist registration",1294,London Local Authorities Act 1991,1,1294-1-1
+941411,"Massage and special treatment, therapist registration",1294,Byelaw under Local Government(Miscellaneous Provisions) Act 1982,5,1294-5-1
+941431,"Massage and special treatment, therapist registration",1294,Nottinghamshire County Council Act 1985,1,1294-1-1
+941441,"Massage and special treatment, therapist registration",1294,Worcester City Council Act 1985,1,1294-1-1
+1400001,Road works licence,1295,Roads (Scotland)  Act 1984 Section 58,3,1295-3-1
+1400003,Streetworks and running pipes/cables under road,1295,tbd,4,1295-4-1
+1250001,Approval of premises for civil marriage and civil partnership,1296,The Marriages and Civil Partnerships (Approved Premises) Regulations 2005,5,1296-5-1
+1250002,Approval of premises for civil marriage and civil partnership,1296,Marriage (NI) Regulations 2003 and The Civil Partnership Act 2004,4,1296-4-1
+1250003,Approval of premises for civil marriage,1296,Marriage (Approval of Places) (Scotland) Regulations 2002,3,1296-3-1
+1250301,Approval of premises for civil marriage and civil partnership,1296,The Marriages and Civil Partnerships (Approved Premises) Regulations 2005,5,1296-5-1
+1250302,Approval of premises for civil marriage and civil partnership,1296,Marriage (NI) Regulations 2003 and The Civil Partnership Act 2004,4,1296-4-1
+1250303,Approval of premises for civil marriage,1296,Marriage (Approval of Places) (Scotland) Regulations 2002,3,1296-3-1
+1850001,Application to register as a children's social care provider: adoption support agency,1309,Care Standards Act 2000,1,1309-1-1
+1852001,Application to register as a children's social care provider: independent fostering service,1310,Care Standards Act 2000,1,1310-1-1
+1851001,Application to register as a children's social care provider: voluntary adoption agency,1311,Care Standards Act 2000,1,1311-1-1
+491201,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120159,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120160,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120161,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120163,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120164,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120166,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120167,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120168,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120169,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120170,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120171,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120172,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+49120173,On-Construction Domestic Energy Assessor (OCDEA),1312,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1312-5-1
+491101,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+49110159,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+49110163,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+49110164,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+49110166,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+49110169,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+49110170,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+49110171,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+49110172,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+49110173,Domestic Energy Assessor - Existing Buildings,1313,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1313-5-1
+491501,Air Conditioning System Energy Assessor,1314,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1314-5-1
+49150158,Energy Assessor Scheme for the Inspection of Air Conditioning Systems,1314,Energy Performance of Buildings (Certificates and Inspections) (England & Wales) Regulations 2007,5,1314-5-1
+49150161,Air Conditioning Inspector,1314,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1314-5-1
+49150163,Air Conditioning System Energy Assessor,1314,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1314-5-1
+49150166,Air Conditioning System Energy Assessor,1314,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1314-5-1
+49150168,Air Conditioning System Energy Assessor,1314,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1314-5-1
+49150171,Air Conditioning System Energy Assessor,1314,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1314-5-1
+49150172,Air Conditioning System Energy Assessor,1314,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1314-5-1
+49150358,Energy Assessor Scheme for the Inspection of Air Conditioning Systems,1314,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1314-5-1
+49150361,Air Conditioning Inspector,1314,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1314-5-1
+491401,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140158,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140159,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140161,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140163,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140164,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140166,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140168,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140169,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140170,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140171,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140172,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140173,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1315-5-1
+49140358,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140359,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140361,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140363,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140364,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140366,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140368,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140369,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140370,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140371,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140372,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+49140373,Operational Ratings Assessor (Production of Display Energy Certificates),1315,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1315-4-1
+491301,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130158,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130159,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130161,Commercial (Non-Domestic) Energy Assessor,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130163,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130164,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130166,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130168,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130169,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130170,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130171,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130172,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130173,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings Certificates and Inspections England and Wales Regulations 2007,5,1316-5-1
+49130358,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130359,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130361,Commercial (Non-Domestic) Energy Assessor,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130363,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130364,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130366,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130368,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130369,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130370,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130371,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130372,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+49130373,Commercial (Non-Domestic) Energy Assessor ,1316,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,1316-4-1
+653001,Electricity Supply Licence,1317,Electricity Act 1989,6,1317-6-1
+652001,Electricity Transmission Licence,1318,Electricity Act 1989,6,1318-6-1
+655001,Electricty Interconnector,1319,Electricity Act 1989,6,1319-6-1
+656001,Electricity Distribution Licence,1320,Electricity Act 1989,6,1320-6-1
+654001,Electricity Generation Licence,1321,Electricity Act 1989,6,1321-6-1
+625001,Gas Interconnector,1322,Gas Act 1986,6,1322-6-1
+1830001,Certificate enabling a premises to offer tourist accommodation,1323,Tourism (Northern Ireland) Order 1992,4,1323-4-1
+371001,Land drainage consents,1324,Land Drainage Act 1991,5,1324-5-1
+1761001,Hazardous Waste Disposal,1325,Hazardous Waste (England and Wales) Regulations 2005 (NB Amended in England in 2009),5,1325-5-1
+1761002,Special Waste Disposal,1325,"Special Waste Regulations 1996, Special Waster Amendment (Scotland Regulations) 2006",3,1325-3-1
+1761003,Hazardous Waste Disposal,1325,"Hazardous Waste (NI) Regulations 2005, The Controlled Waste (Duty of Care) (Amendment) Regulations (Northern Ireland) 2004",4,1325-4-1
+890004,Integrated Pollution Prevention Control (IPPC) permit,1326,The Pollution Prevention and Control Regulations (Northern Ireland) 2003,4,1326-4-1
+1130002,Pollution prevention and control(PPC)- Part A,1327,Pollution Prevention and Control (Scotland) Regulations 2000,3,1327-3-1
+1551001,PPC - Dry cleaning,1328,tbd,3,1328-3-1
+1552001,PPC - Petrol Vapour Recovery,1329,tdb,3,1329-3-1
+1550002,PPC - Solvent emissions,1330,Solvent Emissions (Scotland) Regulations 2004,3,1330-3-1
+1635001,Transmissible spongiform encephalopathies testing,1331,Transmissible Spongiform Encephalopathies (Scotland) Regulations 2006,3,1331-3-1
+1900001,"Hold, keep or release any of the specified species of non-native fish",1332,Import of Live Fish Act 1980 and Prohibition of Keeping or Release of Live (Specified Species) Order 1998,7,1332-7-1
+1880001,New Marina Application,1333,Transport Act 1962,6,1333-6-1
+1890001,Day care settings,1334,Day Care Setting Regulations (Northern Ireland) 2007,4,1334-4-1
+501001,Environmental permitting (national level),1336,"Environmental Permitting (England and Wales) Regulations, 2010",5,1336-5-1
+261502,Scheme provider for certificate of design or construction,1340,Building (Scotland) Act 2003,3,1340-3-1
+1862001,Direct appointment as an approved certifier of design or construction,1341,Building (Scotland) Act 2003,3,1341-3-1
+1864001,Scheme for certificate of design or construction,1342,Building (Scotland) Act 2003,3,1342-3-1
+1950001,Raised structures,1343,Civic Government (Scotland) Act 1982,3,1343-3-1
+1950301,Raised structures,1343,Civic Government (Scotland) Act 1982,3,remove
+1960001,Certificate of fitness for properties built before 1945,1344,"The Private Tenancies (Northern Ireland) Order 2006, Article 33(3), (4) & (5)-",4,1344-4-1
+1960301,Certificate of fitness for properties built before 1945,1344,"The Private Tenancies (Northern Ireland) Order 2006, Article 33(3), (4) & (5)-",4,remove
+1820001,Postal operators,1346,Postal Services Act 2000,7,1346-7-1
+2010001,Consents for leaflet distribution,1348,Clean Neighbourhood and Environment Act 2005,5,1348-5-1
+2010301,Consents for leaflet distribution,1348,Clean Neighbourhood and Environment Act 2005,5,remove
+2020001,Approval of a centre to offer SQA qualifications,1349,Education (Scotland) Act (1996),3,1349-3-1
+2030001,Assembly Centre Approval,1350,Animals and Animal Products (Import and Export) Regulations (Northern Ireland) 2006 As amended,4,1350-4-1
+1970001,Application for the Childcare Register: childminder,1351,Childcare Act 2006,1,1351-1-1
+1980001,Application for the Childcare Register: childcare provider on domestic or non-domestic premises,1352,Childcare Act 2006,1,1352-1-1
+1990001,Application for the Childcare Register: home childcarer,1353,Childcare Act 2006,1,1353-1-1
+2060001,"Licenses and consents for structures over, along and under the highway",1354,"Highways Act 1980, Sections 176-180",5,1354-5-1
+2060301,"Licenses and consents for structures over, along and under the highway",1354,"Highways Act 1980, Sections 176-180",5,remove
+2050001,Declaration of compliance with NIEA greenfield soils guidance 1,1356,"Waste and Contaminated Land (Northern Ireland) Order 1997, Duty of Care under the Controlled Waste (Duty of Care) regulations 2002 (as amended),The Controlled Waste (Registration of Carriers and Seizure of Vehicles) Regulations (Northern Ireland) 1999-",4,1356-4-1
+8888881,Testing import 1 intially Mode 1,8891,--- Test legislation  ABCD----,1,remove
+8888882,Testing import 2 initailly mode1,8892,--- Test legislation DEFG ----,1,remove
+8888883,Testing import 3 initially Mode 2,8893,--- Test legislation HIJK----,1,remove
+8888884,Testing import 4 initially Mode 2,8894,--- Test legislation LMNO----,1,remove
+870001,"Licence to buy and sell salmon, trout, pike, eel or pollan",9000,Legislation Sections 113 and 114 of Fisheries Act (NI) 1966,4,9000-4-1
+491302,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130257,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130259,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130260,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130261,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130263,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130264,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130265,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130269,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130270,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130272,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49130273,Energy assessors - Non-Domestic,9993,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+491102,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49110257,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49110259,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49110260,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49110262,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49110263,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49110264,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49110269,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49110270,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+49110272,Energy assessors - Domestic,9994,Energy Performance of Buildings (Scotland) Regulations 2008,3,ignore
+491303,Commercial (Non-Domestic) Energy Assessor ,9995,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+9999995,Application to Test out the PSC,9995,Provision of Services Regulations 2009 Test Version,7,remove
+491403,Operational Ratings Assessor (Production of Display Energy Certificates),9996,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+9999996,Application to Test out the PSC,9996,Provision of Services Regulations 2009 Test Version,7,remove
+491503,Air Conditioning System Energy Assessor,9997,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+9999997,Application to run a PSC demonstration,9997,Provision of Services Regulations 2009,7,remove
+491103,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+9999998,Application to run a PSC demonstration,9998,Provision of Services Regulations 2009,7,remove
+49110359,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49110363,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49110364,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49110366,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49110369,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49110370,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49110371,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49110372,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49110373,Domestic Energy Assessor - Existing Buildings,9998,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+491203,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120359,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120360,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120361,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120363,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120364,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120366,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120367,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120368,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120369,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120370,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120371,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120372,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+49120373,On-Construction Domestic Energy Assessor (OCDEA),9999,Energy Performance of Buildings (Certificates and Inspections) Regulations (Northern Ireland) 2008,4,ignore
+,Our new licence,8001,,7,8001-7-1

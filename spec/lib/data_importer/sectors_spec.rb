@@ -50,12 +50,12 @@ describe DataImporter::Sectors do
   describe "open_data_file" do
     it "should open the input data file" do
       tmpfile = Tempfile.new("sectors.csv")
-      DataImporter::Sectors.expects(:data_file_path).with("sectors.csv").returns(tmpfile.path)
+      DataImporter::Sectors.should_receive(:data_file_path).with("sectors.csv").and_return(tmpfile.path)
 
       DataImporter::Sectors.open_data_file
     end
     it "should fail if the input data file does not exist" do
-      DataImporter::Sectors.expects(:data_file_path).with("sectors.csv").returns("/example/sectors.csv")
+      DataImporter::Sectors.should_receive(:data_file_path).with("sectors.csv").and_return("/example/sectors.csv")
 
       lambda do
         DataImporter::Sectors.open_data_file

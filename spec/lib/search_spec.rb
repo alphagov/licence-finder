@@ -9,16 +9,16 @@ describe Search do
   end
 
   it "should index all sectors with the configured client" do
-    @client.expects(:pre_index)
-    Sector.expects(:find_layer3_sectors).returns(:all_sectors)
-    @client.expects(:index).with(:all_sectors)
-    @client.expects(:post_index)
+    @client.should_receive(:pre_index)
+    Sector.should_receive(:find_layer3_sectors).and_return(:all_sectors)
+    @client.should_receive(:index).with(:all_sectors)
+    @client.should_receive(:post_index)
 
     @search.index_all
   end
 
   it "should pass delete_index on to the concrete client" do
-    @client.expects(:delete_index)
+    @client.should_receive(:delete_index)
 
     @search.delete_index
   end
@@ -27,8 +27,8 @@ describe Search do
     s1 = FactoryGirl.create(:sector, public_id: 234)
     s2 = FactoryGirl.create(:sector, public_id: 123)
 
-    @client.expects(:search).with(:query).returns([123, 234])
+    @client.should_receive(:search).with(:query).and_return([123, 234])
 
-    @search.search(:query).should == [s2, s1]
+    @search.search(:query).should eq([s2, s1])
   end
 end

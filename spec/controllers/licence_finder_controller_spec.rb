@@ -26,8 +26,8 @@ describe LicenceFinderController do
         lf2 = stub("lf2", :published? => false)
         lf3 = stub("lf3", :published? => false)
         lf4 = stub("lf4", :published? => true)
-        LicenceFacade.expects(:create_for_licences).with([@l0, @l1, @l2, @l3, @l4, @l5, @l6]).
-          returns([lf1, lf2, lf3, lf4])
+        LicenceFacade.should_receive(:create_for_licences).with([@l0, @l1, @l2, @l3, @l4, @l5, @l6]).
+          and_return([lf1, lf2, lf3, lf4])
 
         get :start
 
@@ -40,8 +40,8 @@ describe LicenceFinderController do
         lf3 = stub("lf3", :published? => true)
         lf4 = stub("lf4", :published? => true)
         lf5 = stub("lf5", :published? => true)
-        LicenceFacade.stubs(:create_for_licences).
-          returns([lf1, lf2, lf3, lf4, lf5])
+        LicenceFacade.stub(:create_for_licences).
+          and_return([lf1, lf2, lf3, lf4, lf5])
 
         get :start
 
@@ -52,8 +52,8 @@ describe LicenceFinderController do
         @l1.destroy
         @l2.destroy
         lf1 = stub("lf1", :published? => true)
-        LicenceFacade.expects(:create_for_licences).with([@l0, @l3, @l4, @l5, @l6]).
-          returns([lf1])
+        LicenceFacade.should_receive(:create_for_licences).with([@l0, @l3, @l4, @l5, @l6]).
+          and_return([lf1])
 
         get :start
 
@@ -79,7 +79,7 @@ describe LicenceFinderController do
       @s2 = FactoryGirl.create(:sector, :name => "Charlie")
       @s3 = FactoryGirl.create(:sector, :name => "Bravo")
 
-      $search.expects(:search).with("test query").returns([@s1, @s2, @s3])
+      $search.should_receive(:search).with("test query").and_return([@s1, @s2, @s3])
 
       get :sectors, q: "test query"
       response.should be_success
@@ -104,7 +104,7 @@ describe LicenceFinderController do
     end
 
     it "should return slimmer headers" do
-      $search.expects(:search).with("test query").returns([])
+      $search.should_receive(:search).with("test query").and_return([])
       get :sectors, q: "test query"
       response.headers["X-Slimmer-Need-ID"].should == "B90"
       response.headers["X-Slimmer-Format"].should == "licence-finder"
@@ -122,7 +122,7 @@ describe LicenceFinderController do
       @s2 = FactoryGirl.create(:sector, :name => "Charlie")
       @s3 = FactoryGirl.create(:sector, :name => "Bravo")
 
-      $search.expects(:search).with("test query").returns([@s1, @s2, @s3])
+      $search.should_receive(:search).with("test query").and_return([@s1, @s2, @s3])
 
       get :sectors, q: "test query"
       response.should be_success
@@ -133,29 +133,29 @@ describe LicenceFinderController do
   describe "GET 'activities'" do
     context "with some sectors specified" do
       before :each do
-        Sector.stubs(:find_by_public_ids).returns(:some_sectors)
-        Activity.stubs(:find_by_sectors).returns(Activity)
-        Activity.stubs(:ascending)
+        Sector.stub(:find_by_public_ids).and_return(:some_sectors)
+        Activity.stub(:find_by_sectors).and_return(Activity)
+        Activity.stub(:ascending)
       end
 
       def do_get
         get :activities, :sectors => "1234_2345_3456"
       end
-      it "returns http success" do
+      it "and_return http success" do
         do_get
         response.should be_success
       end
 
       it "fetches the given sectors and assigns them to @sectors" do
-        Sector.expects(:find_by_public_ids).with([1234,2345,3456]).returns(:some_sectors)
+        Sector.should_receive(:find_by_public_ids).with([1234,2345,3456]).and_return(:some_sectors)
         do_get
         assigns[:sectors].should == :some_sectors
       end
 
       it "fetches the activities pertaining to the given sectors ordered by name and assigns them to @activities" do
         scope = stub()
-        scope.expects(:ascending).with(:name).returns(:some_activities)
-        Activity.expects(:find_by_sectors).with(:some_sectors).returns(scope)
+        scope.should_receive(:ascending).with(:name).and_return(:some_activities)
+        Activity.should_receive(:find_by_sectors).with(:some_sectors).and_return(scope)
         do_get
         assigns[:activities].should == :some_activities
       end
@@ -173,8 +173,8 @@ describe LicenceFinderController do
         a2 = FactoryGirl.create(:activity, :public_id => 2345, :name => "Charlie")
         a3 = FactoryGirl.create(:activity, :public_id => 3456, :name => "Bravo")
         scope1 = stub()
-        scope1.expects(:ascending).with(:name).returns(:some_activities)
-        Activity.expects(:find_by_sectors).with(:some_sectors).returns(scope1)
+        scope1.should_receive(:ascending).with(:name).and_return(:some_activities)
+        Activity.should_receive(:find_by_sectors).with(:some_sectors).and_return(scope1)
 
         get :activities, :sectors => "1234_2345_3456", :activities => "1234_2345_3456"
 
@@ -202,27 +202,27 @@ describe LicenceFinderController do
   describe "GET 'business_location'" do
     context "with sectors and activities specified" do
       before :each do
-        Sector.stubs(:find_by_public_ids).returns(:some_sectors)
-        Activity.stubs(:find_by_public_ids).returns(:some_activities)
+        Sector.stub(:find_by_public_ids).and_return(:some_sectors)
+        Activity.stub(:find_by_public_ids).and_return(:some_activities)
       end
 
       def do_get
         get :business_location, :sectors => '123_321', :activities => '234_432'
       end
 
-      it "returns http success" do
+      it "and_return http success" do
         do_get
         response.should be_success
       end
 
       it "fetches the given sectors and assigns them to @sectors" do
-        Sector.expects(:find_by_public_ids).with([123,321]).returns(:some_sectors)
+        Sector.should_receive(:find_by_public_ids).with([123,321]).and_return(:some_sectors)
         do_get
         assigns[:sectors].should == :some_sectors
       end
 
       it "fetches the given activities and assigns them to @activities" do
-        Activity.expects(:find_by_public_ids).with([234,432]).returns(:some_activities)
+        Activity.should_receive(:find_by_public_ids).with([234,432]).and_return(:some_activities)
         do_get
         assigns[:activities].should == :some_activities
       end
@@ -287,20 +287,20 @@ describe LicenceFinderController do
   describe "GET 'licences'" do
     context "with sectors, activities and location specified" do
       before :each do
-        Sector.stubs(:find_by_public_ids).returns(:some_sectors)
-        Activity.stubs(:find_by_public_ids).returns(:some_activities)
-        Licence.stubs(:find_by_sectors_activities_and_location).returns(:some_licences)
-        LicenceFacade.stubs(:create_for_licences).returns(:some_licence_facades)
+        Sector.stub(:find_by_public_ids).and_return(:some_sectors)
+        Activity.stub(:find_by_public_ids).and_return(:some_activities)
+        Licence.stub(:find_by_sectors_activities_and_location).and_return(:some_licences)
+        LicenceFacade.stub(:create_for_licences).and_return(:some_licence_facades)
       end
       def do_get
         get :licences, :sectors => '123_321', :activities => '234_432', :location => "northern_ireland"
       end
 
       it "fetches the appropriate licences, wraps them in a facade and assigns them to @licences" do
-        Sector.expects(:find_by_public_ids).with([123,321]).returns(:some_sectors)
-        Activity.expects(:find_by_public_ids).with([234,432]).returns(:some_activities)
-        Licence.expects(:find_by_sectors_activities_and_location).with(:some_sectors, :some_activities, "northern_ireland").returns(:some_licences)
-        LicenceFacade.expects(:create_for_licences).with(:some_licences).returns(:some_licence_facades)
+        Sector.should_receive(:find_by_public_ids).with([123,321]).and_return(:some_sectors)
+        Activity.should_receive(:find_by_public_ids).with([234,432]).and_return(:some_activities)
+        Licence.should_receive(:find_by_sectors_activities_and_location).with(:some_sectors, :some_activities, "northern_ireland").and_return(:some_licences)
+        LicenceFacade.should_receive(:create_for_licences).with(:some_licences).and_return(:some_licence_facades)
         do_get
         assigns[:sectors].should == :some_sectors
         assigns[:activities].should == :some_activities

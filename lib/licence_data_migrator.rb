@@ -2,21 +2,13 @@ require 'csv'
 require 'licence_migration_helpers'
 
 class LicenceDataMigrator
-  
+
   include LicenceMigrationHelpers
-  
+    
   attr_accessor :licence_mappings
 
   def self.migrate    
     new(load_mappings).run
-  end
-  
-  def self.read_mappings
-    CSV.read(data_file_path(MAPPING_FILENAME), headers: true)
-  end
-      
-  def self.data_file_path(filename)
-    data_file_path(filename)
   end
 
   def initialize(mappings)

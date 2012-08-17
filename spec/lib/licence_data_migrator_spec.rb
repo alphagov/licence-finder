@@ -2,14 +2,13 @@ require 'spec_helper'
 require 'licence_data_migrator'
 
 describe LicenceDataMigrator do
-  before(:all) do
-    LicenceDataMigrator.stub(:load_mappings).and_return({
+  before(:each) do
+    @migrator = LicenceDataMigrator.new({
       "1083741393" => "1040001",
       "1083741799" => "1620001",
       "1084062157" => "1580003",
       "1075329002" => "1610001"
     })
-    @migrator = LicenceDataMigrator.new
   end
   
   describe "initialize" do

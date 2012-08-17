@@ -1,39 +1,43 @@
 require 'csv'
+require 'licence_migration_helpers'
 
 class LicenceDataMigrator
   
-  MAPPING_FILENAME = 'licence_mappings.csv'
+  include LicenceMigrationHelpers
   
   attr_accessor :licence_mappings
 
-  def self.migrate
-    new().run
+  def self.migrate    
+    new(load_mappings).run
+  end
+  
+  def self.read_mappings
+    CSV.read(data_file_path(MAPPING_FILENAME), headers: true)
   end
       
   def self.data_file_path(filename)
-    Rails.root.join('data', filename)
+    data_file_path(filename)
   end
 
-  def initialize
-    @licence_mappings = load_mappings
+  def initialize(mappings)
+    @licence_mappings = mappings
   end
   
-  def load_mappings
-    licence_mappings = {}
-    data = CSV.read(self.class.data_file_path(MAPPING_FILENAME), headers: true)
-    data.each do |row|
-      licence_mappings[row['GDS ID']] = row['Legal_Ref_No']  
-    end
-    licence_mappings
-  end
+
 
   def run
       
     counter = 0
+    gds_sequence = 9000
     
     Licence.all.each do |licence|
       
       gds_id = @licence_mappings[licence.correlation_id.to_s]
+      
+      if gds_id.nil?
+        gds_id = "#{gds_sequence}-#{country_code(licence)}-1"
+        gds_sequence += 1
+      end
       
       licence.gds_id = gds_id
       licence.save!
@@ -46,7 +50,7 @@ class LicenceDataMigrator
     
     done(counter, "\n")
   end
-
+  
   def done(counter, nl)
     print "Migrated #{counter} Licences.#{nl}"
   end

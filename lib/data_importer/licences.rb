@@ -18,9 +18,9 @@ class DataImporter::Licences < DataImporter
     unless activity = Activity.find_by_correlation_id(row['BUSINESSACT_ID'].to_i)
       raise "Could not find activity #{row['BUSINESSACT_ID']}, failing."
     end
-    unless licence = Licence.find_by_gds_id(row['LICENCE_OID'])
+    unless licence = Licence.where(correlation_id: row['LICENCE_OID']).first
       licence = Licence.new
-      licence.gds_id = row['LICENCE_OID']
+      licence.correlation_id = row['LICENCE_OID']
       Rails.logger.debug "Creating licence #{licence.id}(#{licence.name})"
       counter += 1
     end

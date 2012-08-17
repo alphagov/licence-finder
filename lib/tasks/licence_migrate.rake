@@ -8,22 +8,22 @@ namespace :licence_migrate do
   desc "Migrate licence OID to legal ref no."
   task :all => :environment do
     LicencesCsvMigrator.migrate
-    # TODO: Do we really want to overwrite the licences.csv file
-    # given we end up with a smaller subset of licences because
-    # of incomplete mappings?
-    # LicencesCsvMigrator.move_files
     LicenceDataMigrator.migrate
   end
-  
-  desc "Migrate licences csv data"
-  task :csv => :environment do
-    LicenceDataMigrator.migrate
-  end
-  
-  desc "Overwrites licences CSV with data produced licence_migrate:csv"
-  task :overwrite_csv => :environment do
-    LicencesCsvMigrator.move_files
-  end
+
+# NOTE: It's probably unwise to overwrite Licence CSV data (the original set)
+#       as some of the GDS_IDs will be generated. Far better to import then update
+#       with the LicenceDataMigrator
+# 
+#  desc "Migrate licences csv data"
+#  task :csv => :environment do
+#    LicencesCsvMigrator.migrate
+#  end
+#  
+#  desc "Overwrites licences CSV with data produced licence_migrate:csv"
+#  task :overwrite_csv => :environment do
+#    LicencesCsvMigrator.move_files
+#  end
   
   desc "Migrate activerecord licence data"
   task :data => :environment do

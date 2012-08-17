@@ -11,7 +11,7 @@ describe DataImporter::Licences do
     it "should import a single licence from a file handle" do
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
+"1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
       END
 
       importer = DataImporter::Licences.new(source)
@@ -19,8 +19,8 @@ describe DataImporter::Licences do
         importer.run
       end
 
-      imported_licence = Licence.find_by_gds_id("123-2-1")
-      imported_licence.gds_id.should == "123-2-1"
+      imported_licence = Licence.find_by_correlation_id(1)
+      imported_licence.correlation_id.should == 1
       imported_licence.name.should == "Licences to play music in a theatre (All UK)"
       imported_licence.regulation_area.should == "Copyright"
       imported_licence.da_england == true
@@ -38,7 +38,7 @@ describe DataImporter::Licences do
     it "should decode any html entities in the data file" do
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Some Sector","1","Some Activity","123-2-1","Pavement licence (England &amp; Wales)","Copyright","1","0","1","0","0"
+"1","Some Sector","1","Some Activity","1","Pavement licence (England &amp; Wales)","Copyright","1","0","1","0","0"
       END
 
       importer = DataImporter::Licences.new(source)
@@ -46,16 +46,16 @@ describe DataImporter::Licences do
         importer.run
       end
 
-      imported_licence = Licence.find_by_gds_id("123-2-1")
+      imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.name.should == "Pavement licence (England & Wales)"
     end
 
-    it "should update the licence if one with the same gds_id already exists" do
-      FactoryGirl.create(:licence, gds_id: "123-2-1", name: "Test Name", da_england: false)
+    it "should update the licence if one with the same correlation_id already exists" do
+      FactoryGirl.create(:licence, correlation_id: 1, name: "Test Name", da_england: false)
 
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
+"1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
       END
 
       importer = DataImporter::Licences.new(source)
@@ -63,15 +63,15 @@ describe DataImporter::Licences do
         importer.run
       end
 
-      imported_licence = Licence.find_by_gds_id("123-2-1")
-      imported_licence.gds_id.should == "123-2-1"
+      imported_licence = Licence.find_by_correlation_id(1)
+      imported_licence.correlation_id.should == 1
       imported_licence.name.should == "Licences to play music in a theatre (All UK)"
       imported_licence.da_england.should be_true
     end
     it "should fail early if the sector does not exist" do
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"2","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
+"2","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
       END
 
       importer = DataImporter::Licences.new(source)
@@ -80,13 +80,13 @@ describe DataImporter::Licences do
           importer.run
         end
       end.should raise_error
-      imported_licence = Licence.find_by_gds_id("123-2-1")
+      imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.should == nil
     end
     it "should fail early if the activity does not exist" do
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","2","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
+"1","Motor vehicle fuel retail","2","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
       END
 
       importer = DataImporter::Licences.new(source)
@@ -95,7 +95,7 @@ describe DataImporter::Licences do
           importer.run
         end
       end.should raise_error
-      imported_licence = Licence.find_by_gds_id("123-2-1")
+      imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.should == nil
     end
     it "should add links for all layer3 sectors if a layer2 sector id is provided" do
@@ -107,7 +107,7 @@ describe DataImporter::Licences do
 
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"101","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
+"101","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
       END
 
       importer = DataImporter::Licences.new(source)
@@ -168,7 +168,7 @@ describe DataImporter::Licences do
     it "should mark all devolved authority flags true if DA_ALL is set" do
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
+"1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
       END
 
       importer = DataImporter::Licences.new(source)
@@ -176,7 +176,7 @@ describe DataImporter::Licences do
         importer.run
       end
 
-      imported_licence = Licence.find_by_gds_id("123-2-1")
+      imported_licence = Licence.find_by_correlation_id(1)
       imported_licence.da_england.should == true
       imported_licence.da_scotland.should == true
       imported_licence.da_wales.should == true

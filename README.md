@@ -11,6 +11,6 @@ Load the data into Elasticsearch
 
     bundle exec rake search:index
     
-Migrating your Licence data to use legal_ref_id instead of correlation_id
+Migrating your Licence data to use gds_id instead of correlation_id (This happens automatically on importing licences)
   
     bundle exec rake licence_migrate

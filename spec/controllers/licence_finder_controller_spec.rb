@@ -13,6 +13,14 @@ describe LicenceFinderController do
       response.should be_success
     end
 
+    it "should fetch the artefact and pass it to slimmer" do
+      mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
+      GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
+      @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+
+      get :start
+    end
+
     describe "setting up popular licences" do
       before :each do
         LicenceFinderController::POPULAR_LICENCE_IDS.each_with_index do |correlation_id, i|
@@ -112,6 +120,14 @@ describe LicenceFinderController do
       response.headers["X-Slimmer-Result-Count"].should == "0"
     end
 
+    it "should fetch the artefact and pass it to slimmer" do
+      mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
+      GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
+      @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+
+      get :sectors
+    end
+
     it "should not return result count if no query was provided" do
       get :sectors
       response.headers["X-Slimmer-Result-Count"].should be_nil
@@ -188,6 +204,14 @@ describe LicenceFinderController do
         response.headers["X-Slimmer-Proposition"].should == "business"
         response.headers["X-Slimmer-Result-Count"].should == nil
       end
+
+      it "should fetch the artefact and pass it to slimmer" do
+        mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
+        GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
+        @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+
+        do_get
+      end
     end
 
     context "with no valid sectors selected" do
@@ -236,6 +260,14 @@ describe LicenceFinderController do
         ]
         assigns[:current_question].should == @question3
         assigns[:upcoming_questions].should == []
+      end
+
+      it "should fetch the artefact and pass it to slimmer" do
+        mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
+        GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
+        @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+
+        do_get
       end
     end
 
@@ -315,6 +347,14 @@ describe LicenceFinderController do
             [@question2, :some_activities, 'activities'],
             [@question3, ['Northern Ireland'], 'business_location']
         ]
+      end
+
+      it "should fetch the artefact and pass it to slimmer" do
+        mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
+        GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
+        @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+
+        do_get
       end
     end
 

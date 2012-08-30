@@ -1,7 +1,10 @@
 require "slimmer/headers"
+require "gds_api/helpers"
 
 class LicenceFinderController < ApplicationController
   include Slimmer::Headers
+  include GdsApi::Helpers
+
   SEPARATOR = '_'
   QUESTIONS = [
     'What is your activity or business?',
@@ -13,6 +16,7 @@ class LicenceFinderController < ApplicationController
   # These are the correlation_ids
   POPULAR_LICENCE_IDS = %w(1083741799 1083741393 1084158580 1075329003 1084062657 1075429257 1083741306)
 
+  before_filter :load_artefact
   before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   after_filter :set_analytics_headers
@@ -145,6 +149,11 @@ class LicenceFinderController < ApplicationController
       headers[:result_count] = @sectors.length
     end
     set_slimmer_headers(headers)
+  end
+
+  def load_artefact
+    @artefact = fetch_artefact(slug: APP_SLUG)
+    set_slimmer_artefact(@artefact)
   end
 
   def setup_popular_licences

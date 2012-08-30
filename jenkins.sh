@@ -7,5 +7,6 @@ git clean -fdx
 
 bundle install --path "${HOME}/bundles/${JOB_NAME}" --deployment
 
+bundle exec rake stats
 bundle exec rake db:mongoid:drop
 bundle exec rake

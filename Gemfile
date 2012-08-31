@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 source 'https://gems.gemfury.com/vo6ZrmjBQu5szyywDszE/'
 
 gem 'rails', '~> 3.2.8'
+gem 'unicorn', '4.3.1'
 
 gem "mongoid", "~> 2.4"
 gem "bson_ext", "~> 1.5"

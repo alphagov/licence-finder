@@ -13,7 +13,7 @@ describe "Start page" do
       end
 
       within 'article[role=article]' do
-        within 'div.intro' do
+        within 'section.intro' do
           page.should have_link("Get started", :href => sectors_path)
         end
       end

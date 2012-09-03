@@ -3,19 +3,26 @@
 <div class="article-container group">
   <article role="article" class="group">
     <div class="inner">
-      <div class="intro">
-        <p>You may need a licence for:</p>
-        <ul>
-          <li>some business activities</li>
-          <li>other activities, eg street parties</li>
-        </ul>
-        <p>Use this tool to find out which licences you may need.</p>
-        <p class="get-started">
+
+      <section class="intro">
+        <div class="get-started-intro">
+          <p>You may need a licence for:</p>
+
+          <ul>
+            <li>some business activities</li>
+            <li>other activities, eg street parties</li>
+          </ul>
+
+          <p>Use this tool to find out which licences you may need.</p>
+        </div>
+
+        <p id="get-started" class="get-started">
         <%= link_to sectors_path, :class => "big button" do %>
           Get started <span class="indicator"></span>
         <% end %>
         </p>
-      </div>
+      </section>
+
       <%- if @popular_licences.any? -%>
         <div class="popular-licences">
           <h2>Popular licences</h2>

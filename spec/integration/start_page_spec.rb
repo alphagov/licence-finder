@@ -17,6 +17,8 @@ describe "Start page" do
           page.should have_link("Get started", :href => sectors_path)
         end
       end
+
+      page.should have_selector(".article-container #test-report_a_problem")
     end
 
     within 'head' do

@@ -67,7 +67,7 @@ GEM
     faye-websocket (0.4.6)
       eventmachine (>= 0.12.0)
     ffi (1.0.11)
-    gds-api-adapters (0.2.0)
+    gds-api-adapters (1.8.0)
       lrucache (~> 0.1.1)
       null_logger
       plek
@@ -213,7 +213,7 @@ DEPENDENCIES
   database_cleaner
   exception_notification
   factory_girl_rails (~> 3.2.0)
-  gds-api-adapters (~> 0.2.0)
+  gds-api-adapters (= 1.8.0)
   lograge
   mongoid (~> 2.4)
   poltergeist (~> 0.7.0)

@@ -17,7 +17,7 @@ namespace :panopticon do
         section: "business",
         paths: [APP_SLUG],
         prefixes: [APP_SLUG],
-        live: true, 
+        state: "live",
         indexable_content: "Find out which licences you might need for your activity or business, including temporary events notice, occasional licence, skip licence, and food premises registration.")
     registerer.register(record)
   end

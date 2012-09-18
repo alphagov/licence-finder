@@ -23,8 +23,8 @@ describe LicenceFinderController do
 
     describe "setting up popular licences" do
       before :each do
-        LicenceFinderController::POPULAR_LICENCE_IDS.each_with_index do |correlation_id, i|
-          l = FactoryGirl.create(:licence, :correlation_id => correlation_id)
+        LicenceFinderController::POPULAR_LICENCE_IDS.each_with_index do |gds_id, i|
+          l = FactoryGirl.create(:licence, :gds_id => gds_id)
           instance_variable_set("@l#{i}", l) # @l1 = l
         end
       end

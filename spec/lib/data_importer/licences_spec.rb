@@ -131,7 +131,7 @@ describe DataImporter::Licences do
 
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"101","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
+"101","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
       END
 
       importer = DataImporter::Licences.new(source)
@@ -147,12 +147,12 @@ describe DataImporter::Licences do
       sectors.should_not include(sector3)
     end
     it "should not create a new licence_link if it already exists" do
-      @licence = FactoryGirl.create(:licence, correlation_id: 1, name: "Test Name", da_england: false)
+      @licence = FactoryGirl.create(:licence, gds_id: "123-2-1", name: "Test Name", da_england: false)
       licence_link = FactoryGirl.create(:licence_link, sector: @sector, activity: @activity, licence: @licence)
 
       source = StringIO.new(<<-END)
 "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
+"1","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
       END
 
       importer = DataImporter::Licences.new(source)

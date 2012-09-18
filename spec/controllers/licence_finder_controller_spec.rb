@@ -14,11 +14,12 @@ describe LicenceFinderController do
     end
 
     it "should fetch the artefact and pass it to slimmer" do
-      mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
-      GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
-      @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+      artefact_data = artefact_for_slug(APP_SLUG)
+      content_api_has_an_artefact(APP_SLUG, artefact_data)
 
       get :start
+
+      response.headers[Slimmer::Headers::ARTEFACT_HEADER].should == artefact_data.to_json
     end
 
     describe "setting up popular licences" do
@@ -114,18 +115,17 @@ describe LicenceFinderController do
     it "should return slimmer headers" do
       $search.should_receive(:search).with("test query").and_return([])
       get :sectors, q: "test query"
-      response.headers["X-Slimmer-Need-ID"].should == "B90"
       response.headers["X-Slimmer-Format"].should == "licence-finder"
-      response.headers["X-Slimmer-Proposition"].should == "business"
       response.headers["X-Slimmer-Result-Count"].should == "0"
     end
 
     it "should fetch the artefact and pass it to slimmer" do
-      mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
-      GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
-      @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+      artefact_data = artefact_for_slug(APP_SLUG)
+      content_api_has_an_artefact(APP_SLUG, artefact_data)
 
       get :sectors
+
+      response.headers[Slimmer::Headers::ARTEFACT_HEADER].should == artefact_data.to_json
     end
 
     it "should not return result count if no query was provided" do
@@ -197,20 +197,19 @@ describe LicenceFinderController do
         assigns[:picked_activities].should == [a1, a3, a2]
       end
 
-      it "should core return slimmer headers but no result count" do
+      it "should return core slimmer headers but no result count" do
         do_get
-        response.headers["X-Slimmer-Need-ID"].should == "B90"
         response.headers["X-Slimmer-Format"].should == "licence-finder"
-        response.headers["X-Slimmer-Proposition"].should == "business"
-        response.headers["X-Slimmer-Result-Count"].should == nil
+        response.headers.should_not have_key("X-Slimmer-Result-Count")
       end
 
       it "should fetch the artefact and pass it to slimmer" do
-        mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
-        GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
-        @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+        artefact_data = artefact_for_slug(APP_SLUG)
+        content_api_has_an_artefact(APP_SLUG, artefact_data)
 
         do_get
+
+        response.headers[Slimmer::Headers::ARTEFACT_HEADER].should == artefact_data.to_json
       end
     end
 
@@ -263,11 +262,12 @@ describe LicenceFinderController do
       end
 
       it "should fetch the artefact and pass it to slimmer" do
-        mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
-        GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
-        @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+        artefact_data = artefact_for_slug(APP_SLUG)
+        content_api_has_an_artefact(APP_SLUG, artefact_data)
 
         do_get
+
+        response.headers[Slimmer::Headers::ARTEFACT_HEADER].should == artefact_data.to_json
       end
     end
 
@@ -350,11 +350,12 @@ describe LicenceFinderController do
       end
 
       it "should fetch the artefact and pass it to slimmer" do
-        mock_artefact = {"slug" => APP_SLUG, "title" => "Licence finder"}
-        GdsApi::Panopticon.any_instance.should_receive(:artefact_for_slug).with(APP_SLUG).and_return(mock_artefact)
-        @controller.should_receive(:set_slimmer_artefact).with(mock_artefact)
+        artefact_data = artefact_for_slug(APP_SLUG)
+        content_api_has_an_artefact(APP_SLUG, artefact_data)
 
         do_get
+
+        response.headers[Slimmer::Headers::ARTEFACT_HEADER].should == artefact_data.to_json
       end
     end
 

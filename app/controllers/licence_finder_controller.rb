@@ -145,9 +145,6 @@ class LicenceFinderController < ApplicationController
   def set_analytics_headers
     headers = {
       format:      "licence-finder",
-      proposition: "business",
-      section:     "business",
-      need_id:     "B90"
     }
     if @sectors and params[:q].present?
       headers[:result_count] = @sectors.length
@@ -156,7 +153,7 @@ class LicenceFinderController < ApplicationController
   end
 
   def load_artefact
-    @artefact = fetch_artefact(slug: APP_SLUG)
+    @artefact = content_api.artefact(APP_SLUG)
     set_slimmer_artefact(@artefact)
   end
 

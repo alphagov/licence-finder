@@ -69,7 +69,26 @@ describe LicenceFacade do
       end
 
       it "should log the error" do
-        Rails.logger.should_receive(:warn).with("Timeout fetching licence details from publisher")
+        Rails.logger.should_receive(:warn).with("GdsApi::TimedOutException fetching licence details from publisher")
+        LicenceFacade.create_for_licences([@l1, @l2])
+      end
+    end
+
+    context "when publisher errors" do
+      before :each do
+        GdsApi::Publisher.any_instance.stub(:licences_for_ids).and_raise(GdsApi::HTTPErrorResponse.new(503))
+      end
+
+      it "should continue with no publisher data" do
+        result = LicenceFacade.create_for_licences([@l1, @l2])
+        result[0].licence.should == @l1
+        result[0].publisher_data.should == nil
+        result[1].licence.should == @l2
+        result[1].publisher_data.should == nil
+      end
+
+      it "should log the error" do
+        Rails.logger.should_receive(:warn).with("GdsApi::HTTPErrorResponse(503) fetching licence details from publisher")
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end

@@ -19,8 +19,10 @@ class LicenceFacade
       Rails.logger.warn "Error fetching licence details from publisher"
     end
     data
-  rescue GdsApi::TimedOutException
-    Rails.logger.warn "Timeout fetching licence details from publisher"
+  rescue GdsApi::BaseError => e
+    message = e.class.name
+    message << "(#{e.code})" if e.respond_to?(:code)
+    Rails.logger.warn "#{message} fetching licence details from publisher"
     []
   end
 

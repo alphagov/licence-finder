@@ -10,7 +10,7 @@ describe LicenceFacade do
     end
 
     it "should query publisher for licence details" do
-      GdsApi::Publisher.any_instance.should_receive(:licences_for_ids).with([@l1.correlation_id, @l2.correlation_id]).and_return([])
+      GdsApi::Publisher.any_instance.should_receive(:licences_for_ids).with([@l1.gds_id, @l2.gds_id]).and_return([])
       LicenceFacade.create_for_licences([@l1, @l2])
     end
 
@@ -26,7 +26,7 @@ describe LicenceFacade do
     end
 
     it "should add the publisher details to each Facade where details exist" do
-      pub_data2 = OpenStruct.new(:licence_identifier => @l2.correlation_id.to_s)
+      pub_data2 = OpenStruct.new(:licence_identifier => @l2.gds_id.to_s)
       GdsApi::Publisher.any_instance.should_receive(:licences_for_ids).and_return([pub_data2])
 
       result = LicenceFacade.create_for_licences([@l1, @l2])
@@ -82,7 +82,7 @@ describe LicenceFacade do
 
     context "with publisher data" do
       before :each do
-        @pub_data = OpenStruct.new(:licence_identifier => @licence.correlation_id.to_s,
+        @pub_data = OpenStruct.new(:licence_identifier => @licence.gds_id.to_s,
                                    :title => "Publisher title",
                                    :slug => "licence-slug",
                                    :licence_short_description => "Short description of licence")

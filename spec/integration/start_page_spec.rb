@@ -17,6 +17,8 @@ describe "Start page" do
           page.should have_link("Get started", :href => sectors_path)
         end
       end
+
+      page.should have_selector(".article-container #test-report_a_problem")
     end
 
     within 'head' do
@@ -29,8 +31,8 @@ describe "Start page" do
   context "Seeing popular licences on the start page" do
     before :each do
       @popular_licence_ids = LicenceFinderController::POPULAR_LICENCE_IDS
-      @popular_licence_ids.each do |correlation_id|
-        FactoryGirl.create(:licence, :correlation_id => correlation_id)
+      @popular_licence_ids.each do |gds_id|
+        FactoryGirl.create(:licence, :gds_id => gds_id)
       end
     end
 

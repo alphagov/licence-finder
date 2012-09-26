@@ -30,9 +30,9 @@ describe "Finding licences" do
 
     visit "/#{APP_SLUG}"
 
-    page.should have_link('Get started')
+    page.should have_link('Find licences')
 
-    click_on 'Get started'
+    click_on 'Find licences'
 
     i_should_be_on "/#{APP_SLUG}/sectors"
 

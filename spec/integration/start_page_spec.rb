@@ -14,7 +14,7 @@ describe "Start page" do
 
       within 'article[role=article]' do
         within 'section.intro' do
-          page.should have_link("Get started", :href => sectors_path)
+          page.should have_link("Find licences", :href => sectors_path)
         end
       end
 

@@ -29,7 +29,8 @@ gem 'aws-ses', :require => 'aws/ses' # Needed by exception_notification
 gem 'exception_notification'
 
 group :assets do
-  #gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass', '3.2.0'
+  gem 'sass-rails',   '~> 3.2.3'
   #gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -49,3 +50,5 @@ group :development, :test do
   gem 'poltergeist', "~> 0.7.0"
   gem 'webmock', '~> 1.8.7', :require => false
 end
+
+gem 'govuk_frontend_toolkit', '0.2.1'

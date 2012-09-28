@@ -1,3 +1,6 @@
+@import "_conditionals";
+@import "_css3";
+
 /* see multi-step.css.erb in the static repo for most of these styles */
 
 #search-sectors {
@@ -6,13 +9,8 @@
 
 .search-picker ul,
 .picked-items ul {
-  margin: 0 0 0 -2.1em;
-  padding-left: 2.1em;
-}
-
-.search-picker ul,
-.picked-items ul {
   margin: 0 0 0 -2.4em;
+  padding-left: 2.1em;
 }
 
 .step.current,
@@ -30,14 +28,13 @@ header.page-header hgroup {
   margin-right: 15em;
 }
 
-.current-question h2 {
-  /*font-size: 1em;*/
-}
-
 a.add {
   float: right;
   padding-left: 0.25em;
-  *float: none;
+
+  @include ie(7) {
+    float: none;
+  }
 }
 
 .search-picker li:nth-child(even),
@@ -50,24 +47,44 @@ a.add {
   margin-left: 55%;
   padding: 0.5em 3.5% 1.5em 3.5%;
   width: 38%;
-}
 
-.lte-ie8 .picked-items {
-  *width: 310px;
-  *padding: 8px 10px 24px 10px;
-}
+  @include ie(7) {
+    width: 310px;
+    padding: 8px 10px 24px 10px;
+  }
 
-.picked-items h3 {
-  font-size: 1.1875em;
-}
+  h3 {
+    font-size: 1.1875em;
+  }
 
-.picked-items .button {
-  display: inline-block;
-}
+  .button {
+    display: inline-block;
+  }
 
-.picked-items ul {
-  margin-top: 0.75em;
-  margin-bottom: 0.75em;
+  ul {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+
+    li {
+      &:nth-child(even) {
+        background-color: #e8f0f0;
+      } 
+      
+      a {
+        float: right;
+        padding-left: 0.25em;
+
+        @include ie(7) {
+          float: none;
+        }
+      }
+    }
+  }
+
+  .button-container {
+    margin-top: 1.5em;
+    text-align: right;
+  }
 }
 
 .picked-items ul li,
@@ -79,26 +96,11 @@ a.add {
   zoom: 1;
 }
 
-.picked-items ul li:nth-child(even) {
-  background-color: #e8f0f0;
-}
-
 #sector-navigation ul li span,
 .search-picker ul li span,
 .picked-items ul li span {
   display: inline-block;
   width: 75%;
-}
-
-.picked-items ul li a {
-  float: right;
-  padding-left: 0.25em;
-  *float: none;
-}
-
-.picked-items .button-container {
-  margin-top: 1.5em;
-  text-align: right;
 }
 
 .browse-container,
@@ -110,15 +112,15 @@ a.add {
 
 .browse-container {
   margin-top: 1.25em;
-}
 
-.browse-container .or-browse {
-  margin-top: 0;
-}
+  .or-browse {
+    margin-top: 0;
+  }
 
-.browse-container h3 {
-  font-size: 1.1875em;
-  margin-top: 0;
+  h3 {
+    font-size: 1.1875em;
+    margin-top: 0;
+  }
 }
 
 /* sector navigation widget */
@@ -131,35 +133,37 @@ a.add {
   zoom: 1;
 }
 
-#sector-navigation li {
-  display: block;
-  margin: 0.25em 0;
-  overflow: hidden;
-  zoom: 1;
-  clear: both; /* clear under floated "add" links */
-}
+#sector-navigation {
+  li {
+    display: block;
+    margin: 0.25em 0;
+    overflow: hidden;
+    zoom: 1;
+    clear: both; /* clear under floated "add" links */
 
-#sector-navigation li.open ul {
-  padding-left: 1em;
-}
+    &.open > a {
+      background-position: 0 -86px;
+    }
 
-#sector-navigation li a {
-  background-image: url(<%= asset_path "expand-collapse-arrow.png" %>);
-  background-position: 0 5px;
-  background-repeat: no-repeat;
-  padding-left: 1em;
-}
+    &.open ul {
+      padding-left: 1em;
+    }
 
-#sector-navigation li.open > a {
-  background-position: 0 -86px;
-}
+    a {
+      background-image: image-url("expand-collapse-arrow.png");
+      background-position: 0 5px;
+      background-repeat: no-repeat;
+      padding-left: 1em;
 
-#sector-navigation li a.add {
-  background-image: none;
-}
+      &.add {
+        background-image: none;
+      }
+    }
+  }
 
-#sector-navigation ul ul li {
-  padding: 0 0.25em;
+  ul ul li {
+    padding: 0 0.25em;
+  }
 }
 
 .search-container .button {
@@ -169,8 +173,8 @@ a.add {
 article.outcome {
   /* we don't need min-height on licence-finder */
   min-height: 0;
-}
 
-article.outcome h2:first-child {
-  margin-top: 0;
+  h2:first-child {
+    margin-top: 0;
+  }
 }

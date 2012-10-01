@@ -26,6 +26,10 @@ header.page-header hgroup {
 /* reset margin on start */
 .start-page header.page-header hgroup {
   margin-right: 15em;
+
+  @include media(mobile) {
+    margin-right: 0;
+  }
 }
 
 a.add {
@@ -51,6 +55,12 @@ a.add {
   @include ie(7) {
     width: 310px;
     padding: 8px 10px 24px 10px;
+  }
+
+  @include media(mobile) {
+    margin-left: 0;
+    width: auto;
+    clear: both;
   }
 
   h3 {
@@ -108,6 +118,11 @@ a.add {
   clear: left;
   float: left;
   width: 45%;
+
+  @include media(mobile) {
+    float:none;
+    width:auto;
+  }
 }
 
 .browse-container {
@@ -134,6 +149,10 @@ a.add {
 }
 
 #sector-navigation {
+  @include media(mobile) {
+    margin-bottom: 1em;
+  }
+
   li {
     display: block;
     margin: 0.25em 0;

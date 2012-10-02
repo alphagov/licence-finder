@@ -19,7 +19,47 @@ $(function() {
     };
 
     var pageName = window.location.pathname.split("/").pop(),
+        selectedSectors,
         browseUrl;
+
+    selectedSectors = (function () {
+        var items = [];
+
+        return {
+            add: function(id) {
+                items.push(id + '');
+            },
+            remove: function(id) {
+                var idx = items.length,
+                    found = false,
+                    tmpArr = [];
+
+                while (idx--) {
+                    if (items[idx] !== id) {
+                        tmpArr.push(items[idx]);
+                    } else {
+                        found = true;
+                    }
+                }
+
+                items = tmpArr;
+
+                return found;
+            },
+            contains: function(id) {
+                var idx = $.inArray(id, items);
+
+                if (idx === -1) {
+                    return false
+                }
+                
+                return true;
+            },
+            get: function() {
+                return items.splice();
+            }
+        };
+    }());
 
     function extractIds() {
         return $.makeArray(
@@ -44,7 +84,7 @@ $(function() {
     }
 
     function createAddRemoveUrl(id) {
-        var ids = extractIds(),
+        var ids = selectedSectors.get(),
             params = extractParams(),
             index = $.inArray(id, ids);
         if (index === -1) {
@@ -78,28 +118,48 @@ $(function() {
     // Move a list item from one list to another.
     function swapper(event) {
         event.preventDefault();
-        var oldli = $(this).parent(), // the list item that is being moved
-            newli = $('<li id="'+oldli.attr('id')+'" data-public-id="' + oldli.data("public-id") + '"></li>'), // the target list item
+        var targetClass = '.picked-items',
+            oldli,
+            newli,
             source = $(event.delegateTarget), // container for list that item is coming from
-            target = $(event.data.target), // container for list that item is going to
-            targetList = $("ul", target);
+            target = $(targetClass), // container for list that item is going to
+            targetList = $("ul", target),
+            itemId;
 
-        // move the item
-        newli.append(oldli.find("span:first")).append(" ")
-             .append($('<a href="">' + event.data.linkText + '</a>'));
-        targetList.append(newli);
-        $('li', targetList).each(function() {
-            var $link = $('a', this);
-            $link.attr('href', createAddRemoveUrl($(this).data('public-id')))
-                .attr('aria-labelledby', newli.attr('id'));
-            if ($(this).is('.search-picker li') && !$link.hasClass('add')) {
-                $link.addClass('add');
-            }
-        });
-        oldli.remove();
+        if (event.data.action === 'add') {
+          
+            oldli = $(this).parent(); // the list item that is being moved
+            itemId = oldli.data("public-id");
+            newli = $('<li data-public-id="' + itemId + '"></li>'); // the target list item
 
-        // sort the target list if required
-        if (event.data.sortTarget) {
+            // move the item
+            newli.append(oldli.find("span:first").clone().attr('id',  'sector-' + itemId + '-selected')).append(" ")
+                 .append($('<a href="" >' + event.data.linkText + '</a>'));
+            targetList.append(newli);
+
+            $('li', targetList).each(function() {
+                var $link = $('a', this),
+                    $label = $('span', this),
+                    listItemId = $(this).data('public-id');
+
+                $link.attr('href', createAddRemoveUrl(listItemId))
+                    .attr('aria-labelledby', 'sector-' + listItemId + '-selected')
+                    .addClass('remove');
+                if ($(this).is('.search-picker li') && !$link.hasClass('add')) {
+                    $link.removeClass('remove');
+                    $link.addClass('add');
+                }
+            });
+
+            // update the activity/sector
+            oldli
+                .addClass('selected')
+                .find('a')
+                .removeClass('add')
+                .addClass('remove')
+                .text(event.data.linkText);
+
+            // sort the list of selected activities/sectors
             var newlis = $('>li', targetList);
             newlis.remove();
             newlis = $.makeArray(newlis);
@@ -107,10 +167,25 @@ $(function() {
                 return $("span", a).text().localeCompare($("span", b).text());
             });
             targetList.append(newlis);
+
+            selectedSectors.add(itemId);
+        } else {
+              
+            itemId = $(this).attr('aria-labelledby').replace('-selected', '');
+
+            $('#' + itemId + '-selected').parent('li').remove();
+            $('#' + itemId).parent('li')
+                .removeClass('selected')
+                .find('a')
+                .removeClass('remove')
+                .addClass('add')
+                .text(event.data.linkText);
+
+            selectedSectors.remove(itemId.replace('sector-', ''));
         }
 
         // update links and forms to reflect the move
-        if (event.data.target === ".picked-items") {
+        if (event.data.action === "add") {
             $(".hint", target).removeClass("hint").addClass("hidden");
             if ($("#next-step").length === 0) {
                 target.append('<div class="button-container"><a class="button medium" id="next-step">Next step</a></div>');
@@ -129,16 +204,14 @@ $(function() {
 
     // event handler to add a list item to the picked list.
     $(".search-container, .browse-container").on("click", "li[data-public-id] a.add", {
+        action: "add",
         linkText: "Remove",
-        target: ".picked-items",
-        sortTarget: true
     }, swapper);
 
     // event handler to remove a list item from the picked list.
-    $(".picked-items").on("click", "li[data-public-id] a", {
-        linkText: "Add",
-        target: ".search-picker",
-        sortTarget: (pageName === "activities")
+    $(".picked-items, .browse-container, .search-container").on("click", "li[data-public-id] a.remove", {
+        action: "remove",
+        linkText: "Add"
     }, swapper);
 
     // ajax sector navigation
@@ -175,13 +248,19 @@ $(function() {
     }
 
     function initSectorBrowsing() {
-        $('#sector-navigation').on('click', 'li:not(.open)>a:not(.add)', function(e) {
+        $('#sector-navigation').on('click', 'li:not(.open)>a:not(.add), li:not(.open)>a:not(.remove)', function(e) {
             e.preventDefault();
             var $a = $(this),
                 url = $a.attr('href') + '.json',
                 name = $a.text(),
                 publicId = $a.data('public-id'),
+                isActive,
                 i, l;
+            
+            isActive = function (id) {
+                
+            };
+
             $.ajax(url, {
                 dataType: 'json',
                 cache: false,
@@ -193,18 +272,27 @@ $(function() {
                             name = $a.text(),
                             $openA = $('<a data-public-id="' + publicId + '" data-old-url="' + $a.attr('href')+'">' + name + '</a>'),
                             ul = $('<ul />');
+
                         for (i=0, l=children.length; i<l; i++) {
                             var leaf = children[i],
-                                elString;
+                                elString,
+                                isActive = selectedSectors.contains(leaf['public-id']),
+                                itemClass = (isActive) ? ' class="selected"' : '',
+                                linkClass = (isActive) ? 'remove' : 'add',
+                                linkText = (isActive) ? 'Remove' : 'Add';
 
                             if (typeof leaf.url !== 'undefined') {
                                 elString = '<a data-public-id="' + leaf['public-id'] + '" href="' + leaf.url + '">' + leaf.name + '</a>';
                             }
                             else {
-                                elString = '<span class="sector-name">' + leaf.name + '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" rel="nofollow" class="add">Add</a>';
+                                elString = '<span class="sector-name" id="sector-'+leaf['public-id']+'">' + 
+                                    leaf.name +
+                                    '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" rel="nofollow" class="' + linkClass  + '">' +
+                                    linkText +
+                                    '</a>';
                             }
 
-                            ul.append('<li id="sector-'+leaf['public-id']+'" data-public-id="' + leaf['public-id'] + '">' + elString + '</li>');
+                            ul.append('<li' + itemClass  + ' data-public-id="' + leaf['public-id'] + '">' + elString + '</li>');
                         }
 
                         // insert correct parent URL on open links

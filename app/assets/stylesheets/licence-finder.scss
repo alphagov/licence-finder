@@ -32,6 +32,7 @@ header.page-header hgroup {
   }
 }
 
+a.remove,
 a.add {
   float: right;
   padding-left: 0.25em;
@@ -44,6 +45,13 @@ a.add {
 .search-picker li:nth-child(even),
 #sector-navigation ul ul li:nth-child(even) {
   background-color: #f8f7ee;
+}
+
+.search-picker li.selected,
+#sector-navigation ul ul li.selected,
+.search-picker li.selected:nth-child(even),
+#sector-navigation ul ul li.selected:nth-child(even) {
+  background-color: #D5ECEA;
 }
 
 .picked-items {
@@ -174,6 +182,7 @@ a.add {
       background-repeat: no-repeat;
       padding-left: 1em;
 
+      &.remove,
       &.add {
         background-image: none;
       }

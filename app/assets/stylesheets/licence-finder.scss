@@ -35,7 +35,9 @@ header.page-header hgroup {
 a.remove,
 a.add {
   float: right;
-  padding-left: 0.25em;
+  text-align: right;
+  padding-left: 1%;
+  width: 22%;
 
   @include ie(7) {
     float: none;
@@ -94,6 +96,11 @@ a.add {
 
         @include ie(7) {
           float: none;
+        }
+
+        &.add,
+        &.remove {
+          padding-left: 1%;
         }
       }
     }
@@ -185,6 +192,7 @@ a.add {
       &.remove,
       &.add {
         background-image: none;
+        padding-left: 1%;
       }
     }
   }

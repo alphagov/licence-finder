@@ -5,11 +5,11 @@
   <div class="search-container">
     <div class="business-activity-results search-picker">
       <p class="hint">Add all the activities that apply to you:</p>
-      <% if (@activities - @picked_activities).empty? %>
+      <% if (@activities).empty? %>
         <p>No activities</p>
       <% else %>
         <ul>
-          <% (@activities - @picked_activities).each do |activity| %>
+          <% (@activities).each do |activity| %>
             <%= link_to_add activity %>
           <% end %>
         </ul>

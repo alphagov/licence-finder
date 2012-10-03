@@ -8,8 +8,8 @@ module ApplicationHelper
   def show_link_item(action, model, extra_params, &block)
     key_name = model_key_name(model)
     html = "<li data-public-id=\"#{model.public_id}\"".html_safe
-    html << " id=\"#{key_name}-#{model.public_id}\">\n".html_safe
-    html << "<span class=\"#{key_name}-name\">".html_safe
+    html << ">\n".html_safe
+    html << "<span class=\"#{key_name}-name\" id=\"#{key_name}-#{model.public_id}\">".html_safe
     html << "#{model.name}"
     html << "</span>\n".html_safe
     html << create_add_remove_link(action, model, extra_params, &block)

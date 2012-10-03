@@ -19,10 +19,10 @@ $(function() {
     };
 
     var pageName = window.location.pathname.split("/").pop(),
-        selectedSectors,
+        selectedItems,
         browseUrl;
 
-    selectedSectors = (function () {
+    selectedItems = (function () {
         var items = [];
 
         return {
@@ -56,7 +56,7 @@ $(function() {
                 return true;
             },
             get: function() {
-                return items.splice();
+                return items.slice(0);
             }
         };
     }());
@@ -84,7 +84,7 @@ $(function() {
     }
 
     function createAddRemoveUrl(id) {
-        var ids = selectedSectors.get(),
+        var ids = selectedItems.get(),
             params = extractParams(),
             index = $.inArray(id, ids);
         if (index === -1) {
@@ -101,7 +101,7 @@ $(function() {
     }
 
     function createNextUrl() {
-        var ids = extractIds(),
+        var ids = selectedItems.get(),
             params = extractParams(),
             next, query;
         if (pageName === "sectors") {
@@ -124,7 +124,8 @@ $(function() {
             source = $(event.delegateTarget), // container for list that item is coming from
             target = $(targetClass), // container for list that item is going to
             targetList = $("ul", target),
-            itemId;
+            itemId,
+            prefix = (pageName === 'activities') ? 'activity' : 'sector';
 
         if (event.data.action === 'add') {
           
@@ -133,7 +134,7 @@ $(function() {
             newli = $('<li data-public-id="' + itemId + '"></li>'); // the target list item
 
             // move the item
-            newli.append(oldli.find("span:first").clone().attr('id',  'sector-' + itemId + '-selected')).append(" ")
+            newli.append(oldli.find("span:first").clone().attr('id',  prefix + '-' + itemId + '-selected')).append(" ")
                  .append($('<a href="" >' + event.data.linkText + '</a>'));
             targetList.append(newli);
 
@@ -143,7 +144,7 @@ $(function() {
                     listItemId = $(this).data('public-id');
 
                 $link.attr('href', createAddRemoveUrl(listItemId))
-                    .attr('aria-labelledby', 'sector-' + listItemId + '-selected')
+                    .attr('aria-labelledby', prefix + '-' + listItemId + '-selected')
                     .addClass('remove');
                 if ($(this).is('.search-picker li') && !$link.hasClass('add')) {
                     $link.removeClass('remove');
@@ -168,7 +169,7 @@ $(function() {
             });
             targetList.append(newlis);
 
-            selectedSectors.add(itemId);
+            selectedItems.add(itemId);
         } else {
               
             itemId = $(this).attr('aria-labelledby').replace('-selected', '');
@@ -181,7 +182,7 @@ $(function() {
                 .addClass('add')
                 .text(event.data.linkText);
 
-            selectedSectors.remove(itemId.replace('sector-', ''));
+            selectedItems.remove(itemId.replace(prefix + '-', ''));
         }
 
         // update links and forms to reflect the move
@@ -248,6 +249,29 @@ $(function() {
     }
 
     function initSectorBrowsing() {
+        var checkExisting = function () {
+          var $pickedItems = $('.picked-items ul li');
+          if ($pickedItems.length) {
+            $pickedItems.each(function (idx) {
+              var id = $(this).data('public-id');
+
+              selectedItems.add(id);
+
+              if (pageName === 'activities') {
+                // mark corresponding activity as selected
+                $('#activity-' + id).parent('li')
+                  .addClass('selected')
+                  .find('a')
+                  .removeClass('add')
+                  .addClass('remove')
+                  .text('Remove');
+              }
+            });
+          }
+        };
+
+        checkExisting();
+        
         $('#sector-navigation').on('click', 'li:not(.open)>a:not(.add), li:not(.open)>a:not(.remove)', function(e) {
             e.preventDefault();
             var $a = $(this),
@@ -255,11 +279,8 @@ $(function() {
                 name = $a.text(),
                 publicId = $a.data('public-id'),
                 isActive,
+                checkExisting,
                 i, l;
-            
-            isActive = function (id) {
-                
-            };
 
             $.ajax(url, {
                 dataType: 'json',
@@ -276,7 +297,7 @@ $(function() {
                         for (i=0, l=children.length; i<l; i++) {
                             var leaf = children[i],
                                 elString,
-                                isActive = selectedSectors.contains(leaf['public-id']),
+                                isActive = selectedItems.contains(leaf['public-id']),
                                 itemClass = (isActive) ? ' class="selected"' : '',
                                 linkClass = (isActive) ? 'remove' : 'add',
                                 linkText = (isActive) ? 'Remove' : 'Add';

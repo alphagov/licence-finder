@@ -256,16 +256,6 @@ $(function() {
               var id = $(this).data('public-id');
 
               selectedItems.add(id);
-
-              if (pageName === 'activities') {
-                // mark corresponding activity as selected
-                $('#activity-' + id).parent('li')
-                  .addClass('selected')
-                  .find('a')
-                  .removeClass('add')
-                  .addClass('remove')
-                  .text('Remove');
-              }
             });
           }
         };
@@ -279,7 +269,6 @@ $(function() {
                 name = $a.text(),
                 publicId = $a.data('public-id'),
                 isActive,
-                checkExisting,
                 i, l;
 
             $.ajax(url, {
@@ -288,6 +277,7 @@ $(function() {
                 success: function(data) {
                     if (typeof data.sectors !== "undefined") {
                         cleanOpenLists($a);
+                        checkExisting();
 
                         var children = data.sectors,
                             name = $a.text(),

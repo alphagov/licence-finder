@@ -10,7 +10,11 @@
       <% else %>
         <ul>
           <% (@activities).each do |activity| %>
-            <%= link_to_add activity %>
+            <% if @picked_activities.include?(activity) %>
+              <%= link_selected activity %>
+            <% else %>
+              <%= link_to_add activity %>
+            <% end %>
           <% end %>
         </ul>
       <% end %>

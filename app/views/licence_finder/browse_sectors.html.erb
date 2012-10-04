@@ -20,7 +20,7 @@
                            <% if !@grandchild_sectors.empty? %>
                              <ul>
                                <% @grandchild_sectors.each do |g_sector| %>
-                                 <li><%= g_sector.name %> <%= link_to_add g_sector %></li>
+                                 <%= link_to_add g_sector %>
                                <% end %>
                              </ul>
                            <% end %>

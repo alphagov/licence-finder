@@ -7,7 +7,9 @@ module ApplicationHelper
 
   def show_link_item(action, model, extra_params, &block)
     key_name = model_key_name(model)
+    item_class = extra_params.delete(:item_class)
     html = "<li data-public-id=\"#{model.public_id}\"".html_safe
+    html << " class=\"#{item_class}\"".html_safe unless item_class.nil?
     html << ">\n".html_safe
     html << "<span class=\"#{key_name}-name\" id=\"#{key_name}-#{model.public_id}\">".html_safe
     html << "#{model.name}"
@@ -22,6 +24,10 @@ module ApplicationHelper
 
   def link_to_remove(model)
     show_link_item("Remove", model, {}){|a, b| a - b}
+  end
+
+  def link_selected(model)
+    show_link_item("Remove", model, {:item_class=> "selected"}){|a, b| a - b}
   end
 
   def change_answer_url(action)

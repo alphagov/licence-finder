@@ -119,6 +119,13 @@ a.add {
   list-style-type: none;
   overflow: hidden; /* contain floats */
   zoom: 1;
+
+  a {
+    float: right;
+    width: 22%;
+    padding-left: 1%;
+    text-align: right;
+  }
 }
 
 #sector-navigation ul li span,

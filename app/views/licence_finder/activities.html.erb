@@ -25,7 +25,7 @@
     <p class="<% if @picked_activities.empty? %>hint<% else %>hidden<% end %>">Your chosen activities will appear here</p>
     <ul id="picked-business-activities">
       <% @picked_activities.each do |activity| %>
-        <%= link_to_remove activity %>
+        <%= basket_link activity %>
       <% end %>
     </ul>
     <% unless @picked_activities.empty? %>

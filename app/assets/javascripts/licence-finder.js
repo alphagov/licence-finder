@@ -251,7 +251,7 @@ $(function() {
     function initSectorBrowsing() {
         var checkExisting = function () {
           var $pickedItems = $('.picked-items ul li');
-          if ($pickedItems.length) {
+          if (selectedItems.get().length !== $pickedItems.length) {
             $pickedItems.each(function (idx) {
               var id = $(this).data('public-id');
 

@@ -37,7 +37,7 @@
     <p class="<% if @picked_sectors.empty? %>hint<% else %>hidden<% end %>">Your chosen areas will appear here</p>
     <ul id="picked-business-sectors">
       <% @picked_sectors.each do |sector| %>
-        <%= link_to_remove sector %>
+        <%= basket_link sector %>
       <% end %>
     </ul>
     <% unless @picked_sectors.empty? %>

@@ -115,7 +115,6 @@ describe LicenceFinderController do
     it "should return slimmer headers" do
       $search.should_receive(:search).with("test query").and_return([])
       get :sectors, q: "test query"
-      response.headers["X-Slimmer-Format"].should == "licence-finder"
       response.headers["X-Slimmer-Result-Count"].should == "0"
     end
 
@@ -197,9 +196,8 @@ describe LicenceFinderController do
         assigns[:picked_activities].should == [a1, a3, a2]
       end
 
-      it "should return core slimmer headers but no result count" do
+      it "should not return result count slimmer header" do
         do_get
-        response.headers["X-Slimmer-Format"].should == "licence-finder"
         response.headers.should_not have_key("X-Slimmer-Result-Count")
       end
 

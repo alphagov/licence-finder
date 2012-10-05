@@ -21,11 +21,6 @@ describe "Start page" do
       page.should have_selector(".article-container #test-report_a_problem")
     end
 
-    within 'head' do
-      page.should have_xpath(".//meta[@name = 'x-section-name'][@content = 'Business']")
-      page.should have_xpath(".//meta[@name = 'x-section-link'][@content = '/browse/business']")
-      page.should have_xpath(".//meta[@name = 'x-section-format'][@content = 'licence_finder']")
-    end
   end
 
   context "Seeing popular licences on the start page" do

@@ -61,7 +61,7 @@ describe "Licences page" do
 
   describe "getting licence details from publisher" do
     specify "seeing licence details from publisher on results page" do
-      publisher_has_licence :licence_identifier => @l1.gds_id, :slug => 'licence-one', :title => 'Licence 1',
+      content_api_has_licence :licence_identifier => @l1.gds_id, :slug => 'licence-one', :title => 'Licence 1',
             :licence_short_description => "Short description of licence"
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
@@ -72,7 +72,7 @@ describe "Licences page" do
         page.should_not have_content("Licence One")
 
         within_section "list item containing Licence 1" do
-          page.should have_link("Licence 1", :href => "/licence-one")
+          page.should have_link("Licence 1", :href => "http://www.test.gov.uk/licence-one")
           page.should have_content("Short description of licence")
         end
 
@@ -81,7 +81,7 @@ describe "Licences page" do
     end
 
     specify "handle lack of links gracefully" do
-      publisher_has_licence :licence_identifier => @l1.correlation_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
+      content_api_has_licence :licence_identifier => @l1.correlation_id.to_s, :slug => 'licence-one', :title => 'Licence 1',
             :licence_short_description => "Short description of licence"
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
@@ -92,9 +92,9 @@ describe "Licences page" do
     end
 
     specify "don't show graceful text if we have many links" do
-      publisher_has_licence :licence_identifier => @l1.gds_id, :slug => 'licence-one', :title => 'Licence 1',
+      content_api_has_licence :licence_identifier => @l1.gds_id, :slug => 'licence-one', :title => 'Licence 1',
             :licence_short_description => "Short description of licence"
-      publisher_has_licence :licence_identifier => @l2.gds_id, :slug => 'licence-two', :title => 'Licence 2',
+      content_api_has_licence :licence_identifier => @l2.gds_id, :slug => 'licence-two', :title => 'Licence 2',
             :licence_short_description => "Short description of licence 2"
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')

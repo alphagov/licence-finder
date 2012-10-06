@@ -2,28 +2,7 @@ require 'spec_helper'
 
 describe LicenceFacade do
 
-  def licence_hash(licence)
-    {
-      "title" => "Publisher title",
-      "id" => "http://example.org/licence-slug.json",
-      "web_url" =>  "http://www.test.gov.uk/licence-slug",
-      "format" => "licence",
-      "details" => {
-        "need_id" => nil,
-        "business_proposition" => false,
-        "alternative_title" => nil,
-        "overview" => nil,
-        "will_continue_on" => nil,
-        "continuation_link" => nil,
-        "licence_identifier" => licence.gds_id,
-        "licence_short_description" => "Short description of licence",
-        "licence_overview" => nil,
-        "updated_at" => "2012-10-06T12:00:05+01:00"
-      },
-      "tags" => [],
-      "related" => []
-    }
-  end
+  include GdsApi::TestHelpers::ContentApi
 
   def json_response_data(*licences)
     {
@@ -34,7 +13,7 @@ describe LicenceFacade do
       "page_size" => 1,
       "current_page" => 1,
       "pages" => 1,
-      "results" => licences.map { |l| licence_hash(l) }
+      "results" => licences.map { |l| content_api_licence_hash(l.gds_id) }
     }.to_json
   end
 
@@ -77,7 +56,7 @@ describe LicenceFacade do
       result[0].licence.should == @l1
       result[0].publisher_data.should == nil
       result[1].licence.should == @l2
-      result[1].publisher_data.should == licence_hash(@l2)
+      result[1].publisher_data.should == content_api_licence_hash(@l2.gds_id)
     end
 
     context "when Content API returns nil" do
@@ -145,7 +124,7 @@ describe LicenceFacade do
 
     context "with API data" do
       before :each do
-        @pub_data = licence_hash(@licence)
+        @pub_data = content_api_licence_hash(@licence.gds_id)
         @lf = LicenceFacade.new(@licence, @pub_data)
       end
 

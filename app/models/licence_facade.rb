@@ -2,7 +2,10 @@ require 'gds_api/helpers'
 require 'gds_api/exceptions'
 
 class LicenceFacade
-  extend GdsApi::Helpers
+
+  def self.content_api
+    @content_api ||= GdsApi::ContentApi.new(Plek.current.environment)
+  end
 
   def self.create_for_licences(licences)
     publisher_data = get_publisher_data(licences)
@@ -13,16 +16,16 @@ class LicenceFacade
 
   def self.get_publisher_data(licences)
     return [] if licences.empty?
-    data = publisher_api.licences_for_ids(licences.map(&:gds_id))
+    data = content_api.licences_for_ids(licences.map(&:gds_id))
     if data.nil?
       data = []
-      Rails.logger.warn "Error fetching licence details from publisher"
+      Rails.logger.warn "Error fetching licence details from Content API"
     end
     data
   rescue GdsApi::BaseError => e
     message = e.class.name
     message << "(#{e.code})" if e.respond_to?(:code)
-    Rails.logger.warn "#{message} fetching licence details from publisher"
+    Rails.logger.warn "#{message} fetching licence details from Content API"
     []
   end
 

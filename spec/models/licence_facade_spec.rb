@@ -2,21 +2,29 @@ require 'spec_helper'
 
 describe LicenceFacade do
 
+  def api_response_data(licence)
+    OpenStruct.new(:licence_identifier => licence.gds_id.to_s,
+     :title => "Publisher title",
+     :slug => "licence-slug",
+     :licence_short_description => "Short description of licence",
+     :state => 'published')
+  end
+
   describe "create_for_licences" do
     before :each do
-      GdsApi::Publisher.any_instance.stub(:licences_for_ids).and_return([])
+      GdsApi::ContentApi.any_instance.stub(:licences_for_ids).and_return([])
       @l1 = FactoryGirl.create(:licence)
       @l2 = FactoryGirl.create(:licence)
     end
 
-    it "should query publisher for licence details" do
-      GdsApi::Publisher.any_instance.should_receive(:licences_for_ids).with([@l1.gds_id, @l2.gds_id]).and_return([])
+    it "should query Content API for licence details" do
+      GdsApi::ContentApi.any_instance.should_receive(:licences_for_ids).with([@l1.gds_id, @l2.gds_id]).and_return([])
       LicenceFacade.create_for_licences([@l1, @l2])
     end
 
-    it "should skip querying publisher if not given any licences" do
-      GdsApi::Publisher.any_instance.unstub(:licences_for_ids) # clear the stub above, otherwise the next line won't work
-      GdsApi::Publisher.any_instance.should_not_receive(:licences_for_ids)
+    it "should skip querying Content API if not given any licences" do
+      GdsApi::ContentApi.any_instance.unstub(:licences_for_ids) # clear the stub above, otherwise the next line won't work
+      GdsApi::ContentApi.any_instance.should_not_receive(:licences_for_ids)
       LicenceFacade.create_for_licences([])
     end
 
@@ -25,9 +33,9 @@ describe LicenceFacade do
       result.map(&:licence).should == [@l1, @l2]
     end
 
-    it "should add the publisher details to each Facade where details exist" do
-      pub_data2 = OpenStruct.new(:licence_identifier => @l2.gds_id.to_s)
-      GdsApi::Publisher.any_instance.should_receive(:licences_for_ids).and_return([pub_data2])
+    it "should add the Content API details to each Facade where details exist" do
+      pub_data2 = api_response_data(@l2)
+      GdsApi::ContentApi.any_instance.should_receive(:licences_for_ids).and_return([pub_data2])
 
       result = LicenceFacade.create_for_licences([@l1, @l2])
       result[0].licence.should == @l1
@@ -36,12 +44,12 @@ describe LicenceFacade do
       result[1].publisher_data.should == pub_data2
     end
 
-    context "when publisher api returns nil" do
+    context "when Content API returns nil" do
       before :each do
-        GdsApi::Publisher.any_instance.stub(:licences_for_ids).and_return(nil)
+        GdsApi::ContentApi.any_instance.stub(:licences_for_ids).and_return(nil)
       end
 
-      it "should continue with no publisher data" do
+      it "should continue with no content API data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         result[0].licence.should == @l1
         result[0].publisher_data.should == nil
@@ -50,17 +58,17 @@ describe LicenceFacade do
       end
 
       it "should log the error" do
-        Rails.logger.should_receive(:warn).with("Error fetching licence details from publisher")
+        Rails.logger.should_receive(:warn).with("Error fetching licence details from Content API")
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end
 
-    context "when publisher times out" do
+    context "when Content API times out" do
       before :each do
-        GdsApi::Publisher.any_instance.stub(:licences_for_ids).and_raise(GdsApi::TimedOutException)
+        GdsApi::ContentApi.any_instance.stub(:licences_for_ids).and_raise(GdsApi::TimedOutException)
       end
 
-      it "should continue with no publisher data" do
+      it "should continue with no Content API data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         result[0].licence.should == @l1
         result[0].publisher_data.should == nil
@@ -69,17 +77,17 @@ describe LicenceFacade do
       end
 
       it "should log the error" do
-        Rails.logger.should_receive(:warn).with("GdsApi::TimedOutException fetching licence details from publisher")
+        Rails.logger.should_receive(:warn).with("GdsApi::TimedOutException fetching licence details from Content API")
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end
 
-    context "when publisher errors" do
+    context "when Content API errors" do
       before :each do
-        GdsApi::Publisher.any_instance.stub(:licences_for_ids).and_raise(GdsApi::HTTPErrorResponse.new(503))
+        GdsApi::ContentApi.any_instance.stub(:licences_for_ids).and_raise(GdsApi::HTTPErrorResponse.new(503))
       end
 
-      it "should continue with no publisher data" do
+      it "should continue with no API data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         result[0].licence.should == @l1
         result[0].publisher_data.should == nil
@@ -88,7 +96,7 @@ describe LicenceFacade do
       end
 
       it "should log the error" do
-        Rails.logger.should_receive(:warn).with("GdsApi::HTTPErrorResponse(503) fetching licence details from publisher")
+        Rails.logger.should_receive(:warn).with("GdsApi::HTTPErrorResponse(503) fetching licence details from Content API")
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end
@@ -99,12 +107,9 @@ describe LicenceFacade do
       @licence = FactoryGirl.create(:licence)
     end
 
-    context "with publisher data" do
+    context "with API data" do
       before :each do
-        @pub_data = OpenStruct.new(:licence_identifier => @licence.gds_id.to_s,
-                                   :title => "Publisher title",
-                                   :slug => "licence-slug",
-                                   :licence_short_description => "Short description of licence")
+        @pub_data = api_response_data(@licence)
         @lf = LicenceFacade.new(@licence, @pub_data)
       end
 
@@ -112,7 +117,7 @@ describe LicenceFacade do
         @lf.published?.should == true
       end
 
-      it "should return the publisher title" do
+      it "should return the API title" do
         @lf.title.should == @pub_data.title
       end
 
@@ -120,12 +125,12 @@ describe LicenceFacade do
         @lf.url.should == "/#{@pub_data.slug}"
       end
 
-      it "should return the publisher short description" do
+      it "should return the API short description" do
         @lf.short_description.should == @pub_data.licence_short_description
       end
     end
 
-    context "without publisher data" do
+    context "without API data" do
       before :each do
         @lf = LicenceFacade.new(@licence, nil)
       end

@@ -45,14 +45,14 @@ class LicenceFacade
   end
 
   def title
-    published? ? @publisher_data.title : @licence.name
+    published? ? @publisher_data['title'] : @licence.name
   end
 
   def url
-    published? ? "/#{@publisher_data.slug}" : nil
+    published? ? @publisher_data['web_url'] : nil
   end
 
   def short_description
-    published? ? @publisher_data.licence_short_description : nil
+    published? ? @publisher_data['details']['licence_short_description'] : nil
   end
 end

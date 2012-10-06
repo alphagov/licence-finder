@@ -145,7 +145,7 @@ describe LicenceFacade do
 
     context "with API data" do
       before :each do
-        @pub_data = api_response_data(@licence)
+        @pub_data = licence_hash(@licence)
         @lf = LicenceFacade.new(@licence, @pub_data)
       end
 
@@ -154,15 +154,15 @@ describe LicenceFacade do
       end
 
       it "should return the API title" do
-        @lf.title.should == @pub_data.title
+        @lf.title.should == @pub_data['title']
       end
 
       it "should return the frontend url" do
-        @lf.url.should == "/#{@pub_data.slug}"
+        @lf.url.should == @pub_data['web_url']
       end
 
       it "should return the API short description" do
-        @lf.short_description.should == @pub_data.licence_short_description
+        @lf.short_description.should == @pub_data['details']['licence_short_description']
       end
     end
 

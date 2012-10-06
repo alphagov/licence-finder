@@ -2,12 +2,48 @@ require 'spec_helper'
 
 describe LicenceFacade do
 
+  def licence_hash(licence)
+    {
+      "title" => "Publisher title",
+      "id" => "http://example.org/licence-slug.json",
+      "web_url" =>  "http://www.test.gov.uk/licence-slug",
+      "format" => "licence",
+      "details" => {
+        "need_id" => nil,
+        "business_proposition" => false,
+        "alternative_title" => nil,
+        "overview" => nil,
+        "will_continue_on" => nil,
+        "continuation_link" => nil,
+        "licence_identifier" => licence.gds_id,
+        "licence_short_description" => "Short description of licence",
+        "licence_overview" => nil,
+        "updated_at" => "2012-10-06T12:00:05+01:00"
+      },
+      "tags" => [],
+      "related" => []
+    }
+  end
+
+  def json_response_data(*licences)
+    {
+      "_response_info" => { "status" => "ok" },
+      "description" => "Licences",
+      "total" => 1,
+      "start_index" => 1,
+      "page_size" => 1,
+      "current_page" => 1,
+      "pages" => 1,
+      "results" => licences.map { |l| licence_hash(l) }
+    }.to_json
+  end
+
   def api_response_data(licence)
-    OpenStruct.new(:licence_identifier => licence.gds_id.to_s,
-     :title => "Publisher title",
-     :slug => "licence-slug",
-     :licence_short_description => "Short description of licence",
-     :state => 'published')
+    response = OpenStruct.new(
+      code: 200,
+      body: json_response_data(licence)
+    )
+    GdsApi::Response.new(response)
   end
 
   describe "create_for_licences" do
@@ -35,13 +71,13 @@ describe LicenceFacade do
 
     it "should add the Content API details to each Facade where details exist" do
       pub_data2 = api_response_data(@l2)
-      GdsApi::ContentApi.any_instance.should_receive(:licences_for_ids).and_return([pub_data2])
+      GdsApi::ContentApi.any_instance.should_receive(:licences_for_ids).and_return(pub_data2)
 
       result = LicenceFacade.create_for_licences([@l1, @l2])
       result[0].licence.should == @l1
       result[0].publisher_data.should == nil
       result[1].licence.should == @l2
-      result[1].publisher_data.should == pub_data2
+      result[1].publisher_data.should == licence_hash(@l2)
     end
 
     context "when Content API returns nil" do

@@ -37,12 +37,33 @@ module CustomMatchers
     check_add_remove_links_in_order("Remove", labels)
   end
 
+  def i_should_see_selected_activity_links(ids)
+    check_selected_links(ids, 'activity')
+  end
+
+  def i_should_see_selected_sector_link(id)
+    check_selected_link(id, 'sector')
+  end
+
+  def i_should_see_selected_activity_link(id)
+    check_selected_link(id, 'activity')
+  end
+
   private
 
   def check_add_remove_link(type, label)
+    type_class = type.downcase
     element = find(:xpath, "//li[span/text() = '#{label}']")
     element.should_not be_nil
     element.should have_xpath("a[text() = '#{type}']")
+    element.should have_xpath("a[@class = '#{type_class}']")
+  end
+
+  def check_selected_link(id, type)
+    label_id = "#{type}-#{id}"
+    element = find(:xpath, ".//li[@data-public-id = '#{id}' and @class = 'selected']")
+    element.should_not be_nil
+    element.should have_xpath("span[@id = '#{label_id}']")
   end
 
   def check_add_remove_links(type, labels)
@@ -51,11 +72,16 @@ module CustomMatchers
     end
   end
 
+  def check_selected_links(ids, type)
+    ids.each do |id|
+      check_selected_link(id, type)
+    end
+  end
+  
   def check_add_remove_links_in_order(type, labels)
     check_add_remove_links(type, labels)
     page.all(:xpath, ".//li[a/text() = '#{type}']/span").map(&:text).should == labels
   end
-
 end
 
 RSpec.configuration.include CustomMatchers, :type => :request

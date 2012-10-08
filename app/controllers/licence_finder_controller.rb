@@ -144,7 +144,7 @@ class LicenceFinderController < ApplicationController
 
   def set_analytics_headers
     headers = {
-      format:      "licence-finder",
+      format:      "finder",
     }
     if @sectors and params[:q].present?
       headers[:result_count] = @sectors.length

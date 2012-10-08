@@ -24,6 +24,7 @@ class LicenceFinderController < ApplicationController
   before_filter :extract_and_validate_sector_ids, :except => [:start, :sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_filter :extract_and_validate_activity_ids, :except => [:start, :sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   after_filter :set_analytics_headers
+  before_filter :set_expiry
 
   def start
     setup_popular_licences

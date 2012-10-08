@@ -54,9 +54,9 @@ describe LicenceFacade do
 
       result = LicenceFacade.create_for_licences([@l1, @l2])
       result[0].licence.should == @l1
-      result[0].publisher_data.should == nil
+      result[0].artefact.should == nil
       result[1].licence.should == @l2
-      result[1].publisher_data.should == content_api_licence_hash(@l2.gds_id)
+      result[1].artefact.should == content_api_licence_hash(@l2.gds_id)
     end
 
     context "when Content API returns nil" do
@@ -67,9 +67,9 @@ describe LicenceFacade do
       it "should continue with no content API data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         result[0].licence.should == @l1
-        result[0].publisher_data.should == nil
+        result[0].artefact.should == nil
         result[1].licence.should == @l2
-        result[1].publisher_data.should == nil
+        result[1].artefact.should == nil
       end
 
       it "should log the error" do
@@ -86,9 +86,9 @@ describe LicenceFacade do
       it "should continue with no Content API data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         result[0].licence.should == @l1
-        result[0].publisher_data.should == nil
+        result[0].artefact.should == nil
         result[1].licence.should == @l2
-        result[1].publisher_data.should == nil
+        result[1].artefact.should == nil
       end
 
       it "should log the error" do
@@ -105,9 +105,9 @@ describe LicenceFacade do
       it "should continue with no API data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         result[0].licence.should == @l1
-        result[0].publisher_data.should == nil
+        result[0].artefact.should == nil
         result[1].licence.should == @l2
-        result[1].publisher_data.should == nil
+        result[1].artefact.should == nil
       end
 
       it "should log the error" do

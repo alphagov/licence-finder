@@ -31,14 +31,14 @@ describe "Start page" do
       end
     end
 
-    specify "should not see popular licences section if none of the popular licences are available in publisher" do
+    specify "should not see popular licences section if none of the popular licences are available in Content API" do
       visit "/#{APP_SLUG}"
 
       page.should_not have_selector('div.popular-licences')
       page.should_not have_content('Popular licences')
     end
 
-    specify "should display licences available in publisher" do
+    specify "should display licences available in Content API" do
       content_api_has_licence :licence_identifier => @popular_licence_ids[0],
         :slug => 'licence-one', :title => 'Licence 1',
         :licence_short_description => "Short description of licence 1"

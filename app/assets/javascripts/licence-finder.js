@@ -206,7 +206,7 @@ $(function() {
     // event handler to add a list item to the picked list.
     $(".search-container, .browse-container").on("click", "li[data-public-id] a.add", {
         action: "add",
-        linkText: "Remove",
+        linkText: "Remove"
     }, swapper);
 
     // event handler to remove a list item from the picked list.

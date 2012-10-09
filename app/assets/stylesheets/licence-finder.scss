@@ -1,0 +1,231 @@
+@import "_conditionals";
+@import "_css3";
+
+/* see multi-step.css.erb in the static repo for most of these styles */
+
+.current-question h2 {
+  width: 100%;
+}
+
+#search-sectors {
+  margin-left: 0;
+}
+
+.search-picker ul,
+.picked-items ul {
+  margin: 0 0 0 -2.4em;
+  padding-left: 2.1em;
+}
+
+.step.current,
+.article-container.finished,
+header.page-header hgroup {
+  margin-right: 0;
+}
+
+.step.current .hint:first-child {
+  margin-top: 0.25em;
+}
+
+/* reset margin on start */
+.start-page header.page-header hgroup {
+  margin-right: 15em;
+
+  @include media(mobile) {
+    margin-right: 0;
+  }
+}
+
+a.remove,
+a.add {
+  float: right;
+  text-align: right;
+  padding-left: 1%;
+  width: 22%;
+
+  @include ie(7) {
+    float: none;
+  }
+
+  &:focus {
+    background-color: transparent;
+  }
+}
+
+.search-picker li:nth-child(even),
+#sector-navigation ul ul li:nth-child(even) {
+  background-color: #f8f7ee;
+}
+
+.search-picker li.selected,
+#sector-navigation ul ul li.selected,
+.search-picker li.selected:nth-child(even),
+#sector-navigation ul ul li.selected:nth-child(even) {
+  background-color: #D5ECEA;
+}
+
+.picked-items {
+  background-color: #d5ecea;
+  float: right;
+  padding: 0.5em 3.5% 1.5em 3.5%;
+  width: 38%;
+
+  @include ie(7) {
+    width: 310px;
+    padding: 8px 10px 24px 10px;
+  }
+
+  @include media(mobile) {
+    margin-left: 0;
+    width: auto;
+    clear: both;
+  }
+
+  h3 {
+    font-size: 1.1875em;
+  }
+
+  .button {
+    display: inline-block;
+  }
+
+  ul {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+
+    li {
+      &:nth-child(even) {
+        background-color: #e8f0f0;
+      } 
+      
+      a {
+        float: right;
+        padding-left: 0.25em;
+
+        @include ie(7) {
+          float: none;
+        }
+
+        &.add,
+        &.remove {
+          padding-left: 1%;
+        }
+      }
+    }
+  }
+
+  .button-container {
+    margin-top: 1.5em;
+    text-align: right;
+  }
+}
+
+.picked-items ul li,
+.search-picker ul li {
+  padding: 0.25em 0.3em;
+  margin-bottom: 0.25em;
+  list-style-type: none;
+  overflow: hidden; /* contain floats */
+  zoom: 1;
+
+  a {
+    float: right;
+    width: 22%;
+    padding-left: 1%;
+    text-align: right;
+  }
+}
+
+#sector-navigation ul li span,
+.search-picker ul li span,
+.picked-items ul li span {
+  float: left;
+  width: 75%;
+}
+
+.browse-container,
+.search-container {
+  clear: left;
+  float: left;
+  width: 45%;
+
+  @include media(mobile) {
+    float:none;
+    width:auto;
+  }
+}
+
+.browse-container {
+  margin-top: 1.25em;
+
+  .or-browse {
+    margin-top: 0;
+  }
+
+  h3 {
+    font-size: 1.1875em;
+    margin-top: 0;
+  }
+}
+
+/* sector navigation widget */
+#sector-navigation,
+#sector-navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  zoom: 1;
+}
+
+#sector-navigation {
+  @include media(mobile) {
+    margin-bottom: 1em;
+  }
+
+  li {
+    display: block;
+    margin: 0.25em 0;
+    overflow: hidden;
+    zoom: 1;
+    clear: both; /* clear under floated "add" links */
+
+    &.open > a {
+      background-position: 0 -86px;
+    }
+
+    &.open ul {
+      padding-left: 1em;
+    }
+
+    a {
+      background-image: image-url("expand-collapse-arrow.png");
+      background-position: 0 5px;
+      background-repeat: no-repeat;
+      padding-left: 1em;
+
+      &.remove,
+      &.add {
+        background-image: none;
+        padding-left: 1%;
+      }
+    }
+  }
+
+  ul ul li {
+    padding: 0 0.25em;
+  }
+}
+
+.search-container .button {
+  margin-left: 0.5em;
+}
+
+article.outcome {
+  /* we don't need min-height on licence-finder */
+  min-height: 0;
+
+  h2:first-child {
+    margin-top: 0;
+  }
+}

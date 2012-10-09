@@ -56,6 +56,8 @@ describe "Activity selection page" do
     within_section 'current question' do
       within '.business-activity-results' do
         i_should_see_add_links_in_order ["Gooey Activity", "Transmogrifying"]
+        i_should_see_remove_links_in_order ["Fooey Activity", "Kabloom"]
+        i_should_see_selected_activity_links [@a1.public_id, @a3.public_id]
       end
       within '.business-activity-picked' do
         i_should_see_remove_links_in_order ["Fooey Activity", "Kabloom"]

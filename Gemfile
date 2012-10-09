@@ -13,7 +13,7 @@ gem 'router-client', '~> 3.0.1', :require => 'router'
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
 else
-  gem 'gds-api-adapters', '2.1.0'
+  gem 'gds-api-adapters', '3.3.0'
 end
 
 gem 'rummageable', '~> 0.1.3'

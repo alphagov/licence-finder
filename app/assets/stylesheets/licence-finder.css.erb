@@ -19,6 +19,7 @@
 .article-container.finished,
 header.page-header hgroup {
   margin-right: 0;
+  padding-right: 0;
 }
 
 .step.current .hint:first-child {
@@ -46,10 +47,11 @@ a.add {
 }
 
 .picked-items {
-  background-color: #d5ecea;
-  margin-left: 55%;
-  padding: 0.5em 3.5% 1.5em 3.5%;
-  width: 38%;
+  background-color: #D5ECEA;
+  float: left;
+  margin-top: 1.25em;
+  padding: 0 1em 1em 1em;
+  width: 21em;
 }
 
 .lte-ie8 .picked-items {
@@ -103,9 +105,16 @@ a.add {
 
 .browse-container,
 .search-container {
-  clear: left;
   float: left;
-  width: 45%;
+  width: 100%;
+  margin-right: -23em;
+}
+
+.browse-container .inner,
+.search-container .inner {
+  margin: 0;
+  padding: 0;
+  margin-right: 26em;
 }
 
 .browse-container {
@@ -173,4 +182,8 @@ article.outcome {
 
 article.outcome h2:first-child {
   margin-top: 0;
+}
+
+.find-location-for-service {
+  margin-bottom: 2em;
 }

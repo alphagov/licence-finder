@@ -22,6 +22,12 @@ describe LicenceFinderController do
       response.headers[Slimmer::Headers::ARTEFACT_HEADER].should == artefact_data.to_json
     end
 
+    it "should set correct expiry headers" do
+      get :start
+
+      response.headers["Cache-Control"].should == "max-age=1800, public"
+    end
+
     describe "setting up popular licences" do
       before :each do
         LicenceFinderController::POPULAR_LICENCE_IDS.each_with_index do |gds_id, i|

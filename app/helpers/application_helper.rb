@@ -22,19 +22,19 @@ module ApplicationHelper
   def link_to_add(model)
     key_name = model_key_name(model)
     model_id = "#{key_name}-#{model.public_id}"
-    show_link_item("Add", model, {"class"=> "add", :model_id => model_id}){|a, b| a + b}
+    show_link_item("Add", model, {"class"=> "add", :model_id => model_id}) {|a, b| a + b}
   end
 
   def link_selected(model)
     key_name = model_key_name(model)
     model_id = "#{key_name}-#{model.public_id}"
-    show_link_item("Remove", model, {"class"=> "remove", :model_id => model_id, :item_class=> "selected"}){|a, b| a - b}
+    show_link_item("Remove", model, {"class"=> "remove", :model_id => model_id, :item_class=> "selected"}) {|a, b| a - b}
   end
 
   def basket_link(model)
     key_name = model_key_name(model)
     model_id = "#{key_name}-#{model.public_id}-selected"
-    show_link_item("Remove", model, {"class"=> "remove", :model_id => model_id}){|a, b| a - b}
+    show_link_item("Remove", model, {"class"=> "remove", :model_id => model_id}) {|a, b| a - b}
   end
 
   def change_answer_url(action)

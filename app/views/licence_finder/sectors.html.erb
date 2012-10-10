@@ -29,7 +29,9 @@
   </div>
 
   <div class="browse-container">
-    <p class="or-browse">Or <%= link_to "choose your area of interest", browse_sector_index_path, {"id" => 'browse-sectors'} %>.</p>
+    <div class="inner">
+      <p class="or-browse">Or <%= link_to "choose your area of interest", browse_sector_index_path, {"id" => 'browse-sectors'} %>.</p>
+    </div>
   </div>
 
   <div class="business-sector-picked picked-items" aria-live="polite">

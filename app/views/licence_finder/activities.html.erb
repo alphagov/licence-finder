@@ -3,21 +3,23 @@
 <%= render :partial => 'completed_questions' %>
 <%= current_question do %>
   <div class="search-container">
-    <div class="business-activity-results search-picker">
-      <p class="hint">Add all the activities that apply to you:</p>
-      <% if (@activities).empty? %>
-        <p>No activities</p>
-      <% else %>
-        <ul>
-          <% (@activities).each do |activity| %>
-            <% if @picked_activities.include?(activity) %>
-              <%= link_selected activity %>
-            <% else %>
-              <%= link_to_add activity %>
+    <div class="inner">
+      <div class="business-activity-results search-picker">
+        <p class="hint">Add all the activities that apply to you:</p>
+        <% if (@activities).empty? %>
+          <p>No activities</p>
+        <% else %>
+          <ul>
+            <% (@activities).each do |activity| %>
+              <% if @picked_activities.include?(activity) %>
+                <%= link_selected activity %>
+              <% else %>
+                <%= link_to_add activity %>
+              <% end %>
             <% end %>
-          <% end %>
-        </ul>
-      <% end %>
+          </ul>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="business-activity-picked picked-items" aria-live="polite" data-next-url="<%= business_location_path(sectors: params[:sectors], activities: params[:activities]) %>">

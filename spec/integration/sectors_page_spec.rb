@@ -47,10 +47,15 @@ describe "Sector selection page" do
 
     within_section 'current question' do
       within '.search-results' do
-        page.should_not have_content('Fooey Sector')
-        page.should_not have_content('Kablooey Sector')
+        page.should have_content('Fooey Sector')
+        page.should have_content('Kablooey Sector')
 
         i_should_see_add_link 'Gooey Sector'
+        i_should_see_remove_link 'Fooey Sector'
+        i_should_see_remove_link 'Kablooey Sector'
+
+        i_should_see_selected_sector_link '123'
+        i_should_see_selected_sector_link '234'
       end
 
       within '.business-sector-picked' do

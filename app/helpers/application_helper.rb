@@ -7,9 +7,12 @@ module ApplicationHelper
 
   def show_link_item(action, model, extra_params, &block)
     key_name = model_key_name(model)
+    model_id = extra_params[:model_id]
+    item_class = extra_params.delete(:item_class)
     html = "<li data-public-id=\"#{model.public_id}\"".html_safe
-    html << " id=\"#{key_name}-#{model.public_id}\">\n".html_safe
-    html << "<span class=\"#{key_name}-name\">".html_safe
+    html << " class=\"#{item_class}\"".html_safe unless item_class.nil?
+    html << ">\n".html_safe
+    html << "<span class=\"#{key_name}-name\" id=\"#{model_id}\">".html_safe
     html << "#{model.name}"
     html << "</span>\n".html_safe
     html << create_add_remove_link(action, model, extra_params, &block)
@@ -17,11 +20,21 @@ module ApplicationHelper
   end
 
   def link_to_add(model)
-    show_link_item("Add", model, {"class"=> "add"}){|a, b| a + b}
+    key_name = model_key_name(model)
+    model_id = "#{key_name}-#{model.public_id}"
+    show_link_item("Add", model, {"class"=> "add", :model_id => model_id}) {|a, b| a + b}
   end
 
-  def link_to_remove(model)
-    show_link_item("Remove", model, {}){|a, b| a - b}
+  def link_selected(model)
+    key_name = model_key_name(model)
+    model_id = "#{key_name}-#{model.public_id}"
+    show_link_item("Remove", model, {"class"=> "remove", :model_id => model_id, :item_class=> "selected"}) {|a, b| a - b}
+  end
+
+  def basket_link(model)
+    key_name = model_key_name(model)
+    model_id = "#{key_name}-#{model.public_id}-selected"
+    show_link_item("Remove", model, {"class"=> "remove", :model_id => model_id}) {|a, b| a - b}
   end
 
   def change_answer_url(action)
@@ -33,9 +46,10 @@ module ApplicationHelper
 
   def create_add_remove_link(name, model, extra_params, &block)
     key_name = model_key_name(model)
+    model_id = extra_params[:model_id]
     new_params = params.select {|k, v| %w(sectors activities q).include? k.to_s }
     new_params["#{key_name.pluralize}"] = extract_public_ids(new_params, key_name, model, block).join("_")
-    extra_params["aria-labelledby"] = "#{key_name}-#{model.public_id}"
+    extra_params["aria-labelledby"] = "#{model_id}"
     link_to(name, url_for(new_params.merge(:action => key_name.pluralize)), extra_params)
   end
 

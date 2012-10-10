@@ -14,8 +14,12 @@
         <h3 class="visuallyhidden">Search results for "<%= params[:q] %>"</h3>
         <p class="hint">Add all the areas that apply to you:</p>
         <ul>
-          <% (@sectors - @picked_sectors).each do |sector| %>
-            <%= link_to_add sector %>
+          <% (@sectors).each do |sector| %>
+            <% if @picked_sectors.include?(sector) %>
+              <%= link_selected sector %>
+            <% else %>
+              <%= link_to_add sector %>
+            <% end %>
           <% end %>
         </ul>
       </div>
@@ -35,7 +39,7 @@
     <p class="<% if @picked_sectors.empty? %>hint<% else %>hidden<% end %>">Your chosen areas will appear here</p>
     <ul id="picked-business-sectors">
       <% @picked_sectors.each do |sector| %>
-        <%= link_to_remove sector %>
+        <%= basket_link sector %>
       <% end %>
     </ul>
     <% unless @picked_sectors.empty? %>

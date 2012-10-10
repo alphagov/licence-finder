@@ -6,12 +6,16 @@
     <div class="inner">
       <div class="business-activity-results search-picker">
         <p class="hint">Add all the activities that apply to you:</p>
-        <% if (@activities - @picked_activities).empty? %>
+        <% if (@activities).empty? %>
           <p>No activities</p>
         <% else %>
           <ul>
-            <% (@activities - @picked_activities).each do |activity| %>
-              <%= link_to_add activity %>
+            <% (@activities).each do |activity| %>
+              <% if @picked_activities.include?(activity) %>
+                <%= link_selected activity %>
+              <% else %>
+                <%= link_to_add activity %>
+              <% end %>
             <% end %>
           </ul>
         <% end %>
@@ -23,7 +27,7 @@
     <p class="<% if @picked_activities.empty? %>hint<% else %>hidden<% end %>">Your chosen activities will appear here</p>
     <ul id="picked-business-activities">
       <% @picked_activities.each do |activity| %>
-        <%= link_to_remove activity %>
+        <%= basket_link activity %>
       <% end %>
     </ul>
     <% unless @picked_activities.empty? %>

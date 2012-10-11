@@ -1,4 +1,5 @@
 @import "_conditionals";
+@import "_typography";
 @import "_css3";
 
 /* see multi-step.css.erb in the static repo for most of these styles */
@@ -17,10 +18,15 @@
   padding-left: 2.1em;
 }
 
-.step.current,
 .article-container.finished,
 header.page-header hgroup {
   margin-right: 0;
+  padding-right: 0;
+}
+
+.step.current {
+  margin-right: 0;
+  padding-right: 1em;
 }
 
 .step.current .hint:first-child {
@@ -65,10 +71,11 @@ a.add {
 }
 
 .picked-items {
-  background-color: #d5ecea;
+  background-color: #D5ECEA;
   float: right;
-  padding: 0.5em 3.5% 1.5em 3.5%;
-  width: 38%;
+  margin-top: 1.25em;
+  padding: 0.5em 1em;
+  width: 21em;
 
   @include ie(7) {
     width: 310px;
@@ -76,13 +83,14 @@ a.add {
   }
 
   @include media(mobile) {
+    clear: both;
+    float: none;
     margin-left: 0;
     width: auto;
-    clear: both;
   }
 
   h3 {
-    font-size: 1.1875em;
+    @include core-19;
   }
 
   .button {
@@ -94,6 +102,8 @@ a.add {
     margin-bottom: 0.75em;
 
     li {
+      @include core-16;
+
       &:nth-child(even) {
         background-color: #e8f0f0;
       } 
@@ -115,13 +125,14 @@ a.add {
   }
 
   .button-container {
-    margin-top: 1.5em;
+    margin: 1.5em 0 1em 0;
     text-align: right;
   }
 }
 
 .picked-items ul li,
 .search-picker ul li {
+  @include core-16;
   padding: 0.25em 0.3em;
   margin-bottom: 0.25em;
   list-style-type: none;
@@ -145,13 +156,20 @@ a.add {
 
 .browse-container,
 .search-container {
-  clear: left;
-  float: left;
-  width: 45%;
 
-  @include media(mobile) {
-    float:none;
-    width:auto;
+  @include media(desktop) {
+    float: left;
+    margin-right: -23em;
+    width: 100%;
+  }
+
+  .inner {
+    margin: 0;
+    padding: 0;
+
+    @include media(desktop) {
+      margin-right: 26em;
+    }
   }
 }
 
@@ -163,7 +181,7 @@ a.add {
   }
 
   h3 {
-    font-size: 1.1875em;
+    @include core-19;
     margin-top: 0;
   }
 }
@@ -184,8 +202,9 @@ a.add {
   }
 
   li {
+    @include core-16;
     display: block;
-    margin: 0.25em 0;
+    margin: 0.5em 0;
     overflow: hidden;
     zoom: 1;
     clear: both; /* clear under floated "add" links */
@@ -219,6 +238,20 @@ a.add {
 
 .search-container .button {
   margin-left: 0.5em;
+}
+
+.find-location-for-service {
+  margin-bottom: 2em;
+  margin-right: 23em;
+
+  label, input {
+    @include core-19;
+  }
+
+  @include media(mobile) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 article.outcome {

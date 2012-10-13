@@ -64,9 +64,7 @@ a.add {
 }
 
 .search-picker li.selected,
-#sector-navigation ul ul li.selected,
-.search-picker li.selected:nth-child(even),
-#sector-navigation ul ul li.selected:nth-child(even) {
+#sector-navigation ul ul li.selected {
   background-color: #D5ECEA;
 }
 
@@ -156,19 +154,22 @@ a.add {
 
 .browse-container,
 .search-container {
+  float: left;
+  margin-right: -23em;
+  width: 100%;
 
-  @include media(desktop) {
-    float: left;
-    margin-right: -23em;
-    width: 100%;
+  @include media(mobile) {
+    margin-right: 0;
+    float: none;
+    width: auto;
   }
 
   .inner {
-    margin: 0;
     padding: 0;
+    margin-right: 26em;
 
-    @include media(desktop) {
-      margin-right: 26em;
+    @include media(mobile) {
+      margin: 0;
     }
   }
 }

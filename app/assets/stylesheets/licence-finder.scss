@@ -177,6 +177,10 @@ a.add {
     margin-top: 0;
   }
 
+  .inner {
+    padding: 0;
+  }
+
   h3 {
     @include core-19;
     margin-top: 0;

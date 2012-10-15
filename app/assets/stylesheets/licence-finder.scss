@@ -14,7 +14,6 @@
 
 .search-picker ul,
 .picked-items ul {
-  margin: 0 0 0 -2.4em;
   padding-left: 2.1em;
 }
 
@@ -69,22 +68,24 @@ a.add {
 }
 
 .picked-items {
-  background-color: #D5ECEA;
-  float: right;
-  margin-top: 1.25em;
-  padding: 0.5em 1em;
-  width: 21em;
+  background-color: #d5ecea;
+  padding: 0.5em 0 1.5em 0;
+  width: 38%;
+  overflow: hidden;
 
-  @include ie(7) {
-    width: 310px;
+  @include ie-lte(7) {
     padding: 8px 10px 24px 10px;
   }
 
   @include media(mobile) {
-    clear: both;
-    float: none;
-    margin-left: 0;
     width: auto;
+  }
+
+  h3,
+  ul,
+  p {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 
   h3 {
@@ -123,9 +124,13 @@ a.add {
   }
 
   .button-container {
-    margin: 1.5em 0 1em 0;
+    margin: 1.5em 1em 1em;
     text-align: right;
   }
+}
+
+.search-picker ul {
+  margin: 0 0 0 -2.4em;
 }
 
 .picked-items ul li,
@@ -154,23 +159,14 @@ a.add {
 
 .browse-container,
 .search-container {
+  clear: left;
   float: left;
-  margin-right: -23em;
-  width: 100%;
+  width: 57%;
+  margin-right: 4%;
 
   @include media(mobile) {
-    margin-right: 0;
-    float: none;
     width: auto;
-  }
-
-  .inner {
-    padding: 0;
-    margin-right: 26em;
-
-    @include media(mobile) {
-      margin: 0;
-    }
+    float: none;
   }
 }
 

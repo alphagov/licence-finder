@@ -28,8 +28,6 @@ describe "Browse sectors via licence finder homepage" do
   end
 
   specify "3rd level sectors should be able to be added to the sidebar", :js => true do
-    find('a.thanks-dismiss').click
-
     click_link "browse-sectors"
     click_on @s1.name
     click_on @s2.name

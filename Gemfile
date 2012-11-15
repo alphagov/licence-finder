@@ -22,7 +22,7 @@ gem 'lograge'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '3.3.2'
+  gem "slimmer", '3.9.4'
 end
 
 gem 'aws-ses', :require => 'aws/ses' # Needed by exception_notification

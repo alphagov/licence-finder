@@ -10,6 +10,6 @@
       <label for="select-location">Select a location
         <%= select_tag(:location, options_for_select([['Select one...', ''], %w(England england), %w(Scotland scotland), %w(Wales wales), ['Northern Ireland', 'northern_ireland']]), :id => "select-location") %></label>
     </div>
-    <%= submit_tag 'Find licences', :class => 'button medium' %>
+    <%= button_tag 'Find licences', :class => 'button medium' %>
   <% end %>
 <% end %>

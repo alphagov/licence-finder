@@ -6,7 +6,7 @@
       <%= hidden_field_tag "sectors", params[:sectors], id: "hidden-sectors" %>
       <label class="visuallyhidden" for="search-sectors">Search for areas</label>
       <%= text_field_tag "q", params[:q], id: "search-sectors" %>
-      <%= submit_tag params[:q].present? ? "Search again" : "Search", class: "button", id: "search-button" %>
+      <%= button_tag params[:q].present? ? "Search again" : "Search", class: "button", id: "search-button" %>
     <% end %>
 
     <% if !@sectors.empty? %>

@@ -1,38 +1,21 @@
 require 'csv'
+require 'json'
 
 class DataImporter
+  def self.import_for(klass)
+    file = File.open("data/json/#{klass.to_s.downcase}.json", "rb")
+    records = JSON.parse(file.read)
+    file.close
 
-  def self.update
-    fh = open_data_file
-    begin
-      new(fh).run
-    ensure
-      fh.close
+    unless records.nil?
+      records.each do |record|
+        # symbolise keys.
+        record.keys.each do |key|
+          record[(key.to_sym rescue key) || key] = record.delete(key)
+        end
+
+        klass.create!(record)
+      end
     end
-  end
-
-  def self.data_file_path(filename)
-    Rails.root.join('data', filename)
-  end
-
-  def initialize(fh)
-    @filehandle = fh
-  end
-
-  def run
-    counter = 0
-    CSV.new(@filehandle, headers: true).each do |row|
-      counter += process_row(row)
-      done(counter, "\r")
-    end
-    done(counter, "\n")
-  end
-
-  private
-
-  def done(counter, nl)
-    print "Imported #{counter} #{self.class.name.split('::').last}.#{nl}"
   end
 end
-
-Dir[File.join(File.dirname(__FILE__), "data_importer/**/*.rb")].each {|f| require f}

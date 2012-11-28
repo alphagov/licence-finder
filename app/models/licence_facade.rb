@@ -4,7 +4,7 @@ require 'gds_api/exceptions'
 class LicenceFacade
 
   def self.content_api
-    @content_api ||= GdsApi::ContentApi.new(Plek.current.environment)
+    @content_api ||= GdsApi::ContentApi.new(Plek.current.find('content_api'))
   end
 
   def self.create_for_licences(licences)

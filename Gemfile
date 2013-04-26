@@ -9,6 +9,8 @@ gem "mongoid", "2.4.9"
 gem "bson_ext", "1.6.2"
 gem "tire"
 
+gem 'mongoid_rails_migrations', '1.0.1'
+
 gem 'router-client', '~> 3.0.1', :require => 'router'
 
 if ENV['API_DEV']

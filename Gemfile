@@ -5,8 +5,8 @@ gem 'rails', '3.2.13'
 gem 'unicorn', '4.3.1'
 gem 'plek', '1.1.0'
 
-gem "mongoid", "~> 2.4"
-gem "bson_ext", "~> 1.5"
+gem "mongoid", "2.4.9"
+gem "bson_ext", "1.6.2"
 gem "tire"
 
 gem 'router-client', '~> 3.0.1', :require => 'router'

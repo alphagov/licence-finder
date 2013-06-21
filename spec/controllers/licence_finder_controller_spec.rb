@@ -26,7 +26,7 @@ describe LicenceFinderController do
       stub_request(:get, %r{\A#{GdsApi::TestHelpers::ContentApi::CONTENT_API_ENDPOINT}}).to_timeout
       artefact_data = artefact_for_slug(APP_SLUG)
       get :start
-      assert_equal 503, response.status
+      response.status.should == 503
     end
 
     it "should set correct expiry headers" do

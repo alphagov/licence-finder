@@ -22,6 +22,13 @@ describe LicenceFinderController do
       response.headers[Slimmer::Headers::ARTEFACT_HEADER].should == artefact_data.to_json
     end
 
+    it "should 503 if the request times out" do
+      stub_request(:get, %r{\A#{GdsApi::TestHelpers::ContentApi::CONTENT_API_ENDPOINT}}).to_timeout
+      artefact_data = artefact_for_slug(APP_SLUG)
+      get :start
+      assert_equal 503, response.status
+    end
+
     it "should set correct expiry headers" do
       get :start
 

@@ -1,6 +1,3 @@
-require "slimmer/headers"
-require "gds_api/helpers"
-
 class LicenceFinderController < ApplicationController
   include Slimmer::Headers
   include GdsApi::Helpers

@@ -54,4 +54,4 @@ group :development, :test do
   gem 'webmock', '~> 1.8.7', :require => false
 end
 
-gem 'govuk_frontend_toolkit', '0.2.1'
+gem 'govuk_frontend_toolkit', '0.32.2'

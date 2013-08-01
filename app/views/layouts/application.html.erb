@@ -9,7 +9,7 @@
   </head>
   <body class="mainstream">
     <div id="wrapper" class="answer licence-finder <%= yield :page_class %>">
-      <section id="content">
+      <main id="content" role="main">
         <header class="page-header group">
           <div>
             <h1><span>Quick answer</span> Licence finder</h1>
@@ -17,7 +17,7 @@
           <a class="skip-to-related" href="#related">Not what you're looking for? ↓</a>
         </header>
         <%= yield %>
-      </section>
+      </main>
       <%= yield :after_content %>
     </div>
   </body>

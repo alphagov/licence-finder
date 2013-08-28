@@ -191,8 +191,8 @@ $(function() {
             if ($("#next-step").length === 0) {
                 target.append('<div class="button-container"><a class="button medium" id="next-step">Next step</a></div>');
             }
-        } else if (source.find("li").length === 0) {
-            $(".hidden", source).removeClass("hidden").addClass("hint");
+        } else if (target.find("li").length === 0) {
+            $(".hidden", target).removeClass("hidden").addClass("hint");
             $("#next-step").remove();
         }
         $("#next-step").attr("href", createNextUrl());

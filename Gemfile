@@ -11,7 +11,7 @@ gem "tire"
 
 gem 'mongoid_rails_migrations', '1.0.1'
 
-gem 'router-client', '~> 3.0.1', :require => 'router'
+gem 'router-client', '3.0.1', :require => 'router'
 
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
@@ -33,8 +33,8 @@ gem 'exception_notification'
 
 group :assets do
   gem 'sass', '3.2.0'
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails', '3.2.5'
+  gem 'uglifier', '1.2.4'
 end
 
 if ENV['RUBY_DEBUG']
@@ -42,12 +42,12 @@ if ENV['RUBY_DEBUG']
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.11.0'
-  gem 'factory_girl_rails', '~> 3.2.0'
+  gem 'rspec-rails', '2.11.0'
+  gem 'factory_girl_rails', '3.2.0'
   gem 'database_cleaner'
-  gem 'capybara', '~> 1.1.2'
-  gem 'poltergeist', "~> 0.7.0"
-  gem 'webmock', '~> 1.8.7', :require => false
+  gem 'capybara', '1.1.2'
+  gem 'poltergeist', "0.7.0"
+  gem 'webmock', '1.8.7', :require => false
 end
 
 gem 'govuk_frontend_toolkit', '0.32.2'

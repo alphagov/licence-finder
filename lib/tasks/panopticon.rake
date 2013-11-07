@@ -15,8 +15,8 @@ namespace :panopticon do
         description: "Find out which licences you might need for your activity or business.",
         need_id: "B90", 
         section: "business",
-        paths: [APP_SLUG],
-        prefixes: [APP_SLUG],
+        paths: [],
+        prefixes: ["/#{APP_SLUG}"],
         state: "live",
         indexable_content: "Find out which licences you might need for your activity or business, including temporary events notice, occasional licence, skip licence, and food premises registration.")
     registerer.register(record)

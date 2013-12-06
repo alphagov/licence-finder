@@ -7,10 +7,7 @@ describe "Start page" do
     visit "/#{APP_SLUG}"
 
     within '#content' do
-      within 'header' do
-        page.should have_content("Licence finder")
-        page.should have_content("Quick answer")
-      end
+      
 
       within 'article[role=article]' do
         within 'section.intro' do

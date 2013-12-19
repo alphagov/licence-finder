@@ -54,9 +54,6 @@ LicenceFinder::Application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
-  
-  # Enable lograge
-  config.lograge.enabled = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
@@ -65,4 +62,8 @@ LicenceFinder::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+  # Enable JSON-style logging
+  config.logstasher.enabled = true
+  config.logstasher.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.json.log")
+  config.logstasher.supress_app_log = true
 end

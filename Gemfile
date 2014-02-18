@@ -18,7 +18,7 @@ else
 end
 
 gem 'rummageable', '~> 0.1.3'
-gem 'logstasher', '0.4.1'
+gem 'logstasher', '0.4.8'
 
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'

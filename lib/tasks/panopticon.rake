@@ -13,7 +13,6 @@ namespace :panopticon do
         slug: APP_SLUG, 
         title: "Licence Finder", 
         description: "Find out which licences you might need for your activity or business.",
-        need_id: "B90", 
         section: "business",
         paths: [],
         prefixes: ["/#{APP_SLUG}"],

@@ -9,6 +9,7 @@
   </head>
   <body class="mainstream">
     <div id="wrapper" class="answer licence-finder <%= yield :page_class %>">
+      <% if content_for?(:after_content) %><div class="grid-row"><% end %>
       <main id="content" role="main">
         <header class="page-header group">
           <div>
@@ -18,6 +19,7 @@
         <%= yield %>
       </main>
       <%= yield :after_content %>
+      <% if content_for?(:after_content) %></div><% end %>
     </div>
   </body>
 </html>

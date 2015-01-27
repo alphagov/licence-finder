@@ -23,7 +23,7 @@ gem 'logstasher', '0.4.8'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '3.25.0'
+  gem "slimmer", '6.0.0'
 end
 
 gem 'aws-ses', :require => 'aws/ses' # Needed by exception_notification
@@ -43,8 +43,8 @@ group :development, :test do
   gem 'rspec-rails', '2.11.0'
   gem 'factory_girl_rails', '3.2.0'
   gem 'database_cleaner'
-  gem 'capybara', '1.1.2'
-  gem 'poltergeist', "0.7.0"
+  gem 'capybara', '2.4.4'
+  gem 'poltergeist', "1.5.1"
   gem 'webmock', '1.8.7', :require => false
 end
 

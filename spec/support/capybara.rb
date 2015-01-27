@@ -5,3 +5,5 @@ Capybara.register_driver :poltergeist do |app|
 end
 
 Capybara.javascript_driver = :poltergeist
+
+RSpec.configuration.include Capybara::DSL, :type => :request

@@ -6,18 +6,13 @@ describe "Start page" do
 
     visit "/#{APP_SLUG}"
 
-    within '#content' do
-      
-
-      within 'article[role=article]' do
-        within 'section.intro' do
-          page.should have_link("Find licences", :href => sectors_path)
-        end
+    within 'article[role=article]' do
+      within 'section.intro' do
+        page.should have_link("Find licences", :href => sectors_path)
       end
-
-      page.should have_selector(".article-container #test-report_a_problem")
     end
 
+    page.should have_selector("#test-report_a_problem")
   end
 
   context "Seeing popular licences on the start page" do

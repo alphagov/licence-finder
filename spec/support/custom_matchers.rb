@@ -53,7 +53,7 @@ module CustomMatchers
 
   def check_add_remove_link(type, label)
     type_class = type.downcase
-    element = find(:xpath, "//li[span/text() = '#{label}']")
+    element = find(:xpath, ".//li[span/text() = '#{label}']")
     element.should_not be_nil
     element.should have_xpath("a[text() = '#{type}']")
     element.should have_xpath("a[@class = '#{type_class}']")

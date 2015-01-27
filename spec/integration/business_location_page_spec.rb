@@ -35,7 +35,7 @@ describe "Business location page" do
     within_section 'current question' do
       page.should have_content('Where will you be located?')
 
-      page.all(:xpath, '//select[@id="select-location"]//option/@value').map(&:text).should == [
+      page.all('select#select-location option').map(&:value).should == [
         '',
         'england',
         'scotland',

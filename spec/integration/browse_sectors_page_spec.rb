@@ -76,10 +76,11 @@ describe "Sector browse page" do
   specify "clicking on sibling sectors collapses other sectors", :js => true do
     visit "/#{APP_SLUG}/browse-sectors"
 
-    click_on @s1.name
-    click_on @s2.name
-    click_on @s4.name
-    page.should_not have_content @s3.name
+    click_on @s1.name # first top level
+    click_on @s2.name # first child
+    click_on @s4.name # second child
+    page.should have_content @s5.name # second grand child
+    page.should_not have_content @s3.name # first grand child
   end
 
   specify "clicking on an open sector closes its children", :js => true do

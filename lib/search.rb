@@ -8,6 +8,11 @@ class Search
     client_config = HashWithIndifferentAccess.new(YAML.load_file(config_path))
     client_config = client_config[environment].merge(client_config[:all_envs])
 
+    # FIXME: remove this override once migration is complete.
+    if ENV['OVERRIDE_ES_URL'].present?
+      client_config[:url] = ENV['OVERRIDE_ES_URL']
+    end
+
     Rails.logger.instance_eval do
       alias :write :info
     end

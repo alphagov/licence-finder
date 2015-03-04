@@ -4,7 +4,7 @@ describe "Finding licences" do
 
   specify "Simple happy path through the app" do
     WebMock.allow_net_connect!
-    $search = Search.create_for_config("elasticsearch", "test")
+    $search = Search.create
 
     s1 = FactoryGirl.create(:sector, :name => "Fooey Sector", :layer => 3)
     s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector", :layer => 3)

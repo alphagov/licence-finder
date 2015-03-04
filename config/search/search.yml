@@ -1,8 +1,0 @@
-development:
-    client: elasticsearch
-
-test:
-    client: elasticsearch
-
-production:
-    client: elasticsearch

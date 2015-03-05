@@ -9,7 +9,7 @@ test:
     type:  sector
 
 production:
-    url:   'http://support.cluster:9200'
+    url:   'http://localhost:9200'
     index: licence-finder
     type:  sector
 

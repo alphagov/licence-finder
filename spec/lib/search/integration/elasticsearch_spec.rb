@@ -5,7 +5,7 @@ require "search/client/elasticsearch"
 describe Search::Client::Elasticsearch do
   before(:each) do
     WebMock.allow_net_connect!
-    $search = Search.create_for_config("elasticsearch", "test")
+    $search = Search.create
 
     s1 = FactoryGirl.create(:sector, :public_id => 123, :correlation_id => 987, :name => "Fooey Sector", :layer => 3)
     s2 = FactoryGirl.create(:sector, :public_id => 234, :correlation_id => 986, :name => "Kablooey Sector", :layer => 3)

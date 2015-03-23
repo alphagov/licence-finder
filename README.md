@@ -13,3 +13,13 @@ Load the data into Elasticsearch
 Migrating your Licence data to use gds_id instead of correlation_id (This happens automatically on importing licences)
 
     bundle exec rake licence_migrate
+
+### Running the application
+
+Using bowler on the VM from cd /var/govuk/development/:
+
+```
+bowl licencefinder
+```
+
+If you are using the GDS development virtual machine then the application will be available on the host at http://licencefinder.dev.gov.uk/licence-finder

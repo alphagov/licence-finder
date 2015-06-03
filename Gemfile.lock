@@ -158,7 +158,7 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    slimmer (8.1.0)
+    slimmer (8.2.1)
       activesupport
       json
       nokogiri (>= 1.5.0, < 1.7.0)
@@ -220,7 +220,7 @@ DEPENDENCIES
   rummageable (~> 0.1.3)
   sass (= 3.2.0)
   sass-rails (= 3.2.5)
-  slimmer (= 8.1.0)
+  slimmer (= 8.2.1)
   tire
   uglifier (= 1.2.4)
   unicorn (= 4.3.1)

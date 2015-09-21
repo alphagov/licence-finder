@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://BnrJb6FZyzspBboNJzYZ@gem.fury.io/govuk/'
 
 gem 'rails', '3.2.22'
 gem 'unicorn', '4.3.1'
@@ -48,4 +47,4 @@ group :development, :test do
   gem 'webmock', '1.8.7', :require => false
 end
 
-gem 'govuk_frontend_toolkit', '0.32.2'
+gem 'govuk_frontend_toolkit', '0.41.1'

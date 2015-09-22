@@ -44,7 +44,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara', '2.4.4'
   gem 'poltergeist', "1.5.1"
-  gem 'webmock', '1.8.7', :require => false
+  gem 'webmock', '1.8.11', :require => false
+  gem 'govuk-content-schema-test-helpers'
 end
 
 gem 'govuk_frontend_toolkit', '0.41.1'

@@ -13,7 +13,7 @@ gem 'mongoid_rails_migrations', '1.0.1'
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
 else
-  gem 'gds-api-adapters', '20.1.1'
+  gem 'gds-api-adapters', '~> 24.4.0'
 end
 
 gem 'rummageable', '~> 0.1.3'

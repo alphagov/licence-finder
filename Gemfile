@@ -10,6 +10,8 @@ gem "tire"
 
 gem 'mongoid_rails_migrations', '1.0.1'
 
+gem "airbrake", "4.3.1"
+
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
 else
@@ -24,9 +26,6 @@ if ENV['SLIMMER_DEV']
 else
   gem "slimmer", '8.2.1'
 end
-
-gem 'aws-ses', :require => 'aws/ses' # Needed by exception_notification
-gem 'exception_notification'
 
 group :assets do
   gem 'sass', '3.2.0'

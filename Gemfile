@@ -22,7 +22,7 @@ gem 'logstasher', '0.4.8'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '8.2.1'
+  gem "slimmer", '9.0.0'
 end
 
 gem 'aws-ses', :require => 'aws/ses' # Needed by exception_notification

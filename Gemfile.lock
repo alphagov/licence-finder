@@ -106,8 +106,7 @@ GEM
     netrc (0.10.3)
     nokogiri (1.5.11)
     null_logger (0.0.1)
-    plek (1.1.0)
-      builder
+    plek (1.11.0)
     poltergeist (1.5.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -224,7 +223,7 @@ DEPENDENCIES
   logstasher (= 0.4.8)
   mongoid (= 2.4.9)
   mongoid_rails_migrations (= 1.0.1)
-  plek (= 1.1.0)
+  plek (= 1.11.0)
   poltergeist (= 1.5.1)
   rails (= 3.2.22)
   rspec-rails (= 2.11.0)

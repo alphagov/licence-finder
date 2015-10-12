@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.22'
 gem 'unicorn', '4.3.1'
-gem 'plek', '1.1.0'
+gem 'plek', '1.11.0'
 
 gem "mongoid", "2.4.9"
 gem "bson_ext", "1.6.2"

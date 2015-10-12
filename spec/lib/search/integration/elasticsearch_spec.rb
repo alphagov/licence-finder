@@ -15,7 +15,7 @@ describe Search::Client::Elasticsearch do
     a2 = FactoryGirl.create(:activity, :public_id => 7124, :correlation_id => 982, :name => "Unrelated terms", :sectors => [s3])
 
     @search = $search.clone
-    @search.client.stub(:extra_terms).and_return({
+    allow(@search.client).to receive(:extra_terms).and_return({
       987 => %w(foo bar),
       986 => %w(monkey)
     })
@@ -27,25 +27,25 @@ describe Search::Client::Elasticsearch do
   end
 
   it "should return sectors that match on title" do
-    @search.search("fooey")[0].public_id.should == 123
-    @search.search("sector").length.should == 3
+    expect(@search.search("fooey")[0].public_id).to eq(123)
+    expect(@search.search("sector").length).to eq(3)
   end
 
   it "should return sectors that match on extra terms" do
     search = @search.search("monkey")
-    search[0].public_id.should == 234
-    search.length.should == 1
+    expect(search[0].public_id).to eq(234)
+    expect(search.length).to eq(1)
   end
 
   it "should return sectors that match on activities" do
     search = @search.search("unrelated")
-    search[0].public_id.should == 345
-    search.length.should == 1
+    expect(search[0].public_id).to eq(345)
+    expect(search.length).to eq(1)
   end
 
   it "should return sectors above activities when both match" do
     search = @search.search("fooey")
-    search.length.should == 2
-    search[0].public_id.should == 123
+    expect(search.length).to eq(2)
+    expect(search[0].public_id).to eq(123)
   end
 end

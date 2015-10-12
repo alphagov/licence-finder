@@ -18,15 +18,15 @@ describe DataImporter::Activities do
       end
 
       imported_activity1 = Activity.find_by_correlation_id(362)
-      imported_activity1.correlation_id.should == 362
-      imported_activity1.name.should == "Practise as a dietitian "
+      expect(imported_activity1.correlation_id).to eq(362)
+      expect(imported_activity1.name).to eq("Practise as a dietitian ")
 
       imported_activity2 = Activity.find_by_correlation_id(1002)
-      imported_activity2.correlation_id.should == 1002
-      imported_activity2.name.should == "Use CCTV systems"
+      expect(imported_activity2.correlation_id).to eq(1002)
+      expect(imported_activity2.name).to eq("Use CCTV systems")
 
       sector.reload
-      sector.activities.should == [imported_activity1, imported_activity2]
+      expect(sector.activities).to eq([imported_activity1, imported_activity2])
     end
 
     it "should avoid importing the same activity id more than once" do
@@ -43,23 +43,23 @@ describe DataImporter::Activities do
         importer.run
       end
 
-      Activity.where(correlation_id: 362).length.should == 1
+      expect(Activity.where(correlation_id: 362).length).to eq(1)
     end
   end
 
   describe "open_data_file" do
     it "should open the input data file" do
       tmpfile = Tempfile.new("activities.csv")
-      DataImporter::Activities.should_receive(:data_file_path).with("activities.csv").and_return(tmpfile.path)
+      expect(DataImporter::Activities).to receive(:data_file_path).with("activities.csv").and_return(tmpfile.path)
 
       DataImporter::Activities.open_data_file
     end
     it "should fail if the input data file does not exist" do
-      DataImporter::Activities.should_receive(:data_file_path).with("activities.csv").and_return("/example/activities.csv")
+      expect(DataImporter::Activities).to receive(:data_file_path).with("activities.csv").and_return("/example/activities.csv")
 
-      lambda do
+      expect do
         DataImporter::Activities.open_data_file
-      end.should raise_error(Errno::ENOENT)
+      end.to raise_error(Errno::ENOENT)
     end
   end
 end

@@ -19,10 +19,10 @@ describe "Sector selection page" do
   specify "inspecting the page" do
     visit "/#{APP_SLUG}/sectors?q=sector"
 
-    page.should_not have_selector(*selector_of_section('completed questions'))
+    expect(page).not_to have_selector(*selector_of_section('completed questions'))
 
     within_section 'current question' do
-      page.should have_content("What is your activity or business?")
+      expect(page).to have_content("What is your activity or business?")
 
       within '.search-results' do
         i_should_see_add_links ["Fooey Sector", "Gooey Sector", "Kablooey Sector"]
@@ -30,15 +30,15 @@ describe "Sector selection page" do
 
       within '.business-sector-picked' do
         # none are selected yet
-        page.should have_content("Your chosen areas will appear here")
+        expect(page).to have_content("Your chosen areas will appear here")
       end
     end
 
     within_section 'upcoming questions' do
-      page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
+      expect(page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
         'What would you like to do?',
         'Where will you be located?'
-      ]
+      ])
     end
   end
 
@@ -47,8 +47,8 @@ describe "Sector selection page" do
 
     within_section 'current question' do
       within '.search-results' do
-        page.should have_content('Fooey Sector')
-        page.should have_content('Kablooey Sector')
+        expect(page).to have_content('Fooey Sector')
+        expect(page).to have_content('Kablooey Sector')
 
         i_should_see_add_link 'Gooey Sector'
         i_should_see_remove_link 'Fooey Sector'
@@ -70,9 +70,9 @@ describe "Sector selection page" do
 
     within_section 'current question' do
       within '.search-container' do
-        page.should have_css("input#search-sectors")
+        expect(page).to have_css("input#search-sectors")
       end
-      page.should_not have_css(".search-results")
+      expect(page).not_to have_css(".search-results")
     end
   end
 
@@ -81,8 +81,8 @@ describe "Sector selection page" do
 
     within_section 'current question' do
       within '.search-container' do
-        page.should have_css("input#search-sectors")
-        page.should have_content("No results")
+        expect(page).to have_css("input#search-sectors")
+        expect(page).to have_content("No results")
       end
     end
   end
@@ -103,7 +103,7 @@ describe "Sector selection page" do
 
     within_section 'current question' do
       within '.business-sector-picked' do
-        page.should_not have_xpath(".//li[span/text() = 'Fooey Sector']")
+        expect(page).not_to have_xpath(".//li[span/text() = 'Fooey Sector']")
         i_should_see_remove_link "Kablooey Sector"
       end
     end
@@ -114,8 +114,8 @@ describe "Sector selection page" do
 
     within_section 'current question' do
       within '.search-container' do
-        page.should have_css("input#search-sectors")
-        page.should have_content("No results")
+        expect(page).to have_css("input#search-sectors")
+        expect(page).to have_content("No results")
       end
     end
   end

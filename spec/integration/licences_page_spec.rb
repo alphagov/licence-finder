@@ -27,36 +27,36 @@ describe "Licences page" do
     visit licence_finder_url_for('licences', [@s1], [@a1], 'scotland')
 
     within_section 'completed questions' do
-      page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
+      expect(page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
         'What is your activity or business?',
         'What would you like to do?',
         'Where will you be located?',
-      ]
+      ])
     end
     within_section 'completed question 1' do
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Sector',
-      ]
+      ])
     end
     within_section 'completed question 2' do
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Activity',
-      ]
+      ])
     end
     within_section 'completed question 3' do
-      page.should have_content('Scotland')
+      expect(page).to have_content('Scotland')
     end
 
     within_section 'outcome' do
-      page.all('li').map(&:text).map(&:strip).should == [
+      expect(page.all('li').map(&:text).map(&:strip)).to eq([
         'Licence Four'
-      ]
+      ])
     end
 
-    page.should_not have_selector(*selector_of_section('current question'))
-    page.should_not have_selector(*selector_of_section('upcoming questions'))
+    expect(page).not_to have_selector(*selector_of_section('current question'))
+    expect(page).not_to have_selector(*selector_of_section('upcoming questions'))
 
-    page.should_not have_content("No licences")
+    expect(page).not_to have_content("No licences")
   end
 
   describe "getting licence details from content API" do
@@ -68,15 +68,15 @@ describe "Licences page" do
 
       within_section 'outcome' do
         # should use the title from content API, instead of local one
-        page.should have_content("Licence 1")
-        page.should_not have_content("Licence One")
+        expect(page).to have_content("Licence 1")
+        expect(page).not_to have_content("Licence One")
 
         within_section "list item containing Licence 1" do
-          page.should have_link("Licence 1", :href => "http://www.test.gov.uk/licence-one")
-          page.should have_content("Short description of licence")
+          expect(page).to have_link("Licence 1", :href => "http://www.test.gov.uk/licence-one")
+          expect(page).to have_content("Short description of licence")
         end
 
-        page.should have_content("Licence Two")
+        expect(page).to have_content("Licence Two")
       end
     end
 
@@ -87,7 +87,7 @@ describe "Licences page" do
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
       within_section "outcome" do
-        page.should have_content "Further information may not yet be available for some licences"
+        expect(page).to have_content "Further information may not yet be available for some licences"
       end
     end
 
@@ -100,7 +100,7 @@ describe "Licences page" do
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
       within_section "outcome" do
-        page.should_not have_content "Further information may not yet be available for some licences"
+        expect(page).not_to have_content "Further information may not yet be available for some licences"
       end
     end
 
@@ -111,10 +111,10 @@ describe "Licences page" do
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
       within_section 'outcome' do
-        page.all('li').map(&:text).map(&:strip).should == [
+        expect(page.all('li').map(&:text).map(&:strip)).to eq([
           'Licence One',
           'Licence Two',
-        ]
+        ])
       end
     end
   end
@@ -132,6 +132,6 @@ describe "Licences page" do
   specify "no licences for current selection" do
     visit licence_finder_url_for("licences", [@s3], [@a4], "england")
 
-    page.should have_content("No licences")
+    expect(page).to have_content("No licences")
   end
 end

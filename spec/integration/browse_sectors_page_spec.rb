@@ -18,10 +18,10 @@ describe "Sector browse page" do
     visit "/#{APP_SLUG}/browse-sectors"
 
     within "#sector-navigation" do
-      page.should have_css "li>a"
-      page.should have_content @s1.name
-      page.should have_content @s6.name
-      page.should_not have_content @s3.name
+      expect(page).to have_css "li>a"
+      expect(page).to have_content @s1.name
+      expect(page).to have_content @s6.name
+      expect(page).not_to have_content @s3.name
     end
   end
 
@@ -30,17 +30,17 @@ describe "Sector browse page" do
 
     click_on @s1.name
 
-    page.should have_content @s2.name
+    expect(page).to have_content @s2.name
 
     click_on @s2.name
 
-    page.should have_content @s3.name
+    expect(page).to have_content @s3.name
   end
 
   specify "viewing a deeper URL has the correct content" do
     visit "/#{APP_SLUG}/browse-sectors/#{@s1.public_id}"
 
-    page.should have_content @s2.name
+    expect(page).to have_content @s2.name
   end
 
   specify "sectors can be added from browse page" do
@@ -49,28 +49,28 @@ describe "Sector browse page" do
     click_on "Add"
 
     within '.picked-items' do
-      page.should have_content @s3.name
+      expect(page).to have_content @s3.name
     end
   end
 
   specify "clicking on sectors fetches children", :js => true do
     visit "/#{APP_SLUG}/browse-sectors"
 
-    page.should have_content @s1.name
-    page.should_not have_content @s2.name
+    expect(page).to have_content @s1.name
+    expect(page).not_to have_content @s2.name
 
     within "#sector-navigation" do
       click_on @s1.name
     end
 
-    page.should have_content @s2.name
-    page.should_not have_content @s3.name
+    expect(page).to have_content @s2.name
+    expect(page).not_to have_content @s3.name
 
     within "#sector-navigation" do
       click_on @s2.name
     end
 
-    page.should have_content @s3.name
+    expect(page).to have_content @s3.name
   end
 
   specify "clicking on sibling sectors collapses other sectors", :js => true do
@@ -79,8 +79,8 @@ describe "Sector browse page" do
     click_on @s1.name # first top level
     click_on @s2.name # first child
     click_on @s4.name # second child
-    page.should have_content @s5.name # second grand child
-    page.should_not have_content @s3.name # first grand child
+    expect(page).to have_content @s5.name # second grand child
+    expect(page).not_to have_content @s3.name # first grand child
   end
 
   specify "clicking on an open sector closes its children", :js => true do
@@ -88,20 +88,20 @@ describe "Sector browse page" do
 
     click_on @s1.name
     click_on @s2.name
-    page.should have_content @s3.name
+    expect(page).to have_content @s3.name
 
     click_on @s2.name
-    page.should_not have_content @s3.name
+    expect(page).not_to have_content @s3.name
   end
 
   specify "granchild sectors will have rel=\"nofollow\" attributes on 'Add' links", :js => true do
     visit "/#{APP_SLUG}/browse-sectors"
 
     click_on @s1.name
-    page.should have_content @s2.name
+    expect(page).to have_content @s2.name
 
     click_on @s2.name
-    page.should have_content @s3.name
+    expect(page).to have_content @s3.name
 
     all("a.add").each { |a| assert_equal "nofollow", a[:rel] }
   end

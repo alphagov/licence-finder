@@ -14,37 +14,37 @@ describe "Business location page" do
     visit licence_finder_url_for("location", [@s1, @s2], [@a1, @a2])
 
     within_section 'completed questions' do
-      page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
+      expect(page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
         'What is your activity or business?',
         'What would you like to do?',
-      ]
+      ])
     end
     within_section 'completed question 1' do
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Sector',
         'Balooey Sector'
-      ]
+      ])
     end
     within_section 'completed question 2' do
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Activity',
         'Kablooey Activity'
-      ]
+      ])
     end
 
     within_section 'current question' do
-      page.should have_content('Where will you be located?')
+      expect(page).to have_content('Where will you be located?')
 
-      page.all('select#select-location option').map(&:value).should == [
+      expect(page.all('select#select-location option').map(&:value)).to eq([
         '',
         'england',
         'scotland',
         'wales',
         'northern_ireland'
-      ]
+      ])
     end
 
-    page.should_not have_selector(*selector_of_section('upcoming questions'))
+    expect(page).not_to have_selector(*selector_of_section('upcoming questions'))
 
     select('England', from: 'select-location')
 

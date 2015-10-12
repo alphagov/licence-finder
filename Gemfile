@@ -28,8 +28,8 @@ else
 end
 
 group :assets do
-  gem 'sass', '3.2.0'
-  gem 'sass-rails', '3.2.5'
+  gem 'sass', '~> 3.2.0'
+  gem 'sass-rails', '~> 3.2.5'
   gem 'uglifier', '1.2.4'
 end
 

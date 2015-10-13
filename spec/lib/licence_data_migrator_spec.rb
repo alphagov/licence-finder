@@ -13,7 +13,7 @@ describe LicenceDataMigrator do
   
   describe "initialize" do
     it "should load the identifier mappings" do
-      @migrator.licence_mappings["1083741393"].should == "1237-4-1"
+      expect(@migrator.licence_mappings["1083741393"]).to eq("1237-4-1")
     end
   end
   
@@ -28,8 +28,8 @@ describe LicenceDataMigrator do
       
       l1.reload
       l2.reload
-      l1.gds_id.should == "1237-4-1"
-      l2.gds_id.should == "9876-3-1"
+      expect(l1.gds_id).to eq("1237-4-1")
+      expect(l2.gds_id).to eq("9876-3-1")
     end
     
 #    it "should generate the gds_id where no suitable mapping exists" do
@@ -46,15 +46,15 @@ describe LicenceDataMigrator do
   describe "country code" do
     it "should give a numeric code for the licence" do
       licence = FactoryGirl.create(:licence, da_northern_ireland: true, da_england: true)
-      @migrator.country_code(licence).should == 7
+      expect(@migrator.country_code(licence)).to eq(7)
       licence.da_northern_ireland = false
       licence.da_scotland = true
       licence.da_wales = true
-      @migrator.country_code(licence).should == 6
+      expect(@migrator.country_code(licence)).to eq(6)
       licence.da_scotland = false
-      @migrator.country_code(licence).should == 5
+      expect(@migrator.country_code(licence)).to eq(5)
       licence.da_wales = false
-      @migrator.country_code(licence).should == 1
+      expect(@migrator.country_code(licence)).to eq(1)
     end
   end
 end

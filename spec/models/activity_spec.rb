@@ -8,9 +8,9 @@ describe Activity do
       :name => "Some Activity"
     )
     activity = Activity.first
-    activity.public_id.should == 42
-    activity.correlation_id.should == 24
-    activity.name.should == "Some Activity"
+    expect(activity.public_id).to eq(42)
+    expect(activity.correlation_id).to eq(24)
+    expect(activity.name).to eq("Some Activity")
   end
 
   describe "validations" do
@@ -21,22 +21,22 @@ describe Activity do
     it "should have a database level uniqueness constraint on public_id" do
       FactoryGirl.create(:activity, :public_id => 42)
       @activity.public_id = 42
-      lambda do
+      expect do
         @activity.safely.save
-      end.should raise_error(Mongo::OperationFailure)
+      end.to raise_error(Mongo::OperationFailure)
     end
 
     it "should have a database level uniqueness constraint on correlation_id" do
       FactoryGirl.create(:activity, :correlation_id => 42)
       @activity.correlation_id = 42
-      lambda do
+      expect do
         @activity.safely.save
-      end.should raise_error(Mongo::OperationFailure)
+      end.to raise_error(Mongo::OperationFailure)
     end
 
     it "should require a name" do
       @activity.name = ''
-      @activity.should_not be_valid
+      expect(@activity).not_to be_valid
     end
   end
 
@@ -51,7 +51,7 @@ describe Activity do
       a.save!
 
       a.reload
-      a.sectors.should == [s1, s2]
+      expect(a.sectors).to eq([s1, s2])
     end
   end
 
@@ -63,12 +63,12 @@ describe Activity do
 
       it "should be able to retrieve by public_id" do
         found_activity = Activity.find_by_public_id(@activity.public_id)
-        found_activity.should == @activity
+        expect(found_activity).to eq(@activity)
       end
 
       it "should fail to retrieve a non-existent public_id" do
         found_activity = Activity.find_by_public_id(@activity.public_id + 1)
-        found_activity.should == nil
+        expect(found_activity).to eq(nil)
       end
     end
 
@@ -81,12 +81,12 @@ describe Activity do
 
       it "should return the activities for the given id's" do
         found_activities = Activity.find_by_public_ids([10, 11])
-        found_activities.to_a.should =~ [@a1, @a2]
+        expect(found_activities.to_a).to match_array([@a1, @a2])
       end
 
       it "should skip any non-existent activities" do
         found_activities = Activity.find_by_public_ids([10, 12, 13])
-        found_activities.to_a.should =~ [@a1, @a3]
+        expect(found_activities.to_a).to match_array([@a1, @a3])
       end
     end
 
@@ -97,12 +97,12 @@ describe Activity do
 
       it "should be able to retrieve by correlation_id" do
         found_activity = Activity.find_by_correlation_id(@activity.correlation_id)
-        found_activity.should == @activity
+        expect(found_activity).to eq(@activity)
       end
 
       it "should fail to retrieve a non-existent correlation_id" do
         found_activity = Activity.find_by_correlation_id(@activity.correlation_id + 1)
-        found_activity.should == nil
+        expect(found_activity).to eq(nil)
       end
     end
 
@@ -120,43 +120,43 @@ describe Activity do
       end
 
       it "should return activities relating to the given sectors" do
-        Activity.find_by_sectors([@s2, @s3]).to_a.should =~ [@a2, @a3, @a4, @a5]
+        expect(Activity.find_by_sectors([@s2, @s3]).to_a).to match_array([@a2, @a3, @a4, @a5])
       end
 
       it "should only return each activity once" do
-        Activity.find_by_sectors([@s1, @s3]).to_a.should =~ [@a1, @a3, @a4, @a5]
+        expect(Activity.find_by_sectors([@s1, @s3]).to_a).to match_array([@a1, @a3, @a4, @a5])
       end
 
       it "returns activities in a way that's chainable with other scopes" do
-        Activity.find_by_sectors([@s2, @s3]).ascending(:name).should == [@a3, @a2, @a4, @a5]
+        expect(Activity.find_by_sectors([@s2, @s3]).ascending(:name)).to eq([@a3, @a2, @a4, @a5])
       end
     end
   end
 
   specify "to_s returns the name" do
     a = FactoryGirl.build(:activity, :name => "Foo Activity")
-    a.to_s.should == "Foo Activity"
+    expect(a.to_s).to eq("Foo Activity")
   end
 
   describe "auto incrementing public_id" do
     it "should set the public_id to the next free public_id on save" do
       activity = FactoryGirl.build(:activity)
-      activity.public_id.should == nil
+      expect(activity.public_id).to eq(nil)
       activity.save!
-      activity.public_id.should == 1
+      expect(activity.public_id).to eq(1)
 
       activity = FactoryGirl.build(:activity)
-      activity.public_id.should == nil
+      expect(activity.public_id).to eq(nil)
       activity.save!
-      activity.public_id.should == 2
+      expect(activity.public_id).to eq(2)
     end
 
     it "should use a separate sequence for each model" do
       activity = FactoryGirl.create(:activity)
-      activity.public_id.should == 1
+      expect(activity.public_id).to eq(1)
       FactoryGirl.create(:licence)
       activity = FactoryGirl.create(:activity)
-      activity.public_id.should == 2
+      expect(activity.public_id).to eq(2)
     end
   end
 end

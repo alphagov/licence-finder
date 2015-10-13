@@ -18,13 +18,13 @@ describe "Browse sectors via licence finder homepage" do
   end
 
   specify "when browsing the main sectors page", :js => true do
-    page.should_not have_content @s1.name
-    page.should_not have_css 'ul#sector-navigation'
+    expect(page).not_to have_content @s1.name
+    expect(page).not_to have_css 'ul#sector-navigation'
 
     click_link "browse-sectors"
 
-    page.should have_content @s1.name
-    page.should have_css 'ul#sector-navigation'
+    expect(page).to have_content @s1.name
+    expect(page).to have_css 'ul#sector-navigation'
   end
 
   specify "3rd level sectors should be able to be added to the sidebar", :js => true do
@@ -32,12 +32,12 @@ describe "Browse sectors via licence finder homepage" do
     click_on @s1.name
     click_on @s2.name
 
-    find('.picked-items').should_not have_content @s3.name
+    expect(find('.picked-items')).not_to have_content @s3.name
 
     within "li[data-public-id='#{@s3.public_id}']" do
       click_on "Add"
     end
 
-    find('.picked-items').should have_content @s3.name
+    expect(find('.picked-items')).to have_content @s3.name
   end
 end

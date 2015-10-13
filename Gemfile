@@ -28,17 +28,15 @@ else
 end
 
 group :assets do
-  gem 'sass', '3.2.0'
-  gem 'sass-rails', '3.2.5'
+  gem 'sass', '~> 3.2.0'
+  gem 'sass-rails', '~> 3.2.5'
   gem 'uglifier', '1.2.4'
 end
 
-if ENV['RUBY_DEBUG']
-  gem "ruby-debug19"
-end
-
 group :development, :test do
-  gem 'rspec-rails', '2.11.0'
+  gem 'rspec-rails', '~> 2.99.0'
+  # NOTE: only while we are on rails 3.2.x - remove when we go to 4.x
+  gem 'test-unit'
   gem 'factory_girl_rails', '3.2.0'
   gem 'database_cleaner'
   gem 'capybara', '2.4.4'

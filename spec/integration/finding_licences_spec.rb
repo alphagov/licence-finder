@@ -30,7 +30,7 @@ describe "Finding licences" do
 
     visit "/#{APP_SLUG}"
 
-    page.should have_link('Find licences')
+    expect(page).to have_link('Find licences')
 
     click_on 'Find licences'
 
@@ -49,14 +49,14 @@ describe "Finding licences" do
     i_should_be_on "/#{APP_SLUG}/activities", :ignore_query => true
 
     within_section 'completed question 1' do
-      page.should have_content "Fooey Sector"
-      page.should have_content "Gooey Sector"
-      page.should_not have_content "Kablooey Sector"
+      expect(page).to have_content "Fooey Sector"
+      expect(page).to have_content "Gooey Sector"
+      expect(page).not_to have_content "Kablooey Sector"
       # They should be in alphabetical order
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Sector',
         'Gooey Sector',
-      ]
+      ])
     end
 
     within_section 'current question' do
@@ -70,23 +70,23 @@ describe "Finding licences" do
     i_should_be_on "/#{APP_SLUG}/location", :ignore_query => true
 
     within_section 'completed question 1' do
-      page.should have_content "Fooey Sector" # s1
-      page.should have_content "Gooey Sector" # s3
+      expect(page).to have_content "Fooey Sector" # s1
+      expect(page).to have_content "Gooey Sector" # s3
       # They should be in alphabetical order
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Sector',
         'Gooey Sector',
-      ]
+      ])
     end
 
     within_section 'completed question 2' do
-      page.should have_content 'Fooey Activity' # a1
-      page.should have_content 'Gooey Activity' # a4
+      expect(page).to have_content 'Fooey Activity' # a1
+      expect(page).to have_content 'Gooey Activity' # a4
       # They should be in alphabetical order
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Activity',
         'Gooey Activity',
-      ]
+      ])
     end
 
     select('England', from: 'location')
@@ -96,27 +96,27 @@ describe "Finding licences" do
     i_should_be_on "/#{APP_SLUG}/licences", :ignore_query => true
 
     within_section 'completed question 1' do
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Sector',
         'Gooey Sector',
-      ]
+      ])
     end
 
     within_section 'completed question 2' do
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Activity',
         'Gooey Activity',
-      ]
+      ])
     end
 
     within_section 'completed question 3' do
-      page.should have_content('England')
+      expect(page).to have_content('England')
     end
 
     within_section 'outcome' do
-      page.all('li').map(&:text).map(&:strip).should == [
+      expect(page.all('li').map(&:text).map(&:strip)).to eq([
         'Licence One'
-      ]
+      ])
     end
 
     $search.delete_index

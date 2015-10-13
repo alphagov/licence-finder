@@ -20,19 +20,19 @@ describe DataImporter::Licences do
       end
 
       imported_licence = Licence.find_by_correlation_id(1)
-      imported_licence.correlation_id.should == 1
-      imported_licence.name.should == "Licences to play music in a theatre (All UK)"
-      imported_licence.regulation_area.should == "Copyright"
+      expect(imported_licence.correlation_id).to eq(1)
+      expect(imported_licence.name).to eq("Licences to play music in a theatre (All UK)")
+      expect(imported_licence.regulation_area).to eq("Copyright")
       imported_licence.da_england == true
       imported_licence.da_wales == true
       imported_licence.da_scotland == false
       imported_licence.da_northern_ireland == false
 
       imported_licence_link = LicenceLink.first
-      imported_licence_link.sector.should == @sector
-      imported_licence_link.activity.should == @activity
-      imported_licence_link.licence.should == imported_licence
-      LicenceLink.all.length.should == 1
+      expect(imported_licence_link.sector).to eq(@sector)
+      expect(imported_licence_link.activity).to eq(@activity)
+      expect(imported_licence_link.licence).to eq(imported_licence)
+      expect(LicenceLink.all.length).to eq(1)
     end
 
     it "should decode any html entities in the data file" do
@@ -47,7 +47,7 @@ describe DataImporter::Licences do
       end
 
       imported_licence = Licence.find_by_correlation_id(1)
-      imported_licence.name.should == "Pavement licence (England & Wales)"
+      expect(imported_licence.name).to eq("Pavement licence (England & Wales)")
     end
 
     it "should update the licence if one with the same correlation_id already exists" do
@@ -64,9 +64,9 @@ describe DataImporter::Licences do
       end
 
       imported_licence = Licence.find_by_correlation_id(1)
-      imported_licence.correlation_id.should == 1
-      imported_licence.name.should == "Licences to play music in a theatre (All UK)"
-      imported_licence.da_england.should be_true
+      expect(imported_licence.correlation_id).to eq(1)
+      expect(imported_licence.name).to eq("Licences to play music in a theatre (All UK)")
+      expect(imported_licence.da_england).to be_truthy
     end
     it "should fail early if the sector does not exist" do
       source = StringIO.new(<<-END)
@@ -75,13 +75,13 @@ describe DataImporter::Licences do
       END
 
       importer = DataImporter::Licences.new(source)
-      lambda do
+      expect do
         silence_stream(STDOUT) do
           importer.run
         end
-      end.should raise_error
+      end.to raise_error
       imported_licence = Licence.find_by_correlation_id(1)
-      imported_licence.should == nil
+      expect(imported_licence).to eq(nil)
     end
     it "should fail early if the activity does not exist" do
       source = StringIO.new(<<-END)
@@ -90,13 +90,13 @@ describe DataImporter::Licences do
       END
 
       importer = DataImporter::Licences.new(source)
-      lambda do
+      expect do
         silence_stream(STDOUT) do
           importer.run
         end
-      end.should raise_error
+      end.to raise_error
       imported_licence = Licence.find_by_correlation_id(1)
-      imported_licence.should == nil
+      expect(imported_licence).to eq(nil)
     end
     it "should add links for all layer3 sectors if a layer2 sector id is provided" do
       l2sector1 = FactoryGirl.create(:sector, correlation_id: 101, layer: 2)
@@ -116,11 +116,11 @@ describe DataImporter::Licences do
       end
 
       imported_links = LicenceLink.all
-      imported_links.length.should == 2
+      expect(imported_links.length).to eq(2)
       sectors = imported_links.map(&:sector)
-      sectors.should include(sector1)
-      sectors.should include(sector2)
-      sectors.should_not include(sector3)
+      expect(sectors).to include(sector1)
+      expect(sectors).to include(sector2)
+      expect(sectors).not_to include(sector3)
     end
     it "should add links for all layer3 sectors if a layer1 sector id is provided" do
       l1sector = FactoryGirl.create(:sector, correlation_id: 101, layer: 1)
@@ -140,11 +140,11 @@ describe DataImporter::Licences do
       end
 
       imported_links = LicenceLink.all
-      imported_links.length.should == 2
+      expect(imported_links.length).to eq(2)
       sectors = imported_links.map(&:sector)
-      sectors.should include(sector1)
-      sectors.should include(sector2)
-      sectors.should_not include(sector3)
+      expect(sectors).to include(sector1)
+      expect(sectors).to include(sector2)
+      expect(sectors).not_to include(sector3)
     end
     it "should not create a new licence_link if it already exists" do
       @licence = FactoryGirl.create(:licence, gds_id: "123-2-1", name: "Test Name", da_england: false)
@@ -160,7 +160,7 @@ describe DataImporter::Licences do
         importer.run
       end
 
-      LicenceLink.first.should == licence_link
+      expect(LicenceLink.first).to eq(licence_link)
     end
   end
 
@@ -177,26 +177,26 @@ describe DataImporter::Licences do
       end
 
       imported_licence = Licence.find_by_correlation_id(1)
-      imported_licence.da_england.should == true
-      imported_licence.da_scotland.should == true
-      imported_licence.da_wales.should == true
-      imported_licence.da_northern_ireland.should == true
+      expect(imported_licence.da_england).to eq(true)
+      expect(imported_licence.da_scotland).to eq(true)
+      expect(imported_licence.da_wales).to eq(true)
+      expect(imported_licence.da_northern_ireland).to eq(true)
     end
   end
 
   describe "open_data_file" do
     it "should open the input data file" do
       tmpfile = Tempfile.new("licences.csv")
-      DataImporter::Licences.should_receive(:data_file_path).with("licences.csv").and_return(tmpfile.path)
+      expect(DataImporter::Licences).to receive(:data_file_path).with("licences.csv").and_return(tmpfile.path)
 
       DataImporter::Licences.open_data_file
     end
     it "should fail if the input data file does not exist" do
-      DataImporter::Licences.should_receive(:data_file_path).with("licences.csv").and_return("/example/licences.csv")
+      expect(DataImporter::Licences).to receive(:data_file_path).with("licences.csv").and_return("/example/licences.csv")
 
-      lambda do
+      expect do
         DataImporter::Licences.open_data_file
-      end.should raise_error(Errno::ENOENT)
+      end.to raise_error(Errno::ENOENT)
     end
   end
 end

@@ -9,9 +9,9 @@ describe Licence do
       :regulation_area => "Some Regulation Area"
     )
     licence = Licence.first
-    licence.public_id.should == 42
-    licence.gds_id.should == "24-3-1"
-    licence.name.should == "Some Licence"
+    expect(licence.public_id).to eq(42)
+    expect(licence.gds_id).to eq("24-3-1")
+    expect(licence.name).to eq("Some Licence")
   end
 
   describe "validations" do
@@ -22,19 +22,19 @@ describe Licence do
     it "should have a database level uniqueness constraint on gds_id" do
       FactoryGirl.create(:licence, :gds_id => "24-3-1")
       @licence.gds_id = "24-3-1"
-      lambda do
+      expect do
         @licence.safely.save
-      end.should raise_error(Mongo::OperationFailure)
+      end.to raise_error(Mongo::OperationFailure)
     end
 
     it "should require a name" do
       @licence.name = ''
-      @licence.should_not be_valid
+      expect(@licence).not_to be_valid
     end
 
     it "should require a regulation_area" do
       @licence.regulation_area = ''
-      @licence.should_not be_valid
+      expect(@licence).not_to be_valid
     end
   end
 
@@ -45,12 +45,12 @@ describe Licence do
 
     it "should be able to retrieve by gds_id" do
       found_licence = Licence.find_by_gds_id(@licence.gds_id)
-      found_licence.should == @licence
+      expect(found_licence).to eq(@licence)
     end
 
     it "should fail to retrieve a non-existent gds_id" do
       found_licence = Licence.find_by_gds_id("24-3-2")
-      found_licence.should == nil
+      expect(found_licence).to eq(nil)
     end
   end
 
@@ -73,22 +73,22 @@ describe Licence do
 
     it "should find all licences that match sectors, activities and location" do
       found_licences = Licence.find_by_sectors_activities_and_location([@s1, @s2], [@a1, @a2], :england)
-      found_licences.to_a.should =~ [@l1, @l2, @l3]
+      expect(found_licences.to_a).to match_array([@l1, @l2, @l3])
     end
 
     it "should not match licences if the location does not match" do
       found_licences = Licence.find_by_sectors_activities_and_location([@s1, @s2], [@a1, @a2], :scotland)
-      found_licences.to_a.should =~ [@l2, @l3]
+      expect(found_licences.to_a).to match_array([@l2, @l3])
     end
 
     it "should not match if the sector matches but the activity does not" do
       found_licences = Licence.find_by_sectors_activities_and_location([@s1, @s2], [@a1], :england)
-      found_licences.to_a.should =~ [@l1]
+      expect(found_licences.to_a).to match_array([@l1])
     end
 
     it "should not match if the activity matches but the sector does not" do
       found_licences = Licence.find_by_sectors_activities_and_location([@s1], [@a1, @a2], :england)
-      found_licences.to_a.should =~ [@l1, @l2]
+      expect(found_licences.to_a).to match_array([@l1, @l2])
     end
   end
 

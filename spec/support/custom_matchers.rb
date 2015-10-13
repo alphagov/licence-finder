@@ -1,19 +1,19 @@
 module CustomMatchers
   def i_should_see_field(name, options = {})
     field = find_field(name)
-    field.should_not be_nil
+    expect(field).not_to be_nil
     case options[:type].to_s
     when nil
     when 'textarea'
-      field.tag_name.should == type
+      expect(field.tag_name).to eq(type)
     else
-      field.tag_name.should == 'input'
-      field['type'].should == options[:type].to_s
+      expect(field.tag_name).to eq('input')
+      expect(field['type']).to eq(options[:type].to_s)
     end
     if options.has_key?(:value)
-      field.value.should == options[:value]
+      expect(field.value).to eq(options[:value])
     elsif options.has_key?(:checked)
-      field['checked'].should == options[:checked]
+      expect(field['checked']).to eq(options[:checked])
     end
   end
 
@@ -54,16 +54,16 @@ module CustomMatchers
   def check_add_remove_link(type, label)
     type_class = type.downcase
     element = find(:xpath, ".//li[span/text() = '#{label}']")
-    element.should_not be_nil
-    element.should have_xpath("a[text() = '#{type}']")
-    element.should have_xpath("a[@class = '#{type_class}']")
+    expect(element).not_to be_nil
+    expect(element).to have_xpath("a[text() = '#{type}']")
+    expect(element).to have_xpath("a[@class = '#{type_class}']")
   end
 
   def check_selected_link(id, type)
     label_id = "#{type}-#{id}"
     element = find(:xpath, ".//li[@data-public-id = '#{id}' and @class = 'selected']")
-    element.should_not be_nil
-    element.should have_xpath("span[@id = '#{label_id}']")
+    expect(element).not_to be_nil
+    expect(element).to have_xpath("span[@id = '#{label_id}']")
   end
 
   def check_add_remove_links(type, labels)
@@ -80,7 +80,7 @@ module CustomMatchers
   
   def check_add_remove_links_in_order(type, labels)
     check_add_remove_links(type, labels)
-    page.all(:xpath, ".//li[a/text() = '#{type}']/span").map(&:text).should == labels
+    expect(page.all(:xpath, ".//li[a/text() = '#{type}']/span").map(&:text)).to eq(labels)
   end
 end
 

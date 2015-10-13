@@ -9,7 +9,7 @@ describe DataImporter::Sectors do
 "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
       END
 
-      Sector.find_by_correlation_id(1000011).should == nil
+      expect(Sector.find_by_correlation_id(1000011)).to eq(nil)
 
       importer = DataImporter::Sectors.new(source)
       silence_stream(STDOUT) do
@@ -17,16 +17,16 @@ describe DataImporter::Sectors do
       end
 
       imported_sector = Sector.find_by_correlation_id(1000011)
-      imported_sector.correlation_id.should == 1000011
-      imported_sector.name.should == "Animal farming support services"
+      expect(imported_sector.correlation_id).to eq(1000011)
+      expect(imported_sector.name).to eq("Animal farming support services")
 
       parent_sectors = imported_sector.parents.to_a
-      parent_sectors.length.should == 1
-      parent_sectors[0].correlation_id.should == 1000002
+      expect(parent_sectors.length).to eq(1)
+      expect(parent_sectors[0].correlation_id).to eq(1000002)
 
       gparent_sectors = parent_sectors[0].parents.to_a
-      gparent_sectors.length.should == 1
-      gparent_sectors[0].correlation_id.should == 1000001
+      expect(gparent_sectors.length).to eq(1)
+      expect(gparent_sectors[0].correlation_id).to eq(1000001)
     end
 
     it "should avoid importing the same sector id twice" do
@@ -36,30 +36,30 @@ describe DataImporter::Sectors do
 "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
       END
 
-      Sector.find_by_correlation_id(1000011).should == nil
+      expect(Sector.find_by_correlation_id(1000011)).to eq(nil)
 
       importer = DataImporter::Sectors.new(source)
       silence_stream(STDOUT) do
         importer.run
       end
 
-      Sector.where(correlation_id: 1000011).length.should == 1
+      expect(Sector.where(correlation_id: 1000011).length).to eq(1)
     end
   end
 
   describe "open_data_file" do
     it "should open the input data file" do
       tmpfile = Tempfile.new("sectors.csv")
-      DataImporter::Sectors.should_receive(:data_file_path).with("sectors.csv").and_return(tmpfile.path)
+      expect(DataImporter::Sectors).to receive(:data_file_path).with("sectors.csv").and_return(tmpfile.path)
 
       DataImporter::Sectors.open_data_file
     end
     it "should fail if the input data file does not exist" do
-      DataImporter::Sectors.should_receive(:data_file_path).with("sectors.csv").and_return("/example/sectors.csv")
+      expect(DataImporter::Sectors).to receive(:data_file_path).with("sectors.csv").and_return("/example/sectors.csv")
 
-      lambda do
+      expect do
         DataImporter::Sectors.open_data_file
-      end.should raise_error(Errno::ENOENT)
+      end.to raise_error(Errno::ENOENT)
     end
   end
 end

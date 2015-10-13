@@ -18,36 +18,36 @@ describe "Activity selection page" do
     visit licence_finder_url_for("activities", [@s1, @s3])
 
     within_section 'completed questions' do
-      page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
+      expect(page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
         "What is your activity or business?",
-      ]
+      ])
     end
     within_section 'completed question 1' do
-      page.all('.answer li').map(&:text).should == [
+      expect(page.all('.answer li').map(&:text)).to eq([
         'Fooey Sector',
         'Gooey Sector',
-      ]
+      ])
     end
 
     within_section 'current question' do
-      page.should have_content('What would you like to do?')
+      expect(page).to have_content('What would you like to do?')
 
       within '.business-activity-results' do
         i_should_see_add_links_in_order ["Fooey Activity", "Gooey Activity", "Kabloom", "Transmogrifying"]
       end
       within '.business-activity-picked' do
         # none are selected yet
-        page.should have_content("Your chosen activities will appear here")
+        expect(page).to have_content("Your chosen activities will appear here")
       end
     end
 
     within_section 'upcoming questions' do
-      page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?).should == [
+      expect(page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
         'Where will you be located?',
-      ]
+      ])
     end
 
-    page.should_not have_content("No activities")
+    expect(page).not_to have_content("No activities")
   end
 
   specify "with activities selected" do
@@ -78,6 +78,6 @@ describe "Activity selection page" do
   specify "no activities for current selection" do
     visit licence_finder_url_for("activities", [@s4])
 
-    page.should have_content("No activities")
+    expect(page).to have_content("No activities")
   end
 end

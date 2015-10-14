@@ -12,8 +12,8 @@ describe LicenceLink do
                          licence: @licence_link.licence
       )
       expect do
-        @licence_link.safely.save
-      end.to raise_error(Mongo::OperationFailure)
+        @licence_link.with(safe: true).save
+      end.to raise_error(Moped::Errors::OperationFailure)
     end
     it "should require a Sector" do
       @licence_link.sector_id = nil

@@ -4,8 +4,7 @@ gem 'rails', '3.2.22'
 gem 'unicorn', '4.3.1'
 gem 'plek', '1.11.0'
 
-gem "mongoid", "2.4.9"
-gem "bson_ext", "1.6.2"
+gem "mongoid", "3.1.7"
 gem "tire"
 
 gem 'mongoid_rails_migrations', '1.0.1'
@@ -35,10 +34,13 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.99.0'
+
   # NOTE: only while we are on rails 3.2.x - remove when we go to 4.x
   gem 'test-unit'
   gem 'factory_girl_rails', '3.2.0'
-  gem 'database_cleaner'
+
+  # NOTE: 1.5.0 has a bug with mongoid and truncation: https://github.com/DatabaseCleaner/database_cleaner/issues/299
+  gem 'database_cleaner', '~> 1.4.0'
   gem 'capybara', '2.4.4'
   gem 'poltergeist', "1.5.1"
   gem 'webmock', '1.8.11', :require => false

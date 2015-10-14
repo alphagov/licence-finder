@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Activity do
   it "should use the correct field types on the model" do
-    Activity.safely.create!(
+    Activity.with(safe: true).create!(
       :public_id => 42,
       :correlation_id => 24,
       :name => "Some Activity"
@@ -22,16 +22,16 @@ describe Activity do
       FactoryGirl.create(:activity, :public_id => 42)
       @activity.public_id = 42
       expect do
-        @activity.safely.save
-      end.to raise_error(Mongo::OperationFailure)
+        @activity.with(safe: true).save
+      end.to raise_error(Moped::Errors::OperationFailure)
     end
 
     it "should have a database level uniqueness constraint on correlation_id" do
       FactoryGirl.create(:activity, :correlation_id => 42)
       @activity.correlation_id = 42
       expect do
-        @activity.safely.save
-      end.to raise_error(Mongo::OperationFailure)
+        @activity.with(safe: true).save
+      end.to raise_error(Moped::Errors::OperationFailure)
     end
 
     it "should require a name" do

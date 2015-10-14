@@ -4,11 +4,11 @@ class Sector
   include Mongoid::Document
   include PublicId
   field :correlation_id, :type => Integer
-  index :correlation_id, :unique => true
+  index({ correlation_id: 1}, { unique: true })
   field :name, :type => String
   field :layer, :type => Integer
   field :parent_ids, :type => Array
-  index :parent_ids
+  index({ parent_ids: 1 })
 
   has_and_belongs_to_many :activities
 

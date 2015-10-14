@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Sector do
   it "should use the correct field types on the model" do
-    Sector.safely.create!(
+    Sector.with(safe: true).create!(
       :public_id => 42,
       :correlation_id => 24,
       :name => "Some Sector"
@@ -22,16 +22,16 @@ describe Sector do
       FactoryGirl.create(:sector, :public_id => 42)
       @sector.public_id = 42
       expect do
-        @sector.safely.save
-      end.to raise_error(Mongo::OperationFailure)
+        @sector.with(safe: true).save
+      end.to raise_error(Moped::Errors::OperationFailure)
     end
 
     it "should have a database level uniqueness constraint on correlation_id" do
       FactoryGirl.create(:sector, :correlation_id => 42)
       @sector.correlation_id = 42
       expect do
-        @sector.safely.save
-      end.to raise_error(Mongo::OperationFailure)
+        @sector.with(safe: true).save
+      end.to raise_error(Moped::Errors::OperationFailure)
     end
 
     it "should require a name" do

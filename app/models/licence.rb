@@ -2,9 +2,9 @@ class Licence
   include Mongoid::Document
   # Deprecated attr left here for smoother migration.
   field :correlation_id, :type => Integer
-  index :correlation_id, :unique => true
+  index({ correlation_id: 1 }, { unique: true })
   field :gds_id, :type => String
-  index :gds_id, :unique => true
+  index({ gds_id: 1 }, { unique: true })
   field :name, :type => String
   field :regulation_area, :type => String
   field :da_england, :type => Boolean

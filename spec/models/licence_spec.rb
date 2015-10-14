@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Licence do
   it "should use the correct field types on the model" do
-    Licence.safely.create!(
+    Licence.with(safe: true).create!(
       :public_id => 42,
       :gds_id => "24-3-1",
       :name => "Some Licence",
@@ -23,8 +23,8 @@ describe Licence do
       FactoryGirl.create(:licence, :gds_id => "24-3-1")
       @licence.gds_id = "24-3-1"
       expect do
-        @licence.safely.save
-      end.to raise_error(Mongo::OperationFailure)
+        @licence.with(safe: true).save
+      end.to raise_error(Moped::Errors::OperationFailure)
     end
 
     it "should require a name" do

@@ -28,11 +28,13 @@ module LicenceFinder
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.prefix = 'licencefinder' # this has to match the path configured in puppet and deploy scripts.
-    config.assets.precompile += ['licence-finder.css', 'licence-finder.js']
+    config.assets.prefix = '/licencefinder' # this has to match the path configured in puppet and deploy scripts.
+    config.assets.precompile += %w(
+      licence-finder.css
+      licence-finder.js
+    )
 
     # Disable Rack::Cache
     config.action_dispatch.rack_cache = nil
-
   end
 end

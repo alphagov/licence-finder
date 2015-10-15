@@ -1,4 +1,4 @@
-LicenceFinder::Application.configure do
+Rails.application.configure do
   config.slimmer.logger = Rails.logger
 
   if Rails.env.production?

@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.22'
+gem 'rails', '4.2.4'
 gem 'unicorn', '4.3.1'
 gem 'plek', '1.11.0'
 
-gem "mongoid", "3.1.7"
+gem "mongoid", '~> 4.0'
 gem "tire"
 
 gem 'mongoid_rails_migrations', '1.0.1'
@@ -26,11 +26,9 @@ else
   gem "slimmer", '9.0.0'
 end
 
-group :assets do
-  gem 'sass', '~> 3.2.0'
-  gem 'sass-rails', '~> 3.2.5'
-  gem 'uglifier', '1.2.4'
-end
+gem 'sass', '~> 3.2.0'
+gem 'sass-rails', '~> 5.0.4'
+gem 'uglifier', '1.2.4'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.99.0'
@@ -41,8 +39,8 @@ group :development, :test do
 
   # NOTE: 1.5.0 has a bug with mongoid and truncation: https://github.com/DatabaseCleaner/database_cleaner/issues/299
   gem 'database_cleaner', '~> 1.4.0'
-  gem 'capybara', '2.4.4'
-  gem 'poltergeist', "1.5.1"
+  gem 'capybara', '2.5.0'
+  gem 'poltergeist', '1.7.0'
   gem 'webmock', '1.8.11', :require => false
   gem 'govuk-content-schema-test-helpers'
 end

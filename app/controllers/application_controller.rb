@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   include Slimmer::Template
   slimmer_template 'wrapper'
 
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
   protected
   rescue_from GdsApi::TimedOutException, :with => :error_503
 
@@ -20,5 +24,4 @@ class ApplicationController < ActionController::Base
       expires_in(duration, :public => true)
     end
   end
-
 end

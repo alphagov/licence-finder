@@ -1,15 +1,14 @@
 RSpec.describe Licence, type: :model do
   it "should use the correct field types on the model" do
     Licence.with(safe: true).create!(
-      :public_id => 42,
       :gds_id => "24-3-1",
       :name => "Some Licence",
       :regulation_area => "Some Regulation Area"
     )
     licence = Licence.first
-    expect(licence.public_id).to eq(42)
     expect(licence.gds_id).to eq("24-3-1")
     expect(licence.name).to eq("Some Licence")
+    expect(licence.regulation_area).to eq("Some Regulation Area")
   end
 
   describe "validations" do

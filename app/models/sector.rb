@@ -10,7 +10,7 @@ class Sector
   field :parent_ids, :type => Array
   index({ parent_ids: 1 })
 
-  has_and_belongs_to_many :activities
+  has_and_belongs_to_many :activities, autosave: true
 
   validates :name, :presence => true
 

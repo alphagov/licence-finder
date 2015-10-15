@@ -6,7 +6,7 @@ class Activity
   field :correlation_id, :type => Integer
   index({ correlation_id: 1 }, { unique: true })
   field :name, :type => String
-  has_and_belongs_to_many :sectors
+  has_and_belongs_to_many :sectors, autosave: true
 
   validates :name, :presence => true
 

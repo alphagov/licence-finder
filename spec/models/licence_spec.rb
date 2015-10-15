@@ -89,5 +89,4 @@ RSpec.describe Licence, type: :model do
       expect(found_licences.to_a).to match_array([@l1, @l2])
     end
   end
-
 end

@@ -78,7 +78,7 @@ RSpec.describe DataImporter::Licences do
         silence_stream(STDOUT) do
           importer.run
         end
-      end.to raise_error
+      end.to raise_error(NoMethodError)
       imported_licence = Licence.find_by_correlation_id(1)
       expect(imported_licence).to eq(nil)
     end
@@ -93,7 +93,7 @@ RSpec.describe DataImporter::Licences do
         silence_stream(STDOUT) do
           importer.run
         end
-      end.to raise_error
+      end.to raise_error(RuntimeError)
       imported_licence = Licence.find_by_correlation_id(1)
       expect(imported_licence).to eq(nil)
     end

@@ -58,13 +58,13 @@ RSpec.describe LicenceLink, type: :model do
     it "should fail if an invalid object is provided as a sector" do
       expect do
         LicenceLink.find_by_sectors_and_activities([@s1, nil], [@a1])
-      end.to raise_error(RuntimeError)
+      end.to raise_error(NoMethodError)
     end
 
     it "should fail if an invalid object is provided as an activity" do
       expect do
         LicenceLink.find_by_sectors_and_activities([@s1], [@a1, nil])
-      end.to raise_error(RuntimeError)
+      end.to raise_error(NoMethodError)
     end
   end
 end

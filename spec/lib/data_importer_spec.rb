@@ -25,7 +25,7 @@ RSpec.describe DataImporter do
 
       expect do
         DataImporter.update
-      end.to raise_error
+      end.to raise_error(RuntimeError)
     end
   end
 

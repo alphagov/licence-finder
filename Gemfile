@@ -31,11 +31,8 @@ gem 'sass-rails', '~> 5.0.4'
 gem 'uglifier', '1.2.4'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.99.0'
-
-  # NOTE: only while we are on rails 3.2.x - remove when we go to 4.x
-  gem 'test-unit'
-  gem 'factory_girl_rails', '3.2.0'
+  gem 'rspec-rails', '~> 3.3.3'
+  gem 'factory_girl_rails', '~> 4.5.0'
 
   # NOTE: 1.5.0 has a bug with mongoid and truncation: https://github.com/DatabaseCleaner/database_cleaner/issues/299
   gem 'database_cleaner', '~> 1.4.0'

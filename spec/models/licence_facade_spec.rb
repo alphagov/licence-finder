@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe LicenceFacade do
 
   include GdsApi::TestHelpers::ContentApi

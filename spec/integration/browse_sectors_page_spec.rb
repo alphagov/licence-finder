@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'capybara'
 
 # Make sure Capybara doesn't automatically refresh the page

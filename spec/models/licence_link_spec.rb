@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe LicenceLink do
   describe "validations" do
     before :each do

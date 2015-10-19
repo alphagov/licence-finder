@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Sector do
   it "should use the correct field types on the model" do
     Sector.with(safe: true).create!(

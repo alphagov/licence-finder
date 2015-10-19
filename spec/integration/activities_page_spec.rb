@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Activity selection page" do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")

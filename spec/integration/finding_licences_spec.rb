@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Finding licences" do
 
   specify "Simple happy path through the app" do

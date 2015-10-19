@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Licence do
   it "should use the correct field types on the model" do
     Licence.with(safe: true).create!(

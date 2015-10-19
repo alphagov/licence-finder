@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe LicenceFinderController do
   before :each do
     @question1 = 'What is your activity or business?'

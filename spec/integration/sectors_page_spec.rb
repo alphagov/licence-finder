@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Sector selection page" do
   before(:each) do
     WebMock.allow_net_connect!

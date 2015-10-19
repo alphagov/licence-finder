@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Activity do
   it "should use the correct field types on the model" do
     Activity.with(safe: true).create!(

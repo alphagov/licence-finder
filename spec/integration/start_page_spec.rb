@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "Start page" do
 
   specify "Inspecting the start page" do

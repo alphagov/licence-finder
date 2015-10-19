@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'data_importer'
 
 describe DataImporter do

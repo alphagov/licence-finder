@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'licence_data_migrator'
 
 describe LicenceDataMigrator do

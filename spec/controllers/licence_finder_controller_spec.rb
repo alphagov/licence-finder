@@ -1,4 +1,4 @@
-describe LicenceFinderController do
+RSpec.describe LicenceFinderController, type: :controller do
   before :each do
     @question1 = 'What is your activity or business?'
     @question2 = 'What would you like to do?'

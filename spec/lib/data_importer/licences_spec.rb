@@ -1,6 +1,6 @@
 require 'data_importer'
 
-describe DataImporter::Licences do
+RSpec.describe DataImporter::Licences do
   before :each do
     @sector = FactoryGirl.create(:sector, correlation_id: 1, layer: 3)
     @activity = FactoryGirl.create(:activity, correlation_id: 1)

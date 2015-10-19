@@ -1,4 +1,4 @@
-describe "Finding licences" do
+RSpec.describe "Finding licences",:type => :request do
 
   specify "Simple happy path through the app" do
     WebMock.allow_net_connect!

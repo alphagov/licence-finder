@@ -1,8 +1,6 @@
-require "spec_helper"
 require "search/client/elasticsearch"
 
-
-describe Search::Client::Elasticsearch do
+RSpec.describe Search::Client::Elasticsearch do
   before(:each) do
     WebMock.allow_net_connect!
     $search = Search.create

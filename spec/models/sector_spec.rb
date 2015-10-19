@@ -1,4 +1,4 @@
-describe Sector do
+RSpec.describe Sector, type: :model do
   it "should use the correct field types on the model" do
     Sector.with(safe: true).create!(
       :public_id => 42,

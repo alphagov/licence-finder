@@ -1,9 +1,7 @@
-require 'capybara'
-
 # Make sure Capybara doesn't automatically refresh the page
 Capybara.automatic_reload = false
 
-describe "Sector browse page" do
+RSpec.describe "Sector browse page",:type => :request do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, layer: 1, name: 'First top level')
     @s2 = FactoryGirl.create(:sector, layer: 2, name: 'First child', parents: [@s1])

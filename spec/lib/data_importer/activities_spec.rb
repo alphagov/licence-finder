@@ -1,6 +1,6 @@
 require 'data_importer'
 
-describe DataImporter::Activities do
+RSpec.describe DataImporter::Activities do
   describe "fresh import" do
     it "should import activities from a file handle" do
       source = StringIO.new(<<-END)

@@ -1,4 +1,3 @@
-require "spec_helper"
 require "search/client"
 
 RSpec.describe Search::Client do

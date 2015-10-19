@@ -1,4 +1,4 @@
-describe Licence do
+RSpec.describe Licence, type: :model do
   it "should use the correct field types on the model" do
     Licence.with(safe: true).create!(
       :public_id => 42,

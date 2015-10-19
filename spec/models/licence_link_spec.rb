@@ -1,4 +1,4 @@
-describe LicenceLink do
+RSpec.describe LicenceLink, type: :model do
   describe "validations" do
     before :each do
       @licence_link = FactoryGirl.build(:licence_link)

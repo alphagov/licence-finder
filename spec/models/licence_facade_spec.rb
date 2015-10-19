@@ -1,5 +1,4 @@
-describe LicenceFacade do
-
+RSpec.describe LicenceFacade, type: :model do
   include GdsApi::TestHelpers::ContentApi
 
   def json_response_data(*licences)

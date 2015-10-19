@@ -1,7 +1,6 @@
-require "spec_helper"
 require "search/client/elasticsearch"
 
-describe Search::Client::Elasticsearch do
+RSpec.describe Search::Client::Elasticsearch do
   before(:each) do
     @es_config = {
         url:    'localhost',

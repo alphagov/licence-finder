@@ -1,4 +1,4 @@
-describe "Activity selection page" do
+RSpec.describe "Activity selection page",:type => :request do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
     @s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")

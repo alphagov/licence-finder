@@ -1,7 +1,6 @@
-require "rails_helper"
 require "search"
 
-describe Search do
+RSpec.describe Search do
 
   before(:each) do
     @client = double()

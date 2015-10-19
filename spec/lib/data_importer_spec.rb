@@ -1,6 +1,6 @@
 require 'data_importer'
 
-describe DataImporter do
+RSpec.describe DataImporter do
   describe "update" do
     it "imports relevant file and then close it" do
       fh = double()

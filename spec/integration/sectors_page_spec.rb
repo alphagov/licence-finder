@@ -1,4 +1,4 @@
-describe "Sector selection page" do
+RSpec.describe "Sector selection page",:type => :request do
   before(:each) do
     WebMock.allow_net_connect!
     $search = Search.create

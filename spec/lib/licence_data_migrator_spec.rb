@@ -1,6 +1,6 @@
 require 'licence_data_migrator'
 
-describe LicenceDataMigrator do
+RSpec.describe LicenceDataMigrator do
   before(:each) do
     @migrator = LicenceDataMigrator.new({
       "1083741393" => "1237-4-1",

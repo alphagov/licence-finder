@@ -1,6 +1,4 @@
-require "spec_helper"
-
-describe "Business location page" do
+RSpec.describe "Business location page",:type => :request do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")
     @s2 = FactoryGirl.create(:sector, name: "Balooey Sector")

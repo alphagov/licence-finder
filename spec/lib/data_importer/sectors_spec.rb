@@ -1,6 +1,6 @@
 require 'data_importer'
 
-describe DataImporter::Sectors do
+RSpec.describe DataImporter::Sectors do
   describe "fresh import" do
     it "imports sectors from a file handle" do
       source = StringIO.new(<<-END)

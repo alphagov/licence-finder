@@ -1,4 +1,4 @@
-describe Activity do
+RSpec.describe Activity, type: :model do
   it "should use the correct field types on the model" do
     Activity.with(safe: true).create!(
       :public_id => 42,

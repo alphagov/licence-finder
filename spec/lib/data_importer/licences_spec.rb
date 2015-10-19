@@ -13,10 +13,8 @@ RSpec.describe DataImporter::Licences do
 "1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
       END
 
-      importer = DataImporter::Licences.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Licences.new(source, StringIO.new)
+      importer.run
 
       imported_licence = Licence.find_by_correlation_id(1)
       expect(imported_licence.correlation_id).to eq(1)
@@ -40,10 +38,8 @@ RSpec.describe DataImporter::Licences do
 "1","Some Sector","1","Some Activity","1","Pavement licence (England &amp; Wales)","Copyright","1","0","1","0","0"
       END
 
-      importer = DataImporter::Licences.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Licences.new(source, StringIO.new)
+      importer.run
 
       imported_licence = Licence.find_by_correlation_id(1)
       expect(imported_licence.name).to eq("Pavement licence (England & Wales)")
@@ -57,10 +53,8 @@ RSpec.describe DataImporter::Licences do
 "1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
       END
 
-      importer = DataImporter::Licences.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Licences.new(source, StringIO.new)
+      importer.run
 
       imported_licence = Licence.find_by_correlation_id(1)
       expect(imported_licence.correlation_id).to eq(1)
@@ -73,11 +67,9 @@ RSpec.describe DataImporter::Licences do
 "2","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
       END
 
-      importer = DataImporter::Licences.new(source)
+      importer = DataImporter::Licences.new(source, StringIO.new)
       expect do
-        silence_stream(STDOUT) do
-          importer.run
-        end
+        importer.run
       end.to raise_error(NoMethodError)
       imported_licence = Licence.find_by_correlation_id(1)
       expect(imported_licence).to eq(nil)
@@ -88,11 +80,9 @@ RSpec.describe DataImporter::Licences do
 "1","Motor vehicle fuel retail","2","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
       END
 
-      importer = DataImporter::Licences.new(source)
+      importer = DataImporter::Licences.new(source, StringIO.new)
       expect do
-        silence_stream(STDOUT) do
-          importer.run
-        end
+        importer.run
       end.to raise_error(RuntimeError)
       imported_licence = Licence.find_by_correlation_id(1)
       expect(imported_licence).to eq(nil)
@@ -109,10 +99,8 @@ RSpec.describe DataImporter::Licences do
 "101","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
       END
 
-      importer = DataImporter::Licences.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Licences.new(source, StringIO.new)
+      importer.run
 
       imported_links = LicenceLink.all
       expect(imported_links.length).to eq(2)
@@ -133,10 +121,8 @@ RSpec.describe DataImporter::Licences do
 "101","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
       END
 
-      importer = DataImporter::Licences.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Licences.new(source, StringIO.new)
+      importer.run
 
       imported_links = LicenceLink.all
       expect(imported_links.length).to eq(2)
@@ -154,10 +140,8 @@ RSpec.describe DataImporter::Licences do
 "1","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
       END
 
-      importer = DataImporter::Licences.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Licences.new(source, StringIO.new)
+      importer.run
 
       expect(LicenceLink.first).to eq(licence_link)
     end
@@ -170,10 +154,8 @@ RSpec.describe DataImporter::Licences do
 "1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
       END
 
-      importer = DataImporter::Licences.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Licences.new(source, StringIO.new)
+      importer.run
 
       imported_licence = Licence.find_by_correlation_id(1)
       expect(imported_licence.da_england).to eq(true)

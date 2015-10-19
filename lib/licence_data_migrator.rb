@@ -10,8 +10,9 @@ class LicenceDataMigrator
     new(load_mappings).run
   end
 
-  def initialize(mappings)
+  def initialize(mappings, output_stream = $stdout)
     @licence_mappings = mappings
+    @output_stream = output_stream
   end
   
   def self.data_file_path(filename)
@@ -64,7 +65,7 @@ class LicenceDataMigrator
   end 
   
   def done(counter, nl)
-    print "Migrated #{counter} Licences.#{nl}"
+    @output_stream.print "Migrated #{counter} Licences.#{nl}"
   end
   
 end

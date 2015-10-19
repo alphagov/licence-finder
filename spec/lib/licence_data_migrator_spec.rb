@@ -7,7 +7,9 @@ RSpec.describe LicenceDataMigrator do
       "1083741799" => "1620001",
       "1084062157" => "1580003",
       "1075329002" => "9876-3-1"
-    })
+      },
+      StringIO.new
+    )
   end
   
   describe "initialize" do
@@ -21,25 +23,13 @@ RSpec.describe LicenceDataMigrator do
       l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 1083741393)
       l2 = FactoryGirl.create(:licence, name: "Licence Two", correlation_id: 1075329002)
       
-      silence_stream(STDOUT) do
-        @migrator.run
-      end
+      @migrator.run
       
       l1.reload
       l2.reload
       expect(l1.gds_id).to eq("1237-4-1")
       expect(l2.gds_id).to eq("9876-3-1")
     end
-    
-#    it "should generate the gds_id where no suitable mapping exists" do
-#      l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 9999999999)
-#      
-#      silence_stream(STDOUT) do
-#        @migrator.run
-#      end
-#      
-#      l1.gds_id.should == "3-3-1"
-#    end
   end
   
   describe "country code" do

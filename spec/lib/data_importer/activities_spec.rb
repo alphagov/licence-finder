@@ -11,10 +11,8 @@ RSpec.describe DataImporter::Activities do
 
       sector = FactoryGirl.create(:sector, correlation_id: 1000431)
 
-      importer = DataImporter::Activities.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Activities.new(source, StringIO.new)
+      importer.run
 
       imported_activity1 = Activity.find_by_correlation_id(362)
       expect(imported_activity1.correlation_id).to eq(362)
@@ -37,10 +35,8 @@ RSpec.describe DataImporter::Activities do
 
       sector = FactoryGirl.create(:sector, correlation_id: 1000431)
 
-      importer = DataImporter::Activities.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Activities.new(source, StringIO.new)
+      importer.run
 
       expect(Activity.where(correlation_id: 362).length).to eq(1)
     end

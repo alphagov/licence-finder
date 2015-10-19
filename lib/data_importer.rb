@@ -15,8 +15,9 @@ class DataImporter
     Rails.root.join('data', filename)
   end
 
-  def initialize(fh)
+  def initialize(fh, output_stream = $stdout)
     @filehandle = fh
+    @output_stream = output_stream
   end
 
   def run
@@ -31,7 +32,7 @@ class DataImporter
   private
 
   def done(counter, nl)
-    print "Imported #{counter} #{self.class.name.split('::').last}.#{nl}"
+    @output_stream.print "Imported #{counter} #{self.class.name.split('::').last}.#{nl}"
   end
 end
 

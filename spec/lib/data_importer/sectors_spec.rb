@@ -10,10 +10,8 @@ RSpec.describe DataImporter::Sectors do
 
       expect(Sector.find_by_correlation_id(1000011)).to eq(nil)
 
-      importer = DataImporter::Sectors.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Sectors.new(source, StringIO.new)
+      importer.run
 
       imported_sector = Sector.find_by_correlation_id(1000011)
       expect(imported_sector.correlation_id).to eq(1000011)
@@ -37,10 +35,8 @@ RSpec.describe DataImporter::Sectors do
 
       expect(Sector.find_by_correlation_id(1000011)).to eq(nil)
 
-      importer = DataImporter::Sectors.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Sectors.new(source, StringIO.new)
+      importer.run
 
       expect(Sector.where(correlation_id: 1000011).length).to eq(1)
     end

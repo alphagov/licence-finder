@@ -26,7 +26,6 @@ else
   gem "slimmer", '9.0.0'
 end
 
-gem 'sass', '~> 3.2.0'
 gem 'sass-rails', '~> 5.0.4'
 gem 'uglifier', '1.2.4'
 

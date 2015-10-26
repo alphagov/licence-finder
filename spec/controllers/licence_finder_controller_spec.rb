@@ -13,7 +13,7 @@ describe LicenceFinderController do
       expect(response).to be_success
     end
 
-    it "should fetch the artefact and pass it to slimmer" do
+    it "fetches the artefact and pass it to slimmer" do
       artefact_data = artefact_for_slug(APP_SLUG)
       content_api_has_an_artefact(APP_SLUG, artefact_data)
 
@@ -22,14 +22,14 @@ describe LicenceFinderController do
       expect(response.headers[Slimmer::Headers::ARTEFACT_HEADER]).to eq(artefact_data.to_json)
     end
 
-    it "should 503 if the request times out" do
+    it "returns 503 if the request times out" do
       stub_request(:get, %r{\A#{GdsApi::TestHelpers::ContentApi::CONTENT_API_ENDPOINT}}).to_timeout
       artefact_data = artefact_for_slug(APP_SLUG)
       get :start
       expect(response.status).to eq(503)
     end
 
-    it "should set correct expiry headers" do
+    it "sets correct expiry headers" do
       get :start
 
       expect(response.headers["Cache-Control"]).to eq("max-age=1800, public")
@@ -43,7 +43,7 @@ describe LicenceFinderController do
         end
       end
 
-      it "should assign facades for the published licences to @popular_licences" do
+      it "assigns facades for the published licences to @popular_licences" do
         lf1 = double("lf1", :published? => true)
         lf2 = double("lf2", :published? => false)
         lf3 = double("lf3", :published? => false)
@@ -56,7 +56,7 @@ describe LicenceFinderController do
         expect(assigns[:popular_licences]).to eq([lf1, lf4])
       end
 
-      it "should only assign the first 3 to @popular_licences" do
+      it "only assigns the first 3 to @popular_licences" do
         lf1 = double("lf1", :published? => true)
         lf2 = double("lf2", :published? => false)
         lf3 = double("lf3", :published? => true)
@@ -70,7 +70,7 @@ describe LicenceFinderController do
         expect(assigns[:popular_licences]).to eq([lf1, lf3, lf4])
       end
 
-      it "should cope with licences missing from the local database" do
+      it "copes with licences missing from the local database" do
         @l1.destroy
         @l2.destroy
         lf1 = double("lf1", :published? => true)
@@ -86,7 +86,7 @@ describe LicenceFinderController do
 
   describe "GET 'sectors'" do
 
-    it "should return no sectors if no query is provided" do
+    it "returns no sectors if no query is provided" do
       @s1 = FactoryGirl.create(:sector, :name => "Alpha")
       @s2 = FactoryGirl.create(:sector, :name => "Charlie")
       @s3 = FactoryGirl.create(:sector, :name => "Bravo")
@@ -96,7 +96,7 @@ describe LicenceFinderController do
       expect(assigns[:sectors]).to eq([])
     end
 
-    it "should return all sectors returned from the search" do
+    it "returns all sectors returned from the search" do
       @s1 = FactoryGirl.create(:sector, :name => "Alpha")
       @s2 = FactoryGirl.create(:sector, :name => "Charlie")
       @s3 = FactoryGirl.create(:sector, :name => "Bravo")
@@ -125,14 +125,14 @@ describe LicenceFinderController do
       expect(assigns[:picked_sectors]).to eq([@s3, @s2])
     end
 
-    it "should return slimmer headers" do
+    it "returns slimmer headers" do
       expect($search).to receive(:search).with("test query").and_return([])
       get :sectors, q: "test query"
       expect(response.headers["X-Slimmer-Format"]).to eq("finder")
       expect(response.headers["X-Slimmer-Result-Count"]).to eq("0")
     end
 
-    it "should fetch the artefact and pass it to slimmer" do
+    it "fetches the artefact and pass it to slimmer" do
       artefact_data = artefact_for_slug(APP_SLUG)
       content_api_has_an_artefact(APP_SLUG, artefact_data)
 
@@ -141,12 +141,12 @@ describe LicenceFinderController do
       expect(response.headers[Slimmer::Headers::ARTEFACT_HEADER]).to eq(artefact_data.to_json)
     end
 
-    it "should not return result count if no query was provided" do
+    it "does not return result count if no query was provided" do
       get :sectors
       expect(response.headers["X-Slimmer-Result-Count"]).to be_nil
     end
 
-    it "should return slimmer result count when available" do
+    it "returns slimmer result count when available" do
       @s1 = FactoryGirl.create(:sector, :name => "Alpha")
       @s2 = FactoryGirl.create(:sector, :name => "Charlie")
       @s3 = FactoryGirl.create(:sector, :name => "Bravo")
@@ -210,12 +210,12 @@ describe LicenceFinderController do
         expect(assigns[:picked_activities]).to eq([a1, a3, a2])
       end
 
-      it "should not return result count slimmer header" do
+      it "does not return result count slimmer header" do
         do_get
         expect(response.headers).not_to have_key("X-Slimmer-Result-Count")
       end
 
-      it "should fetch the artefact and pass it to slimmer" do
+      it "fetches the artefact and pass it to slimmer" do
         artefact_data = artefact_for_slug(APP_SLUG)
         content_api_has_an_artefact(APP_SLUG, artefact_data)
 
@@ -226,7 +226,7 @@ describe LicenceFinderController do
     end
 
     context "with no valid sectors selected" do
-      it "should return a 404 status code" do
+      it "returns a 404 status code" do
         get :activities
         expect(response).to be_not_found
       end
@@ -273,7 +273,7 @@ describe LicenceFinderController do
         expect(assigns[:upcoming_questions]).to eq([])
       end
 
-      it "should fetch the artefact and pass it to slimmer" do
+      it "fetches the artefact and pass it to slimmer" do
         artefact_data = artefact_for_slug(APP_SLUG)
         content_api_has_an_artefact(APP_SLUG, artefact_data)
 
@@ -284,7 +284,7 @@ describe LicenceFinderController do
     end
 
     context "with no valid businesses selected, but valid activities" do
-      it "should return a 404 status code" do
+      it "returns a 404 status code" do
         get :business_location, :activities => '234_432'
         expect(response).to be_not_found
       end
@@ -294,19 +294,19 @@ describe LicenceFinderController do
   describe "POST 'business_location_submit'" do
     context "with valid sectors and activities" do
       context "with a valid location" do
-        it "should pass through all parameters and redirects to the licences action" do
+        it "passes through all parameters and redirects to the licences action" do
           post :business_location_submit, :sectors => '123_321', :activities => '234_432', :location => "england"
           expect(response).to redirect_to(licences_path(:sectors => '123_321', :activities => '234_432', :location => "england"))
         end
       end
       context "with no location" do
-        it "should pass through sectors and activities and redirect to business_location" do
+        it "passes through sectors and activities and redirects to business_location" do
           post :business_location_submit, :sectors => '123_321', :activities => '234_432'
           expect(response).to redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
         end
       end
       context "with an invalid location" do
-        it "should pass through sectors and activities and redirect to business_location" do
+        it "passes through sectors and activities and redirect to business_location" do
           post :business_location_submit, :sectors => '123_321', :activities => '234_432', :location => 'invalid'
           expect(response).to redirect_to(business_location_path(:sectors => '123_321', :activities => '234_432'))
         end
@@ -314,14 +314,14 @@ describe LicenceFinderController do
     end
 
     context "with valid sectors and invalid activities" do
-      it "should show an error page" do
+      it "shows an error page" do
         post :business_location_submit, :sectors => '123_321', :activities => '', :location => 'anything'
         expect(response).to be_not_found
       end
     end
 
     context "with no valid sectors" do
-      it "should show an error page" do
+      it "shows an error page" do
         post :business_location_submit, :sectors => '', :activities => '', :location => 'anything'
         expect(response).to be_not_found
       end
@@ -361,7 +361,7 @@ describe LicenceFinderController do
         ])
       end
 
-      it "should fetch the artefact and pass it to slimmer" do
+      it "fetches the artefact and pass it to slimmer" do
         artefact_data = artefact_for_slug(APP_SLUG)
         content_api_has_an_artefact(APP_SLUG, artefact_data)
 
@@ -372,14 +372,14 @@ describe LicenceFinderController do
     end
 
     context "with valid sectors and invalid activities" do
-      it "should show an error page" do
+      it "shows an error page" do
         get :licences, :sectors => '123_321', :activities => '', :location => 'anything'
         expect(response).to be_not_found
       end
     end
 
     context "with no valid sectors" do
-      it "should show an error page" do
+      it "shows an error page" do
         get :licences, :sectors => '', :activities => '123_321', :location => 'england'
         expect(response).to be_not_found
       end
@@ -398,21 +398,21 @@ describe LicenceFinderController do
         @s6 = FactoryGirl.create(:sector, layer: 1, name: 'Second top level')
       end
 
-      it 'Should show top level sectors' do
+      it 'shows top level sectors' do
         get :browse_sector_index
         expect(assigns[:sectors]).to eq([@s1, @s6])
         expect(assigns[:child_sectors]).to eq([])
         expect(assigns[:grandchild_sectors]).to eq([])
       end
 
-      it 'Should show children of top level sectors' do
+      it 'shows children of top level sectors' do
         get :browse_sector, :sector => @s1.public_id
         expect(assigns[:sectors]).to eq([@s1, @s6])
         expect(assigns[:child_sectors]).to eq([@s2, @s4])
         expect(assigns[:grandchild_sectors]).to eq([])
       end
 
-      it 'Should show grandchildren of top level sectors' do
+      it 'shows grandchildren of top level sectors' do
         get :browse_sector_child, :sector_parent => @s1.public_id, :sector => @s2.public_id
         expect(assigns[:sectors]).to eq([@s1, @s6])
         expect(assigns[:child_sectors]).to eq([@s2, @s4])

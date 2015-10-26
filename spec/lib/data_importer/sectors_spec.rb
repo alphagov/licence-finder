@@ -3,7 +3,7 @@ require 'data_importer'
 
 describe DataImporter::Sectors do
   describe "fresh import" do
-    it "should import sectors from a file handle" do
+    it "imports sectors from a file handle" do
       source = StringIO.new(<<-END)
 "LAYER1_OID","LAYER_1_TAX_CODE","LAYER1","LAYER2_OID","LAYER_2_TAX_CODE","LAYER2","LAYER3_OID","LAYER_3_TAX_CODE","LAYER3"
 "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
@@ -29,7 +29,7 @@ describe DataImporter::Sectors do
       expect(gparent_sectors[0].correlation_id).to eq(1000001)
     end
 
-    it "should avoid importing the same sector id twice" do
+    it "avoids importing the same sector id twice" do
       source = StringIO.new(<<-END)
 "LAYER1_OID","LAYER_1_TAX_CODE","LAYER1","LAYER2_OID","LAYER_2_TAX_CODE","LAYER2","LAYER3_OID","LAYER_3_TAX_CODE","LAYER3"
 "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
@@ -48,13 +48,13 @@ describe DataImporter::Sectors do
   end
 
   describe "open_data_file" do
-    it "should open the input data file" do
+    it "opens the input data file" do
       tmpfile = Tempfile.new("sectors.csv")
       expect(DataImporter::Sectors).to receive(:data_file_path).with("sectors.csv").and_return(tmpfile.path)
 
       DataImporter::Sectors.open_data_file
     end
-    it "should fail if the input data file does not exist" do
+    it "fails if the input data file does not exist" do
       expect(DataImporter::Sectors).to receive(:data_file_path).with("sectors.csv").and_return("/example/sectors.csv")
 
       expect do

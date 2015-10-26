@@ -12,13 +12,13 @@ describe LicenceDataMigrator do
   end
   
   describe "initialize" do
-    it "should load the identifier mappings" do
+    it "loads the identifier mappings" do
       expect(@migrator.licence_mappings["1083741393"]).to eq("1237-4-1")
     end
   end
   
   describe "run" do 
-    it "should update the gds_id_id on licence records" do
+    it "updates the gds_id_id on licence records" do
       l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 1083741393)
       l2 = FactoryGirl.create(:licence, name: "Licence Two", correlation_id: 1075329002)
       
@@ -44,7 +44,7 @@ describe LicenceDataMigrator do
   end
   
   describe "country code" do
-    it "should give a numeric code for the licence" do
+    it "gives a numeric code for the licence" do
       licence = FactoryGirl.create(:licence, da_northern_ireland: true, da_england: true)
       expect(@migrator.country_code(licence)).to eq(7)
       licence.da_northern_ireland = false

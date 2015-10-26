@@ -3,7 +3,7 @@ require 'data_importer'
 
 describe DataImporter do
   describe "update" do
-    it "should import relevant file and then close it" do
+    it "imports relevant file and then close it" do
       fh = double()
       expect(fh).to receive(:close)
       allow(DataImporter).to receive(:open_data_file).and_return(fh)
@@ -15,7 +15,7 @@ describe DataImporter do
       DataImporter.update
     end
 
-    it "should close import file even if an exception is raised" do
+    it "closes import file even if an exception is raised" do
       fh = double()
       expect(fh).to receive(:close)
       allow(DataImporter).to receive(:open_data_file).and_return(fh)
@@ -31,7 +31,7 @@ describe DataImporter do
   end
 
   describe "run" do
-    it "should call process_row with a hash for each line in the csv" do
+    it "calls process_row with a hash for each line in the csv" do
       source = StringIO.new(<<-END)
 "LAYER1_OID","LAYER_1_TAX_CODE","LAYER1","LAYER2_OID","LAYER_2_TAX_CODE","LAYER2","LAYER3_OID","LAYER_3_TAX_CODE","LAYER3"
 "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"

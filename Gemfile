@@ -27,7 +27,7 @@ else
 end
 
 gem 'sass-rails', '~> 5.0.4'
-gem 'uglifier', '1.2.4'
+gem 'uglifier', '2.7.2'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.3.3'

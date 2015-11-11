@@ -30,6 +30,7 @@ gem 'sass-rails', '~> 5.0.4'
 gem 'uglifier', '2.7.2'
 
 group :development, :test do
+  gem 'pry-rails'
   gem 'rspec-rails', '~> 3.3.3'
   gem 'factory_girl_rails', '~> 4.5.0'
 

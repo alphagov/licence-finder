@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe "Start page" do
+RSpec.describe "Start page", :type => :request do
 
   specify "Inspecting the start page" do
 

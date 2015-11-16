@@ -1,7 +1,6 @@
-require 'spec_helper'
 require 'data_importer'
 
-describe DataImporter::Activities do
+RSpec.describe DataImporter::Activities do
   describe "fresh import" do
     it "should import activities from a file handle" do
       source = StringIO.new(<<-END)
@@ -12,10 +11,8 @@ describe DataImporter::Activities do
 
       sector = FactoryGirl.create(:sector, correlation_id: 1000431)
 
-      importer = DataImporter::Activities.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Activities.new(source, StringIO.new)
+      importer.run
 
       imported_activity1 = Activity.find_by_correlation_id(362)
       expect(imported_activity1.correlation_id).to eq(362)
@@ -38,10 +35,8 @@ describe DataImporter::Activities do
 
       sector = FactoryGirl.create(:sector, correlation_id: 1000431)
 
-      importer = DataImporter::Activities.new(source)
-      silence_stream(STDOUT) do
-        importer.run
-      end
+      importer = DataImporter::Activities.new(source, StringIO.new)
+      importer.run
 
       expect(Activity.where(correlation_id: 362).length).to eq(1)
     end

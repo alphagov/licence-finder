@@ -18,7 +18,7 @@ class DataImporter::Activities < DataImporter
       activity.correlation_id = row['BUSINSS_ACT_ID'].to_i
       activity.name = row['ACTIVITY_TITLE']
       Rails.logger.debug "Creating BusinessActivity #{activity.id}(#{activity.name})"
-      activity.safely.save!
+      activity.with(safe: true).save!
       counter += 1
     end
     if sector.activities.nil?
@@ -26,7 +26,7 @@ class DataImporter::Activities < DataImporter
     end
     unless sector.activities.include? activity
       sector.activities << activity
-      sector.safely.save!
+      sector.with(safe: true).save!
     end
     counter
   end

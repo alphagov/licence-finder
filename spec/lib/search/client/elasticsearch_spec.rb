@@ -1,7 +1,6 @@
-require "spec_helper"
 require "search/client/elasticsearch"
 
-describe Search::Client::Elasticsearch do
+RSpec.describe Search::Client::Elasticsearch do
   before(:each) do
     @es_config = {
         url:    'localhost',
@@ -15,13 +14,13 @@ describe Search::Client::Elasticsearch do
   end
 
   describe "indexing" do
-    it "should delete and create index with mapping before re-indexing" do
+    it "deletes and creates index with mapping before re-indexing" do
       expect(@es_indexer).to receive(:delete)
       expect(@es_indexer).to receive(:create).with("test-create").and_return(true)
       @client.pre_index
     end
 
-    it "should index provided sectors" do
+    it "indexes provided sectors" do
       s1 = FactoryGirl.create(:sector, public_id: 1, name: "Sector One")
       s2 = FactoryGirl.create(:sector, public_id: 2, name: "Sector Two")
       s3 = FactoryGirl.create(:sector, public_id: 3, name: "Sector Three")
@@ -36,25 +35,25 @@ describe Search::Client::Elasticsearch do
       @client.index [s1, s2, s3]
     end
 
-    it "should convert a sector to a hash with the correct fields set" do
+    it "converts a sector to a hash with the correct fields set" do
       document = @client.to_document(FactoryGirl.build(:sector, public_id: 123, name: "Test Sector"))
       expect(document).to eq({_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: [], activities: []})
     end
 
-    it "should add extra_terms to document when available" do
+    it "adds extra_terms to document when available" do
       allow(@client).to receive(:extra_terms).and_return({123 => %w(foo bar monkey)})
       document = @client.to_document(FactoryGirl.build(:sector, public_id: 321, correlation_id: 123, name: "Test Sector"))
       expect(document).to eq({_id: 321, type: "test-type", public_id: 321, title: "Test Sector", extra_terms: %w(foo bar monkey), activities: []})
     end
 
-    it "should commit after re-indexing" do
+    it "commits after re-indexing" do
       expect(@es_indexer).to receive(:refresh)
       @client.post_index
     end
   end
 
   describe "deleting" do
-    it "should delete the index" do
+    it "deletes the index" do
       expect(@es_indexer).to receive(:delete)
 
       @client.delete_index
@@ -62,7 +61,7 @@ describe Search::Client::Elasticsearch do
   end
 
   describe "searching" do
-    it "should search the title with a text query and just return ids" do
+    it "searches the title with a text query and just returns ids" do
       d1 = double()
       expect(d1).to receive(:public_id).and_return(123)
       d2 = double()
@@ -83,19 +82,19 @@ describe Search::Client::Elasticsearch do
   end
 
   describe "Lucene search escaping characters" do
-    it "should return valid strings back" do
+    it "returns valid strings back" do
       expect(@client.escape_lucene_chars("blargh")).to eq("blargh")
       expect(@client.escape_lucene_chars("Testing")).to eq("Testing")
     end
 
-    it "should remove expected special chars" do
+    it "removes expected special chars" do
       %w(+ - && || ! ( ) { } [ ] ^ " ~ * ? \ :).each { |char|
         char.strip!
         expect(@client.escape_lucene_chars("#{char}blargh")).to eq("\\#{char}blargh")
       }
     end
 
-    it "should downcase search keywords" do
+    it "downcases search keywords" do
       expect(@client.downcase_ending_keywords("bleh AND")).to eq("bleh and")
       expect(@client.downcase_ending_keywords("bleh OR")).to eq("bleh or")
       expect(@client.downcase_ending_keywords("bleh NOT")).to eq("bleh not")

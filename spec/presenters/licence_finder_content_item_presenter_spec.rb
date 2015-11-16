@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe LicenceFinderContentItemPresenter do
+RSpec.describe LicenceFinderContentItemPresenter do
   let(:subject) { LicenceFinderContentItemPresenter.new }
 
   describe "#base_path" do

@@ -1,6 +1,6 @@
-require "spec_helper"
+require "services"
 
-describe PublishingApiNotifier do
+RSpec.describe PublishingApiNotifier do
   describe "#publish" do
     let(:presenter) { double("content_item_presenter", base_path: "/licence-finder", payload: {test: :payload}) }
 

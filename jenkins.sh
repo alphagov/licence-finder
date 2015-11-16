@@ -49,6 +49,8 @@ export GOVUK_CONTENT_SCHEMAS_PATH=tmp/govuk-content-schemas
 export RAILS_ENV=test
 bundle install --path "${HOME}/bundles/${JOB_NAME}" --deployment --without development
 
+bundle exec rake assets:precompile
+
 if bundle exec rake ${TEST_TASK:-$DEFAULT_TASK}; then
   github_status "$REPO_NAME" success "succeeded on Jenkins"
 else

@@ -4,7 +4,7 @@ module PublicId
   def self.included(klass)
     klass.instance_eval do
       field :public_id, :type => Integer
-      index :public_id, :unique => true
+      index({ public_id: 1 }, { unique: true })
 
       before_save :set_public_id
     end
@@ -15,12 +15,14 @@ module PublicId
   private
   def set_public_id
     if self.public_id.nil?
-      counter = Mongoid.database["counters"].find_and_modify(
-          :query  => {:_id  => self.class.name},
-          :update => {:$inc => {:count => 1}},
-          :new    => true,
-          :upsert => true
+      counters = Mongoid::Sessions.default["counters"]
+      counter = counters.find(
+        '_id' => self.class.name
+      ).modify(
+        {'$inc' => { :count => 1 }},
+        :new => true, :upsert => true
       )["count"]
+
       self.public_id = counter
     end
   end

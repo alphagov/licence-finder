@@ -1,3 +1,5 @@
+require 'services'
+
 class PublishingApiNotifier
   def self.publish(presenter=LicenceFinderContentItemPresenter.new)
     new.publish(presenter)

@@ -1,8 +1,6 @@
-require "spec_helper"
 require "search/client/elasticsearch"
 
-
-describe Search::Client::Elasticsearch do
+RSpec.describe Search::Client::Elasticsearch do
   before(:each) do
     WebMock.allow_net_connect!
     $search = Search.create
@@ -26,24 +24,24 @@ describe Search::Client::Elasticsearch do
     @search.delete_index
   end
 
-  it "should return sectors that match on title" do
+  it "returns sectors that match on title" do
     expect(@search.search("fooey")[0].public_id).to eq(123)
     expect(@search.search("sector").length).to eq(3)
   end
 
-  it "should return sectors that match on extra terms" do
+  it "returns sectors that match on extra terms" do
     search = @search.search("monkey")
     expect(search[0].public_id).to eq(234)
     expect(search.length).to eq(1)
   end
 
-  it "should return sectors that match on activities" do
+  it "returns sectors that match on activities" do
     search = @search.search("unrelated")
     expect(search[0].public_id).to eq(345)
     expect(search.length).to eq(1)
   end
 
-  it "should return sectors above activities when both match" do
+  it "returns sectors above activities when both match" do
     search = @search.search("fooey")
     expect(search.length).to eq(2)
     expect(search[0].public_id).to eq(123)

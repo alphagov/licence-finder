@@ -1,10 +1,7 @@
-require 'spec_helper'
-require 'capybara'
-
 # Make sure Capybara doesn't automatically refresh the page
 Capybara.automatic_reload = false
 
-describe "Sector browse page" do
+RSpec.describe "Sector browse page",:type => :request do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, layer: 1, name: 'First top level')
     @s2 = FactoryGirl.create(:sector, layer: 2, name: 'First child', parents: [@s1])
@@ -78,8 +75,10 @@ describe "Sector browse page" do
 
     click_on @s1.name # first top level
     click_on @s2.name # first child
+    expect(find('span#sector-3')).to have_text(@s3.name) # first grand child
+
     click_on @s4.name # second child
-    expect(page).to have_content @s5.name # second grand child
+    expect(find('span#sector-5')).to have_text(@s5.name) # second grand child
     expect(page).not_to have_content @s3.name # first grand child
   end
 

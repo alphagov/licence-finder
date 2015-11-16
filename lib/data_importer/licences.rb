@@ -38,7 +38,7 @@ class DataImporter::Licences < DataImporter
         licence_join.sector = sector
         licence_join.activity = activity
         licence_join.licence = licence
-        licence_join.safely.save!
+        licence_join.with(safe: true).save!
       end
     end
     counter

@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe LicenceLink do
+RSpec.describe LicenceLink, type: :model do
   describe "validations" do
     before :each do
       @licence_link = FactoryGirl.build(:licence_link)
@@ -12,8 +10,8 @@ describe LicenceLink do
                          licence: @licence_link.licence
       )
       expect do
-        @licence_link.safely.save
-      end.to raise_error(Mongo::OperationFailure)
+        @licence_link.with(safe: true).save
+      end.to raise_error(Moped::Errors::OperationFailure)
     end
     it "should require a Sector" do
       @licence_link.sector_id = nil
@@ -60,13 +58,13 @@ describe LicenceLink do
     it "should fail if an invalid object is provided as a sector" do
       expect do
         LicenceLink.find_by_sectors_and_activities([@s1, nil], [@a1])
-      end.to raise_error(RuntimeError)
+      end.to raise_error(NoMethodError)
     end
 
     it "should fail if an invalid object is provided as an activity" do
       expect do
         LicenceLink.find_by_sectors_and_activities([@s1], [@a1, nil])
-      end.to raise_error(RuntimeError)
+      end.to raise_error(NoMethodError)
     end
   end
 end

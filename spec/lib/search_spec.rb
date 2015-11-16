@@ -1,14 +1,13 @@
-require "spec_helper"
 require "search"
 
-describe Search do
+RSpec.describe Search do
 
   before(:each) do
     @client = double()
     @search = Search.new(@client)
   end
 
-  it "should index all sectors with the configured client" do
+  it "indexes all sectors with the configured client" do
     expect(@client).to receive(:pre_index)
     expect(Sector).to receive(:find_layer3_sectors).and_return(:all_sectors)
     expect(@client).to receive(:index).with(:all_sectors)
@@ -17,13 +16,13 @@ describe Search do
     @search.index_all
   end
 
-  it "should pass delete_index on to the concrete client" do
+  it "passes delete_index on to the concrete client" do
     expect(@client).to receive(:delete_index)
 
     @search.delete_index
   end
 
-  it "should pass search query on to concrete client" do
+  it "passes search query on to concrete client" do
     s1 = FactoryGirl.create(:sector, public_id: 234)
     s2 = FactoryGirl.create(:sector, public_id: 123)
 

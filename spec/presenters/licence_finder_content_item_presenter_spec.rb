@@ -14,7 +14,6 @@ RSpec.describe LicenceFinderContentItemPresenter do
 
     it "has the correct data" do
       expect(subject.payload[:title]).to eq "Licence Finder"
-      expect(subject.payload[:content_id]).to eq "69af22e0-da49-4810-9ee4-22b4666ac627"
     end
   end
 end

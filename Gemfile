@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5.1'
 gem 'unicorn', '4.3.1'
 gem 'plek', '1.11.0'
 
@@ -23,7 +23,7 @@ gem 'logstasher', '0.4.8'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '9.0.0'
+  gem "slimmer", '9.0.1'
 end
 
 gem 'sass-rails', '~> 5.0.4'

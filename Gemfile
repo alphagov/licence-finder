@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5.1'
+gem 'rails', '4.2.6'
 gem 'unicorn', '4.3.1'
 gem 'plek', '1.11.0'
 
@@ -31,7 +31,7 @@ gem 'uglifier', '2.7.2'
 
 group :development, :test do
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.3.3'
+  gem 'rspec-rails', '~> 3.4.2'
   gem 'factory_girl_rails', '~> 4.5.0'
 
   # NOTE: 1.5.0 has a bug with mongoid and truncation: https://github.com/DatabaseCleaner/database_cleaner/issues/299

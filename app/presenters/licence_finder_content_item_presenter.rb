@@ -16,11 +16,13 @@ class LicenceFinderContentItemPresenter
       base_path: base_path,
       title: metadata[:title],
       description: metadata[:description],
-      format: 'placeholder_licence_finder',
+      document_type: 'placeholder_licence_finder',
+      schema_name: 'placeholder_licence_finder',
       publishing_app: 'licencefinder',
       rendering_app: 'licencefinder',
       locale: 'en',
       public_updated_at: Time.now.iso8601,
+      details: {},
       routes: [
         { type: 'exact', path: base_path }
       ]

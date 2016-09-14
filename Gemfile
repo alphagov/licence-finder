@@ -30,6 +30,10 @@ end
 gem 'sass-rails', '~> 5.0.4'
 gem 'uglifier', '~> 3.0.2'
 
+gem 'govuk_frontend_toolkit', '~> 4.18.0'
+
+gem 'govuk-lint'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5.0'
@@ -44,5 +48,3 @@ group :development, :test do
   gem 'webmock', '~> 2.1.0'
   gem 'govuk-content-schema-test-helpers'
 end
-
-gem 'govuk_frontend_toolkit', '~> 4.18.0'

@@ -20,13 +20,13 @@ RSpec.describe "Business location page", type: :request do
       ])
     end
     within_section 'completed question 1' do
-      expect(page.all('.answer li').map(&:text)).to eq([
+      expect(page.all('.answer li').map(&:text)).to match_array([
         'Fooey Sector',
         'Balooey Sector'
       ])
     end
     within_section 'completed question 2' do
-      expect(page.all('.answer li').map(&:text)).to eq([
+      expect(page.all('.answer li').map(&:text)).to match_array([
         'Fooey Activity',
         'Kablooey Activity'
       ])

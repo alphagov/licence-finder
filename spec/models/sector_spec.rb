@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Sector, type: :model do
   it "should use the correct field types on the model" do
     Sector.with(safe: true).create!(

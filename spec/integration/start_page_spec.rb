@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe "Start page", type: :request do
   specify "Inspecting the start page" do
     visit "/#{APP_SLUG}"

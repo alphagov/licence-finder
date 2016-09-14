@@ -1,3 +1,4 @@
+require 'rails_helper'
 require 'data_importer'
 
 RSpec.describe DataImporter::Sectors do

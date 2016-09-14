@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe "Business location page", type: :request do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")

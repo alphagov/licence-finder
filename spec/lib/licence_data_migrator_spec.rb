@@ -1,3 +1,4 @@
+require 'rails_helper'
 require 'licence_data_migrator'
 
 RSpec.describe LicenceDataMigrator do

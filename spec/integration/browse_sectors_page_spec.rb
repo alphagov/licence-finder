@@ -1,3 +1,4 @@
+require 'rails_helper'
 # Make sure Capybara doesn't automatically refresh the page
 Capybara.automatic_reload = false
 

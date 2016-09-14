@@ -1,3 +1,4 @@
+require 'rails_helper'
 # -*- coding: utf-8 -*-
 
 # Make sure Capybara doesn't automatically refresh the page

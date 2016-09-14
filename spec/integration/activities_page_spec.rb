@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe "Activity selection page", type: :request do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")

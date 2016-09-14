@@ -21,7 +21,7 @@ RSpec.describe Licence, type: :model do
       @licence.gds_id = "24-3-1"
       expect do
         @licence.with(safe: true).save
-      end.to raise_error(Moped::Errors::OperationFailure)
+      end.to raise_error(Mongo::Error::OperationFailure)
     end
 
     it "should require a name" do

@@ -40,7 +40,7 @@ class LicenceFinderController < ApplicationController
   def activities
     @sectors = Sector.find_by_public_ids(@sector_ids)
     @activities = Activity.find_by_sectors(@sectors).ascending(:name)
-    @picked_activities = Activity.find_by_public_ids(extract_ids(:activity)).ascending(:name).to_a
+    @picked_activities = Activity.find_by_public_ids(extract_ids(:activity)).order_by(name: :asc).to_a
     setup_questions [@sectors]
   end
 

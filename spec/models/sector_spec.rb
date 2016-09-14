@@ -21,7 +21,7 @@ RSpec.describe Sector, type: :model do
       @sector.public_id = 42
       expect do
         @sector.with(safe: true).save
-      end.to raise_error(Moped::Errors::OperationFailure)
+      end.to raise_error(Mongo::Error::OperationFailure)
     end
 
     it "should have a database level uniqueness constraint on correlation_id" do
@@ -29,7 +29,7 @@ RSpec.describe Sector, type: :model do
       @sector.correlation_id = 42
       expect do
         @sector.with(safe: true).save
-      end.to raise_error(Moped::Errors::OperationFailure)
+      end.to raise_error(Mongo::Error::OperationFailure)
     end
 
     it "should require a name" do

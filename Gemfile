@@ -4,10 +4,10 @@ gem 'rails', '4.2.7.1'
 gem 'unicorn', '~> 5.1.0'
 gem 'plek', '1.12.0'
 
-gem "mongoid", '~> 4.0'
+gem "mongoid", '~> 5.1.0'
 gem "tire"
 
-gem 'mongoid_rails_migrations', '1.0.1'
+gem 'mongoid_rails_migrations', '~> 1.1.0'
 
 gem "airbrake", "~> 4.3.1"
 

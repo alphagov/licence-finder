@@ -11,7 +11,7 @@ RSpec.describe LicenceLink, type: :model do
       )
       expect do
         @licence_link.with(safe: true).save
-      end.to raise_error(Moped::Errors::OperationFailure)
+      end.to raise_error(Mongo::Error::OperationFailure)
     end
     it "should require a Sector" do
       @licence_link.sector_id = nil

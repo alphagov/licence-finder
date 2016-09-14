@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.7.1'
 gem 'unicorn', '4.3.1'
 gem 'plek', '1.11.0'
 

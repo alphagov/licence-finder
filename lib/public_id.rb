@@ -3,8 +3,8 @@
 module PublicId
   def self.included(klass)
     klass.instance_eval do
-      field :public_id, :type => Integer
-      index({ public_id: 1 }, { unique: true })
+      field :public_id, type: Integer
+      index({ public_id: 1 }, unique: true)
 
       before_save :set_public_id
     end
@@ -12,7 +12,8 @@ module PublicId
     klass.extend(ClassMethods)
   end
 
-  private
+private
+
   def set_public_id
     if self.public_id.nil?
       counters = Mongoid::Clients.default["counters"]
@@ -21,7 +22,7 @@ module PublicId
           '_id' => self.class.name
         },
         {
-          '$inc' => { :count => 1 }
+          '$inc' => { count: 1 }
         },
         return_document: :after, upsert: true
       )["count"]

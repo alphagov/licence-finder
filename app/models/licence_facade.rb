@@ -2,7 +2,6 @@ require 'gds_api/exceptions'
 require 'services'
 
 class LicenceFacade
-
   def self.create_for_licences(licences)
     api_data = get_licence_artefacts(licences)
     licences.map do |l|

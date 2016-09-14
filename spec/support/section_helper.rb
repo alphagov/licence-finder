@@ -23,10 +23,10 @@ module SectionHelper
   end
 
   def within_section(section_name)
-    within *selector_of_section(section_name) do
+    within(*selector_of_section(section_name)) do
       yield
     end
   end
 end
 
-RSpec.configuration.include SectionHelper, :type => :request
+RSpec.configuration.include SectionHelper, type: :request

@@ -13,7 +13,7 @@ RSpec.describe Search::Client do
 
   it "returns an empty array if no extra terms are found for a sector" do
     client = Search::Client.new
-    expect(client.extra_terms_for_sector(FactoryGirl.build(:sector, :public_id => 123))).to eq([])
+    expect(client.extra_terms_for_sector(FactoryGirl.build(:sector, public_id: 123))).to eq([])
   end
 
 
@@ -23,19 +23,17 @@ RSpec.describe Search::Client do
 123,foo, bar, monkey
 321,bottle, mouse, keyboard
       END
-      @client = Search::Client.new()
+      @client = Search::Client.new
       allow(@client).to receive(:extra_terms_handle).and_return(source)
     end
 
     it "provides extra terms" do
-      expect(@client.extra_terms).to eq({
-          123 => %w{foo bar monkey},
-          321 => %w{bottle mouse keyboard}
-      })
+      expect(@client.extra_terms).to eq(123 => %w{foo bar monkey},
+          321 => %w{bottle mouse keyboard})
     end
 
     it "finds extra terms for a sector" do
-      sector = FactoryGirl.build(:sector, :public_id => 321, :correlation_id => 123)
+      sector = FactoryGirl.build(:sector, public_id: 321, correlation_id: 123)
       expect(@client.extra_terms_for_sector(sector)).to eq(%w(foo bar monkey))
     end
   end

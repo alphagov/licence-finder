@@ -11,27 +11,27 @@ RSpec.describe LicenceDataMigrator do
       StringIO.new
     )
   end
-  
+
   describe "initialize" do
     it "loads the identifier mappings" do
       expect(@migrator.licence_mappings["1083741393"]).to eq("1237-4-1")
     end
   end
-  
-  describe "run" do 
+
+  describe "run" do
     it "updates the gds_id_id on licence records" do
       l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 1083741393)
       l2 = FactoryGirl.create(:licence, name: "Licence Two", correlation_id: 1075329002)
-      
+
       @migrator.run
-      
+
       l1.reload
       l2.reload
       expect(l1.gds_id).to eq("1237-4-1")
       expect(l2.gds_id).to eq("9876-3-1")
     end
   end
-  
+
   describe "country code" do
     it "gives a numeric code for the licence" do
       licence = FactoryGirl.create(:licence, da_northern_ireland: true, da_england: true)

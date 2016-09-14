@@ -8,7 +8,7 @@ RSpec.describe Search::Client::Elasticsearch do
         type:   'test-type',
         create: 'test-create'
     }
-    @es_indexer = double()
+    @es_indexer = double
     @client = Search::Client::Elasticsearch.new(@es_config)
     allow(@client).to receive(:indexer).and_return(@es_indexer)
   end
@@ -37,13 +37,13 @@ RSpec.describe Search::Client::Elasticsearch do
 
     it "converts a sector to a hash with the correct fields set" do
       document = @client.to_document(FactoryGirl.build(:sector, public_id: 123, name: "Test Sector"))
-      expect(document).to eq({_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: [], activities: []})
+      expect(document).to eq(_id: 123, type: "test-type", public_id: 123, title: "Test Sector", extra_terms: [], activities: [])
     end
 
     it "adds extra_terms to document when available" do
-      allow(@client).to receive(:extra_terms).and_return({123 => %w(foo bar monkey)})
+      allow(@client).to receive(:extra_terms).and_return(123 => %w(foo bar monkey))
       document = @client.to_document(FactoryGirl.build(:sector, public_id: 321, correlation_id: 123, name: "Test Sector"))
-      expect(document).to eq({_id: 321, type: "test-type", public_id: 321, title: "Test Sector", extra_terms: %w(foo bar monkey), activities: []})
+      expect(document).to eq(_id: 321, type: "test-type", public_id: 321, title: "Test Sector", extra_terms: %w(foo bar monkey), activities: [])
     end
 
     it "commits after re-indexing" do
@@ -62,21 +62,19 @@ RSpec.describe Search::Client::Elasticsearch do
 
   describe "searching" do
     it "searches the title with a text query and just returns ids" do
-      d1 = double()
+      d1 = double
       expect(d1).to receive(:public_id).and_return(123)
-      d2 = double()
+      d2 = double
       expect(d2).to receive(:public_id).and_return(234)
-      response = double()
+      response = double
       expect(response).to receive(:results).and_return([d1, d2])
 
-      expect(Tire).to receive(:search).with(@es_config[:index], {
-          query: {
+      expect(Tire).to receive(:search).with(@es_config[:index], query: {
               query_string: {
                   fields: %w(title extra_terms activities),
                   query: "query"
               }
-          }
-      }).and_return(response)
+          }).and_return(response)
       expect(@client.search("query")).to eq([123, 234])
     end
   end

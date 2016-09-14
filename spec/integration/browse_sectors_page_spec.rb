@@ -1,7 +1,7 @@
 # Make sure Capybara doesn't automatically refresh the page
 Capybara.automatic_reload = false
 
-RSpec.describe "Sector browse page",:type => :request do
+RSpec.describe "Sector browse page", type: :request do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, layer: 1, name: 'First top level')
     @s2 = FactoryGirl.create(:sector, layer: 2, name: 'First child', parents: [@s1])
@@ -50,7 +50,7 @@ RSpec.describe "Sector browse page",:type => :request do
     end
   end
 
-  specify "clicking on sectors fetches children", :js => true do
+  specify "clicking on sectors fetches children", js: true do
     visit "/#{APP_SLUG}/browse-sectors"
 
     expect(page).to have_content @s1.name
@@ -70,7 +70,7 @@ RSpec.describe "Sector browse page",:type => :request do
     expect(page).to have_content @s3.name
   end
 
-  specify "clicking on sibling sectors collapses other sectors", :js => true do
+  specify "clicking on sibling sectors collapses other sectors", js: true do
     visit "/#{APP_SLUG}/browse-sectors"
 
     click_on @s1.name # first top level
@@ -82,7 +82,7 @@ RSpec.describe "Sector browse page",:type => :request do
     expect(page).not_to have_content @s3.name # first grand child
   end
 
-  specify "clicking on an open sector closes its children", :js => true do
+  specify "clicking on an open sector closes its children", js: true do
     visit "/#{APP_SLUG}/browse-sectors"
 
     click_on @s1.name
@@ -93,7 +93,7 @@ RSpec.describe "Sector browse page",:type => :request do
     expect(page).not_to have_content @s3.name
   end
 
-  specify "granchild sectors will have rel=\"nofollow\" attributes on 'Add' links", :js => true do
+  specify "granchild sectors will have rel=\"nofollow\" attributes on 'Add' links", js: true do
     visit "/#{APP_SLUG}/browse-sectors"
 
     click_on @s1.name

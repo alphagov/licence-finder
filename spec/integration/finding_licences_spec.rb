@@ -1,28 +1,29 @@
-RSpec.describe "Finding licences",:type => :request do
+require 'rails_helper'
 
+RSpec.describe "Finding licences", type: :request do
   specify "Simple happy path through the app" do
     WebMock.allow_net_connect!
     $search = Search.create
 
-    s1 = FactoryGirl.create(:sector, :name => "Fooey Sector", :layer => 3)
-    s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector", :layer => 3)
-    s3 = FactoryGirl.create(:sector, :name => "Gooey Sector", :layer => 3)
+    s1 = FactoryGirl.create(:sector, name: "Fooey Sector", layer: 3)
+    s2 = FactoryGirl.create(:sector, name: "Kablooey Sector", layer: 3)
+    s3 = FactoryGirl.create(:sector, name: "Gooey Sector", layer: 3)
 
-    a1 = FactoryGirl.create(:activity, :name => "Fooey Activity", :sectors => [s1])
-    a2 = FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [s2])
-    a3 = FactoryGirl.create(:activity, :name => "Kabloom", :sectors => [s1, s2])
-    a4 = FactoryGirl.create(:activity, :name => "Gooey Activity", :sectors => [s3])
-    a5 = FactoryGirl.create(:activity, :name => "Transmogrifying", :sectors => [s1, s3])
+    a1 = FactoryGirl.create(:activity, name: "Fooey Activity", sectors: [s1])
+    a2 = FactoryGirl.create(:activity, name: "Kablooey Activity", sectors: [s2])
+    FactoryGirl.create(:activity, name: "Kabloom", sectors: [s1, s2])
+    FactoryGirl.create(:activity, name: "Gooey Activity", sectors: [s3])
+    FactoryGirl.create(:activity, name: "Transmogrifying", sectors: [s1, s3])
 
-    l1 = FactoryGirl.create(:licence, :name => "Licence One")
-    l2 = FactoryGirl.create(:licence, :name => "Licence Two")
-    l3 = FactoryGirl.create(:licence, :name => "Licence Three")
-    l4 = FactoryGirl.create(:licence, :name => "Licence Four", :da_england => false, :da_scotland => true)
+    l1 = FactoryGirl.create(:licence, name: "Licence One")
+    l2 = FactoryGirl.create(:licence, name: "Licence Two")
+    l3 = FactoryGirl.create(:licence, name: "Licence Three")
+    l4 = FactoryGirl.create(:licence, name: "Licence Four", da_england: false, da_scotland: true)
 
-    FactoryGirl.create(:licence_link, :sector => s1, :activity => a1, :licence => l1)
-    FactoryGirl.create(:licence_link, :sector => s1, :activity => a2, :licence => l2)
-    FactoryGirl.create(:licence_link, :sector => s2, :activity => a1, :licence => l3)
-    FactoryGirl.create(:licence_link, :sector => s1, :activity => a1, :licence => l4)
+    FactoryGirl.create(:licence_link, sector: s1, activity: a1, licence: l1)
+    FactoryGirl.create(:licence_link, sector: s1, activity: a2, licence: l2)
+    FactoryGirl.create(:licence_link, sector: s2, activity: a1, licence: l3)
+    FactoryGirl.create(:licence_link, sector: s1, activity: a1, licence: l4)
 
     $search.index_all
 
@@ -44,7 +45,7 @@ RSpec.describe "Finding licences",:type => :request do
     click_add_link('Gooey Sector')
     click_on 'Next step'
 
-    i_should_be_on "/#{APP_SLUG}/activities", :ignore_query => true
+    i_should_be_on "/#{APP_SLUG}/activities", ignore_query: true
 
     within_section 'completed question 1' do
       expect(page).to have_content "Fooey Sector"
@@ -65,7 +66,7 @@ RSpec.describe "Finding licences",:type => :request do
     click_add_link('Gooey Activity')
     click_on 'Next step'
 
-    i_should_be_on "/#{APP_SLUG}/location", :ignore_query => true
+    i_should_be_on "/#{APP_SLUG}/location", ignore_query: true
 
     within_section 'completed question 1' do
       expect(page).to have_content "Fooey Sector" # s1
@@ -91,7 +92,7 @@ RSpec.describe "Finding licences",:type => :request do
 
     click_on 'Find licences'
 
-    i_should_be_on "/#{APP_SLUG}/licences", :ignore_query => true
+    i_should_be_on "/#{APP_SLUG}/licences", ignore_query: true
 
     within_section 'completed question 1' do
       expect(page.all('.answer li').map(&:text)).to eq([

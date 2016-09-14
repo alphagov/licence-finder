@@ -3,12 +3,12 @@ require "public_id"
 class Activity
   include Mongoid::Document
   include PublicId
-  field :correlation_id, :type => Integer
-  index({ correlation_id: 1 }, { unique: true })
-  field :name, :type => String
+  field :correlation_id, type: Integer
+  index({ correlation_id: 1 }, unique: true)
+  field :name, type: String
   has_and_belongs_to_many :sectors, autosave: true
 
-  validates :name, :presence => true
+  validates :name, presence: true
 
   def self.find_by_public_ids(public_ids)
     self.any_in public_id: public_ids

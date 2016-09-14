@@ -1,9 +1,9 @@
 RSpec.describe Licence, type: :model do
   it "should use the correct field types on the model" do
     Licence.with(safe: true).create!(
-      :gds_id => "24-3-1",
-      :name => "Some Licence",
-      :regulation_area => "Some Regulation Area"
+      gds_id: "24-3-1",
+      name: "Some Licence",
+      regulation_area: "Some Regulation Area"
     )
     licence = Licence.first
     expect(licence.gds_id).to eq("24-3-1")
@@ -17,11 +17,11 @@ RSpec.describe Licence, type: :model do
     end
 
     it "should have a database level uniqueness constraint on gds_id" do
-      FactoryGirl.create(:licence, :gds_id => "24-3-1")
+      FactoryGirl.create(:licence, gds_id: "24-3-1")
       @licence.gds_id = "24-3-1"
-      expect do
+      expect {
         @licence.with(safe: true).save
-      end.to raise_error(Mongo::Error::OperationFailure)
+      }.to raise_error(Mongo::Error::OperationFailure)
     end
 
     it "should require a name" do

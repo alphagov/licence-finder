@@ -3,7 +3,7 @@
 # Make sure Capybara doesn't automatically refresh the page
 Capybara.automatic_reload = false
 
-RSpec.describe "Browse sectors via licence finder homepage",:type => :request do
+RSpec.describe "Browse sectors via licence finder homepage", type: :request do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, layer: 1, name: 'First top level')
     @s2 = FactoryGirl.create(:sector, layer: 2, name: 'First child', parents: [@s1])
@@ -15,7 +15,7 @@ RSpec.describe "Browse sectors via licence finder homepage",:type => :request do
     visit "/#{APP_SLUG}/sectors"
   end
 
-  specify "when browsing the main sectors page", :js => true do
+  specify "when browsing the main sectors page", js: true do
     expect(page).not_to have_content @s1.name
     expect(page).not_to have_css 'ul#sector-navigation'
 
@@ -25,7 +25,7 @@ RSpec.describe "Browse sectors via licence finder homepage",:type => :request do
     expect(page).to have_css 'ul#sector-navigation'
   end
 
-  specify "3rd level sectors should be able to be added to the sidebar", :js => true do
+  specify "3rd level sectors should be able to be added to the sidebar", js: true do
     click_link "browse-sectors"
     click_on @s1.name
     click_on @s2.name

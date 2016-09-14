@@ -52,9 +52,9 @@ RSpec.describe DataImporter::Sectors do
     it "fails if the input data file does not exist" do
       expect(DataImporter::Sectors).to receive(:data_file_path).with("sectors.csv").and_return("/example/sectors.csv")
 
-      expect do
+      expect {
         DataImporter::Sectors.open_data_file
-      end.to raise_error(Errno::ENOENT)
+      }.to raise_error(Errno::ENOENT)
     end
   end
 end

@@ -1,7 +1,6 @@
 require 'csv'
 
 class DataImporter
-
   def self.update
     fh = open_data_file
     begin
@@ -29,11 +28,11 @@ class DataImporter
     done(counter, "\n")
   end
 
-  private
+private
 
   def done(counter, nl)
     @output_stream.print "Imported #{counter} #{self.class.name.split('::').last}.#{nl}"
   end
 end
 
-Dir[File.join(File.dirname(__FILE__), "data_importer/**/*.rb")].each {|f| require f}
+Dir[File.join(File.dirname(__FILE__), "data_importer/**/*.rb")].each { |f| require f }

@@ -1,11 +1,7 @@
-require 'gds_api/helpers'
 require 'gds_api/exceptions'
+require 'services'
 
 class LicenceFacade
-
-  def self.content_api
-    @content_api ||= GdsApi::ContentApi.new(Plek.current.find('contentapi'))
-  end
 
   def self.create_for_licences(licences)
     api_data = get_licence_artefacts(licences)
@@ -20,13 +16,7 @@ class LicenceFacade
 
     return raw_data if licences.empty?
 
-    data = content_api.licences_for_ids(licences.map(&:gds_id))
-    if data.is_a?(GdsApi::Response)
-      return data.to_hash
-    else 
-      Rails.logger.warn "Error fetching licence details from Content API"
-      return raw_data
-    end
+    Services.content_api.licences_for_ids(licences.map(&:gds_id)).to_hash
   rescue GdsApi::BaseError => e
     message = e.class.name
     message << "(#{e.code})" if e.respond_to?(:code)

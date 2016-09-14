@@ -1,6 +1,7 @@
+require 'services'
+
 class LicenceFinderController < ApplicationController
   include Slimmer::Headers
-  include GdsApi::Helpers
 
   SEPARATOR = '_'
   QUESTIONS = [
@@ -142,7 +143,7 @@ class LicenceFinderController < ApplicationController
 
   def set_analytics_headers
     headers = {
-      format:      "finder",
+      format: "finder",
     }
     if @sectors and params[:q].present?
       headers[:result_count] = @sectors.length
@@ -151,7 +152,11 @@ class LicenceFinderController < ApplicationController
   end
 
   def load_artefact
-    @artefact = content_api.artefact(APP_SLUG)
+    @artefact = Services.content_api.artefact(APP_SLUG)
+  rescue GdsApi::HTTPNotFound, GdsApi::HTTPGone
+    Rails.logger.warn "No artefact for licence-finder application: #{APP_SLUG}"
+    @artefact = nil
+  ensure
     set_slimmer_artefact(@artefact)
   end
 

@@ -14,7 +14,9 @@ gem "airbrake", "~> 4.3.1"
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
 else
-  gem 'gds-api-adapters', '~> 25.1'
+  # NOTE: Newer versions require a version of rest-client incompatible with tire
+  # which we should be replacing anyway
+  gem 'gds-api-adapters', '33.1.0'
 end
 
 gem 'logstasher', '~> 0.6.0'

@@ -1,5 +1,5 @@
 require "slimmer/headers"
-require "gds_api/helpers"
+
 class ApplicationController < ActionController::Base
   include Slimmer::Template
   slimmer_template 'wrapper'

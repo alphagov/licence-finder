@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe LicenceFinderController, type: :controller do
   before :each do
     @question1 = 'What is your activity or business?'

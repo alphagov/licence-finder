@@ -17,7 +17,6 @@ else
   gem 'gds-api-adapters', '~> 25.1'
 end
 
-gem 'rummageable', '~> 0.1.3'
 gem 'logstasher', '~> 0.6.0'
 
 if ENV['SLIMMER_DEV']

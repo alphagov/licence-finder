@@ -31,14 +31,16 @@ gem 'uglifier', '2.7.2'
 
 group :development, :test do
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.4.2'
-  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'rspec-rails', '~> 3.5.0'
+  gem 'factory_girl_rails', '~> 4.7.0'
+  gem 'database_cleaner', '~> 1.5.1'
+  gem 'capybara', '~> 2.8.0'
 
-  # NOTE: 1.5.0 has a bug with mongoid and truncation: https://github.com/DatabaseCleaner/database_cleaner/issues/299
-  gem 'database_cleaner', '~> 1.4.0'
-  gem 'capybara', '2.5.0'
-  gem 'poltergeist', '1.7.0'
-  gem 'webmock', '1.8.11', :require => false
+  # TODO: 1.10.x is available, but it introduces a warning about using an old
+  # version of phantomjs and suggests we upgrade to a version >= 2.1.1, we'll
+  # stick to 1.9.x until we can get a newer phantomjs version.
+  gem 'poltergeist', '~> 1.9.0'
+  gem 'webmock', '~> 2.1.0'
   gem 'govuk-content-schema-test-helpers'
 end
 

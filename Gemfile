@@ -26,7 +26,7 @@ else
 end
 
 gem 'sass-rails', '~> 5.0.4'
-gem 'uglifier', '2.7.2'
+gem 'uglifier', '~> 3.0.2'
 
 group :development, :test do
   gem 'pry-rails'
@@ -43,4 +43,4 @@ group :development, :test do
   gem 'govuk-content-schema-test-helpers'
 end
 
-gem 'govuk_frontend_toolkit', '0.41.1'
+gem 'govuk_frontend_toolkit', '~> 4.18.0'

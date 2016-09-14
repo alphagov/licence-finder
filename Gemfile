@@ -9,7 +9,7 @@ gem "tire"
 
 gem 'mongoid_rails_migrations', '1.0.1'
 
-gem "airbrake", "4.3.1"
+gem "airbrake", "~> 4.3.1"
 
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
@@ -18,7 +18,7 @@ else
 end
 
 gem 'rummageable', '~> 0.1.3'
-gem 'logstasher', '0.4.8'
+gem 'logstasher', '~> 0.6.0'
 
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'

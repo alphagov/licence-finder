@@ -1,6 +1,4 @@
 require 'rails_helper'
-# Make sure Capybara doesn't automatically refresh the page
-Capybara.automatic_reload = false
 
 RSpec.describe "Sector browse page", type: :request do
   before(:each) do

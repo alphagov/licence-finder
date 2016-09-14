@@ -1,8 +1,4 @@
 require 'rails_helper'
-# -*- coding: utf-8 -*-
-
-# Make sure Capybara doesn't automatically refresh the page
-Capybara.automatic_reload = false
 
 RSpec.describe "Browse sectors via licence finder homepage", type: :request do
   before(:each) do

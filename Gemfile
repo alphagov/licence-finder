@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.7.1'
 gem 'unicorn', '4.3.1'
-gem 'plek', '1.11.0'
+gem 'plek', '1.12.0'
 
 gem "mongoid", '~> 4.0'
 gem "tire"
@@ -23,7 +23,7 @@ gem 'logstasher', '0.4.8'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '9.0.1'
+  gem "slimmer", '9.5.0'
 end
 
 gem 'sass-rails', '~> 5.0.4'

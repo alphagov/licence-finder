@@ -23,3 +23,11 @@ bowl licencefinder
 ```
 
 If you are using the GDS development virtual machine then the application will be available on the host at http://licencefinder.dev.gov.uk/licence-finder
+
+### Publishing to GOV.UK
+
+- `bundle exec rake panopticon:register` will send the licence finder pages to panopticon. Panopticon will register the URL.
+
+### Search indexing
+
+- `bundle exec rake rummager:index_all` will send the data to Rummager for indexing in search.

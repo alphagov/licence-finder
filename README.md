@@ -30,4 +30,4 @@ If you are using the GDS development virtual machine then the application will b
 
 ### Search indexing
 
-- `bundle exec rake rummager:index_all` will send the data to Rummager for indexing in search.
+- `bundle exec rake rummager:index` will send the data to Rummager for indexing in search.

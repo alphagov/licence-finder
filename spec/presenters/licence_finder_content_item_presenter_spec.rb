@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 RSpec.describe LicenceFinderContentItemPresenter do
   let(:subject) { LicenceFinderContentItemPresenter.new }
 

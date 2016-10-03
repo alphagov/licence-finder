@@ -49,7 +49,7 @@ module CustomMatchers
     check_selected_link(id, 'activity')
   end
 
-  private
+private
 
   def check_add_remove_link(type, label)
     type_class = type.downcase
@@ -77,11 +77,11 @@ module CustomMatchers
       check_selected_link(id, type)
     end
   end
-  
+
   def check_add_remove_links_in_order(type, labels)
     check_add_remove_links(type, labels)
     expect(page.all(:xpath, ".//li[a/text() = '#{type}']/span").map(&:text)).to eq(labels)
   end
 end
 
-RSpec.configuration.include CustomMatchers, :type => :request
+RSpec.configuration.include CustomMatchers, type: :request

@@ -1,9 +1,11 @@
+require 'rails_helper'
+
 RSpec.describe Sector, type: :model do
   it "should use the correct field types on the model" do
     Sector.with(safe: true).create!(
-      :public_id => 42,
-      :correlation_id => 24,
-      :name => "Some Sector"
+      public_id: 42,
+      correlation_id: 24,
+      name: "Some Sector"
     )
     sector = Sector.first
     expect(sector.public_id).to eq(42)
@@ -17,19 +19,19 @@ RSpec.describe Sector, type: :model do
     end
 
     it "should have a database level uniqueness constraint on public_id" do
-      FactoryGirl.create(:sector, :public_id => 42)
+      FactoryGirl.create(:sector, public_id: 42)
       @sector.public_id = 42
-      expect do
+      expect {
         @sector.with(safe: true).save
-      end.to raise_error(Moped::Errors::OperationFailure)
+      }.to raise_error(Mongo::Error::OperationFailure)
     end
 
     it "should have a database level uniqueness constraint on correlation_id" do
-      FactoryGirl.create(:sector, :correlation_id => 42)
+      FactoryGirl.create(:sector, correlation_id: 42)
       @sector.correlation_id = 42
-      expect do
+      expect {
         @sector.with(safe: true).save
-      end.to raise_error(Moped::Errors::OperationFailure)
+      }.to raise_error(Mongo::Error::OperationFailure)
     end
 
     it "should require a name" do
@@ -72,9 +74,9 @@ RSpec.describe Sector, type: :model do
 
     describe "#find_by_public_ids" do
       before :each do
-        @s1 = FactoryGirl.create(:sector, :public_id => 12)
-        @s2 = FactoryGirl.create(:sector, :public_id => 13)
-        @s3 = FactoryGirl.create(:sector, :public_id => 14)
+        @s1 = FactoryGirl.create(:sector, public_id: 12)
+        @s2 = FactoryGirl.create(:sector, public_id: 13)
+        @s3 = FactoryGirl.create(:sector, public_id: 14)
       end
 
       it "should return the sectors for the given id's" do
@@ -101,12 +103,11 @@ RSpec.describe Sector, type: :model do
   end
 
   specify "to_s returns the name" do
-    s = FactoryGirl.build(:sector, :name => "Foo Sector")
+    s = FactoryGirl.build(:sector, name: "Foo Sector")
     expect(s.to_s).to eq("Foo Sector")
   end
 
   describe "auto incrementing public_id" do
-
     it "should set the public_id to the next free public_id when saved" do
       sector = FactoryGirl.build(:sector)
       expect(sector.public_id).to eq(nil)
@@ -125,14 +126,14 @@ RSpec.describe Sector, type: :model do
       FactoryGirl.create(:sector, layer: 1)
       FactoryGirl.create(:sector, layer: 2)
       FactoryGirl.create(:sector, layer: 3)
-      expect(Sector.find_layer1_sectors().length).to eq(1)
+      expect(Sector.find_layer1_sectors.length).to eq(1)
     end
 
     it "should be able to find all layer 3 sectors" do
       FactoryGirl.create(:sector, layer: 1)
       FactoryGirl.create(:sector, layer: 2)
       FactoryGirl.create(:sector, layer: 3)
-      expect(Sector.find_layer3_sectors().length).to eq(1)
+      expect(Sector.find_layer3_sectors.length).to eq(1)
     end
 
     it "should be able to find child sectors" do
@@ -151,7 +152,7 @@ RSpec.describe Sector, type: :model do
       s1 = FactoryGirl.create(:sector, layer: 1)
       s2 = FactoryGirl.create(:sector, layer: 2, parents: [s1])
       s3 = FactoryGirl.create(:sector, layer: 3, parents: [s1, s2])
-      s4 = FactoryGirl.create(:sector, layer: 2, parents: [s1])
+      FactoryGirl.create(:sector, layer: 2, parents: [s1])
       FactoryGirl.create(:sector, layer: 2)
 
       expect(s1.parents.to_a).to eq([])

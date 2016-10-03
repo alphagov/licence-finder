@@ -3,16 +3,16 @@ require "public_id"
 class Sector
   include Mongoid::Document
   include PublicId
-  field :correlation_id, :type => Integer
-  index({ correlation_id: 1}, { unique: true })
-  field :name, :type => String
-  field :layer, :type => Integer
-  field :parent_ids, :type => Array
-  index({ parent_ids: 1 })
+  field :correlation_id, type: Integer
+  index({ correlation_id: 1 }, unique: true)
+  field :name, type: String
+  field :layer, type: Integer
+  field :parent_ids, type: Array
+  index(parent_ids: 1)
 
   has_and_belongs_to_many :activities, autosave: true
 
-  validates :name, :presence => true
+  validates :name, presence: true
 
   def self.find_by_public_id(public_id)
     self.find_by_public_ids([public_id]).first
@@ -26,11 +26,11 @@ class Sector
     where(correlation_id: correlation_id).first
   end
 
-  def self.find_layer1_sectors()
+  def self.find_layer1_sectors
     where(layer: 1)
   end
 
-  def self.find_layer3_sectors()
+  def self.find_layer3_sectors
     where(layer: 3)
   end
 
@@ -43,7 +43,7 @@ class Sector
   end
 
   def parents
-    Sector.where(_id: {"$in" => self.parent_ids || []})
+    Sector.where(_id: { "$in" => self.parent_ids || [] })
   end
 
   def to_s

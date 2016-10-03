@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe LicenceLink, type: :model do
   describe "validations" do
     before :each do
@@ -9,9 +11,9 @@ RSpec.describe LicenceLink, type: :model do
                          activity: @licence_link.activity,
                          licence: @licence_link.licence
       )
-      expect do
+      expect {
         @licence_link.with(safe: true).save
-      end.to raise_error(Moped::Errors::OperationFailure)
+      }.to raise_error(Mongo::Error::OperationFailure)
     end
     it "should require a Sector" do
       @licence_link.sector_id = nil
@@ -56,15 +58,15 @@ RSpec.describe LicenceLink, type: :model do
     end
 
     it "should fail if an invalid object is provided as a sector" do
-      expect do
+      expect {
         LicenceLink.find_by_sectors_and_activities([@s1, nil], [@a1])
-      end.to raise_error(NoMethodError)
+      }.to raise_error(NoMethodError)
     end
 
     it "should fail if an invalid object is provided as an activity" do
-      expect do
+      expect {
         LicenceLink.find_by_sectors_and_activities([@s1], [@a1, nil])
-      end.to raise_error(NoMethodError)
+      }.to raise_error(NoMethodError)
     end
   end
 end

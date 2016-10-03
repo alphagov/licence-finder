@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe LicenceFacade, type: :model do
   include GdsApi::TestHelpers::ContentApi
 
@@ -14,29 +16,30 @@ RSpec.describe LicenceFacade, type: :model do
     }.to_json
   end
 
-  def api_response_data(licence)
+  def api_response_data(licence = nil)
+    body_args = licence.nil? ? [] : [licence]
     response = OpenStruct.new(
       code: 200,
-      body: json_response_data(licence)
+      body: json_response_data(*body_args)
     )
     GdsApi::Response.new(response)
   end
 
   describe "create_for_licences" do
     before :each do
-      allow_any_instance_of(GdsApi::ContentApi).to receive(:licences_for_ids).and_return([])
+      allow(Services.content_api).to receive(:licences_for_ids).and_return(api_response_data(nil))
       @l1 = FactoryGirl.create(:licence)
       @l2 = FactoryGirl.create(:licence)
     end
 
     it "should query Content API for licence details" do
-      expect_any_instance_of(GdsApi::ContentApi).to receive(:licences_for_ids).with([@l1.gds_id, @l2.gds_id]).and_return([])
+      expect(Services.content_api).to receive(:licences_for_ids).with([@l1.gds_id, @l2.gds_id]).and_return api_response_data(nil)
       LicenceFacade.create_for_licences([@l1, @l2])
     end
 
     it "should skip querying Content API if not given any licences" do
-      allow_any_instance_of(GdsApi::ContentApi).to receive(:licences_for_ids).and_call_original # clear the stub above, otherwise the next line won't work
-      expect_any_instance_of(GdsApi::ContentApi).not_to receive(:licences_for_ids)
+      allow(Services.content_api).to receive(:licences_for_ids).and_call_original # clear the stub above, otherwise the next line won't work
+      expect(Services.content_api).not_to receive(:licences_for_ids)
       LicenceFacade.create_for_licences([])
     end
 
@@ -47,7 +50,7 @@ RSpec.describe LicenceFacade, type: :model do
 
     it "should add the Content API details to each Facade where details exist" do
       pub_data2 = api_response_data(@l2)
-      expect_any_instance_of(GdsApi::ContentApi).to receive(:licences_for_ids).and_return(pub_data2)
+      expect(Services.content_api).to receive(:licences_for_ids).and_return(pub_data2)
 
       result = LicenceFacade.create_for_licences([@l1, @l2])
       expect(result[0].licence).to eq(@l1)
@@ -56,9 +59,9 @@ RSpec.describe LicenceFacade, type: :model do
       expect(result[1].artefact).to eq(content_api_licence_hash(@l2.gds_id))
     end
 
-    context "when Content API returns nil" do
+    context "when Content API can't find the licenses" do
       before :each do
-        allow_any_instance_of(GdsApi::ContentApi).to receive(:licences_for_ids).and_return(nil)
+        allow(Services.content_api).to receive(:licences_for_ids).and_raise(GdsApi::HTTPNotFound.new(404))
       end
 
       it "should continue with no content API data" do
@@ -70,14 +73,33 @@ RSpec.describe LicenceFacade, type: :model do
       end
 
       it "should log the error" do
-        expect(Rails.logger).to receive(:warn).with("Error fetching licence details from Content API")
+        expect(Rails.logger).to receive(:warn).with("GdsApi::HTTPNotFound(404) fetching licence details from Content API")
+        LicenceFacade.create_for_licences([@l1, @l2])
+      end
+    end
+
+    context "when Content API finds that the licenses have been removed" do
+      before :each do
+        allow(Services.content_api).to receive(:licences_for_ids).and_raise(GdsApi::HTTPGone.new(410))
+      end
+
+      it "should continue with no content API data" do
+        result = LicenceFacade.create_for_licences([@l1, @l2])
+        expect(result[0].licence).to eq(@l1)
+        expect(result[0].artefact).to eq(nil)
+        expect(result[1].licence).to eq(@l2)
+        expect(result[1].artefact).to eq(nil)
+      end
+
+      it "should log the error" do
+        expect(Rails.logger).to receive(:warn).with("GdsApi::HTTPGone(410) fetching licence details from Content API")
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end
 
     context "when Content API times out" do
       before :each do
-        allow_any_instance_of(GdsApi::ContentApi).to receive(:licences_for_ids).and_raise(GdsApi::TimedOutException)
+        allow(Services.content_api).to receive(:licences_for_ids).and_raise(GdsApi::TimedOutException)
       end
 
       it "should continue with no Content API data" do
@@ -96,7 +118,7 @@ RSpec.describe LicenceFacade, type: :model do
 
     context "when Content API errors" do
       before :each do
-        allow_any_instance_of(GdsApi::ContentApi).to receive(:licences_for_ids).and_raise(GdsApi::HTTPErrorResponse.new(503))
+        allow(Services.content_api).to receive(:licences_for_ids).and_raise(GdsApi::HTTPErrorResponse.new(503))
       end
 
       it "should continue with no API data" do

@@ -1,9 +1,11 @@
+require 'rails_helper'
+
 RSpec.describe Activity, type: :model do
   it "should use the correct field types on the model" do
     Activity.with(safe: true).create!(
-      :public_id => 42,
-      :correlation_id => 24,
-      :name => "Some Activity"
+      public_id: 42,
+      correlation_id: 24,
+      name: "Some Activity"
     )
     activity = Activity.first
     expect(activity.public_id).to eq(42)
@@ -17,19 +19,19 @@ RSpec.describe Activity, type: :model do
     end
 
     it "should have a database level uniqueness constraint on public_id" do
-      FactoryGirl.create(:activity, :public_id => 42)
+      FactoryGirl.create(:activity, public_id: 42)
       @activity.public_id = 42
-      expect do
+      expect {
         @activity.with(safe: true).save
-      end.to raise_error(Moped::Errors::OperationFailure)
+      }.to raise_error(Mongo::Error::OperationFailure)
     end
 
     it "should have a database level uniqueness constraint on correlation_id" do
-      FactoryGirl.create(:activity, :correlation_id => 42)
+      FactoryGirl.create(:activity, correlation_id: 42)
       @activity.correlation_id = 42
-      expect do
+      expect {
         @activity.with(safe: true).save
-      end.to raise_error(Moped::Errors::OperationFailure)
+      }.to raise_error(Mongo::Error::OperationFailure)
     end
 
     it "should require a name" do
@@ -106,15 +108,15 @@ RSpec.describe Activity, type: :model do
 
     describe "find_by_sectors" do
       before :each do
-        @s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
-        @s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")
-        @s3 = FactoryGirl.create(:sector, :name => "Gooey Sector")
+        @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")
+        @s2 = FactoryGirl.create(:sector, name: "Kablooey Sector")
+        @s3 = FactoryGirl.create(:sector, name: "Gooey Sector")
 
-        @a1 = FactoryGirl.create(:activity, :name => "Fooey Activity", :sectors => [@s1])
-        @a2 = FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [@s2])
-        @a3 = FactoryGirl.create(:activity, :name => "Gooey Activity", :sectors => [@s3])
-        @a4 = FactoryGirl.create(:activity, :name => "Kabloom", :sectors => [@s1, @s2])
-        @a5 = FactoryGirl.create(:activity, :name => "Transmogrifying", :sectors => [@s1, @s3])
+        @a1 = FactoryGirl.create(:activity, name: "Fooey Activity", sectors: [@s1])
+        @a2 = FactoryGirl.create(:activity, name: "Kablooey Activity", sectors: [@s2])
+        @a3 = FactoryGirl.create(:activity, name: "Gooey Activity", sectors: [@s3])
+        @a4 = FactoryGirl.create(:activity, name: "Kabloom", sectors: [@s1, @s2])
+        @a5 = FactoryGirl.create(:activity, name: "Transmogrifying", sectors: [@s1, @s3])
       end
 
       it "should return activities relating to the given sectors" do
@@ -132,7 +134,7 @@ RSpec.describe Activity, type: :model do
   end
 
   specify "to_s returns the name" do
-    a = FactoryGirl.build(:activity, :name => "Foo Activity")
+    a = FactoryGirl.build(:activity, name: "Foo Activity")
     expect(a.to_s).to eq("Foo Activity")
   end
 

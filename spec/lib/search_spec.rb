@@ -1,9 +1,9 @@
+require 'rails_helper'
 require "search"
 
 RSpec.describe Search do
-
   before(:each) do
-    @client = double()
+    @client = double
     @search = Search.new(@client)
   end
 

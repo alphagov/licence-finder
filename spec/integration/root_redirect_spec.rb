@@ -1,5 +1,6 @@
-RSpec.describe "Redirecting the root URL",:type => :request do
+require 'rails_helper'
 
+RSpec.describe "Redirecting the root URL", type: :request do
   specify "visiting the root URL redirects me to the licence-finder start page" do
     visit "/"
 

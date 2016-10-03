@@ -6,7 +6,7 @@ class IdConvert
     revised_codes = CSV.read("data/revised_codes.csv", headers: true)
     match = 0
     in_db = 0
-    mappings_headers = ["correlation_id", "legal_ref_id", "gds_id"]
+    mappings_headers = %w(correlation_id legal_ref_id gds_id)
     correlation_to_gds_id = {}
     CSV.open("data/correlation_id_to_gds_id_mappings.csv", "wb") do |mappings_csv|
       mappings_csv << CSV::Row.new(mappings_headers, mappings_headers, headers: true)
@@ -16,7 +16,7 @@ class IdConvert
           missing_in_db_csv << revised_codes.headers
           revised_codes.each do |row|
             legal_ref_num = row["legal ref nr"]
-            result = licence_mappings.find{|i| i["Legal_Ref_No"] == legal_ref_num}
+            result = licence_mappings.find { |i| i["Legal_Ref_No"] == legal_ref_num }
             if result
               match += 1
               correlation_id = result["GDS ID"]

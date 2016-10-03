@@ -11,7 +11,7 @@ class Search
 
       def initialize(config)
         super
-        @config   = config
+        @config = config
         configure
       end
 
@@ -77,12 +77,12 @@ class Search
       # The Lucene documentation declares special characters to be:
       #   + - && || ! ( ) { } [ ] ^ " ~ * ? : \
       def escape_lucene_chars(s)
-        s.gsub(ESCAPE_LUCENE_CHARS) { |char| "\\#{char}"}
+        s.gsub(ESCAPE_LUCENE_CHARS) { |char| "\\#{char}" }
       end
 
       def downcase_ending_keywords(s)
         escape_keywords_regex = /(AND$ | OR$ | NOT$)/x
-        s.gsub(escape_keywords_regex) { |keyword| keyword.downcase }
+        s.gsub(escape_keywords_regex, &:downcase)
       end
     end
   end

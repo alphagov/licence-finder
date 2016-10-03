@@ -1,27 +1,30 @@
 development:
-  sessions:
+  clients:
     default:
       uri: mongodb://localhost/licence_finder_development
       options:
         write:
           w: 1
-        read: primary
+        read:
+          mode: :primary
 test:
-  sessions:
+  clients:
     default:
       uri: mongodb://localhost/licence_finder_test
       options:
         write:
           w: 1
-        read: primary
+        read:
+          mode: :primary
         max_retries: 1
         retry_interval: 0
 production:
-  sessions:
+  clients:
     default:
       uri: <%= ENV['MONGODB_URI'] %>
       options:
         write:
           w: 1
-        read: primary
+        read:
+          mode: :primary
         retry_interval: 120

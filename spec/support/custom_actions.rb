@@ -11,4 +11,4 @@ module CustomActions
   end
 end
 
-RSpec.configuration.include CustomActions, :type => :request
+RSpec.configuration.include CustomActions, type: :request

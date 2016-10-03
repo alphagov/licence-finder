@@ -1,15 +1,17 @@
-RSpec.describe "Activity selection page",:type => :request do
-  before(:each) do
-    @s1 = FactoryGirl.create(:sector, :name => "Fooey Sector")
-    @s2 = FactoryGirl.create(:sector, :name => "Kablooey Sector")
-    @s3 = FactoryGirl.create(:sector, :name => "Gooey Sector")
-    @s4 = FactoryGirl.create(:sector, :name => "Sector Four")
+require 'rails_helper'
 
-    @a1 = FactoryGirl.create(:activity, :name => "Fooey Activity", :sectors => [@s1])
-    @a2 = FactoryGirl.create(:activity, :name => "Kablooey Activity", :sectors => [@s2])
-    @a3 = FactoryGirl.create(:activity, :name => "Kabloom", :sectors => [@s1, @s2])
-    @a4 = FactoryGirl.create(:activity, :name => "Gooey Activity", :sectors => [@s3])
-    @a5 = FactoryGirl.create(:activity, :name => "Transmogrifying", :sectors => [@s1, @s3])
+RSpec.describe "Activity selection page", type: :request do
+  before(:each) do
+    @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")
+    @s2 = FactoryGirl.create(:sector, name: "Kablooey Sector")
+    @s3 = FactoryGirl.create(:sector, name: "Gooey Sector")
+    @s4 = FactoryGirl.create(:sector, name: "Sector Four")
+
+    @a1 = FactoryGirl.create(:activity, name: "Fooey Activity", sectors: [@s1])
+    @a2 = FactoryGirl.create(:activity, name: "Kablooey Activity", sectors: [@s2])
+    @a3 = FactoryGirl.create(:activity, name: "Kabloom", sectors: [@s1, @s2])
+    @a4 = FactoryGirl.create(:activity, name: "Gooey Activity", sectors: [@s3])
+    @a5 = FactoryGirl.create(:activity, name: "Transmogrifying", sectors: [@s1, @s3])
   end
 
   specify "inspecting the page" do
@@ -49,7 +51,7 @@ RSpec.describe "Activity selection page",:type => :request do
   end
 
   specify "with activities selected" do
-    visit "/#{APP_SLUG}/activities?sectors=#{[@s1,@s3].map(&:public_id).join('_')}&activities=#{@a1.public_id}_#{@a3.public_id}"
+    visit "/#{APP_SLUG}/activities?sectors=#{[@s1, @s3].map(&:public_id).join('_')}&activities=#{@a1.public_id}_#{@a3.public_id}"
 
     within_section 'current question' do
       within '.business-activity-results' do
@@ -64,7 +66,7 @@ RSpec.describe "Activity selection page",:type => :request do
   end
 
   specify "going back to previous sections" do
-    {1 => "sectors"}.each do |question, section|
+    { 1 => "sectors" }.each do |question, section|
       visit licence_finder_url_for("activities", [@s1, @s3])
 
       click_change_answer question

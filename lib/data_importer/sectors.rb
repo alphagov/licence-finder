@@ -1,11 +1,11 @@
 class DataImporter::Sectors < DataImporter
-  FILENAME = 'sectors.csv'
+  FILENAME = 'sectors.csv'.freeze
 
   def self.open_data_file
     File.open(data_file_path(FILENAME))
   end
 
-  private
+private
 
   def process_row(row)
     counter = 0

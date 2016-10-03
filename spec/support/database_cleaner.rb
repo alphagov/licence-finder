@@ -1,6 +1,7 @@
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.clean
+    Mongoid::Tasks::Database.create_indexes
   end
 
   config.before(:each) do

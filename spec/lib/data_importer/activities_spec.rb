@@ -1,3 +1,4 @@
+require 'rails_helper'
 require 'data_importer'
 
 RSpec.describe DataImporter::Activities do
@@ -33,7 +34,7 @@ RSpec.describe DataImporter::Activities do
 "1000431","Nutritionist services","362","Practise as a dietitian "
       END
 
-      sector = FactoryGirl.create(:sector, correlation_id: 1000431)
+      FactoryGirl.create(:sector, correlation_id: 1000431)
 
       importer = DataImporter::Activities.new(source, StringIO.new)
       importer.run
@@ -52,9 +53,9 @@ RSpec.describe DataImporter::Activities do
     it "should fail if the input data file does not exist" do
       expect(DataImporter::Activities).to receive(:data_file_path).with("activities.csv").and_return("/example/activities.csv")
 
-      expect do
+      expect {
         DataImporter::Activities.open_data_file
-      end.to raise_error(Errno::ENOENT)
+      }.to raise_error(Errno::ENOENT)
     end
   end
 end

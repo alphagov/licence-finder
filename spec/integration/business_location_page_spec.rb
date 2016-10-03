@@ -1,4 +1,6 @@
-RSpec.describe "Business location page",:type => :request do
+require 'rails_helper'
+
+RSpec.describe "Business location page", type: :request do
   before(:each) do
     @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")
     @s2 = FactoryGirl.create(:sector, name: "Balooey Sector")
@@ -18,13 +20,13 @@ RSpec.describe "Business location page",:type => :request do
       ])
     end
     within_section 'completed question 1' do
-      expect(page.all('.answer li').map(&:text)).to eq([
+      expect(page.all('.answer li').map(&:text)).to match_array([
         'Fooey Sector',
         'Balooey Sector'
       ])
     end
     within_section 'completed question 2' do
-      expect(page.all('.answer li').map(&:text)).to eq([
+      expect(page.all('.answer li').map(&:text)).to match_array([
         'Fooey Activity',
         'Kablooey Activity'
       ])
@@ -52,7 +54,7 @@ RSpec.describe "Business location page",:type => :request do
   end
 
   specify "going back to previous sections" do
-    {1 => "sectors", 2 => "activities"}.each do |question, section|
+    { 1 => "sectors", 2 => "activities" }.each do |question, section|
       visit licence_finder_url_for('location', [@s1, @s2], [@a1, @a2])
 
       click_change_answer question

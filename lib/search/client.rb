@@ -21,7 +21,8 @@ class Search
         CSV.new(extra_terms_handle).each do |row|
           @extra_terms[row[0].to_i] = row[1..-1].map(&:strip)
         end
-      rescue
+      rescue => e
+        Rails.logger.warn("Exception #{e.message} raised while searching for extra terms")
       end
       @extra_terms
     end
@@ -31,9 +32,7 @@ class Search
     end
 
     def activities_for_sector(sector)
-      sector.activities.map do |activity|
-        activity.name
-      end
+      sector.activities.map(&:name)
     end
   end
 end

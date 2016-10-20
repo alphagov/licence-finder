@@ -86,6 +86,7 @@ GEM
     govuk_frontend_toolkit (4.18.1)
       rails (>= 3.1.0)
       sass (>= 3.2.0)
+    govuk_navigation_helpers (2.0.0)
     hashdiff (0.3.0)
     hashr (0.0.22)
     http-cookie (1.0.2)
@@ -218,7 +219,7 @@ GEM
     scss_lint (0.40.1)
       rainbow (~> 2.0)
       sass (~> 3.4.1)
-    slimmer (9.5.0)
+    slimmer (9.6.0)
       activesupport
       json
       nokogiri (>= 1.5.0, < 1.7.0)
@@ -278,6 +279,7 @@ DEPENDENCIES
   govuk-content-schema-test-helpers
   govuk-lint
   govuk_frontend_toolkit (~> 4.18.0)
+  govuk_navigation_helpers (~> 2.0.0)
   logstasher (~> 0.6.0)
   mongoid (~> 5.1.0)
   mongoid_rails_migrations (~> 1.1.0)
@@ -287,11 +289,11 @@ DEPENDENCIES
   rails (= 4.2.7.1)
   rspec-rails (~> 3.5.0)
   sass-rails (~> 5.0.4)
-  slimmer (= 9.5.0)
+  slimmer (= 9.6.0)
   tire
   uglifier (~> 3.0.2)
   unicorn (~> 5.1.0)
   webmock (~> 2.1.0)
 
 BUNDLED WITH
-   1.11.2
+   1.12.5

@@ -11,6 +11,8 @@ RSpec.describe "Start page", type: :request do
     end
 
     expect(page).to have_selector("#test-report_a_problem")
+    expect(page).to have_css(shared_component_selector('breadcrumbs'))
+    expect(page).to have_css(shared_component_selector('related_items'))
   end
 
   context "Seeing popular licences on the start page" do

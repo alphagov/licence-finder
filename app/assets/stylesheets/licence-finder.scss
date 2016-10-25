@@ -1,6 +1,7 @@
 @import "_conditionals";
 @import "_typography";
 @import "_css3";
+@import "helpers/govuk-component-helpers";
 
 /* see multi-step.css.erb in the static repo for most of these styles */
 
@@ -107,8 +108,8 @@ a.add {
 
       &:nth-child(even) {
         background-color: #e8f0f0;
-      } 
-      
+      }
+
       a {
         float: right;
         padding-left: 0.25em;

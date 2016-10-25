@@ -13,15 +13,6 @@ RSpec.describe LicenceFinderController, type: :controller do
       expect(response).to be_success
     end
 
-    it "fetches the artefact and pass it to slimmer" do
-      artefact_data = artefact_for_slug(APP_SLUG)
-      content_api_has_an_artefact(APP_SLUG, artefact_data)
-
-      get :start
-
-      expect(response.headers[Slimmer::Headers::ARTEFACT_HEADER]).to eq(artefact_data.to_json)
-    end
-
     it "returns 503 if the request times out" do
       stub_request(:get, %r{\A#{GdsApi::TestHelpers::ContentApi::CONTENT_API_ENDPOINT}}).to_timeout
       artefact_for_slug(APP_SLUG)
@@ -123,39 +114,6 @@ RSpec.describe LicenceFinderController, type: :controller do
       expect(response).to be_success
       expect(assigns[:picked_sectors]).to eq([@s3, @s2])
     end
-
-    it "returns slimmer headers" do
-      expect($search).to receive(:search).with("test query").and_return([])
-      get :sectors, q: "test query"
-      expect(response.headers["X-Slimmer-Format"]).to eq("finder")
-      expect(response.headers["X-Slimmer-Result-Count"]).to eq("0")
-    end
-
-    it "fetches the artefact and pass it to slimmer" do
-      artefact_data = artefact_for_slug(APP_SLUG)
-      content_api_has_an_artefact(APP_SLUG, artefact_data)
-
-      get :sectors
-
-      expect(response.headers[Slimmer::Headers::ARTEFACT_HEADER]).to eq(artefact_data.to_json)
-    end
-
-    it "does not return result count if no query was provided" do
-      get :sectors
-      expect(response.headers["X-Slimmer-Result-Count"]).to be_nil
-    end
-
-    it "returns slimmer result count when available" do
-      @s1 = FactoryGirl.create(:sector, name: "Alpha")
-      @s2 = FactoryGirl.create(:sector, name: "Charlie")
-      @s3 = FactoryGirl.create(:sector, name: "Bravo")
-
-      expect($search).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
-
-      get :sectors, q: "test query"
-      expect(response).to be_success
-      expect(response.headers["X-Slimmer-Result-Count"]).to eq("3")
-    end
   end
 
   describe "GET 'activities'" do
@@ -208,20 +166,6 @@ RSpec.describe LicenceFinderController, type: :controller do
 
         expect(assigns[:picked_activities]).to eq([a1, a3, a2])
       end
-
-      it "does not return result count slimmer header" do
-        do_get
-        expect(response.headers).not_to have_key("X-Slimmer-Result-Count")
-      end
-
-      it "fetches the artefact and pass it to slimmer" do
-        artefact_data = artefact_for_slug(APP_SLUG)
-        content_api_has_an_artefact(APP_SLUG, artefact_data)
-
-        do_get
-
-        expect(response.headers[Slimmer::Headers::ARTEFACT_HEADER]).to eq(artefact_data.to_json)
-      end
     end
 
     context "with no valid sectors selected" do
@@ -269,15 +213,6 @@ RSpec.describe LicenceFinderController, type: :controller do
         ])
         expect(assigns[:current_question]).to eq(@question3)
         expect(assigns[:upcoming_questions]).to eq([])
-      end
-
-      it "fetches the artefact and pass it to slimmer" do
-        artefact_data = artefact_for_slug(APP_SLUG)
-        content_api_has_an_artefact(APP_SLUG, artefact_data)
-
-        do_get
-
-        expect(response.headers[Slimmer::Headers::ARTEFACT_HEADER]).to eq(artefact_data.to_json)
       end
     end
 
@@ -357,15 +292,6 @@ RSpec.describe LicenceFinderController, type: :controller do
             [@question2, :some_activities, 'activities'],
             [@question3, ['Northern Ireland'], 'business_location']
         ])
-      end
-
-      it "fetches the artefact and pass it to slimmer" do
-        artefact_data = artefact_for_slug(APP_SLUG)
-        content_api_has_an_artefact(APP_SLUG, artefact_data)
-
-        do_get
-
-        expect(response.headers[Slimmer::Headers::ARTEFACT_HEADER]).to eq(artefact_data.to_json)
       end
     end
 

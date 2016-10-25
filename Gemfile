@@ -24,13 +24,14 @@ gem 'logstasher', '~> 0.6.0'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '9.5.0'
+  gem "slimmer", '9.6.0'
 end
 
 gem 'sass-rails', '~> 5.0.4'
 gem 'uglifier', '~> 3.0.2'
 
 gem 'govuk_frontend_toolkit', '~> 4.18.0'
+gem 'govuk_navigation_helpers', '~> 2.0.0'
 
 gem 'govuk-lint'
 

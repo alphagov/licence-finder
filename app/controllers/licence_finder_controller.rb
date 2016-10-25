@@ -1,8 +1,6 @@
 require 'services'
 
 class LicenceFinderController < ApplicationController
-  include Slimmer::Headers
-
   SEPARATOR = '_'.freeze
   QUESTIONS = [
     'What is your activity or business?',
@@ -21,8 +19,8 @@ class LicenceFinderController < ApplicationController
   before_filter :load_artefact
   before_filter :extract_and_validate_sector_ids, except: [:start, :sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_filter :extract_and_validate_activity_ids, except: [:start, :sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
-  after_filter :set_analytics_headers
   before_filter :set_expiry
+  before_filter :setup_navigation_helpers
 
   def start
     setup_popular_licences
@@ -70,16 +68,14 @@ class LicenceFinderController < ApplicationController
     setup_questions [@sectors, @activities, [@location.titleize]]
   end
 
-  # FIXME: is there some Ruby/Railsism I can use to factor out these
-  # nil/empty variables?
   def browse_sector_index
-    # return list of top-level sectors
     @current_sector = nil
     @parent_sector = nil
 
-    @sectors = Sector.find_layer1_sectors.ascending(:name).to_a
     @child_sectors = []
     @grandchild_sectors = []
+
+    @sectors = Sector.find_layer1_sectors.ascending(:name).to_a
 
     render "browse_sectors"
   end
@@ -141,23 +137,28 @@ protected
     ids.sort
   end
 
-  def set_analytics_headers
-    headers = {
-      format: "finder",
-    }
-    if @sectors && params[:q].present?
-      headers[:result_count] = @sectors.length
-    end
-    set_slimmer_headers(headers)
-  end
-
   def load_artefact
     @artefact = Services.content_api.artefact(APP_SLUG)
   rescue GdsApi::HTTPNotFound, GdsApi::HTTPGone
     Rails.logger.warn "No artefact for licence-finder application: #{APP_SLUG}"
     @artefact = nil
-  ensure
-    set_slimmer_artefact(@artefact)
+  end
+
+  def setup_navigation_helpers
+    @content_item = Services.content_store.content_item("/licence-finder").to_hash
+
+    # Remove the organisations from the content item - this will prevent the
+    # govuk:analytics:organisations meta tag from being generated until there is
+    # a better way of doing this.
+    if @content_item["links"]
+      @content_item["links"].delete("organisations")
+    end
+
+    @navigation_helpers = GovukNavigationHelpers::NavigationHelper.new(@content_item)
+    section_name = @content_item.dig("links", "parent", 0, "links", "parent", 0, "title")
+    if section_name
+      @meta_section = section_name.downcase
+    end
   end
 
   def setup_popular_licences

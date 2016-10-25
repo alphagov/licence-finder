@@ -1,7 +1,7 @@
-require "slimmer/headers"
-
 class ApplicationController < ActionController::Base
   include Slimmer::Template
+  include Slimmer::SharedTemplates
+
   slimmer_template 'wrapper'
 
   # Prevent CSRF attacks by raising an exception.

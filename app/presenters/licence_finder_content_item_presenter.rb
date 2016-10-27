@@ -16,7 +16,7 @@ class LicenceFinderContentItemPresenter
       base_path: base_path,
       title: metadata[:title],
       description: metadata[:description],
-      document_type: 'placeholder_licence_finder',
+      document_type: 'license_finder',
       schema_name: 'placeholder_licence_finder',
       publishing_app: 'licencefinder',
       rendering_app: 'licencefinder',

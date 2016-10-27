@@ -114,6 +114,31 @@ RSpec.describe LicenceFinderController, type: :controller do
       expect(response).to be_success
       expect(assigns[:picked_sectors]).to eq([@s3, @s2])
     end
+
+    it "returns slimmer headers" do
+      expect($search).to receive(:search).with("test query").and_return([])
+
+      get :sectors, q: "test query"
+
+      expect(response.headers["X-Slimmer-Result-Count"]).to eq("0")
+    end
+
+    it "does not return result count if no query was provided" do
+      get :sectors
+
+      expect(response.headers["X-Slimmer-Result-Count"]).to be_nil
+    end
+
+    it "returns slimmer result count when available" do
+      @s1 = FactoryGirl.create(:sector, name: "Alpha")
+      @s2 = FactoryGirl.create(:sector, name: "Charlie")
+      @s3 = FactoryGirl.create(:sector, name: "Bravo")
+
+      expect($search).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
+
+      get :sectors, q: "test query"
+      expect(response.headers["X-Slimmer-Result-Count"]).to eq("3")
+    end
   end
 
   describe "GET 'activities'" do

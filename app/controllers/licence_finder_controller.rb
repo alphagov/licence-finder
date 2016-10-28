@@ -1,6 +1,8 @@
 require 'services'
 
 class LicenceFinderController < ApplicationController
+  include Slimmer::Headers
+
   SEPARATOR = '_'.freeze
   QUESTIONS = [
     'What is your activity or business?',
@@ -21,6 +23,7 @@ class LicenceFinderController < ApplicationController
   before_filter :extract_and_validate_activity_ids, except: [:start, :sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_filter :set_expiry
   before_filter :setup_navigation_helpers
+  after_action :add_analytics_headers
 
   def start
     setup_popular_licences
@@ -164,5 +167,11 @@ protected
   def setup_popular_licences
     licences = POPULAR_LICENCE_IDS.map { |id| Licence.find_by_gds_id(id) }.compact
     @popular_licences = LicenceFacade.create_for_licences(licences).select(&:published?).first(3)
+  end
+
+  def add_analytics_headers
+    if @sectors && params[:q].present?
+      set_slimmer_headers(result_count: @sectors.length)
+    end
   end
 end

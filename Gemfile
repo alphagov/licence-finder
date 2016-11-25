@@ -24,7 +24,7 @@ gem 'logstasher', '~> 0.6.0'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '9.6.0'
+  gem "slimmer", '10.0.0'
 end
 
 gem 'sass-rails', '~> 5.0.4'

@@ -11,7 +11,7 @@ RSpec.describe LicenceFinderContentItemPresenter do
 
   describe "#payload" do
     it "is valid against the schema" do
-      expect(subject.payload).to be_valid_against_schema("placeholder")
+      expect(subject.payload).to be_valid_against_schema("generic")
     end
 
     it "has the correct data" do

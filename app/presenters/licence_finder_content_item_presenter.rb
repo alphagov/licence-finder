@@ -17,14 +17,14 @@ class LicenceFinderContentItemPresenter
       title: metadata[:title],
       description: metadata[:description],
       document_type: 'license_finder',
-      schema_name: 'placeholder_licence_finder',
+      schema_name: 'generic',
       publishing_app: 'licencefinder',
       rendering_app: 'licencefinder',
       locale: 'en',
       public_updated_at: Time.now.iso8601,
       details: {},
       routes: [
-        { type: 'exact', path: base_path }
+        { type: 'prefix', path: base_path }
       ]
     }
   end

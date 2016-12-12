@@ -17,6 +17,14 @@
   padding-left: 2.1em;
 }
 
+.search-results {
+  margin-right: 26em;
+
+  @include media(mobile) {
+    margin-right: 0;
+  }
+}
+
 .article-container.finished,
 header.page-header hgroup {
   margin-right: 0;

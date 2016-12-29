@@ -4,12 +4,6 @@ APPLICATION_METADATA = {
   title: "Licence Finder",
   description: "Find out which licences you might need for your activity or business.",
   section: "business",
-
-  # Sending an empty array for `paths` and `prefixes` will make sure we don't
-  # register routes in Panopticon.
-  paths: [],
-  prefixes: [],
-
   indexable_content: <<-HEREDOC.gsub(/\s+/, " ").strip,
     Find out which licences you might need for your
     activity or business, including temporary events notice, occasional licence,

@@ -26,7 +26,7 @@ If you are using the GDS development virtual machine then the application will b
 
 ### Publishing to GOV.UK
 
-- `bundle exec rake panopticon:register` will send the licence finder pages to panopticon. Panopticon will register the URL.
+- `bundle exec rake publishing_api:publish` will send the licence finder pages to the publishing-api.
 
 ### Search indexing
 

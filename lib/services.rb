@@ -1,6 +1,5 @@
 require 'gds_api/content_api'
 require 'gds_api/content_store'
-require 'gds_api/panopticon'
 require 'gds_api/publishing_api_v2'
 require 'gds_api/rummager'
 
@@ -13,10 +12,6 @@ module Services
     @content_store ||= GdsApi::ContentStore.new(
       Plek.new.find('content-store')
     )
-  end
-
-  def self.panopticon_registerer
-    @panopticon_registerer ||= GdsApi::Panopticon::Registerer.new(owning_app: "licencefinder")
   end
 
   def self.publishing_api

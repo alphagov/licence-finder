@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 
-REPOSITORY = 'licencefinder'
+JOB_TO_BUILD = 'licencefinder'
+REPOSITORY = 'licence-finder'
 DEFAULT_SCHEMA_BRANCH = 'deployed-to-production'
 
 node {
@@ -72,7 +73,7 @@ node {
       }
 
       stage('Deploy to Integration') {
-        govuk.deployIntegration(REPOSITORY, BRANCH_NAME, 'release', 'deploy')
+        govuk.deployIntegration(JOB_TO_BUILD, BRANCH_NAME, 'release', 'deploy')
       }
     }
   } catch (e) {

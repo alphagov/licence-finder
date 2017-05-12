@@ -18,7 +18,6 @@ class LicenceFinderController < ApplicationController
   # These are the gds_ids (mapped from the legal_ref_ids above)
   POPULAR_LICENCE_IDS = %w(1071-5-1 1071-3-1 390-7-1 521-5-1 521-3-1 860-5-1 860-3-1).freeze
 
-  before_filter :load_artefact
   before_filter :extract_and_validate_sector_ids, except: [:start, :sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_filter :extract_and_validate_activity_ids, except: [:start, :sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_filter :set_expiry
@@ -138,13 +137,6 @@ protected
       ids += params[param_base.to_s.pluralize].split(SEPARATOR).map(&:to_i).reject { |n| n < 1 }
     end
     ids.sort
-  end
-
-  def load_artefact
-    @artefact = Services.content_api.artefact(APP_SLUG)
-  rescue GdsApi::HTTPNotFound, GdsApi::HTTPGone
-    Rails.logger.warn "No artefact for licence-finder application: #{APP_SLUG}"
-    @artefact = nil
   end
 
   def setup_navigation_helpers

@@ -1,62 +1,64 @@
 require "search/client"
+require 'search/client/search_result'
+require 'elasticsearch'
 
 class Search
   class Client
     class Elasticsearch < Search::Client
+      attr_accessor :client, :index_name, :settings, :type
       ESCAPE_LUCENE_CHARS = /
         ( [-+!\(\)\{\}\[\]^"~*?:\\] # A special character
           | &&                        # Boolean &&
           | \|\|                      # Boolean ||
         )/x
 
-      def initialize(config)
-        super
+      def initialize(index_name:, settings:, type:, config:)
+        super(config)
+        @index_name = index_name
+        @settings = settings
+        @type = type
         @config = config
-        configure
-      end
-
-      def configure
-        url = @config[:url]
-        Tire.configure { url url }
-        logger = @config[:logger]
-        if logger
-          Tire.configure { logger logger }
-        end
-      end
-
-      def indexer
-        return @indexer unless @indexer.nil?
-        @indexer = Tire::Index.new(@config[:index])
+        @client = ::Elasticsearch::Client.new(config)
       end
 
       def delete_index
-        indexer.delete
+        client.indices.delete(index: index_name, ignore: [404])
       end
 
       def pre_index
-        indexer.delete
-        raise unless indexer.create(@config[:create])
+        delete_index
+        index = client.indices.create(
+          index: index_name,
+          body: settings
+        )
+        raise unless index
+
+        index
       end
 
       def index(sectors)
         sectors.each do |sector|
-          indexer.store to_document(sector)
+          client.create(
+            { index: index_name }.merge(to_document(sector))
+          )
         end
       end
 
       def to_document(sector)
         {
-          _id:  sector.public_id,
-          type: @config[:type],
-          public_id: sector.public_id,
-          title: sector.name,
-          extra_terms: extra_terms_for_sector(sector),
-          activities: activities_for_sector(sector)
+          id: sector.public_id,
+          type: type,
+          body: {
+            public_id: sector.public_id,
+            title: sector.name,
+            extra_terms: extra_terms_for_sector(sector),
+            activities: activities_for_sector(sector)
+          }
         }
       end
 
       def post_index
-        indexer.refresh
+        client.indices.refresh(index: index_name)
       end
 
       def search(query)
@@ -64,14 +66,16 @@ class Search
 
         query = escape_lucene_chars(query)
 
-        # this only returns public_ids to keep the public
-        # interface as abstract as possible
-        Tire.search(@config[:index], query: {
-            query_string: {
-                fields: %w(title extra_terms activities),
-                query: query
-            }
-        }).results.map(&:public_id)
+        raw_search_results = client.search(
+          index: index_name,
+          q: query,
+          fields: %w(public_id title extra_terms activities),
+          sort: '_score:desc',
+        )
+
+        raw_search_results['hits']['hits'].map do |result|
+          SearchResult.new(result).public_id
+        end
       end
 
       # The Lucene documentation declares special characters to be:

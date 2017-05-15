@@ -7,11 +7,23 @@ class Search
     config_path = Rails.root + 'config' + "elasticsearch.yml"
     client_config = HashWithIndifferentAccess.new(YAML.load_file(config_path))
     client_config = client_config[environment].merge(client_config[:all_envs])
+    index_name = client_config.delete(:index)
+    settings = client_config.delete(:create)
+    type = client_config.delete(:type)
 
     Rails.logger.instance_eval do
       alias :write :info
     end
-    client = Search::Client::Elasticsearch.new(client_config.merge(logger: Rails.logger))
+
+    client = Search::Client::Elasticsearch.new(
+      index_name: index_name,
+      settings: settings,
+      type: type,
+      config: client_config.merge(
+        logger: Rails.logger,
+        log: true
+      )
+    )
 
     Search.new(client)
   end

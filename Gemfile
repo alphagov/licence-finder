@@ -5,7 +5,7 @@ gem 'unicorn', '~> 5.1.0'
 gem 'plek', '1.12.0'
 
 gem "mongoid", '~> 5.1.0'
-gem "tire"
+gem 'elasticsearch'
 
 gem 'mongoid_rails_migrations', '~> 1.1.0'
 

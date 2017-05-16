@@ -8,9 +8,7 @@ class Search
       end
 
       def public_id
-        public_id_result = raw_result.dig('fields', 'public_id') || []
-
-        public_id_result.first
+        raw_result.dig('_source', 'public_id')
       end
     end
   end

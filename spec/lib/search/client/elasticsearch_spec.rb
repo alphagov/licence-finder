@@ -123,17 +123,22 @@ RSpec.describe Search::Client::Elasticsearch do
       es_response = {
         'hits' => {
           'hits' => [
-            { 'fields' => { 'public_id' => [123] } },
-            { 'fields' => { 'public_id' => [234] } },
+            { '_source' => { 'public_id' => 123 } },
+            { '_source' => { 'public_id' => 234 } },
           ]
         }
       }
 
       allow_any_instance_of(Elasticsearch::Transport::Client).to receive(:search).with(
         index: @index_name,
-        q: 'query',
-        fields: %w(public_id title extra_terms activities),
-        sort: '_score:desc',
+        body: {
+          query: {
+            query_string: {
+              fields: %w(title extra_terms activities),
+              query: 'query'
+            }
+          }
+        }
       ).and_return(es_response)
 
       expect(@client.search("query")).to eq([123, 234])

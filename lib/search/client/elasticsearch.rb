@@ -68,9 +68,14 @@ class Search
 
         raw_search_results = client.search(
           index: index_name,
-          q: query,
-          fields: %w(public_id title extra_terms activities),
-          sort: '_score:desc',
+          body: {
+            query: {
+              query_string: {
+                fields: %w(title extra_terms activities),
+                query: query
+              }
+            }
+          }
         )
 
         raw_search_results['hits']['hits'].map do |result|

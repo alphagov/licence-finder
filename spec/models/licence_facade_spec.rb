@@ -1,70 +1,51 @@
 require 'rails_helper'
 
 RSpec.describe LicenceFacade, type: :model do
-  include GdsApi::TestHelpers::ContentApi
-
-  def json_response_data(*licences)
-    {
-      "_response_info" => { "status" => "ok" },
-      "description" => "Licences",
-      "total" => 1,
-      "start_index" => 1,
-      "page_size" => 1,
-      "current_page" => 1,
-      "pages" => 1,
-      "results" => licences.map { |l| content_api_licence_hash(l.gds_id) }
-    }.to_json
-  end
-
-  def api_response_data(licence = nil)
-    body_args = licence.nil? ? [] : [licence]
-    response = OpenStruct.new(
-      code: 200,
-      body: json_response_data(*body_args)
-    )
-    GdsApi::Response.new(response)
-  end
+  include RummagerHelpers
 
   describe "create_for_licences" do
     before :each do
-      allow(Services.content_api).to receive(:licences_for_ids).and_return(api_response_data(nil))
       @l1 = FactoryGirl.create(:licence)
       @l2 = FactoryGirl.create(:licence)
     end
 
-    it "should query Content API for licence details" do
-      expect(Services.content_api).to receive(:licences_for_ids).with([@l1.gds_id, @l2.gds_id]).and_return api_response_data(nil)
+    it "should query Rummager for licence details" do
+      rummager_has_licences([@l1, @l2], when_searching_for: [@l1, @l2])
+
       LicenceFacade.create_for_licences([@l1, @l2])
     end
 
-    it "should skip querying Content API if not given any licences" do
-      allow(Services.content_api).to receive(:licences_for_ids).and_call_original # clear the stub above, otherwise the next line won't work
-      expect(Services.content_api).not_to receive(:licences_for_ids)
+    it "should skip querying Rummager if not given any licences" do
+      allow(Services.rummager).to receive(:search).and_call_original # clear the stub above, otherwise the next line won't work
+      expect(Services.rummager).not_to receive(:search)
       LicenceFacade.create_for_licences([])
     end
 
     it "should construct Facades for each licence maintaining order" do
+      rummager_has_licences([@l1, @l2], when_searching_for: [@l1, @l2])
+
       result = LicenceFacade.create_for_licences([@l1, @l2])
       expect(result.map(&:licence)).to eq([@l1, @l2])
     end
 
-    it "should add the Content API details to each Facade where details exist" do
-      pub_data2 = api_response_data(@l2)
-      expect(Services.content_api).to receive(:licences_for_ids).and_return(pub_data2)
+    it "should add the Rummager details to each Facade where details exist" do
+      rummager_has_licences([@l2], when_searching_for: [@l1, @l2])
 
       result = LicenceFacade.create_for_licences([@l1, @l2])
       expect(result[0].licence).to eq(@l1)
       expect(result[0].artefact).to eq(nil)
       expect(result[1].licence).to eq(@l2)
-      expect(result[1].artefact).to eq(content_api_licence_hash(@l2.gds_id))
+      expect(result[1].artefact).to eq(rummager_licence_hash(@l2.gds_id))
     end
 
-    context "when Content API can't find the licenses" do
+    context "when the Search API errors" do
       before :each do
-        allow(Services.content_api).to receive(:licences_for_ids).and_raise(GdsApi::HTTPNotFound.new(404))
+        allow(Services.rummager).to receive(:search).and_raise(
+          GdsApi::BaseError
+        )
       end
 
-      it "should continue with no content API data" do
+      it "should continue with no search API data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         expect(result[0].licence).to eq(@l1)
         expect(result[0].artefact).to eq(nil)
@@ -73,17 +54,21 @@ RSpec.describe LicenceFacade, type: :model do
       end
 
       it "should log the error" do
-        expect(Rails.logger).to receive(:warn).with("GdsApi::HTTPNotFound(404) fetching licence details from Content API")
+        expect(Rails.logger).to receive(:warn).with(
+          "GdsApi::BaseError fetching licence details from Rummager"
+        )
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end
 
-    context "when Content API finds that the licenses have been removed" do
+    context "when Rummager times out" do
       before :each do
-        allow(Services.content_api).to receive(:licences_for_ids).and_raise(GdsApi::HTTPGone.new(410))
+        allow(Services.rummager).to receive(:search).and_raise(
+          GdsApi::TimedOutException
+        )
       end
 
-      it "should continue with no content API data" do
+      it "should continue with no Rummager data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         expect(result[0].licence).to eq(@l1)
         expect(result[0].artefact).to eq(nil)
@@ -92,17 +77,21 @@ RSpec.describe LicenceFacade, type: :model do
       end
 
       it "should log the error" do
-        expect(Rails.logger).to receive(:warn).with("GdsApi::HTTPGone(410) fetching licence details from Content API")
+        expect(Rails.logger).to receive(:warn).with(
+          "GdsApi::TimedOutException fetching licence details from Rummager"
+        )
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end
 
-    context "when Content API times out" do
+    context "when Rummager errors" do
       before :each do
-        allow(Services.content_api).to receive(:licences_for_ids).and_raise(GdsApi::TimedOutException)
+        allow(Services.rummager).to receive(:search).and_raise(
+          GdsApi::HTTPErrorResponse.new(503)
+        )
       end
 
-      it "should continue with no Content API data" do
+      it "should continue with no Rummager data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         expect(result[0].licence).to eq(@l1)
         expect(result[0].artefact).to eq(nil)
@@ -111,26 +100,9 @@ RSpec.describe LicenceFacade, type: :model do
       end
 
       it "should log the error" do
-        expect(Rails.logger).to receive(:warn).with("GdsApi::TimedOutException fetching licence details from Content API")
-        LicenceFacade.create_for_licences([@l1, @l2])
-      end
-    end
-
-    context "when Content API errors" do
-      before :each do
-        allow(Services.content_api).to receive(:licences_for_ids).and_raise(GdsApi::HTTPErrorResponse.new(503))
-      end
-
-      it "should continue with no API data" do
-        result = LicenceFacade.create_for_licences([@l1, @l2])
-        expect(result[0].licence).to eq(@l1)
-        expect(result[0].artefact).to eq(nil)
-        expect(result[1].licence).to eq(@l2)
-        expect(result[1].artefact).to eq(nil)
-      end
-
-      it "should log the error" do
-        expect(Rails.logger).to receive(:warn).with("GdsApi::HTTPErrorResponse(503) fetching licence details from Content API")
+        expect(Rails.logger).to receive(:warn).with(
+          "GdsApi::HTTPErrorResponse(503) fetching licence details from Rummager"
+        )
         LicenceFacade.create_for_licences([@l1, @l2])
       end
     end
@@ -143,7 +115,7 @@ RSpec.describe LicenceFacade, type: :model do
 
     context "with API data" do
       before :each do
-        @pub_data = content_api_licence_hash(@licence.gds_id)
+        @pub_data = rummager_licence_hash(@licence.gds_id)
         @lf = LicenceFacade.new(@licence, @pub_data)
       end
 
@@ -156,11 +128,11 @@ RSpec.describe LicenceFacade, type: :model do
       end
 
       it "should return the frontend url" do
-        expect(@lf.url).to eq(@pub_data['web_url'])
+        expect(@lf.url).to eq(Plek.find('www') + @pub_data['link'])
       end
 
       it "should return the API short description" do
-        expect(@lf.short_description).to eq(@pub_data['details']['licence_short_description'])
+        expect(@lf.short_description).to eq(@pub_data['licence_short_description'])
       end
     end
 

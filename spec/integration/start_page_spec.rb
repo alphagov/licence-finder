@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Start page", type: :request do
+  include RummagerHelpers
+
   specify "Inspecting the start page" do
     visit "/#{APP_SLUG}"
 
@@ -21,63 +23,72 @@ RSpec.describe "Start page", type: :request do
       @popular_licence_ids.each do |gds_id|
         FactoryGirl.create(:licence, gds_id: gds_id)
       end
+      @all_licences = Licence
+        .where(gds_id: { '$in': @popular_licence_ids })
+        .sort { |a, b|
+          @popular_licence_ids.index(a.gds_id) <=> @popular_licence_ids.index(b.gds_id)
+        }
     end
 
-    specify "should not see popular licences section if none of the popular licences are available in Content API" do
+    specify "should not see popular licences section if none of the popular licences are available in Rummager" do
+      rummager_has_licences([], when_searching_for: @all_licences)
       visit "/#{APP_SLUG}"
 
       expect(page).not_to have_selector('div.popular-licences')
       expect(page).not_to have_content('Popular licences')
     end
 
-    specify "should display licences available in Content API" do
-      content_api_has_licence licence_identifier: @popular_licence_ids[0],
-        slug: 'licence-one', title: 'Licence 1',
-        licence_short_description: "Short description of licence 1"
-      content_api_has_licence licence_identifier: @popular_licence_ids[1],
-        slug: 'licence-two', title: 'Licence 2',
-        licence_short_description: "Short description of licence 2"
+    specify "should display licences available in Rummager" do
+      licences = Licence.where(
+        gds_id: {
+          '$in': [@popular_licence_ids[0], @popular_licence_ids[1]]
+        }
+      )
+      rummager_has_licences(licences, when_searching_for: @all_licences)
 
       visit "/#{APP_SLUG}"
 
       within 'div.popular-licences' do
         expect(page).to have_content("Popular licences")
 
-        expect(page.all('li a').map(&:text).map(&:strip)).to eq([
-          'Licence 1',
-          'Licence 2',
-        ])
+        expect(licences.count).to be > 0
+        licences.each do |licence|
+          expected_title = "Title from search for #{licence.gds_id}"
 
-        within_section "list item containing Licence 1" do
-          expect(page).to have_link("Licence 1", href: "http://www.test.gov.uk/licence-one")
-          expect(page).to have_content("Short description of licence 1")
-        end
+          expect(page).to have_selector('li a', text: expected_title)
 
-        within_section "list item containing Licence 2" do
-          expect(page).to have_link("Licence 2", href: "http://www.test.gov.uk/licence-two")
-          expect(page).to have_content("Short description of licence 2")
+          within_section "list item containing #{expected_title}" do
+            expect(page).to have_link(expected_title, href: /\/licence-#{licence.gds_id}/)
+            expect(page).to have_content("Short description for #{licence.gds_id}")
+          end
         end
       end
     end
 
     specify "should only display the first 3 that are available" do
-      content_api_has_licence licence_identifier: @popular_licence_ids[0], slug: 'licence-one', title: 'Licence 1',
-            licence_short_description: "Short description of licence 1"
-      content_api_has_licence licence_identifier: @popular_licence_ids[1], slug: 'licence-two', title: 'Licence 2',
-            licence_short_description: "Short description of licence 2"
-      content_api_has_licence licence_identifier: @popular_licence_ids[3], slug: 'licence-four', title: 'Licence 4',
-            licence_short_description: "Short description of licence 4"
-      content_api_has_licence licence_identifier: @popular_licence_ids[4], slug: 'licence-five', title: 'Licence 5',
-            licence_short_description: "Short description of licence 5"
+      expected_licences = Licence.where(
+        gds_id: {
+          '$in': [
+            @popular_licence_ids[0],
+            @popular_licence_ids[1],
+            @popular_licence_ids[3]
+          ]
+        }
+      )
+      expect(expected_licences.count).to be > 0
+
+      rummager_has_licences(
+        expected_licences, when_searching_for: @all_licences
+      )
 
       visit "/#{APP_SLUG}"
 
       within 'div.popular-licences' do
-        expect(page.all('li a').map(&:text).map(&:strip)).to eq([
-          'Licence 1',
-          'Licence 2',
-          'Licence 4',
-        ])
+        expected_licences.each do |licence|
+          expected_title = "Title from search for #{licence.gds_id}"
+
+          expect(page).to have_selector('li a', text: expected_title)
+        end
       end
     end
   end

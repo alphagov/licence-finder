@@ -1,6 +1,10 @@
 require 'rails_helper'
+require 'gds_api/test_helpers/rummager'
+require 'services'
 
 RSpec.describe "Licences page", type: :request do
+  include RummagerHelpers
+
   before(:each) do
     @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")
     @s2 = FactoryGirl.create(:sector, name: "Kablooey Sector")
@@ -24,6 +28,9 @@ RSpec.describe "Licences page", type: :request do
   end
 
   specify "inspecting the licences page" do
+    # Returning no results so we default to the values set in the Licence object
+    rummager_has_licences([], when_searching_for: [@l4])
+
     visit licence_finder_url_for('licences', [@s1], [@a1], 'scotland')
 
     within_section 'completed questions' do
@@ -48,9 +55,9 @@ RSpec.describe "Licences page", type: :request do
     end
 
     within_section 'outcome' do
-      expect(page.all('li').map(&:text).map(&:strip)).to eq([
-        'Licence Four'
-      ])
+      outcome = page.all('li').map(&:text).map(&:strip).first
+
+      expect(outcome).to match(/Licence Four/i)
     end
 
     expect(page).not_to have_selector(*selector_of_section('current question'))
@@ -62,30 +69,29 @@ RSpec.describe "Licences page", type: :request do
     expect(page).not_to have_css(shared_component_selector('related_items'))
   end
 
-  describe "getting licence details from content API" do
-    specify "seeing licence details from content API on results page" do
-      content_api_has_licence licence_identifier: @l1.gds_id, slug: 'licence-one', title: 'Licence 1',
-            licence_short_description: "Short description of licence"
+  describe "getting licence details from Rummager" do
+    specify "seeing licence details from Rummager on results page" do
+      rummager_has_licences([@l1], when_searching_for: [@l1, @l2])
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
       within_section 'outcome' do
-        # should use the title from content API, instead of local one
-        expect(page).to have_content("Licence 1")
+        # should use the title from Rummager, instead of local one
+        expect(page).to have_content("Title from search for #{@l1.gds_id}")
         expect(page).not_to have_content("Licence One")
 
-        within_section "list item containing Licence 1" do
-          expect(page).to have_link("Licence 1", href: "http://www.test.gov.uk/licence-one")
-          expect(page).to have_content("Short description of licence")
-        end
+        expect(page).to have_link(
+          "Title from search for #{@l1.gds_id}",
+          href: /\/licence-#{@l1.gds_id}/
+        )
+        expect(page).to have_content("Short description for #{@l1.gds_id}")
 
         expect(page).to have_content("Licence Two")
       end
     end
 
     specify "handle lack of links gracefully" do
-      content_api_has_licence licence_identifier: @l1.correlation_id.to_s, slug: 'licence-one', title: 'Licence 1',
-            licence_short_description: "Short description of licence"
+      rummager_has_licences([], when_searching_for: [@l1, @l2])
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
@@ -95,10 +101,7 @@ RSpec.describe "Licences page", type: :request do
     end
 
     specify "don't show graceful text if we have many links" do
-      content_api_has_licence licence_identifier: @l1.gds_id, slug: 'licence-one', title: 'Licence 1',
-            licence_short_description: "Short description of licence"
-      content_api_has_licence licence_identifier: @l2.gds_id, slug: 'licence-two', title: 'Licence 2',
-            licence_short_description: "Short description of licence 2"
+      rummager_has_licences([@l1, @l2], when_searching_for: [@l1, @l2])
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
 
@@ -107,8 +110,8 @@ RSpec.describe "Licences page", type: :request do
       end
     end
 
-    specify "gracefully handling content API errors" do
-      WebMock.stub_request(:get, %r[\A#{GdsApi::TestHelpers::ContentApi::CONTENT_API_ENDPOINT}/licences]).
+    specify "gracefully handling Rummager errors" do
+      WebMock.stub_request(:get, %r[\A#{GdsApi::TestHelpers::Rummager::RUMMAGER_ENDPOINT}]).
         to_return(status: [500, "Internal Server Error"])
 
       visit licence_finder_url_for('licences', [@s1], [@a1, @a2], 'england')
@@ -124,6 +127,8 @@ RSpec.describe "Licences page", type: :request do
 
   specify "going back to previous sections" do
     { 1 => "sectors", 2 => "activities", 3 => "location" }.each do |question, section|
+      rummager_has_licences([@l4], when_searching_for: [@l4])
+
       visit licence_finder_url_for('licences', [@s1], [@a1], 'scotland')
 
       click_change_answer question

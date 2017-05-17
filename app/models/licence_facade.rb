@@ -5,7 +5,7 @@ class LicenceFacade
   def self.create_for_licences(licences)
     api_data = get_licence_artefacts(licences)
     licences.map do |l|
-      matching_api_data = api_data['results'].find { |d| l.gds_id.to_s == d['details']['licence_identifier'] }
+      matching_api_data = api_data['results'].find { |d| l.gds_id.to_s == d['licence_identifier'] }
       new(l, matching_api_data)
     end
   end
@@ -15,11 +15,14 @@ class LicenceFacade
 
     return raw_data if licences.empty?
 
-    Services.content_api.licences_for_ids(licences.map(&:gds_id)).to_hash
+    Services.rummager.search(
+      filter_licence_identifier: licences.map(&:gds_id).map(&:to_s),
+      fields: %w(title licence_short_description licence_identifier link)
+    ).to_h
   rescue GdsApi::BaseError => e
     message = e.class.name
     message << "(#{e.code})" if e.respond_to?(:code)
-    Rails.logger.warn "#{message} fetching licence details from Content API"
+    Rails.logger.warn "#{message} fetching licence details from Rummager"
     raw_data
   end
 
@@ -38,10 +41,16 @@ class LicenceFacade
   end
 
   def url
-    published? ? @artefact['web_url'] : nil
+    published? ? web_url : nil
   end
 
   def short_description
-    published? ? @artefact['details']['licence_short_description'] : nil
+    published? ? @artefact['licence_short_description'] : nil
+  end
+
+private
+
+  def web_url
+    Plek.find('www') + @artefact['link']
   end
 end

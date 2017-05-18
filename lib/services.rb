@@ -1,13 +1,8 @@
-require 'gds_api/content_api'
 require 'gds_api/content_store'
 require 'gds_api/publishing_api_v2'
 require 'gds_api/rummager'
 
 module Services
-  def self.content_api
-    @content_api ||= GdsApi::ContentApi.new(Plek.current.find("contentapi"))
-  end
-
   def self.content_store
     @content_store ||= GdsApi::ContentStore.new(
       Plek.new.find('content-store')

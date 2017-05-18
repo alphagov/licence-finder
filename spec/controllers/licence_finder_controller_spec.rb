@@ -13,13 +13,6 @@ RSpec.describe LicenceFinderController, type: :controller do
       expect(response).to be_success
     end
 
-    it "returns 503 if the request times out" do
-      stub_request(:get, %r{\A#{GdsApi::TestHelpers::ContentApi::CONTENT_API_ENDPOINT}}).to_timeout
-      artefact_for_slug(APP_SLUG)
-      get :start
-      expect(response.status).to eq(503)
-    end
-
     it "sets correct expiry headers" do
       get :start
 

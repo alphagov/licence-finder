@@ -3,45 +3,58 @@ require 'services'
 
 class LicenceFacade
   def self.create_for_licences(licences)
-    api_data = get_licence_artefacts(licences)
-    licences.map do |l|
-      matching_api_data = api_data['results'].find { |d| l.gds_id.to_s == d['details']['licence_identifier'] }
-      new(l, matching_api_data)
+    search_results = search_licences(licences)['results']
+
+    licences.map do |licence|
+      matching_search_data = search_results.find do |search_result|
+        licence.gds_id.to_s == search_result['licence_identifier']
+      end
+
+      new(licence, matching_search_data)
     end
   end
 
-  def self.get_licence_artefacts(licences)
+  def self.search_licences(licences)
     raw_data = { 'results' => [] }
 
     return raw_data if licences.empty?
 
-    Services.content_api.licences_for_ids(licences.map(&:gds_id)).to_hash
+    Services.rummager.search(
+      filter_licence_identifier: licences.map(&:gds_id).map(&:to_s),
+      fields: %w(title licence_short_description licence_identifier link)
+    ).to_h
   rescue GdsApi::BaseError => e
     message = e.class.name
     message << "(#{e.code})" if e.respond_to?(:code)
-    Rails.logger.warn "#{message} fetching licence details from Content API"
+    Rails.logger.warn "#{message} fetching licence details from Rummager"
     raw_data
   end
 
-  attr_reader :licence, :artefact
-  def initialize(licence, artefact = nil)
+  attr_reader :licence, :search_result
+  def initialize(licence, search_result = nil)
     @licence = licence
-    @artefact = artefact
+    @search_result = search_result
   end
 
   def published?
-    @artefact.present?
+    @search_result.present?
   end
 
   def title
-    published? ? @artefact['title'] : @licence.name
+    published? ? @search_result['title'] : @licence.name
   end
 
   def url
-    published? ? @artefact['web_url'] : nil
+    published? ? web_url : nil
   end
 
   def short_description
-    published? ? @artefact['details']['licence_short_description'] : nil
+    published? ? @search_result['licence_short_description'] : nil
+  end
+
+private
+
+  def web_url
+    Plek.find('www') + @search_result['link']
   end
 end

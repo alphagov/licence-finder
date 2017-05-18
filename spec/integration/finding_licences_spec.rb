@@ -1,6 +1,9 @@
+require 'services'
 require 'rails_helper'
 
 RSpec.describe "Finding licences", type: :request do
+  include RummagerHelpers
+
   specify "Simple happy path through the app" do
     WebMock.allow_net_connect!
     $search = Search.create
@@ -26,6 +29,7 @@ RSpec.describe "Finding licences", type: :request do
     FactoryGirl.create(:licence_link, sector: s1, activity: a1, licence: l4)
 
     $search.index_all
+    rummager_has_licences([], when_searching_for: [l1])
 
     visit "/#{APP_SLUG}"
 

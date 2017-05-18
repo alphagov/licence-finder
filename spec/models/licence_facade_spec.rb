@@ -33,9 +33,9 @@ RSpec.describe LicenceFacade, type: :model do
 
       result = LicenceFacade.create_for_licences([@l1, @l2])
       expect(result[0].licence).to eq(@l1)
-      expect(result[0].artefact).to eq(nil)
+      expect(result[0].search_result).to eq(nil)
       expect(result[1].licence).to eq(@l2)
-      expect(result[1].artefact).to eq(rummager_licence_hash(@l2.gds_id))
+      expect(result[1].search_result).to eq(rummager_licence_hash(@l2.gds_id))
     end
 
     context "when the Search API errors" do
@@ -48,9 +48,9 @@ RSpec.describe LicenceFacade, type: :model do
       it "should continue with no search API data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         expect(result[0].licence).to eq(@l1)
-        expect(result[0].artefact).to eq(nil)
+        expect(result[0].search_result).to eq(nil)
         expect(result[1].licence).to eq(@l2)
-        expect(result[1].artefact).to eq(nil)
+        expect(result[1].search_result).to eq(nil)
       end
 
       it "should log the error" do
@@ -71,9 +71,9 @@ RSpec.describe LicenceFacade, type: :model do
       it "should continue with no Rummager data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         expect(result[0].licence).to eq(@l1)
-        expect(result[0].artefact).to eq(nil)
+        expect(result[0].search_result).to eq(nil)
         expect(result[1].licence).to eq(@l2)
-        expect(result[1].artefact).to eq(nil)
+        expect(result[1].search_result).to eq(nil)
       end
 
       it "should log the error" do
@@ -94,9 +94,9 @@ RSpec.describe LicenceFacade, type: :model do
       it "should continue with no Rummager data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
         expect(result[0].licence).to eq(@l1)
-        expect(result[0].artefact).to eq(nil)
+        expect(result[0].search_result).to eq(nil)
         expect(result[1].licence).to eq(@l2)
-        expect(result[1].artefact).to eq(nil)
+        expect(result[1].search_result).to eq(nil)
       end
 
       it "should log the error" do

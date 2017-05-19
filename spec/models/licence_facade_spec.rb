@@ -128,7 +128,7 @@ RSpec.describe LicenceFacade, type: :model do
       end
 
       it "should return the frontend url" do
-        expect(@lf.url).to eq(Plek.find('www') + @pub_data['link'])
+        expect(@lf.url).to eq(Plek.current.website_root + @pub_data['link'])
       end
 
       it "should return the API short description" do

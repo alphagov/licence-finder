@@ -55,6 +55,6 @@ class LicenceFacade
 private
 
   def web_url
-    Plek.find('www') + @search_result['link']
+    Plek.current.website_root + @search_result['link']
   end
 end

@@ -27,7 +27,3 @@ If you are using the GDS development virtual machine then the application will b
 ### Publishing to GOV.UK
 
 - `bundle exec rake publishing_api:publish` will send the licence finder pages to the publishing-api.
-
-### Search indexing
-
-- `bundle exec rake rummager:index` will send the data to Rummager for indexing in search.

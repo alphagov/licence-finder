@@ -31,11 +31,7 @@ RSpec.describe "Finding licences", type: :request do
     $search.index_all
     rummager_has_licences([], when_searching_for: [l1])
 
-    visit "/#{APP_SLUG}"
-
-    expect(page).to have_link('Find licences')
-
-    click_on 'Find licences'
+    visit "/#{APP_SLUG}/sectors"
 
     i_should_be_on "/#{APP_SLUG}/sectors"
 

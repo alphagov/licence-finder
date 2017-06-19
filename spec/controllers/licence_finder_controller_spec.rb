@@ -7,67 +7,6 @@ RSpec.describe LicenceFinderController, type: :controller do
     @question3 = 'Where will you be located?'
   end
 
-  describe "GET 'start'" do
-    it "returns http success" do
-      get 'start'
-      expect(response).to be_success
-    end
-
-    it "sets correct expiry headers" do
-      get :start
-
-      expect(response.headers["Cache-Control"]).to eq("max-age=1800, public")
-    end
-
-    describe "setting up popular licences" do
-      before :each do
-        LicenceFinderController::POPULAR_LICENCE_IDS.each_with_index do |gds_id, i|
-          l = FactoryGirl.create(:licence, gds_id: gds_id)
-          instance_variable_set("@l#{i}", l) # @l1 = l
-        end
-      end
-
-      it "assigns facades for the published licences to @popular_licences" do
-        lf1 = double("lf1", published?: true)
-        lf2 = double("lf2", published?: false)
-        lf3 = double("lf3", published?: false)
-        lf4 = double("lf4", published?: true)
-        expect(LicenceFacade).to receive(:create_for_licences).with([@l0, @l1, @l2, @l3, @l4, @l5, @l6]).
-          and_return([lf1, lf2, lf3, lf4])
-
-        get :start
-
-        expect(assigns[:popular_licences]).to eq([lf1, lf4])
-      end
-
-      it "only assigns the first 3 to @popular_licences" do
-        lf1 = double("lf1", published?: true)
-        lf2 = double("lf2", published?: false)
-        lf3 = double("lf3", published?: true)
-        lf4 = double("lf4", published?: true)
-        lf5 = double("lf5", published?: true)
-        allow(LicenceFacade).to receive(:create_for_licences).
-          and_return([lf1, lf2, lf3, lf4, lf5])
-
-        get :start
-
-        expect(assigns[:popular_licences]).to eq([lf1, lf3, lf4])
-      end
-
-      it "copes with licences missing from the local database" do
-        @l1.destroy
-        @l2.destroy
-        lf1 = double("lf1", published?: true)
-        expect(LicenceFacade).to receive(:create_for_licences).with([@l0, @l3, @l4, @l5, @l6]).
-          and_return([lf1])
-
-        get :start
-
-        expect(assigns[:popular_licences]).to eq([lf1])
-      end
-    end
-  end
-
   describe "GET 'sectors'" do
     it "returns no sectors if no query is provided" do
       @s1 = FactoryGirl.create(:sector, name: "Alpha")

@@ -32,17 +32,6 @@ header.page-header hgroup {
   margin-top: 0.25em;
 }
 
-/* reset margin on start */
-.start-page header.page-header hgroup {
-  margin: 0 24em 0 0;
-  padding: 1em 2em 2em 2em;
-
-  @include media(mobile) {
-    margin-right: 0;
-    padding-bottom: 0;
-  }
-}
-
 a.remove,
 a.add {
   float: right;

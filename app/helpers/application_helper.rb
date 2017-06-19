@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def start_path
+    "/#{APP_SLUG}"
+  end
+
   def current_question(&block)
     render partial: 'current_question', locals: {
       body: capture(&block),

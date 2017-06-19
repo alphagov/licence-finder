@@ -11,22 +11,11 @@ class LicenceFinderController < ApplicationController
   ].freeze
   ACTIONS = %w(sectors activities business_location).freeze
 
-  # These are the correlation_ids
-  # POPULAR_LICENCE_IDS = %w(1083741799 1083741393 1084158580 1075329003 1084062657 1075429257 1083741306)
-  # These are the legal_ref_ids (mapped from the correlation_ids above)
-  # POPULAR_LICENCE_IDS = %w(1620001 1040001 590001 1520001 1520002 1160001 1170001)
-  # These are the gds_ids (mapped from the legal_ref_ids above)
-  POPULAR_LICENCE_IDS = %w(1071-5-1 1071-3-1 390-7-1 521-5-1 521-3-1 860-5-1 860-3-1).freeze
-
-  before_filter :extract_and_validate_sector_ids, except: [:start, :sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
-  before_filter :extract_and_validate_activity_ids, except: [:start, :sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
+  before_filter :extract_and_validate_sector_ids, except: [:sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
+  before_filter :extract_and_validate_activity_ids, except: [:sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_filter :set_expiry
   before_filter :setup_navigation_helpers
   after_action :add_analytics_headers
-
-  def start
-    setup_popular_licences
-  end
 
   def sectors
     @picked_sectors = Sector.find_by_public_ids(extract_ids(:sector)).ascending(:name).to_a
@@ -154,11 +143,6 @@ protected
     if section_name
       @meta_section = section_name.downcase
     end
-  end
-
-  def setup_popular_licences
-    licences = POPULAR_LICENCE_IDS.map { |id| Licence.find_by_gds_id(id) }.compact
-    @popular_licences = LicenceFacade.create_for_licences(licences).select(&:published?).first(3)
   end
 
   def add_analytics_headers

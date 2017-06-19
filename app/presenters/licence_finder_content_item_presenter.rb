@@ -25,7 +25,6 @@ class LicenceFinderContentItemPresenter
       publishing_app: 'licencefinder',
       rendering_app: 'licencefinder',
       locale: 'en',
-      public_updated_at: Time.now.iso8601,
       details: {},
       routes: [
         { type: route_type, path: base_path }

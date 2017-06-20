@@ -11,10 +11,6 @@ class LicenceFinderContentItemPresenter
     'minor'
   end
 
-  def route_type
-    'exact'
-  end
-
   def payload
     {
       base_path: base_path,
@@ -25,9 +21,10 @@ class LicenceFinderContentItemPresenter
       publishing_app: 'licencefinder',
       rendering_app: 'licencefinder',
       locale: 'en',
+      public_updated_at: Time.now.iso8601,
       details: {},
       routes: [
-        { type: route_type, path: base_path }
+        { type: 'prefix', path: base_path }
       ]
     }
   end

@@ -5,7 +5,6 @@ RSpec.describe PublishingApiNotifier do
   describe "#publish" do
     it "publishes all content items" do
       [
-        '69af22e0-da49-4810-9ee4-22b4666ac627',
         "4ade13fa-7e79-4bee-b809-61dbe5c3aa22",
         "82162026-c815-4cc5-93ef-514fe467409a",
         "45cb0572-d71a-4c22-a84f-fdc53c2e7bc4",
@@ -15,6 +14,13 @@ RSpec.describe PublishingApiNotifier do
         expect(Services.publishing_api).to receive(:put_content).with(content_id, be_valid_against_schema('generic'))
         expect(Services.publishing_api).to receive(:publish).with(content_id, 'minor')
       end
+
+      PublishingApiNotifier.publish
+    end
+
+    it "does not publish the start page" do
+      expect(Services.publishing_api).not_to receive(:put_content).with("69af22e0-da49-4810-9ee4-22b4666ac627", be_valid_against_schema('generic'))
+      expect(Services.publishing_api).not_to receive(:publish).with("69af22e0-da49-4810-9ee4-22b4666ac627", 'minor')
 
       PublishingApiNotifier.publish
     end

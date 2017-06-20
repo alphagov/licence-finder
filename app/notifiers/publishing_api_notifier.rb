@@ -11,7 +11,7 @@ class PublishingApiNotifier
 
   def self.publish
     LICENCE_FINDER_FORM_DETAILS.each do |base_path, content_id|
-      new.publish(LicenceFinderFormContentItemPresenter.new(base_path, content_id))
+      new.publish(LicenceFinderContentItemPresenter.new(base_path, content_id))
     end
   end
 

@@ -1,18 +1,13 @@
 class LicenceFinderContentItemPresenter
-  def base_path
-    "/" + metadata[:slug]
-  end
+  attr_reader :base_path, :content_id
 
-  def content_id
-    metadata[:content_id]
+  def initialize(base_path, content_id)
+    @base_path = base_path
+    @content_id = content_id
   end
 
   def update_type
     'minor'
-  end
-
-  def route_type
-    'exact'
   end
 
   def payload
@@ -27,7 +22,7 @@ class LicenceFinderContentItemPresenter
       locale: 'en',
       details: {},
       routes: [
-        { type: route_type, path: base_path }
+        { type: 'prefix', path: base_path }
       ]
     }
   end

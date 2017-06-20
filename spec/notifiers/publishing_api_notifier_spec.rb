@@ -17,12 +17,5 @@ RSpec.describe PublishingApiNotifier do
 
       PublishingApiNotifier.publish
     end
-
-    it "does not publish the start page" do
-      expect(Services.publishing_api).not_to receive(:put_content).with("69af22e0-da49-4810-9ee4-22b4666ac627", be_valid_against_schema('generic'))
-      expect(Services.publishing_api).not_to receive(:publish).with("69af22e0-da49-4810-9ee4-22b4666ac627", 'minor')
-
-      PublishingApiNotifier.publish
-    end
   end
 end

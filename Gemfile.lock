@@ -78,7 +78,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
-    gds-api-adapters (45.0.0)
+    gds-api-adapters (47.2.0)
       link_header
       lrucache (~> 0.1.1)
       null_logger
@@ -279,7 +279,7 @@ DEPENDENCIES
   database_cleaner (~> 1.5.1)
   elasticsearch
   factory_girl_rails (~> 4.7.0)
-  gds-api-adapters (= 45.0.0)
+  gds-api-adapters (~> 47.2)
   govuk-content-schema-test-helpers
   govuk-lint
   govuk_frontend_toolkit (~> 4.18.0)

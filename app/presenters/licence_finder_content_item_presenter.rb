@@ -6,10 +6,6 @@ class LicenceFinderContentItemPresenter
     @content_id = content_id
   end
 
-  def update_type
-    'minor'
-  end
-
   def payload
     {
       base_path: base_path,
@@ -23,7 +19,8 @@ class LicenceFinderContentItemPresenter
       details: {},
       routes: [
         { type: 'prefix', path: base_path }
-      ]
+      ],
+      update_type: 'minor',
     }
   end
 

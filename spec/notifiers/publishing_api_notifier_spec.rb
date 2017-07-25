@@ -12,7 +12,7 @@ RSpec.describe PublishingApiNotifier do
         "2cae8a3f-1231-4379-bdca-1de9b4668508",
       ].each do |content_id|
         expect(Services.publishing_api).to receive(:put_content).with(content_id, be_valid_against_schema('generic'))
-        expect(Services.publishing_api).to receive(:publish).with(content_id, 'minor')
+        expect(Services.publishing_api).to receive(:publish).with(content_id)
       end
 
       PublishingApiNotifier.publish

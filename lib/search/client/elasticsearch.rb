@@ -70,7 +70,7 @@ class Search
           index: index_name,
           body: {
             query: {
-              query_string: {
+              multi_match: {
                 fields: %w(title extra_terms activities),
                 query: query
               }

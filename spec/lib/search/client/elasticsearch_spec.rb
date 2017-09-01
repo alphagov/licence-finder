@@ -144,24 +144,4 @@ RSpec.describe Search::Client::Elasticsearch do
       expect(@client.search("query")).to eq([123, 234])
     end
   end
-
-  describe "Lucene search escaping characters" do
-    it "returns valid strings back" do
-      expect(@client.escape_lucene_chars("blargh")).to eq("blargh")
-      expect(@client.escape_lucene_chars("Testing")).to eq("Testing")
-    end
-
-    it "removes expected special chars" do
-      %w(+ - && || ! ( ) { } [ ] ^ " ~ * ? \ :).each { |char|
-        char.strip!
-        expect(@client.escape_lucene_chars("#{char}blargh")).to eq("\\#{char}blargh")
-      }
-    end
-
-    it "downcases search keywords" do
-      expect(@client.downcase_ending_keywords("bleh AND")).to eq("bleh and")
-      expect(@client.downcase_ending_keywords("bleh OR")).to eq("bleh or")
-      expect(@client.downcase_ending_keywords("bleh NOT")).to eq("bleh not")
-    end
-  end
 end

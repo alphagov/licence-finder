@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.7.1'
+gem 'govuk_app_config', '~> 0.2.0'
 gem 'unicorn', '~> 5.1.0'
 gem 'plek', '1.12.0'
 
@@ -9,12 +10,10 @@ gem 'elasticsearch'
 
 gem 'mongoid_rails_migrations', '~> 1.1.0'
 
-gem "airbrake", "~> 4.3.1"
-
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
 else
-  gem 'gds-api-adapters', '~> 47.2'
+  gem 'gds-api-adapters', '~> 47.9'
 end
 
 gem 'logstasher', '~> 0.6.0'
@@ -22,7 +21,7 @@ gem 'logstasher', '~> 0.6.0'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '10.0.0'
+  gem "slimmer", '11.0.2'
 end
 
 gem 'sass-rails', '~> 5.0.4'
@@ -31,7 +30,7 @@ gem 'uglifier', '~> 3.0.2'
 gem 'govuk_frontend_toolkit', '~> 4.18.0'
 gem 'govuk_navigation_helpers', '~> 2.0.0'
 
-gem 'govuk-lint'
+gem 'govuk-lint', '~> 1.2.1'
 
 group :development, :test do
   gem 'pry-rails'

@@ -15,7 +15,7 @@ protected
   def error_503(e = nil); error(503, e); end
 
   def error(status_code, exception = nil)
-    notify_airbrake(exception)
+    GovukError.notify(exception)
 
     render status: status_code, text: "#{status_code} error"
   end

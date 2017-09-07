@@ -1,15 +1,15 @@
 development:
-    url:   'http://localhost:9200'
+    url:   <%= ENV['ELASTICSEARCH_URI'] || 'http://localhost:9200' %>
     index: licence-finder-development
     type:  sector
 
 test:
-    url:   'http://localhost:9200'
+    url:   <%= ENV['ELASTICSEARCH_URI'] || 'http://localhost:9200' %>
     index: licence-finder-test
     type:  sector
 
 production:
-    url:   'http://localhost:9200'
+    url:   <%= ENV['ELASTICSEARCH_URI'] || 'http://localhost:9200' %>
     index: licence-finder
     type:  sector
 

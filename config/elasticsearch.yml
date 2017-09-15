@@ -9,7 +9,7 @@ test:
     type:  sector
 
 production:
-    url:   <%= ENV['ELASTICSEARCH_URI'] || 'http://localhost:9200' %>
+    url:   <%= ENV['ELASTICSEARCH_URI'] || 'http://localhost:19200' %>
     index: licence-finder
     type:  sector
 

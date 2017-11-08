@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '4.2.10'
 gem 'govuk_app_config', '~> 0.2.0'
 gem 'unicorn', '~> 5.1.0'
 gem 'plek', '1.12.0'

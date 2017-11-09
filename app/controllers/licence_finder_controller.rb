@@ -11,10 +11,10 @@ class LicenceFinderController < ApplicationController
   ].freeze
   ACTIONS = %w(sectors activities business_location).freeze
 
-  before_filter :extract_and_validate_sector_ids, except: [:sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
-  before_filter :extract_and_validate_activity_ids, except: [:sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
-  before_filter :set_expiry
-  before_filter :setup_navigation_helpers
+  before_action :extract_and_validate_sector_ids, except: [:sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
+  before_action :extract_and_validate_activity_ids, except: [:sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
+  before_action :set_expiry
+  before_action :setup_navigation_helpers
   after_action :add_analytics_headers
 
   def sectors
@@ -109,14 +109,14 @@ protected
     # this won't show anything useful in production.
     @sector_ids = extract_ids(:sector)
     if @sector_ids.empty?
-      render status: :not_found, text: ""
+      head(:not_found)
     end
   end
 
   def extract_and_validate_activity_ids
     @activity_ids = extract_ids(:activity)
     if @activity_ids.empty?
-      render status: :not_found, text: ""
+      head(:not_found)
     end
   end
 

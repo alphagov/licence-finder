@@ -20,7 +20,7 @@ private
       activity.correlation_id = row['BUSINSS_ACT_ID'].to_i
       activity.name = row['ACTIVITY_TITLE']
       Rails.logger.debug "Creating BusinessActivity #{activity.id}(#{activity.name})"
-      activity.with(safe: true).save!
+      activity.save!
       counter += 1
     end
     if sector.activities.nil?
@@ -28,7 +28,7 @@ private
     end
     unless sector.activities.include? activity
       sector.activities << activity
-      sector.with(safe: true).save!
+      sector.save!
     end
     counter
   end

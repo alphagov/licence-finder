@@ -42,7 +42,7 @@ module ApplicationHelper
   end
 
   def change_answer_url(action)
-    new_params = params.reject { |k, _v| %(action controller).include?(k) }
+    new_params = params.permit(:activities, :location, :sectors)
     url_for action: action, params: new_params
   end
 
@@ -51,7 +51,7 @@ protected
   def create_add_remove_link(name, model, extra_params, &block)
     key_name = model_key_name(model)
     model_id = extra_params[:model_id]
-    new_params = params.select { |k, _v| %w(sectors activities q).include? k.to_s }
+    new_params = params.permit(:sectors, :activities, :q).to_h
     new_params[key_name.pluralize.to_s] = extract_public_ids(new_params, key_name, model, block).join("_")
     extra_params["aria-labelledby"] = model_id.to_s
     link_to(name, url_for(new_params.merge(action: key_name.pluralize)), extra_params)

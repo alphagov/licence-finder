@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Sector, type: :model do
   it "should use the correct field types on the model" do
-    Sector.with(safe: true).create!(
+    Sector.create!(
       public_id: 42,
       correlation_id: 24,
       name: "Some Sector"
@@ -22,7 +22,7 @@ RSpec.describe Sector, type: :model do
       FactoryGirl.create(:sector, public_id: 42)
       @sector.public_id = 42
       expect {
-        @sector.with(safe: true).save
+        @sector.save
       }.to raise_error(Mongo::Error::OperationFailure)
     end
 
@@ -30,7 +30,7 @@ RSpec.describe Sector, type: :model do
       FactoryGirl.create(:sector, correlation_id: 42)
       @sector.correlation_id = 42
       expect {
-        @sector.with(safe: true).save
+        @sector.save
       }.to raise_error(Mongo::Error::OperationFailure)
     end
 

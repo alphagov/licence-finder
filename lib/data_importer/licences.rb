@@ -39,7 +39,7 @@ private
         licence_join.sector = sector
         licence_join.activity = activity
         licence_join.licence = licence
-        licence_join.with(safe: true).save!
+        licence_join.save!
       end
     end
     counter

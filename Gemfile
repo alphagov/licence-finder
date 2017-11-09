@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.10'
+gem 'rails', '5.1.4'
+gem 'rails-controller-testing'
 gem 'govuk_app_config', '~> 0.2.0'
 gem 'unicorn', '~> 5.1.0'
 gem 'plek', '1.12.0'
 
-gem "mongoid", '~> 5.1.0'
+gem "mongoid", '~> 6.2.0'
 gem 'elasticsearch'
 
 gem 'mongoid_rails_migrations', '~> 1.1.0'
@@ -21,7 +22,7 @@ gem 'logstasher', '~> 0.6.0'
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '11.0.2'
+  gem "slimmer", '11.1.0'
 end
 
 gem 'sass-rails', '~> 5.0.4'

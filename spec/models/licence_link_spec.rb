@@ -12,7 +12,7 @@ RSpec.describe LicenceLink, type: :model do
                          licence: @licence_link.licence
       )
       expect {
-        @licence_link.with(safe: true).save
+        @licence_link.save
       }.to raise_error(Mongo::Error::OperationFailure)
     end
     it "should require a Sector" do

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Licence, type: :model do
   it "should use the correct field types on the model" do
-    Licence.with(safe: true).create!(
+    Licence.create!(
       gds_id: "24-3-1",
       name: "Some Licence",
       regulation_area: "Some Regulation Area"
@@ -22,7 +22,7 @@ RSpec.describe Licence, type: :model do
       FactoryGirl.create(:licence, gds_id: "24-3-1")
       @licence.gds_id = "24-3-1"
       expect {
-        @licence.with(safe: true).save
+        @licence.save
       }.to raise_error(Mongo::Error::OperationFailure)
     end
 

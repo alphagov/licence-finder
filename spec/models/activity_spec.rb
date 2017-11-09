@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Activity, type: :model do
   it "should use the correct field types on the model" do
-    Activity.with(safe: true).create!(
+    Activity.create!(
       public_id: 42,
       correlation_id: 24,
       name: "Some Activity"
@@ -22,7 +22,7 @@ RSpec.describe Activity, type: :model do
       FactoryGirl.create(:activity, public_id: 42)
       @activity.public_id = 42
       expect {
-        @activity.with(safe: true).save
+        @activity.save
       }.to raise_error(Mongo::Error::OperationFailure)
     end
 
@@ -30,7 +30,7 @@ RSpec.describe Activity, type: :model do
       FactoryGirl.create(:activity, correlation_id: 42)
       @activity.correlation_id = 42
       expect {
-        @activity.with(safe: true).save
+        @activity.save
       }.to raise_error(Mongo::Error::OperationFailure)
     end
 

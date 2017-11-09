@@ -15,7 +15,7 @@ private
       layer1.correlation_id = row['LAYER1_OID'].to_i
       layer1.name = row['LAYER1']
       layer1.layer = 1
-      layer1.with(safe: true).save!
+      layer1.save!
       counter += 1
     end
 
@@ -25,14 +25,14 @@ private
       layer2.correlation_id = row['LAYER2_OID'].to_i
       layer2.name = row['LAYER2']
       layer2.layer = 2
-      layer2.with(safe: true).save!
+      layer2.save!
       counter += 1
     end
 
     l2parents = layer2.parents.to_a
     unless l2parents.include?(layer1)
       layer2.parents = l2parents + [layer1]
-      layer2.with(safe: true).save!
+      layer2.save!
     end
 
     layer3 = Sector.find_by_correlation_id(row['LAYER3_OID'].to_i)
@@ -41,14 +41,14 @@ private
       layer3.correlation_id = row['LAYER3_OID'].to_i
       layer3.name = row['LAYER3']
       layer3.layer = 3
-      layer3.with(safe: true).save!
+      layer3.save!
       counter += 1
     end
 
     l3parents = layer3.parents.to_a
     unless l3parents.include?(layer2)
       layer3.parents = l3parents + [layer2]
-      layer3.with(safe: true).save!
+      layer3.save!
       counter += 1
     end
     counter

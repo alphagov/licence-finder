@@ -25,7 +25,7 @@ RSpec.describe LicenceFinderController, type: :controller do
 
       expect($search).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
 
-      get :sectors, q: "test query"
+      get :sectors, params: { q: "test query" }
       expect(response).to be_success
       expect(assigns[:sectors].to_a).to eq([@s1, @s2, @s3])
     end
@@ -42,7 +42,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       @s2 = FactoryGirl.create(:sector, public_id: 3456, name: "Charlie")
       @s3 = FactoryGirl.create(:sector, public_id: 2345, name: "Bravo")
 
-      get :sectors, sectors: '3456_2345_4567'
+      get :sectors, params: { sectors: '3456_2345_4567' }
       expect(response).to be_success
       expect(assigns[:picked_sectors]).to eq([@s3, @s2])
     end
@@ -50,7 +50,7 @@ RSpec.describe LicenceFinderController, type: :controller do
     it "returns slimmer headers" do
       expect($search).to receive(:search).with("test query").and_return([])
 
-      get :sectors, q: "test query"
+      get :sectors, params: { q: "test query" }
 
       expect(response.headers["X-Slimmer-Result-Count"]).to eq("0")
     end
@@ -68,7 +68,7 @@ RSpec.describe LicenceFinderController, type: :controller do
 
       expect($search).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
 
-      get :sectors, q: "test query"
+      get :sectors, params: { q: "test query" }
       expect(response.headers["X-Slimmer-Result-Count"]).to eq("3")
     end
   end
@@ -82,7 +82,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       end
 
       def do_get
-        get :activities, sectors: "1234_2345_3456"
+        get :activities, params: { sectors: "1234_2345_3456" }
       end
       it "and_return http success" do
         do_get
@@ -119,7 +119,7 @@ RSpec.describe LicenceFinderController, type: :controller do
         expect(scope1).to receive(:ascending).with(:name).and_return(:some_activities)
         expect(Activity).to receive(:find_by_sectors).with(:some_sectors).and_return(scope1)
 
-        get :activities, sectors: "1234_2345_3456", activities: "1234_2345_3456"
+        get :activities, params: { sectors: "1234_2345_3456", activities: "1234_2345_3456" }
 
         expect(assigns[:picked_activities]).to eq([a1, a3, a2])
       end
@@ -141,7 +141,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       end
 
       def do_get
-        get :business_location, sectors: '123_321', activities: '234_432'
+        get :business_location, params: { sectors: '123_321', activities: '234_432' }
       end
 
       it "and_return http success" do
@@ -175,7 +175,7 @@ RSpec.describe LicenceFinderController, type: :controller do
 
     context "with no valid businesses selected, but valid activities" do
       it "returns a 404 status code" do
-        get :business_location, activities: '234_432'
+        get :business_location, params: { activities: '234_432' }
         expect(response).to be_not_found
       end
     end
@@ -185,19 +185,19 @@ RSpec.describe LicenceFinderController, type: :controller do
     context "with valid sectors and activities" do
       context "with a valid location" do
         it "passes through all parameters and redirects to the licences action" do
-          post :business_location_submit, sectors: '123_321', activities: '234_432', location: "england"
+          post :business_location_submit, params: { sectors: '123_321', activities: '234_432', location: "england" }
           expect(response).to redirect_to(licences_path(sectors: '123_321', activities: '234_432', location: "england"))
         end
       end
       context "with no location" do
         it "passes through sectors and activities and redirects to business_location" do
-          post :business_location_submit, sectors: '123_321', activities: '234_432'
+          post :business_location_submit, params: { sectors: '123_321', activities: '234_432' }
           expect(response).to redirect_to(business_location_path(sectors: '123_321', activities: '234_432'))
         end
       end
       context "with an invalid location" do
         it "passes through sectors and activities and redirect to business_location" do
-          post :business_location_submit, sectors: '123_321', activities: '234_432', location: 'invalid'
+          post :business_location_submit, params: { sectors: '123_321', activities: '234_432', location: 'invalid' }
           expect(response).to redirect_to(business_location_path(sectors: '123_321', activities: '234_432'))
         end
       end
@@ -205,14 +205,14 @@ RSpec.describe LicenceFinderController, type: :controller do
 
     context "with valid sectors and invalid activities" do
       it "shows an error page" do
-        post :business_location_submit, sectors: '123_321', activities: '', location: 'anything'
+        post :business_location_submit, params: { sectors: '123_321', activities: '', location: 'anything' }
         expect(response).to be_not_found
       end
     end
 
     context "with no valid sectors" do
       it "shows an error page" do
-        post :business_location_submit, sectors: '', activities: '', location: 'anything'
+        post :business_location_submit, params: { sectors: '', activities: '', location: 'anything' }
         expect(response).to be_not_found
       end
     end
@@ -227,7 +227,7 @@ RSpec.describe LicenceFinderController, type: :controller do
         allow(LicenceFacade).to receive(:create_for_licences).and_return(:some_licence_facades)
       end
       def do_get
-        get :licences, sectors: '123_321', activities: '234_432', location: "northern_ireland"
+        get :licences, params: { sectors: '123_321', activities: '234_432', location: "northern_ireland" }
       end
 
       it "fetches the appropriate licences, wraps them in a facade and assigns them to @licences" do
@@ -254,14 +254,14 @@ RSpec.describe LicenceFinderController, type: :controller do
 
     context "with valid sectors and invalid activities" do
       it "shows an error page" do
-        get :licences, sectors: '123_321', activities: '', location: 'anything'
+        get :licences, params: { sectors: '123_321', activities: '', location: 'anything' }
         expect(response).to be_not_found
       end
     end
 
     context "with no valid sectors" do
       it "shows an error page" do
-        get :licences, sectors: '', activities: '123_321', location: 'england'
+        get :licences, params: { sectors: '', activities: '123_321', location: 'england' }
         expect(response).to be_not_found
       end
     end
@@ -286,14 +286,14 @@ RSpec.describe LicenceFinderController, type: :controller do
       end
 
       it 'shows children of top level sectors' do
-        get :browse_sector, sector: @s1.public_id
+        get :browse_sector, params: { sector: @s1.public_id }
         expect(assigns[:sectors]).to eq([@s1, @s6])
         expect(assigns[:child_sectors]).to eq([@s2, @s4])
         expect(assigns[:grandchild_sectors]).to eq([])
       end
 
       it 'shows grandchildren of top level sectors' do
-        get :browse_sector_child, sector_parent: @s1.public_id, sector: @s2.public_id
+        get :browse_sector_child, params: { sector_parent: @s1.public_id, sector: @s2.public_id }
         expect(assigns[:sectors]).to eq([@s1, @s6])
         expect(assigns[:child_sectors]).to eq([@s2, @s4])
         expect(assigns[:grandchild_sectors]).to eq([@s3])

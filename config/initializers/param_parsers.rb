@@ -1,4 +1,4 @@
 # Turn off XML parsing:
 # https://groups.google.com/forum/#!topic/rubyonrails-security/61bkgvnSGTQ/discussion
-ActionDispatch::ParamsParser::DEFAULT_PARSERS.delete(Mime::XML)
-ActionDispatch::ParamsParser::DEFAULT_PARSERS.delete(Mime::JSON)
+ActionDispatch::Request.parameter_parsers.delete(:xml)
+ActionDispatch::Request.parameter_parsers.delete(:json)

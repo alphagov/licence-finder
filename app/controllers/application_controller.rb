@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
 
   slimmer_template 'wrapper'
 
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery
-
 protected
 
   rescue_from GdsApi::TimedOutException, with: :error_503

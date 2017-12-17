@@ -4,7 +4,7 @@ gem 'rails', '5.1.4'
 gem 'rails-controller-testing'
 gem 'govuk_app_config', '~> 0.2.0'
 gem 'unicorn', '~> 5.1.0'
-gem 'plek', '1.12.0'
+gem 'plek', '2.0.0'
 
 gem "mongoid", '~> 6.2.0'
 gem 'elasticsearch'

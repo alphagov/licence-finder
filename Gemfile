@@ -29,7 +29,7 @@ gem 'sass-rails', '~> 5.0.4'
 gem 'uglifier', '~> 3.0.2'
 
 gem 'govuk_frontend_toolkit', '~> 4.18.0'
-gem 'govuk_navigation_helpers', '~> 2.0.0'
+gem 'govuk_navigation_helpers', '~> 7.4.0'
 
 gem 'govuk-lint', '~> 1.2.1'
 

@@ -260,7 +260,7 @@ GEM
     tilt (2.0.8)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    uglifier (3.0.4)
+    uglifier (4.0.2)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
@@ -304,7 +304,7 @@ DEPENDENCIES
   rspec-rails (~> 3.5.0)
   sass-rails (~> 5.0.4)
   slimmer (= 11.1.0)
-  uglifier (~> 3.0.2)
+  uglifier (~> 4.0.2)
   unicorn (~> 5.1.0)
   webmock (~> 2.3.0)
 

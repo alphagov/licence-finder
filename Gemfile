@@ -14,7 +14,7 @@ gem 'mongoid_rails_migrations', '~> 1.1.0'
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
 else
-  gem 'gds-api-adapters', '~> 47.9'
+  gem 'gds-api-adapters', '~> 50.6'
 end
 
 gem 'logstasher', '~> 0.6.0'

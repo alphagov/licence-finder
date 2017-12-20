@@ -25,7 +25,7 @@ else
   gem "slimmer", '11.1.0'
 end
 
-gem 'sass-rails', '~> 5.0.4'
+gem 'sass-rails', '~> 5.0.7'
 gem 'uglifier', '~> 3.0.2'
 
 gem 'govuk_frontend_toolkit', '~> 4.18.0'

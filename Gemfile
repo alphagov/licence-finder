@@ -36,7 +36,7 @@ gem 'govuk-lint', '~> 1.2.1'
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5.0'
-  gem 'factory_girl_rails', '~> 4.7.0'
+  gem 'factory_girl_rails', '~> 4.9.0'
   gem 'database_cleaner', '~> 1.5.1'
   gem 'capybara', '~> 2.8.0'
 

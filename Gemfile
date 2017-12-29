@@ -17,7 +17,7 @@ else
   gem 'gds-api-adapters', '~> 50.8'
 end
 
-gem 'logstasher', '~> 0.6.0'
+gem 'logstasher', '~> 1.2.2'
 
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'

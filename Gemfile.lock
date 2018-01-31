@@ -154,7 +154,7 @@ GEM
     null_logger (0.0.1)
     parser (2.4.0.0)
       ast (~> 2.2)
-    plek (2.0.0)
+    plek (2.1.0)
     poltergeist (1.17.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -303,7 +303,7 @@ DEPENDENCIES
   logstasher (~> 1.2.2)
   mongoid (~> 6.2.0)
   mongoid_rails_migrations (~> 1.1.0)
-  plek (= 2.0.0)
+  plek (= 2.1.0)
   poltergeist (~> 1.17.0)
   pry-rails
   rails (= 5.1.4)

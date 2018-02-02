@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.1.4'
 gem 'rails-controller-testing'
-gem 'govuk_app_config', '~> 0.2.0'
+gem 'govuk_app_config', '~> 1.3.0'
 gem 'unicorn', '~> 5.4.0'
 gem 'plek', '2.1.0'
 

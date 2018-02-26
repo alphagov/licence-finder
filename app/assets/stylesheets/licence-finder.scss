@@ -2,7 +2,13 @@
 @import "_typography";
 @import "_css3";
 
+@import "govuk_publishing_components/all_components";
+
 /* see multi-step.css.erb in the static repo for most of these styles */
+
+#content {
+  margin-bottom: $gutter;
+}
 
 .current-question h2 {
   width: 100%;

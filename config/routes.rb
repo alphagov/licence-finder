@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  mount GovukPublishingComponents::Engine, at: "/component-guide"
+
   get "#{APP_SLUG}/sectors" => "licence_finder#sectors", :as => :sectors
   get "#{APP_SLUG}/activities" => "licence_finder#activities", :as => :activities
   get "#{APP_SLUG}/location" => "licence_finder#business_location", :as => :business_location

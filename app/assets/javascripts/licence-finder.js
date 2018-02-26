@@ -1,3 +1,5 @@
+//= require govuk_publishing_components/components/feedback
+
 /*globals $ */
 /*jslint
  white: true,
@@ -52,7 +54,7 @@ $(function() {
                 if (idx === -1) {
                     return false
                 }
-                
+
                 return true;
             },
             get: function() {
@@ -128,7 +130,7 @@ $(function() {
             prefix = (pageName === 'activities') ? 'activity' : 'sector';
 
         if (event.data.action === 'add') {
-          
+
             oldli = $(this).parent(); // the list item that is being moved
             itemId = oldli.data("public-id");
             newli = $('<li data-public-id="' + itemId + '"></li>'); // the target list item
@@ -171,7 +173,7 @@ $(function() {
 
             selectedItems.add(itemId);
         } else {
-              
+
             itemId = $(this).attr('aria-labelledby').replace('-selected', '');
 
             $('#' + itemId + '-selected').parent('li').remove();
@@ -261,7 +263,7 @@ $(function() {
         };
 
         checkExisting();
-        
+
         $('#sector-navigation').on('click', 'li:not(.open)>a:not(.add), li:not(.open)>a:not(.remove)', function(e) {
             e.preventDefault();
             var $a = $(this),
@@ -296,7 +298,7 @@ $(function() {
                                 elString = '<a data-public-id="' + leaf['public-id'] + '" href="' + leaf.url + '">' + leaf.name + '</a>';
                             }
                             else {
-                                elString = '<span class="sector-name" id="sector-'+leaf['public-id']+'">' + 
+                                elString = '<span class="sector-name" id="sector-'+leaf['public-id']+'">' +
                                     leaf.name +
                                     '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" rel="nofollow" class="' + linkClass  + '">' +
                                     linkText +

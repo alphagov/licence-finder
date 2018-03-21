@@ -23,7 +23,7 @@ else
 end
 
 gem 'sass-rails', '~> 5.0.7'
-gem 'uglifier', '~> 4.1.7'
+gem 'uglifier', '~> 4.1.8'
 
 gem 'govuk_frontend_toolkit', '~> 7.4.2'
 gem 'govuk_navigation_helpers', '~> 9.2.0'

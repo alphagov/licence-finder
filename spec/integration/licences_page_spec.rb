@@ -64,8 +64,6 @@ RSpec.describe "Licences page", type: :request do
     expect(page).not_to have_selector(*selector_of_section('upcoming questions'))
 
     expect(page).not_to have_content("No licences")
-
-    expect(page).to have_css(shared_component_selector('breadcrumbs'))
   end
 
   describe "getting licence details from Rummager" do

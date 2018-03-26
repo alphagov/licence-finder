@@ -14,7 +14,7 @@ class LicenceFinderController < ApplicationController
   before_action :extract_and_validate_sector_ids, except: [:sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_action :extract_and_validate_activity_ids, except: [:sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
   before_action :set_expiry
-  before_action :setup_navigation_helpers
+  before_action :setup_content_item
   after_action :add_analytics_headers
 
   def sectors
@@ -128,9 +128,8 @@ protected
     ids.sort
   end
 
-  def setup_navigation_helpers
+  def setup_content_item
     @content_item = Services.content_store.content_item("/licence-finder").to_hash
-    @navigation_helpers = GovukNavigationHelpers::NavigationHelper.new(@content_item)
     section_name = @content_item.dig("links", "parent", 0, "links", "parent", 0, "title")
     if section_name
       @meta_section = section_name.downcase

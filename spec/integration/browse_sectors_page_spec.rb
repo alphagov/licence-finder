@@ -21,7 +21,6 @@ RSpec.describe "Sector browse page", type: :request do
     end
 
     expect(page).to have_css(shared_component_selector('breadcrumbs'))
-    expect(page).not_to have_css(shared_component_selector('related_items'))
   end
 
   specify "clicking through drills down the tree" do

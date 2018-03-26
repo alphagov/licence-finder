@@ -14,23 +14,16 @@
   <body class="mainstream">
     <div id="wrapper" class="answer licence-finder <%= yield :page_class %>">
       <%= render partial: 'govuk_component/breadcrumbs', locals: @navigation_helpers.breadcrumbs %>
-      <% unless @sectors %><div class="grid-row"><% end %>
 
-        <main id="content" role="main">
-          <header class="page-header group">
-            <div>
-              <h1>Licence finder</h1>
-            </div>
-          </header>
-          <%= yield %>
-        </main>
+      <main id="content" role="main">
+        <header class="page-header group">
+          <div>
+            <h1>Licence finder</h1>
+          </div>
+        </header>
+        <%= yield %>
+      </main>
 
-      <% unless @sectors %>
-        <div class="related-container">
-          <%= render partial: 'govuk_component/related_items', locals: @navigation_helpers.related_items %>
-        </div>
-      </div>
-      <% end %>
       <%= render 'govuk_publishing_components/components/feedback' %>
     </div>
   </body>

@@ -22,7 +22,6 @@ RSpec.describe "Browse sectors via licence finder homepage", type: :request do
     expect(page).to have_css 'ul#sector-navigation'
 
     expect(page).to have_css(shared_component_selector('breadcrumbs'))
-    expect(page).not_to have_css(shared_component_selector('related_items'))
   end
 
   specify "3rd level sectors should be able to be added to the sidebar", js: true do

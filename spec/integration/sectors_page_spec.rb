@@ -40,9 +40,6 @@ RSpec.describe "Sector selection page", type: :request do
         'Where will you be located?'
       ])
     end
-
-    expect(page).to have_css(shared_component_selector('breadcrumbs'))
-    expect(page).not_to have_css(shared_component_selector('related_items'))
   end
 
   specify "with sectors selected" do

@@ -120,9 +120,10 @@ GEM
       activesupport (~> 5.1)
       gds-api-adapters (>= 43.0)
       govuk_ab_testing (~> 2.4)
-    govuk_publishing_components (5.5.6)
+    govuk_publishing_components (5.6.0)
       govspeak (>= 5.0.3)
       govuk_frontend_toolkit
+      govuk_navigation_helpers (~> 9.2.1)
       rails (>= 5.0.0.1)
       rake
       rouge
@@ -182,7 +183,7 @@ GEM
     nokogumbo (1.5.0)
       nokogiri
     null_logger (0.0.1)
-    parser (2.5.0.4)
+    parser (2.5.0.5)
       ast (~> 2.4.0)
     plek (2.1.1)
     poltergeist (1.17.0)
@@ -340,8 +341,7 @@ DEPENDENCIES
   govuk-lint (~> 1.2.1)
   govuk_app_config (~> 1.4.1)
   govuk_frontend_toolkit (~> 7.4.2)
-  govuk_navigation_helpers (~> 9.2.1)
-  govuk_publishing_components (~> 5.5.6)
+  govuk_publishing_components (~> 5.6.0)
   mongoid (~> 6.2.0)
   mongoid_rails_migrations (~> 1.1.0)
   plek (= 2.1.1)

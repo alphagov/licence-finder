@@ -5,7 +5,7 @@ gem 'rails-controller-testing'
 gem 'govuk_app_config', '~> 1.4.1'
 gem 'plek', '2.1.1'
 
-gem "mongoid", '~> 6.2.0'
+gem "mongoid", '~> 7.0.0'
 gem 'elasticsearch'
 
 gem 'mongoid_rails_migrations', '~> 1.1.0'

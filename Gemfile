@@ -13,7 +13,7 @@ gem 'mongoid_rails_migrations', '~> 1.1.0'
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'
 else
-  gem 'gds-api-adapters', '~> 52.2'
+  gem 'gds-api-adapters', '~> 52.5'
 end
 
 if ENV['SLIMMER_DEV']

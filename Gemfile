@@ -28,7 +28,7 @@ gem 'uglifier', '~> 4.1.8'
 gem 'govuk_frontend_toolkit', '~> 7.4.2'
 gem 'govuk_publishing_components', '~> 6.5.0'
 
-gem 'govuk-lint', '~> 1.2.1'
+gem 'govuk-lint', '~> 3.8.0'
 
 group :development, :test do
   gem 'pry-rails'

@@ -9,10 +9,10 @@ RSpec.describe DataImporter::Licences do
 
   describe "clean import" do
     it "imports a single licence from a file handle" do
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+        "1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
+      CSV
 
       importer = DataImporter::Licences.new(source, StringIO.new)
       importer.run
@@ -34,10 +34,10 @@ RSpec.describe DataImporter::Licences do
     end
 
     it "decodes any html entities in the data file" do
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Some Sector","1","Some Activity","1","Pavement licence (England &amp; Wales)","Copyright","1","0","1","0","0"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+        "1","Some Sector","1","Some Activity","1","Pavement licence (England &amp; Wales)","Copyright","1","0","1","0","0"
+      CSV
 
       importer = DataImporter::Licences.new(source, StringIO.new)
       importer.run
@@ -49,10 +49,10 @@ RSpec.describe DataImporter::Licences do
     it "updates the licence if one with the same correlation_id already exists" do
       FactoryGirl.create(:licence, correlation_id: 1, name: "Test Name", da_england: false)
 
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+        "1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
+      CSV
 
       importer = DataImporter::Licences.new(source, StringIO.new)
       importer.run
@@ -64,10 +64,10 @@ RSpec.describe DataImporter::Licences do
     end
 
     it "fails early if the sector does not exist" do
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"2","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+        "2","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
+      CSV
 
       importer = DataImporter::Licences.new(source, StringIO.new)
       expect {
@@ -78,10 +78,10 @@ RSpec.describe DataImporter::Licences do
     end
 
     it "fails early if the activity does not exist" do
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","2","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+        "1","Motor vehicle fuel retail","2","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
+      CSV
 
       importer = DataImporter::Licences.new(source, StringIO.new)
       expect {
@@ -98,10 +98,10 @@ RSpec.describe DataImporter::Licences do
       sector2 = FactoryGirl.create(:sector, correlation_id: 3, parents: [l2sector1], layer: 3)
       sector3 = FactoryGirl.create(:sector, correlation_id: 4, parents: [l2sector2], layer: 3)
 
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"101","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+        "101","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
+      CSV
 
       importer = DataImporter::Licences.new(source, StringIO.new)
       importer.run
@@ -121,10 +121,10 @@ RSpec.describe DataImporter::Licences do
       sector2 = FactoryGirl.create(:sector, correlation_id: 3, layer: 3, parents: [l2sector])
       sector3 = FactoryGirl.create(:sector, correlation_id: 4, layer: 3, parents: [])
 
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"101","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+        "101","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","0","1","0","0"
+      CSV
 
       importer = DataImporter::Licences.new(source, StringIO.new)
       importer.run
@@ -141,10 +141,10 @@ RSpec.describe DataImporter::Licences do
       @licence = FactoryGirl.create(:licence, gds_id: "123-2-1", name: "Test Name", da_england: false)
       licence_link = FactoryGirl.create(:licence_link, sector: @sector, activity: @activity, licence: @licence)
 
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+        "1","Motor vehicle fuel retail","1","Play background music in your premises","123-2-1","Licences to play music in a theatre (All UK)","Copyright","1","1","1","1","0"
+      CSV
 
       importer = DataImporter::Licences.new(source, StringIO.new)
       importer.run
@@ -155,10 +155,10 @@ RSpec.describe DataImporter::Licences do
 
   describe "devolved authorities" do
     it "marks all devolved authority flags true if DA_ALL is set" do
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
-"1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
+        "1","Motor vehicle fuel retail","1","Play background music in your premises","1","Licences to play music in a theatre (All UK)","Copyright","0","0","0","0","1"
+      CSV
 
       importer = DataImporter::Licences.new(source, StringIO.new)
       importer.run

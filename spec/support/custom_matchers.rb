@@ -4,6 +4,7 @@ module CustomMatchers
     expect(field).not_to be_nil
     case options[:type].to_s
     when nil
+      nil
     when 'textarea'
       expect(field.tag_name).to eq(type)
     else

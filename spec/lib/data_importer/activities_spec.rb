@@ -4,11 +4,11 @@ require 'data_importer'
 RSpec.describe DataImporter::Activities do
   describe "fresh import" do
     it "should import activities from a file handle" do
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINSS_ACT_ID","ACTIVITY_TITLE"
-"1000431","Nutritionist services","362","Practise as a dietitian "
-"1000431","Nutritionist services","1002","Use CCTV systems"
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINSS_ACT_ID","ACTIVITY_TITLE"
+        "1000431","Nutritionist services","362","Practise as a dietitian "
+        "1000431","Nutritionist services","1002","Use CCTV systems"
+      CSV
 
       sector = FactoryGirl.create(:sector, correlation_id: 1000431)
 
@@ -28,11 +28,11 @@ RSpec.describe DataImporter::Activities do
     end
 
     it "should avoid importing the same activity id more than once" do
-      source = StringIO.new(<<-END)
-"SECTOR_OID","SECTOR","BUSINSS_ACT_ID","ACTIVITY_TITLE"
-"1000431","Nutritionist services","362","Practise as a dietitian "
-"1000431","Nutritionist services","362","Practise as a dietitian "
-      END
+      source = StringIO.new(<<~CSV)
+        "SECTOR_OID","SECTOR","BUSINSS_ACT_ID","ACTIVITY_TITLE"
+        "1000431","Nutritionist services","362","Practise as a dietitian "
+        "1000431","Nutritionist services","362","Practise as a dietitian "
+      CSV
 
       FactoryGirl.create(:sector, correlation_id: 1000431)
 

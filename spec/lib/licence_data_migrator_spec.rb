@@ -3,11 +3,12 @@ require 'licence_data_migrator'
 
 RSpec.describe LicenceDataMigrator do
   before(:each) do
-    @migrator = LicenceDataMigrator.new({
-      "1083741393" => "1237-4-1",
-      "1083741799" => "1620001",
-      "1084062157" => "1580003",
-      "1075329002" => "9876-3-1"
+    @migrator = LicenceDataMigrator.new(
+      {
+        "1083741393" => "1237-4-1",
+        "1083741799" => "1620001",
+        "1084062157" => "1580003",
+        "1075329002" => "9876-3-1"
       },
       StringIO.new
     )

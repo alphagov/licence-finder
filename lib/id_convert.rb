@@ -1,5 +1,8 @@
 # Produces a three way mapping between the legacy BT_ID, the Legal Ref Number and the new GDS_ID
 #
+
+# rubocop:disable Metrics/BlockLength
+
 class IdConvert
   def self.run
     licence_mappings = CSV.read("data/licence_mappings.csv", headers: true)
@@ -43,3 +46,5 @@ class IdConvert
     puts "In db   #{in_db}/#{match}"
   end
 end
+
+# rubocop:enable Metrics/BlockLength

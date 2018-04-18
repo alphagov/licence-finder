@@ -6,7 +6,7 @@ class Search
 
   def self.create(environment = Rails.env)
     config_path = Rails.root + 'config' + "elasticsearch.yml"
-    client_config = HashWithIndifferentAccess.new(YAML.load(ERB.new(File.read(config_path)).result))
+    client_config = HashWithIndifferentAccess.new(YAML.safe_load(ERB.new(File.read(config_path)).result))
     client_config = client_config[environment].merge(client_config[:all_envs])
     index_name = client_config.delete(:index)
     settings = client_config.delete(:create)

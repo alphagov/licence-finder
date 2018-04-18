@@ -11,8 +11,8 @@ class LicenceFinderController < ApplicationController
   ].freeze
   ACTIONS = %w(sectors activities business_location).freeze
 
-  before_action :extract_and_validate_sector_ids, except: [:sectors, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
-  before_action :extract_and_validate_activity_ids, except: [:sectors, :sectors_submit, :activities, :browse_sector_index, :browse_sector, :browse_sector_child, :browse_sector_grandchild]
+  before_action :extract_and_validate_sector_ids, except: %i(sectors browse_sector_index browse_sector browse_sector_child browse_sector_grandchild)
+  before_action :extract_and_validate_activity_ids, except: %i(sectors sectors_submit activities browse_sector_index browse_sector browse_sector_child browse_sector_grandchild)
   before_action :set_expiry
   before_action :setup_content_item
   after_action :add_analytics_headers

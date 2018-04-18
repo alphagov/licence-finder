@@ -9,8 +9,8 @@ RSpec.describe LicenceLink, type: :model do
       FactoryGirl.create(:licence_link,
                          sector: @licence_link.sector,
                          activity: @licence_link.activity,
-                         licence: @licence_link.licence
-      )
+                         licence: @licence_link.licence)
+
       expect {
         @licence_link.save
       }.to raise_error(Mongo::Error::OperationFailure)

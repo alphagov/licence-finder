@@ -20,10 +20,10 @@ RSpec.describe Search::Client do
 
   describe "with a stubbed out path" do
     before(:each) do
-      source = StringIO.new(<<-END)
-123,foo, bar, monkey
-321,bottle, mouse, keyboard
-      END
+      source = StringIO.new(<<~CSV)
+        123,foo, bar, monkey
+        321,bottle, mouse, keyboard
+      CSV
       @client = Search::Client.new
       allow(@client).to receive(:extra_terms_handle).and_return(source)
     end

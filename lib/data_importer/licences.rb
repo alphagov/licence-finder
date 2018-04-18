@@ -59,6 +59,6 @@ private
   end
 
   def is_applicable_in(row, devolved_authority)
-    row[devolved_authority].to_i > 0 || row['ALL_OF_UK'].to_i > 0
+    row[devolved_authority].to_i.positive? || row['ALL_OF_UK'].to_i.positive?
   end
 end

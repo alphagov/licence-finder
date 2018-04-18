@@ -4,10 +4,10 @@ require 'data_importer'
 RSpec.describe DataImporter::Sectors do
   describe "fresh import" do
     it "imports sectors from a file handle" do
-      source = StringIO.new(<<-END)
-"LAYER1_OID","LAYER_1_TAX_CODE","LAYER1","LAYER2_OID","LAYER_2_TAX_CODE","LAYER2","LAYER3_OID","LAYER_3_TAX_CODE","LAYER3"
-"1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
-      END
+      source = StringIO.new(<<~CSV)
+        "LAYER1_OID","LAYER_1_TAX_CODE","LAYER1","LAYER2_OID","LAYER_2_TAX_CODE","LAYER2","LAYER3_OID","LAYER_3_TAX_CODE","LAYER3"
+        "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
+      CSV
 
       expect(Sector.find_by_correlation_id(1000011)).to eq(nil)
 
@@ -28,11 +28,11 @@ RSpec.describe DataImporter::Sectors do
     end
 
     it "avoids importing the same sector id twice" do
-      source = StringIO.new(<<-END)
-"LAYER1_OID","LAYER_1_TAX_CODE","LAYER1","LAYER2_OID","LAYER_2_TAX_CODE","LAYER2","LAYER3_OID","LAYER_3_TAX_CODE","LAYER3"
-"1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
-"1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
-      END
+      source = StringIO.new(<<~CSV)
+        "LAYER1_OID","LAYER_1_TAX_CODE","LAYER1","LAYER2_OID","LAYER_2_TAX_CODE","LAYER2","LAYER3_OID","LAYER_3_TAX_CODE","LAYER3"
+        "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
+        "1000001","A0","Agriculture, forestry and fishing","1000002","A0.010","Agriculture","1000011","A0.010.090","Animal farming support services"
+      CSV
 
       expect(Sector.find_by_correlation_id(1000011)).to eq(nil)
 

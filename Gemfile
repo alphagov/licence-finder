@@ -34,7 +34,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.7.2'
   gem 'factory_girl_rails', '~> 4.9.0'
-  gem 'database_cleaner', '~> 1.6.2'
+  gem 'database_cleaner', '~> 1.7.0'
   gem 'capybara', '~> 2.18.0'
 
   # TODO: 1.10.x is available, but it introduces a warning about using an old

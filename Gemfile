@@ -40,7 +40,7 @@ group :development, :test do
   # TODO: 1.10.x is available, but it introduces a warning about using an old
   # version of phantomjs and suggests we upgrade to a version >= 2.1.1, we'll
   # stick to 1.9.x until we can get a newer phantomjs version.
-  gem 'poltergeist', '~> 1.17.0'
+  gem 'poltergeist', '~> 1.18.0'
   gem 'webmock', '~> 3.4.0'
   gem 'govuk-content-schema-test-helpers'
 end

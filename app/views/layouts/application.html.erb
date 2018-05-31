@@ -3,6 +3,7 @@
   <head>
     <title><%= content_for?(:page_title) ? yield(:page_title) : "Licence Finder" %> - GOV.UK</title>
     <meta name="description" content="Find out which licences you might need for your activity or business.">
+    <meta name="robots" content="noindex">
     <%= stylesheet_link_tag "licence-finder" %>
     <%= javascript_include_tag 'licence-finder', defer: true %>
     <%= yield :head %>

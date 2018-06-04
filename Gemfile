@@ -19,7 +19,7 @@ end
 if ENV['SLIMMER_DEV']
   gem "slimmer", :path => '../slimmer'
 else
-  gem "slimmer", '12.1.0'
+  gem "slimmer", '13.0.0'
 end
 
 gem 'sass-rails', '~> 5.0.7'

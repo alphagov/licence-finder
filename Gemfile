@@ -41,6 +41,6 @@ group :development, :test do
   # version of phantomjs and suggests we upgrade to a version >= 2.1.1, we'll
   # stick to 1.9.x until we can get a newer phantomjs version.
   gem 'poltergeist', '~> 1.18.1'
-  gem 'webmock', '~> 3.4.1'
+  gem 'webmock', '~> 3.4.2'
   gem 'govuk-content-schema-test-helpers'
 end

@@ -6,6 +6,7 @@ node {
 
   govuk.buildProject(
     sassLint: false,
-    repoName: 'licence-finder'
+    repoName: 'licence-finder',
+    brakeman: true,
   )
 }

@@ -32,7 +32,7 @@ gem 'govuk-lint', '~> 3.8.0'
 
 group :development, :test do
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.7.2'
+  gem 'rspec-rails', '~> 3.8.0'
   gem 'factory_girl_rails', '~> 4.9.0'
   gem 'database_cleaner', '~> 1.7.0'
   gem 'capybara', '~> 3.5.1'

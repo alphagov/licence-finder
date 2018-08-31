@@ -29,21 +29,21 @@ RSpec.describe Search::Client::Elasticsearch do
     end
 
     it "indexes provided sectors" do
-      s1 = FactoryGirl.create(:sector, public_id: 1, name: "Sector One")
+      s1 = FactoryBot.create(:sector, public_id: 1, name: "Sector One")
       allow_any_instance_of(
         Elasticsearch::Transport::Client
       ).to receive(:create).with(
         hash_including(@client.to_document(s1))
       ).and_return(true)
 
-      s2 = FactoryGirl.create(:sector, public_id: 2, name: "Sector Two")
+      s2 = FactoryBot.create(:sector, public_id: 2, name: "Sector Two")
       allow_any_instance_of(
         Elasticsearch::Transport::Client
       ).to receive(:create).with(
         hash_including(@client.to_document(s2))
       ).and_return(true)
 
-      s3 = FactoryGirl.create(:sector, public_id: 3, name: "Sector Three")
+      s3 = FactoryBot.create(:sector, public_id: 3, name: "Sector Three")
       allow_any_instance_of(
         Elasticsearch::Transport::Client
       ).to receive(:create).with(
@@ -55,7 +55,7 @@ RSpec.describe Search::Client::Elasticsearch do
 
     it "converts a sector to a hash with the correct fields set" do
       document = @client.to_document(
-        FactoryGirl.build(
+        FactoryBot.build(
           :sector,
           public_id: 123,
           name: "Test Sector"
@@ -79,7 +79,7 @@ RSpec.describe Search::Client::Elasticsearch do
         123 => %w(foo bar monkey)
       )
       document = @client.to_document(
-        FactoryGirl.build(
+        FactoryBot.build(
           :sector,
           public_id: 321,
           correlation_id: 123,

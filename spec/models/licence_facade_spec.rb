@@ -5,8 +5,8 @@ RSpec.describe LicenceFacade, type: :model do
 
   describe "create_for_licences" do
     before :each do
-      @l1 = FactoryGirl.create(:licence)
-      @l2 = FactoryGirl.create(:licence)
+      @l1 = FactoryBot.create(:licence)
+      @l2 = FactoryBot.create(:licence)
     end
 
     it "should query Rummager for licence details" do
@@ -110,7 +110,7 @@ RSpec.describe LicenceFacade, type: :model do
 
   describe "attribute accessors" do
     before :each do
-      @licence = FactoryGirl.create(:licence)
+      @licence = FactoryBot.create(:licence)
     end
 
     context "with API data" do

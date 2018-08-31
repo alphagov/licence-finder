@@ -1,6 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :licence do
     sequence(:correlation_id)
     sequence(:gds_id) { |n| "#{n}-3-1" }

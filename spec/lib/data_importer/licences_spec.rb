@@ -3,8 +3,8 @@ require 'data_importer'
 
 RSpec.describe DataImporter::Licences do
   before :each do
-    @sector = FactoryGirl.create(:sector, correlation_id: 1, layer: 3)
-    @activity = FactoryGirl.create(:activity, correlation_id: 1)
+    @sector = FactoryBot.create(:sector, correlation_id: 1, layer: 3)
+    @activity = FactoryBot.create(:activity, correlation_id: 1)
   end
 
   describe "clean import" do
@@ -47,7 +47,7 @@ RSpec.describe DataImporter::Licences do
     end
 
     it "updates the licence if one with the same correlation_id already exists" do
-      FactoryGirl.create(:licence, correlation_id: 1, name: "Test Name", da_england: false)
+      FactoryBot.create(:licence, correlation_id: 1, name: "Test Name", da_england: false)
 
       source = StringIO.new(<<~CSV)
         "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
@@ -92,11 +92,11 @@ RSpec.describe DataImporter::Licences do
     end
 
     it "adds links for all layer3 sectors if a layer2 sector id is provided" do
-      l2sector1 = FactoryGirl.create(:sector, correlation_id: 101, layer: 2)
-      l2sector2 = FactoryGirl.create(:sector, correlation_id: 111, layer: 2)
-      sector1 = FactoryGirl.create(:sector, correlation_id: 2, parents: [l2sector1], layer: 3)
-      sector2 = FactoryGirl.create(:sector, correlation_id: 3, parents: [l2sector1], layer: 3)
-      sector3 = FactoryGirl.create(:sector, correlation_id: 4, parents: [l2sector2], layer: 3)
+      l2sector1 = FactoryBot.create(:sector, correlation_id: 101, layer: 2)
+      l2sector2 = FactoryBot.create(:sector, correlation_id: 111, layer: 2)
+      sector1 = FactoryBot.create(:sector, correlation_id: 2, parents: [l2sector1], layer: 3)
+      sector2 = FactoryBot.create(:sector, correlation_id: 3, parents: [l2sector1], layer: 3)
+      sector3 = FactoryBot.create(:sector, correlation_id: 4, parents: [l2sector2], layer: 3)
 
       source = StringIO.new(<<~CSV)
         "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
@@ -115,11 +115,11 @@ RSpec.describe DataImporter::Licences do
     end
 
     it "adds links for all layer3 sectors if a layer1 sector id is provided" do
-      l1sector = FactoryGirl.create(:sector, correlation_id: 101, layer: 1)
-      l2sector = FactoryGirl.create(:sector, correlation_id: 102, layer: 2, parents: [l1sector])
-      sector1 = FactoryGirl.create(:sector, correlation_id: 2, layer: 3, parents: [l2sector])
-      sector2 = FactoryGirl.create(:sector, correlation_id: 3, layer: 3, parents: [l2sector])
-      sector3 = FactoryGirl.create(:sector, correlation_id: 4, layer: 3, parents: [])
+      l1sector = FactoryBot.create(:sector, correlation_id: 101, layer: 1)
+      l2sector = FactoryBot.create(:sector, correlation_id: 102, layer: 2, parents: [l1sector])
+      sector1 = FactoryBot.create(:sector, correlation_id: 2, layer: 3, parents: [l2sector])
+      sector2 = FactoryBot.create(:sector, correlation_id: 3, layer: 3, parents: [l2sector])
+      sector3 = FactoryBot.create(:sector, correlation_id: 4, layer: 3, parents: [])
 
       source = StringIO.new(<<~CSV)
         "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"
@@ -138,8 +138,8 @@ RSpec.describe DataImporter::Licences do
     end
 
     it "does not create a new licence_link if it already exists" do
-      @licence = FactoryGirl.create(:licence, gds_id: "123-2-1", name: "Test Name", da_england: false)
-      licence_link = FactoryGirl.create(:licence_link, sector: @sector, activity: @activity, licence: @licence)
+      @licence = FactoryBot.create(:licence, gds_id: "123-2-1", name: "Test Name", da_england: false)
+      licence_link = FactoryBot.create(:licence_link, sector: @sector, activity: @activity, licence: @licence)
 
       source = StringIO.new(<<~CSV)
         "SECTOR_OID","SECTOR","BUSINESSACT_ID","ACTIVITY_TITLE","LICENCE_OID","LICENCE","REGULATION_AREA","DA_ENGLAND","DA_SCOTLAND","DA_WALES","DA_NIRELAND","ALL_OF_UK"

@@ -15,11 +15,11 @@ RSpec.describe Licence, type: :model do
 
   describe "validations" do
     before :each do
-      @licence = FactoryGirl.build(:licence)
+      @licence = FactoryBot.build(:licence)
     end
 
     it "should have a database level uniqueness constraint on gds_id" do
-      FactoryGirl.create(:licence, gds_id: "24-3-1")
+      FactoryBot.create(:licence, gds_id: "24-3-1")
       @licence.gds_id = "24-3-1"
       expect {
         @licence.save
@@ -39,7 +39,7 @@ RSpec.describe Licence, type: :model do
 
   describe "find_by_gds_id" do
     before :each do
-      @licence = FactoryGirl.create(:licence)
+      @licence = FactoryBot.create(:licence)
     end
 
     it "should be able to retrieve by gds_id" do
@@ -55,19 +55,19 @@ RSpec.describe Licence, type: :model do
 
   describe "find_by_sectors_activities_and_location" do
     before :each do
-      @s1 = FactoryGirl.create(:sector, name: "Sector One")
-      @s2 = FactoryGirl.create(:sector, name: "Sector Two")
+      @s1 = FactoryBot.create(:sector, name: "Sector One")
+      @s2 = FactoryBot.create(:sector, name: "Sector Two")
 
-      @a1 = FactoryGirl.create(:activity, name: "Activity One")
-      @a2 = FactoryGirl.create(:activity, name: "Activity Two")
+      @a1 = FactoryBot.create(:activity, name: "Activity One")
+      @a2 = FactoryBot.create(:activity, name: "Activity Two")
 
-      @l1 = FactoryGirl.create(:licence, name: "Licence One")
-      @l2 = FactoryGirl.create(:licence, name: "Licence Two", da_scotland: true, da_wales: true, da_northern_ireland: true)
-      @l3 = FactoryGirl.create(:licence, name: "Licence Three", da_scotland: true)
+      @l1 = FactoryBot.create(:licence, name: "Licence One")
+      @l2 = FactoryBot.create(:licence, name: "Licence Two", da_scotland: true, da_wales: true, da_northern_ireland: true)
+      @l3 = FactoryBot.create(:licence, name: "Licence Three", da_scotland: true)
 
-      @ll1 = FactoryGirl.create(:licence_link, sector: @s1, activity: @a1, licence: @l1)
-      @ll2 = FactoryGirl.create(:licence_link, sector: @s1, activity: @a2, licence: @l2)
-      @ll3 = FactoryGirl.create(:licence_link, sector: @s2, activity: @a2, licence: @l3)
+      @ll1 = FactoryBot.create(:licence_link, sector: @s1, activity: @a1, licence: @l1)
+      @ll2 = FactoryBot.create(:licence_link, sector: @s1, activity: @a2, licence: @l2)
+      @ll3 = FactoryBot.create(:licence_link, sector: @s2, activity: @a2, licence: @l3)
     end
 
     it "should find all licences that match sectors, activities and location" do

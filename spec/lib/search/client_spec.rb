@@ -14,7 +14,7 @@ RSpec.describe Search::Client do
 
   it "returns an empty array if no extra terms are found for a sector" do
     client = Search::Client.new
-    expect(client.extra_terms_for_sector(FactoryGirl.build(:sector, public_id: 123))).to eq([])
+    expect(client.extra_terms_for_sector(FactoryBot.build(:sector, public_id: 123))).to eq([])
   end
 
 
@@ -34,7 +34,7 @@ RSpec.describe Search::Client do
     end
 
     it "finds extra terms for a sector" do
-      sector = FactoryGirl.build(:sector, public_id: 321, correlation_id: 123)
+      sector = FactoryBot.build(:sector, public_id: 321, correlation_id: 123)
       expect(@client.extra_terms_for_sector(sector)).to eq(%w(foo bar monkey))
     end
   end

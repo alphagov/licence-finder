@@ -31,16 +31,12 @@ gem 'govuk_publishing_components', '~> 9.15.0'
 gem 'govuk-lint', '~> 3.8.0'
 
 group :development, :test do
+  gem 'capybara', '~> 3.7.0'
+  gem 'database_cleaner', '~> 1.7.0'
+  gem 'factory_girl_rails', '~> 4.9.0'
+  gem 'govuk-content-schema-test-helpers'
+  gem 'govuk_test'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.8.0'
-  gem 'factory_girl_rails', '~> 4.9.0'
-  gem 'database_cleaner', '~> 1.7.0'
-  gem 'capybara', '~> 3.7.0'
-
-  # TODO: 1.10.x is available, but it introduces a warning about using an old
-  # version of phantomjs and suggests we upgrade to a version >= 2.1.1, we'll
-  # stick to 1.9.x until we can get a newer phantomjs version.
-  gem 'poltergeist', '~> 1.18.1'
   gem 'webmock', '~> 3.4.2'
-  gem 'govuk-content-schema-test-helpers'
 end

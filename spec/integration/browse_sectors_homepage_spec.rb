@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Browse sectors via licence finder homepage", type: :request do
   before(:each) do
-    @s1 = FactoryGirl.create(:sector, layer: 1, name: 'First top level')
-    @s2 = FactoryGirl.create(:sector, layer: 2, name: 'First child', parents: [@s1])
-    @s3 = FactoryGirl.create(:sector, layer: 3, name: 'First grand child', parents: [@s2])
-    @s4 = FactoryGirl.create(:sector, layer: 2, name: 'Second child', parents: [@s1])
-    @s5 = FactoryGirl.create(:sector, layer: 3, name: 'Second grand child', parents: [@s4])
-    @s6 = FactoryGirl.create(:sector, layer: 1, name: 'Second top level')
+    @s1 = FactoryBot.create(:sector, layer: 1, name: 'First top level')
+    @s2 = FactoryBot.create(:sector, layer: 2, name: 'First child', parents: [@s1])
+    @s3 = FactoryBot.create(:sector, layer: 3, name: 'First grand child', parents: [@s2])
+    @s4 = FactoryBot.create(:sector, layer: 2, name: 'Second child', parents: [@s1])
+    @s5 = FactoryBot.create(:sector, layer: 3, name: 'Second grand child', parents: [@s4])
+    @s6 = FactoryBot.create(:sector, layer: 1, name: 'Second top level')
 
     visit "/#{APP_SLUG}/sectors"
   end

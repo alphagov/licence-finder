@@ -10,7 +10,7 @@ RSpec.describe DataImporter::Activities do
         "1000431","Nutritionist services","1002","Use CCTV systems"
       CSV
 
-      sector = FactoryGirl.create(:sector, correlation_id: 1000431)
+      sector = FactoryBot.create(:sector, correlation_id: 1000431)
 
       importer = DataImporter::Activities.new(source, StringIO.new)
       importer.run
@@ -34,7 +34,7 @@ RSpec.describe DataImporter::Activities do
         "1000431","Nutritionist services","362","Practise as a dietitian "
       CSV
 
-      FactoryGirl.create(:sector, correlation_id: 1000431)
+      FactoryBot.create(:sector, correlation_id: 1000431)
 
       importer = DataImporter::Activities.new(source, StringIO.new)
       importer.run

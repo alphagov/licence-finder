@@ -33,7 +33,7 @@ gem 'govuk-lint', '~> 3.8.0'
 group :development, :test do
   gem 'capybara', '~> 3.7.0'
   gem 'database_cleaner', '~> 1.7.0'
-  gem 'factory_girl_rails', '~> 4.9.0'
+  gem 'factory_bot_rails'
   gem 'govuk-content-schema-test-helpers'
   gem 'govuk_test'
   gem 'pry-rails'

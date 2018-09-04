@@ -22,8 +22,8 @@ RSpec.describe LicenceDataMigrator do
 
   describe "run" do
     it "updates the gds_id_id on licence records" do
-      l1 = FactoryGirl.create(:licence, name: "Licence One", correlation_id: 1083741393)
-      l2 = FactoryGirl.create(:licence, name: "Licence Two", correlation_id: 1075329002)
+      l1 = FactoryBot.create(:licence, name: "Licence One", correlation_id: 1083741393)
+      l2 = FactoryBot.create(:licence, name: "Licence Two", correlation_id: 1075329002)
 
       @migrator.run
 
@@ -36,7 +36,7 @@ RSpec.describe LicenceDataMigrator do
 
   describe "country code" do
     it "gives a numeric code for the licence" do
-      licence = FactoryGirl.create(:licence, da_northern_ireland: true, da_england: true)
+      licence = FactoryBot.create(:licence, da_northern_ireland: true, da_england: true)
       expect(@migrator.country_code(licence)).to eq(7)
       licence.da_northern_ireland = false
       licence.da_scotland = true

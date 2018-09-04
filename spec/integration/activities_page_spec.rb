@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "Activity selection page", type: :request do
   before(:each) do
-    @s1 = FactoryGirl.create(:sector, name: "Fooey Sector")
-    @s2 = FactoryGirl.create(:sector, name: "Kablooey Sector")
-    @s3 = FactoryGirl.create(:sector, name: "Gooey Sector")
-    @s4 = FactoryGirl.create(:sector, name: "Sector Four")
+    @s1 = FactoryBot.create(:sector, name: "Fooey Sector")
+    @s2 = FactoryBot.create(:sector, name: "Kablooey Sector")
+    @s3 = FactoryBot.create(:sector, name: "Gooey Sector")
+    @s4 = FactoryBot.create(:sector, name: "Sector Four")
 
-    @a1 = FactoryGirl.create(:activity, name: "Fooey Activity", sectors: [@s1])
-    @a2 = FactoryGirl.create(:activity, name: "Kablooey Activity", sectors: [@s2])
-    @a3 = FactoryGirl.create(:activity, name: "Kabloom", sectors: [@s1, @s2])
-    @a4 = FactoryGirl.create(:activity, name: "Gooey Activity", sectors: [@s3])
-    @a5 = FactoryGirl.create(:activity, name: "Transmogrifying", sectors: [@s1, @s3])
+    @a1 = FactoryBot.create(:activity, name: "Fooey Activity", sectors: [@s1])
+    @a2 = FactoryBot.create(:activity, name: "Kablooey Activity", sectors: [@s2])
+    @a3 = FactoryBot.create(:activity, name: "Kabloom", sectors: [@s1, @s2])
+    @a4 = FactoryBot.create(:activity, name: "Gooey Activity", sectors: [@s3])
+    @a5 = FactoryBot.create(:activity, name: "Transmogrifying", sectors: [@s1, @s3])
   end
 
   specify "inspecting the page" do

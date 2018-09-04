@@ -14,7 +14,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       @s3 = FactoryGirl.create(:sector, name: "Bravo")
 
       get :sectors
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns[:sectors]).to eq([])
     end
 
@@ -26,7 +26,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       expect($search).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
 
       get :sectors, params: { q: "test query" }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns[:sectors].to_a).to eq([@s1, @s2, @s3])
     end
 
@@ -43,7 +43,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       @s3 = FactoryGirl.create(:sector, public_id: 2345, name: "Bravo")
 
       get :sectors, params: { sectors: '3456_2345_4567' }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns[:picked_sectors]).to eq([@s3, @s2])
     end
 
@@ -86,7 +86,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       end
       it "and_return http success" do
         do_get
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "fetches the given sectors and assigns them to @sectors" do
@@ -146,7 +146,7 @@ RSpec.describe LicenceFinderController, type: :controller do
 
       it "and_return http success" do
         do_get
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "fetches the given sectors and assigns them to @sectors" do

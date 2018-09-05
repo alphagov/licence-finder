@@ -9,24 +9,24 @@ RSpec.describe LicenceFinderController, type: :controller do
 
   describe "GET 'sectors'" do
     it "returns no sectors if no query is provided" do
-      @s1 = FactoryGirl.create(:sector, name: "Alpha")
-      @s2 = FactoryGirl.create(:sector, name: "Charlie")
-      @s3 = FactoryGirl.create(:sector, name: "Bravo")
+      @s1 = FactoryBot.create(:sector, name: "Alpha")
+      @s2 = FactoryBot.create(:sector, name: "Charlie")
+      @s3 = FactoryBot.create(:sector, name: "Bravo")
 
       get :sectors
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns[:sectors]).to eq([])
     end
 
     it "returns all sectors returned from the search" do
-      @s1 = FactoryGirl.create(:sector, name: "Alpha")
-      @s2 = FactoryGirl.create(:sector, name: "Charlie")
-      @s3 = FactoryGirl.create(:sector, name: "Bravo")
+      @s1 = FactoryBot.create(:sector, name: "Alpha")
+      @s2 = FactoryBot.create(:sector, name: "Charlie")
+      @s3 = FactoryBot.create(:sector, name: "Bravo")
 
       expect($search).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
 
       get :sectors, params: { q: "test query" }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns[:sectors].to_a).to eq([@s1, @s2, @s3])
     end
 
@@ -39,11 +39,11 @@ RSpec.describe LicenceFinderController, type: :controller do
     end
 
     it "extracts selected sectors ordered alphabetically by name" do
-      @s2 = FactoryGirl.create(:sector, public_id: 3456, name: "Charlie")
-      @s3 = FactoryGirl.create(:sector, public_id: 2345, name: "Bravo")
+      @s2 = FactoryBot.create(:sector, public_id: 3456, name: "Charlie")
+      @s3 = FactoryBot.create(:sector, public_id: 2345, name: "Bravo")
 
       get :sectors, params: { sectors: '3456_2345_4567' }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns[:picked_sectors]).to eq([@s3, @s2])
     end
 
@@ -62,9 +62,9 @@ RSpec.describe LicenceFinderController, type: :controller do
     end
 
     it "returns slimmer result count when available" do
-      @s1 = FactoryGirl.create(:sector, name: "Alpha")
-      @s2 = FactoryGirl.create(:sector, name: "Charlie")
-      @s3 = FactoryGirl.create(:sector, name: "Bravo")
+      @s1 = FactoryBot.create(:sector, name: "Alpha")
+      @s2 = FactoryBot.create(:sector, name: "Charlie")
+      @s3 = FactoryBot.create(:sector, name: "Bravo")
 
       expect($search).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
 
@@ -86,7 +86,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       end
       it "and_return http success" do
         do_get
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "fetches the given sectors and assigns them to @sectors" do
@@ -112,9 +112,9 @@ RSpec.describe LicenceFinderController, type: :controller do
       end
 
       it "extracts the union of selected activities ordered alphabetically by name" do
-        a1 = FactoryGirl.create(:activity, public_id: 1234, name: "Alpha")
-        a2 = FactoryGirl.create(:activity, public_id: 2345, name: "Charlie")
-        a3 = FactoryGirl.create(:activity, public_id: 3456, name: "Bravo")
+        a1 = FactoryBot.create(:activity, public_id: 1234, name: "Alpha")
+        a2 = FactoryBot.create(:activity, public_id: 2345, name: "Charlie")
+        a3 = FactoryBot.create(:activity, public_id: 3456, name: "Bravo")
         scope1 = double
         expect(scope1).to receive(:ascending).with(:name).and_return(:some_activities)
         expect(Activity).to receive(:find_by_sectors).with(:some_sectors).and_return(scope1)
@@ -146,7 +146,7 @@ RSpec.describe LicenceFinderController, type: :controller do
 
       it "and_return http success" do
         do_get
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "fetches the given sectors and assigns them to @sectors" do
@@ -270,12 +270,12 @@ RSpec.describe LicenceFinderController, type: :controller do
   describe "GET 'browse sectors'" do
     context 'With nested sectors' do
       before :each do
-        @s1 = FactoryGirl.create(:sector, layer: 1, name: 'First top level')
-        @s2 = FactoryGirl.create(:sector, layer: 2, name: 'First child', parents: [@s1])
-        @s3 = FactoryGirl.create(:sector, layer: 3, name: 'First grand child', parents: [@s2])
-        @s4 = FactoryGirl.create(:sector, layer: 2, name: 'Second child', parents: [@s1])
-        @s5 = FactoryGirl.create(:sector, layer: 3, name: 'Second grand child', parents: [@s4])
-        @s6 = FactoryGirl.create(:sector, layer: 1, name: 'Second top level')
+        @s1 = FactoryBot.create(:sector, layer: 1, name: 'First top level')
+        @s2 = FactoryBot.create(:sector, layer: 2, name: 'First child', parents: [@s1])
+        @s3 = FactoryBot.create(:sector, layer: 3, name: 'First grand child', parents: [@s2])
+        @s4 = FactoryBot.create(:sector, layer: 2, name: 'Second child', parents: [@s1])
+        @s5 = FactoryBot.create(:sector, layer: 3, name: 'Second grand child', parents: [@s4])
+        @s6 = FactoryBot.create(:sector, layer: 1, name: 'Second top level')
       end
 
       it 'shows top level sectors' do

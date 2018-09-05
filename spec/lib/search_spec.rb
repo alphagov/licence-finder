@@ -23,8 +23,8 @@ RSpec.describe Search do
   end
 
   it "passes search query on to concrete client" do
-    s1 = FactoryGirl.create(:sector, public_id: 234)
-    s2 = FactoryGirl.create(:sector, public_id: 123)
+    s1 = FactoryBot.create(:sector, public_id: 234)
+    s2 = FactoryBot.create(:sector, public_id: 123)
 
     expect(@client).to receive(:search).with(:query).and_return([123, 234])
 

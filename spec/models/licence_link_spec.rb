@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe LicenceLink, type: :model do
   describe "validations" do
     before :each do
-      @licence_link = FactoryGirl.build(:licence_link)
+      @licence_link = FactoryBot.build(:licence_link)
     end
     it "should have a database uniqueness constraint on sector, activity and licence" do
-      FactoryGirl.create(:licence_link,
+      FactoryBot.create(:licence_link,
                          sector: @licence_link.sector,
                          activity: @licence_link.activity,
                          licence: @licence_link.licence)
@@ -31,15 +31,15 @@ RSpec.describe LicenceLink, type: :model do
 
   describe "find_by_sectors_and_activities" do
     before :each do
-      @s1 = FactoryGirl.create(:sector, name: "Sector One")
-      @s2 = FactoryGirl.create(:sector, name: "Sector Two")
+      @s1 = FactoryBot.create(:sector, name: "Sector One")
+      @s2 = FactoryBot.create(:sector, name: "Sector Two")
 
-      @a1 = FactoryGirl.create(:activity, name: "Activity One")
-      @a2 = FactoryGirl.create(:activity, name: "Activity Two")
+      @a1 = FactoryBot.create(:activity, name: "Activity One")
+      @a2 = FactoryBot.create(:activity, name: "Activity Two")
 
-      @ll1 = FactoryGirl.create(:licence_link, sector: @s1, activity: @a1)
-      @ll2 = FactoryGirl.create(:licence_link, sector: @s1, activity: @a2)
-      @ll3 = FactoryGirl.create(:licence_link, sector: @s2, activity: @a2)
+      @ll1 = FactoryBot.create(:licence_link, sector: @s1, activity: @a1)
+      @ll2 = FactoryBot.create(:licence_link, sector: @s1, activity: @a2)
+      @ll3 = FactoryBot.create(:licence_link, sector: @s2, activity: @a2)
     end
 
     it "should find all licence links that match the provided sectors and activities" do

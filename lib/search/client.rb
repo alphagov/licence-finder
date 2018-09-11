@@ -16,6 +16,7 @@ class Search
 
     def extra_terms
       return @extra_terms unless @extra_terms.nil?
+
       @extra_terms = Hash.new
       begin
         CSV.new(extra_terms_handle).each do |row|

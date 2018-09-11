@@ -12,9 +12,11 @@ private
   def process_row(row)
     counter = 0
     sectors = find_sectors(row['SECTOR_OID'].to_i)
+
     if sectors.empty?
       raise "Could not find sector #{row['SECTOR_OID']}, failing."
     end
+
     activity = Activity.find_by_correlation_id(row['BUSINESSACT_ID'].to_i)
     raise "Could not find activity #{row['BUSINESSACT_ID']}, failing." if activity.nil?
 

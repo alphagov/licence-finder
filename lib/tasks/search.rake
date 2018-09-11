@@ -1,4 +1,3 @@
-
 desc "Interact with the search index"
 task search: %w(search::index)
 

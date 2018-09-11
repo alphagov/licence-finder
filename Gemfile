@@ -28,7 +28,7 @@ gem 'uglifier', '~> 4.1.18'
 gem 'govuk_frontend_toolkit', '~> 7.6.0'
 gem 'govuk_publishing_components', '~> 9.20.0'
 
-gem 'govuk-lint', '~> 3.8.0'
+gem 'govuk-lint', '~> 3.9.0'
 
 group :development, :test do
   gem 'capybara', '~> 3.7.1'

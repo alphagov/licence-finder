@@ -60,7 +60,7 @@ class LicenceDataMigrator
     return 1 if licence.da_england
   end
 
-  def done(counter, nl)
-    @output_stream.print "Migrated #{counter} Licences.#{nl}"
+  def done(counter, newline)
+    @output_stream.print "Migrated #{counter} Licences.#{newline}"
   end
 end

@@ -7,7 +7,9 @@ protected
 
   rescue_from GdsApi::TimedOutException, with: :error_503
 
-  def error_503(e = nil); error(503, e); end
+  def error_503(exception = nil)
+    error(503, exception)
+  end
 
   def error(status_code, exception = nil)
     GovukError.notify(exception)

@@ -31,7 +31,7 @@ gem 'govuk_publishing_components', '~> 9.20.0'
 gem 'govuk-lint', '~> 3.9.0'
 
 group :development, :test do
-  gem 'capybara', '~> 3.7.1'
+  gem 'capybara', '~> 3.7.2'
   gem 'database_cleaner', '~> 1.7.0'
   gem 'factory_bot_rails'
   gem 'govuk-content-schema-test-helpers'

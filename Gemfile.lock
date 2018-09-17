@@ -350,7 +350,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  capybara (~> 3.7.2)
   database_cleaner (~> 1.7.0)
   elasticsearch
   factory_bot_rails

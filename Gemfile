@@ -8,7 +8,7 @@ gem 'plek', '2.1.1'
 gem "mongoid", '~> 6.2.0'
 gem 'elasticsearch'
 
-gem 'mongoid_rails_migrations', '~> 1.1.0'
+gem 'mongoid_rails_migrations', '~> 1.2.0'
 
 if ENV['API_DEV']
   gem 'gds-api-adapters', :path => '../gds-api-adapters'

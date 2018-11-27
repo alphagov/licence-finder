@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.1'
+gem 'rails', '5.2.1.1'
 gem 'rails-controller-testing'
 gem 'govuk_app_config', '~> 1.10.0'
 gem 'plek', '2.1.1'

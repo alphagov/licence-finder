@@ -28,7 +28,7 @@ gem 'uglifier', '~> 4.1.19'
 gem 'govuk_frontend_toolkit', '~> 8.1.0'
 gem 'govuk_publishing_components', '~> 12.20.0'
 
-gem 'govuk-lint', '~> 3.9.0'
+gem 'govuk-lint', '~> 3.10.0'
 
 group :development, :test do
   gem 'database_cleaner', '~> 1.7.0'

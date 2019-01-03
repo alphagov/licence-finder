@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.2.2'
 gem 'rails-controller-testing'
-gem 'govuk_app_config', '~> 1.10.0'
+gem 'govuk_app_config', '~> 1.11.0'
 gem 'plek', '2.1.1'
 
 gem "mongoid", '~> 6.2.0'

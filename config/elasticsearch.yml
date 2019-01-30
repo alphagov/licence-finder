@@ -48,22 +48,22 @@ all_envs:
             sector:
                 properties:
                     public_id:
-                        type:  string
+                        type:  keyword
                         store: yes
                         index: not_analyzed
                     title:
-                        type: multi_field
+                        type: text
                         fields:
-                            title:        {type: string, store: yes, index: analyzed, analyzer: my_snowball}
-                            sortable:     {type: string, store: no,  index: analyzed, analyzer: my_snowball}
-                            autocomplete: {type: string, store: no,  index: analyzed, analyzer: my_snowball}
+                            title:        {type: text, store: yes, index: analyzed, analyzer: my_snowball}
+                            sortable:     {type: text, store: no,  index: analyzed, analyzer: my_snowball}
+                            autocomplete: {type: text, store: no,  index: analyzed, analyzer: my_snowball}
                     extra_terms:
-                        type: string
+                        type: text
                         store: yes
                         index: analyzed
                         analyzer: my_snowball
                     activities:
-                        type: string
+                        type: text
                         store: yes
                         index: analyzed
                         analyzer: my_snowball

@@ -24,7 +24,7 @@ RSpec.describe Search::Client::Elasticsearch do
   end
 
   it "returns sectors that match on title" do
-    expect(@search.search("fooey")[0].public_id).to eq(123)
+    expect(@search.search("fooey")[1].public_id).to eq(123)
     expect(@search.search("sector").length).to eq(3)
   end
 
@@ -43,6 +43,6 @@ RSpec.describe Search::Client::Elasticsearch do
   it "returns sectors above activities when both match" do
     search = @search.search("fooey")
     expect(search.length).to eq(2)
-    expect(search[0].public_id).to eq(123)
+    expect(search[1].public_id).to eq(123)
   end
 end

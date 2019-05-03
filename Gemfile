@@ -30,7 +30,7 @@ gem 'uglifier', '~> 4.1.20'
 gem 'govuk_frontend_toolkit', '~> 8.1.0'
 gem 'govuk_publishing_components', '~> 16.14.1'
 
-gem 'govuk-lint', '~> 3.11.0'
+gem 'govuk-lint', '~> 3.11.1'
 
 group :development, :test do
   gem 'database_cleaner', '~> 1.7.0'

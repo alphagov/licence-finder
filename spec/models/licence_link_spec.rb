@@ -7,9 +7,9 @@ RSpec.describe LicenceLink, type: :model do
     end
     it "should have a database uniqueness constraint on sector, activity and licence" do
       FactoryBot.create(:licence_link,
-                         sector: @licence_link.sector,
-                         activity: @licence_link.activity,
-                         licence: @licence_link.licence)
+                        sector: @licence_link.sector,
+                        activity: @licence_link.activity,
+                        licence: @licence_link.licence)
 
       expect {
         @licence_link.save

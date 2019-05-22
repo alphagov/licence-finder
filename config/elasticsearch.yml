@@ -50,21 +50,21 @@ all_envs:
                     public_id:
                         type:  keyword
                         store: yes
-                        index: not_analyzed
+                        index: true
                     title:
                         type: text
                         fields:
-                            title:        {type: text, store: yes, index: analyzed, analyzer: my_snowball}
-                            sortable:     {type: text, store: no,  index: analyzed, analyzer: my_snowball}
-                            autocomplete: {type: text, store: no,  index: analyzed, analyzer: my_snowball}
+                            title:        {type: text, store: yes, index: true, analyzer: my_snowball}
+                            sortable:     {type: text, store: no,  index: true, analyzer: my_snowball}
+                            autocomplete: {type: text, store: no,  index: true, analyzer: my_snowball}
                     extra_terms:
                         type: text
                         store: yes
-                        index: analyzed
+                        index: true
                         analyzer: my_snowball
                     activities:
                         type: text
                         store: yes
-                        index: analyzed
+                        index: true
                         analyzer: my_snowball
                         boost: 0.7

@@ -5,7 +5,7 @@ ruby File.read(".ruby-version").strip
 gem 'rails', '5.2.3'
 gem 'rails-controller-testing'
 gem 'govuk_app_config', '~> 1.16.1'
-gem 'plek', '2.1.1'
+gem 'plek', '3.0.0'
 
 gem "mongoid", '~> 6.2.0'
 gem 'elasticsearch'

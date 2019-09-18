@@ -328,7 +328,7 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (~> 1.0)
       selenium-webdriver (>= 3.0, < 4.0)
-    webmock (3.7.4)
+    webmock (3.7.5)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -362,7 +362,7 @@ DEPENDENCIES
   sass-rails (~> 5.0.7)
   slimmer (= 13.1.0)
   uglifier (~> 4.1.20)
-  webmock (~> 3.7.4)
+  webmock (~> 3.7.5)
 
 RUBY VERSION
    ruby 2.6.3p62

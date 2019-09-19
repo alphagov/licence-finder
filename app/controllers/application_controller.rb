@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
 
   slimmer_template 'wrapper'
 
+  if ENV["BASIC_AUTH_USERNAME"]
+    http_basic_authenticate_with(
+      name: ENV.fetch("BASIC_AUTH_USERNAME"),
+      password: ENV.fetch("BASIC_AUTH_PASSWORD")
+    )
+  end
+
 protected
 
   rescue_from GdsApi::TimedOutException, with: :error_503

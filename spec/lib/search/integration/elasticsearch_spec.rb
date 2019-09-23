@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 require "search/client/elasticsearch"
 
 RSpec.describe Search::Client::Elasticsearch do

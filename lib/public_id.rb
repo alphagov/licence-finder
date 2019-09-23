@@ -19,12 +19,12 @@ private
       counters = Mongoid::Clients.default["counters"]
       counter = counters.find_one_and_update(
         {
-          '_id' => self.class.name
+          "_id" => self.class.name,
         },
         {
-          '$inc' => { count: 1 }
+          "$inc" => { count: 1 },
         },
-        return_document: :after, upsert: true
+        return_document: :after, upsert: true,
       )["count"]
 
       self.public_id = counter

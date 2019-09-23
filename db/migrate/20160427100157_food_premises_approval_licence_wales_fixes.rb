@@ -1,7 +1,7 @@
 class FoodPremisesApprovalLicenceWalesFixes < Mongoid::Migration
   def self.up
     # Food Premises Approval (England).
-    english_licence = Licence.find_by_gds_id('1293-1-1')
+    english_licence = Licence.find_by_gds_id("1293-1-1")
     english_licence.da_england = true
     english_licence.da_wales = false
     english_licence.da_scotland = false
@@ -10,9 +10,9 @@ class FoodPremisesApprovalLicenceWalesFixes < Mongoid::Migration
 
     # Food Premises Approval (Wales).
     welsh_licence = Licence.new
-    welsh_licence.gds_id = '1293-2-1'
-    welsh_licence.correlation_id = '9999990003' # Following the convention in `20130426141055_data_fixes1.rb`.
-    welsh_licence.name = 'Food Premises Approval (Wales)'
+    welsh_licence.gds_id = "1293-2-1"
+    welsh_licence.correlation_id = "9999990003" # Following the convention in `20130426141055_data_fixes1.rb`.
+    welsh_licence.name = "Food Premises Approval (Wales)"
     welsh_licence.da_england = false
     welsh_licence.da_wales = true
     welsh_licence.da_scotland = false
@@ -29,9 +29,9 @@ class FoodPremisesApprovalLicenceWalesFixes < Mongoid::Migration
 
     # Food Premises Approval (Scotland).
     scottish_licence = Licence.new
-    scottish_licence.gds_id = '1293-3-1'
-    scottish_licence.correlation_id = '9999990004'
-    scottish_licence.name = 'Food Premises Approval (Scotland)'
+    scottish_licence.gds_id = "1293-3-1"
+    scottish_licence.correlation_id = "9999990004"
+    scottish_licence.name = "Food Premises Approval (Scotland)"
     scottish_licence.da_england = false
     scottish_licence.da_wales = false
     scottish_licence.da_scotland = true
@@ -48,9 +48,9 @@ class FoodPremisesApprovalLicenceWalesFixes < Mongoid::Migration
 
     # Food Premises Approval (Northern Ireland).
     northern_irish_licence = Licence.new
-    northern_irish_licence.gds_id = '1293-4-1'
-    northern_irish_licence.correlation_id = '9999990005'
-    northern_irish_licence.name = 'Food Premises Approval (Northern Ireland)'
+    northern_irish_licence.gds_id = "1293-4-1"
+    northern_irish_licence.correlation_id = "9999990005"
+    northern_irish_licence.name = "Food Premises Approval (Northern Ireland)"
     northern_irish_licence.da_england = false
     northern_irish_licence.da_wales = false
     northern_irish_licence.da_scotland = false

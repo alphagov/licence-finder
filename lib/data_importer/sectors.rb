@@ -1,5 +1,5 @@
 class DataImporter::Sectors < DataImporter
-  FILENAME = 'sectors.csv'.freeze
+  FILENAME = "sectors.csv".freeze
 
   def self.open_data_file
     File.open(data_file_path(FILENAME))
@@ -9,21 +9,21 @@ private
 
   def process_row(row)
     counter = 0
-    layer1 = Sector.find_by_correlation_id(row['LAYER1_OID'].to_i)
+    layer1 = Sector.find_by_correlation_id(row["LAYER1_OID"].to_i)
     unless layer1
       layer1 = Sector.new
-      layer1.correlation_id = row['LAYER1_OID'].to_i
-      layer1.name = row['LAYER1']
+      layer1.correlation_id = row["LAYER1_OID"].to_i
+      layer1.name = row["LAYER1"]
       layer1.layer = 1
       layer1.save!
       counter += 1
     end
 
-    layer2 = Sector.find_by_correlation_id(row['LAYER2_OID'].to_i)
+    layer2 = Sector.find_by_correlation_id(row["LAYER2_OID"].to_i)
     unless layer2
       layer2 = Sector.new
-      layer2.correlation_id = row['LAYER2_OID'].to_i
-      layer2.name = row['LAYER2']
+      layer2.correlation_id = row["LAYER2_OID"].to_i
+      layer2.name = row["LAYER2"]
       layer2.layer = 2
       layer2.save!
       counter += 1
@@ -35,11 +35,11 @@ private
       layer2.save!
     end
 
-    layer3 = Sector.find_by_correlation_id(row['LAYER3_OID'].to_i)
+    layer3 = Sector.find_by_correlation_id(row["LAYER3_OID"].to_i)
     unless layer3
       layer3 = Sector.new
-      layer3.correlation_id = row['LAYER3_OID'].to_i
-      layer3.name = row['LAYER3']
+      layer3.correlation_id = row["LAYER3_OID"].to_i
+      layer3.name = row["LAYER3"]
       layer3.layer = 3
       layer3.save!
       counter += 1

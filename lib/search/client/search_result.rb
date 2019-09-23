@@ -8,7 +8,7 @@ class Search
       end
 
       def public_id
-        raw_result.dig('_source', 'public_id')
+        raw_result.dig("_source", "public_id")
       end
     end
   end

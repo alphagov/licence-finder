@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Licence, type: :model do
   it "should use the correct field types on the model" do
     Licence.create!(
       gds_id: "24-3-1",
       name: "Some Licence",
-      regulation_area: "Some Regulation Area"
+      regulation_area: "Some Regulation Area",
     )
     licence = Licence.first
     expect(licence.gds_id).to eq("24-3-1")
@@ -27,12 +27,12 @@ RSpec.describe Licence, type: :model do
     end
 
     it "should require a name" do
-      @licence.name = ''
+      @licence.name = ""
       expect(@licence).not_to be_valid
     end
 
     it "should require a regulation_area" do
-      @licence.regulation_area = ''
+      @licence.regulation_area = ""
       expect(@licence).not_to be_valid
     end
   end

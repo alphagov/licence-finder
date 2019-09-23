@@ -1,4 +1,4 @@
-require_relative 'boot'
+require_relative "boot"
 
 # Pick the frameworks you want:
 # require "active_record/railtie"
@@ -12,7 +12,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-APP_SLUG = 'licence-finder'
+APP_SLUG = "licence-finder"
 
 module LicenceFinder
   class Application < Rails::Application
@@ -29,7 +29,7 @@ module LicenceFinder
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.prefix = '/licencefinder' # this has to match the path configured in puppet and deploy scripts.
+    config.assets.prefix = "/licencefinder" # this has to match the path configured in puppet and deploy scripts.
     config.assets.precompile += %w(
       licence-finder.css
       licence-finder.js

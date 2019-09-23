@@ -1,3 +1,3 @@
-require 'search'
+require "search"
 
 $search = Search.create

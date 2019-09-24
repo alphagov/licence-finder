@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe LicenceFacade, type: :model do
   include RummagerHelpers
@@ -41,7 +41,7 @@ RSpec.describe LicenceFacade, type: :model do
     context "when the Search API errors" do
       before :each do
         allow(Services.rummager).to receive(:search).and_raise(
-          GdsApi::BaseError
+          GdsApi::BaseError,
         )
       end
 
@@ -55,7 +55,7 @@ RSpec.describe LicenceFacade, type: :model do
 
       it "should log the error" do
         expect(Rails.logger).to receive(:warn).with(
-          "GdsApi::BaseError fetching licence details from Rummager"
+          "GdsApi::BaseError fetching licence details from Rummager",
         )
         LicenceFacade.create_for_licences([@l1, @l2])
       end
@@ -64,7 +64,7 @@ RSpec.describe LicenceFacade, type: :model do
     context "when Rummager times out" do
       before :each do
         allow(Services.rummager).to receive(:search).and_raise(
-          GdsApi::TimedOutException
+          GdsApi::TimedOutException,
         )
       end
 
@@ -78,7 +78,7 @@ RSpec.describe LicenceFacade, type: :model do
 
       it "should log the error" do
         expect(Rails.logger).to receive(:warn).with(
-          "GdsApi::TimedOutException fetching licence details from Rummager"
+          "GdsApi::TimedOutException fetching licence details from Rummager",
         )
         LicenceFacade.create_for_licences([@l1, @l2])
       end
@@ -87,7 +87,7 @@ RSpec.describe LicenceFacade, type: :model do
     context "when Rummager errors" do
       before :each do
         allow(Services.rummager).to receive(:search).and_raise(
-          GdsApi::HTTPErrorResponse.new(503)
+          GdsApi::HTTPErrorResponse.new(503),
         )
       end
 
@@ -101,7 +101,7 @@ RSpec.describe LicenceFacade, type: :model do
 
       it "should log the error" do
         expect(Rails.logger).to receive(:warn).with(
-          "GdsApi::HTTPErrorResponse(503) fetching licence details from Rummager"
+          "GdsApi::HTTPErrorResponse(503) fetching licence details from Rummager",
         )
         LicenceFacade.create_for_licences([@l1, @l2])
       end
@@ -124,15 +124,15 @@ RSpec.describe LicenceFacade, type: :model do
       end
 
       it "should return the API title" do
-        expect(@lf.title).to eq(@pub_data['title'])
+        expect(@lf.title).to eq(@pub_data["title"])
       end
 
       it "should return the frontend url" do
-        expect(@lf.url).to eq(Plek.current.website_root + @pub_data['link'])
+        expect(@lf.url).to eq(Plek.current.website_root + @pub_data["link"])
       end
 
       it "should return the API short description" do
-        expect(@lf.short_description).to eq(@pub_data['licence_short_description'])
+        expect(@lf.short_description).to eq(@pub_data["licence_short_description"])
       end
     end
 

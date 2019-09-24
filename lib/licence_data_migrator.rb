@@ -1,7 +1,7 @@
-require 'csv'
+require "csv"
 
 class LicenceDataMigrator
-  MAPPING_FILENAME = 'correlation_id_to_gds_id_mappings.csv'.freeze
+  MAPPING_FILENAME = "correlation_id_to_gds_id_mappings.csv".freeze
 
   attr_accessor :licence_mappings
 
@@ -15,13 +15,13 @@ class LicenceDataMigrator
   end
 
   def self.data_file_path(filename)
-    Rails.root.join('data', filename)
+    Rails.root.join("data", filename)
   end
 
   def self.load_mappings
     licence_mappings = {}
     CSV.read(data_file_path(MAPPING_FILENAME), headers: true).each do |row|
-      licence_mappings[row['correlation_id']] = row['gds_id']
+      licence_mappings[row["correlation_id"]] = row["gds_id"]
     end
     licence_mappings
   end

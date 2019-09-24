@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Activity, type: :model do
   it "should use the correct field types on the model" do
     Activity.create!(
       public_id: 42,
       correlation_id: 24,
-      name: "Some Activity"
+      name: "Some Activity",
     )
     activity = Activity.first
     expect(activity.public_id).to eq(42)
@@ -35,7 +35,7 @@ RSpec.describe Activity, type: :model do
     end
 
     it "should require a name" do
-      @activity.name = ''
+      @activity.name = ""
       expect(@activity).not_to be_valid
     end
   end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 require "services"
 
 RSpec.describe PublishingApiNotifier do
@@ -11,7 +11,7 @@ RSpec.describe PublishingApiNotifier do
         e1dc997a-3afe-4180-8c8d-880e7c1ca5a1
         2cae8a3f-1231-4379-bdca-1de9b4668508
       ].each do |content_id|
-        expect(Services.publishing_api).to receive(:put_content).with(content_id, be_valid_against_schema('generic'))
+        expect(Services.publishing_api).to receive(:put_content).with(content_id, be_valid_against_schema("generic"))
         expect(Services.publishing_api).to receive(:publish).with(content_id)
       end
 

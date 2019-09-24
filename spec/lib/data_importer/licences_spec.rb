@@ -1,5 +1,5 @@
-require 'rails_helper'
-require 'data_importer'
+require "rails_helper"
+require "data_importer"
 
 RSpec.describe DataImporter::Licences do
   before :each do

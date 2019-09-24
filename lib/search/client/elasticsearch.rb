@@ -1,6 +1,6 @@
 require "search/client"
-require 'search/client/search_result'
-require 'elasticsearch'
+require "search/client/search_result"
+require "elasticsearch"
 
 class Search
   class Client
@@ -24,7 +24,7 @@ class Search
         delete_index
         index = client.indices.create(
           index: index_name,
-          body: settings
+          body: settings,
         )
         raise unless index
 
@@ -34,7 +34,7 @@ class Search
       def index(sectors)
         sectors.each do |sector|
           client.create(
-            { index: index_name }.merge(to_document(sector))
+            { index: index_name }.merge(to_document(sector)),
           )
         end
       end
@@ -47,8 +47,8 @@ class Search
             public_id: sector.public_id,
             title: sector.name,
             extra_terms: extra_terms_for_sector(sector),
-            activities: activities_for_sector(sector)
-          }
+            activities: activities_for_sector(sector),
+          },
         }
       end
 
@@ -63,13 +63,13 @@ class Search
             query: {
               multi_match: {
                 fields: %w(title extra_terms activities),
-                query: query
-              }
-            }
-          }
+                query: query,
+              },
+            },
+          },
         )
 
-        raw_search_results['hits']['hits'].map do |result|
+        raw_search_results["hits"]["hits"].map do |result|
           SearchResult.new(result).public_id
         end
       end

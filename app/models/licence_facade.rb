@@ -1,13 +1,13 @@
-require 'gds_api/exceptions'
-require 'services'
+require "gds_api/exceptions"
+require "services"
 
 class LicenceFacade
   def self.create_for_licences(licences)
-    search_results = search_licences(licences)['results']
+    search_results = search_licences(licences)["results"]
 
     licences.map do |licence|
       matching_search_data = search_results.find do |search_result|
-        licence.gds_id.to_s == search_result['licence_identifier']
+        licence.gds_id.to_s == search_result["licence_identifier"]
       end
 
       new(licence, matching_search_data)
@@ -15,13 +15,13 @@ class LicenceFacade
   end
 
   def self.search_licences(licences)
-    raw_data = { 'results' => [] }
+    raw_data = { "results" => [] }
 
     return raw_data if licences.empty?
 
     Services.rummager.search(
       filter_licence_identifier: licences.map(&:gds_id).map(&:to_s),
-      fields: %w(title licence_short_description licence_identifier link)
+      fields: %w(title licence_short_description licence_identifier link),
     ).to_h
   rescue GdsApi::BaseError => e
     message = e.class.name
@@ -41,7 +41,7 @@ class LicenceFacade
   end
 
   def title
-    published? ? @search_result['title'] : @licence.name
+    published? ? @search_result["title"] : @licence.name
   end
 
   def url
@@ -49,12 +49,12 @@ class LicenceFacade
   end
 
   def short_description
-    published? ? @search_result['licence_short_description'] : nil
+    published? ? @search_result["licence_short_description"] : nil
   end
 
 private
 
   def web_url
-    Plek.current.website_root + @search_result['link']
+    Plek.current.website_root + @search_result["link"]
   end
 end

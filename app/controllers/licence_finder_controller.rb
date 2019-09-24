@@ -1,13 +1,13 @@
-require 'services'
+require "services"
 
 class LicenceFinderController < ApplicationController
   include Slimmer::Headers
 
-  SEPARATOR = '_'.freeze
+  SEPARATOR = "_".freeze
   QUESTIONS = [
-    'What is your activity or business?',
-    'What would you like to do?',
-    'Where will you be located?',
+    "What is your activity or business?",
+    "What would you like to do?",
+    "Where will you be located?",
   ].freeze
   ACTIONS = %w(sectors activities business_location).freeze
 
@@ -44,9 +44,9 @@ class LicenceFinderController < ApplicationController
   def business_location_submit
     next_params = { sectors: @sector_ids.join(SEPARATOR), activities: @activity_ids.join(SEPARATOR) }
     if %w(england scotland wales northern_ireland).include? params[:location]
-      redirect_to({ action: 'licences', location: params[:location] }.merge(next_params))
+      redirect_to({ action: "licences", location: params[:location] }.merge(next_params))
     else
-      redirect_to({ action: 'business_location' }.merge(next_params))
+      redirect_to({ action: "business_location" }.merge(next_params))
     end
   end
 

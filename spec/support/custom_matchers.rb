@@ -5,16 +5,16 @@ module CustomMatchers
     case options[:type].to_s
     when nil
       nil
-    when 'textarea'
+    when "textarea"
       expect(field.tag_name).to eq(type)
     else
-      expect(field.tag_name).to eq('input')
-      expect(field['type']).to eq(options[:type].to_s)
+      expect(field.tag_name).to eq("input")
+      expect(field["type"]).to eq(options[:type].to_s)
     end
     if options.has_key?(:value)
       expect(field.value).to eq(options[:value])
     elsif options.has_key?(:checked)
-      expect(field['checked']).to eq(options[:checked])
+      expect(field["checked"]).to eq(options[:checked])
     end
   end
 
@@ -39,15 +39,15 @@ module CustomMatchers
   end
 
   def i_should_see_selected_activity_links(ids)
-    check_selected_links(ids, 'activity')
+    check_selected_links(ids, "activity")
   end
 
   def i_should_see_selected_sector_link(id)
-    check_selected_link(id, 'sector')
+    check_selected_link(id, "sector")
   end
 
   def i_should_see_selected_activity_link(id)
-    check_selected_link(id, 'activity')
+    check_selected_link(id, "activity")
   end
 
 private

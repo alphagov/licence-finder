@@ -1,10 +1,10 @@
 module RummagerHelpers
   def rummager_licence_hash(gds_id)
     {
-      'title' => "Title from search for #{gds_id}",
-      'licence_short_description' => "Short description for #{gds_id}",
-      'licence_identifier' => gds_id.to_s,
-      'link' => "/licence-#{gds_id}",
+      "title" => "Title from search for #{gds_id}",
+      "licence_short_description" => "Short description for #{gds_id}",
+      "licence_identifier" => gds_id.to_s,
+      "link" => "/licence-#{gds_id}",
     }
   end
 

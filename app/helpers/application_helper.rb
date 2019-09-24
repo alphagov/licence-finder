@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def current_question(&block)
-    render partial: 'current_question', locals: {
+    render partial: "current_question", locals: {
       body: capture(&block),
     }
   end
@@ -60,7 +60,7 @@ protected
   def extract_public_ids(new_params, key_name, model, block)
     block.call(
       new_params[key_name.pluralize.to_s].to_s.split("_"),
-      [model.public_id.to_s]
+      [model.public_id.to_s],
     )
   end
 

@@ -11,16 +11,16 @@ class LicenceFinderContentItemPresenter
       base_path: base_path,
       title: metadata[:title],
       description: metadata[:description],
-      document_type: 'license_finder',
-      schema_name: 'generic',
-      publishing_app: 'licencefinder',
-      rendering_app: 'licencefinder',
-      locale: 'en',
+      document_type: "license_finder",
+      schema_name: "generic",
+      publishing_app: "licencefinder",
+      rendering_app: "licencefinder",
+      locale: "en",
       details: {},
       routes: [
-        { type: 'prefix', path: base_path }
+        { type: "prefix", path: base_path },
       ],
-      update_type: 'minor',
+      update_type: "minor",
     }
   end
 

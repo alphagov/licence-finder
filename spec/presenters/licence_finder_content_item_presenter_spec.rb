@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe LicenceFinderContentItemPresenter do
   let(:subject) { LicenceFinderContentItemPresenter.new("/licence-finder/sectors", "4ade13fa-7e79-4bee-b809-61dbe5c3aa22") }
@@ -18,13 +18,13 @@ RSpec.describe LicenceFinderContentItemPresenter do
       expect(subject.payload[:title]).to eq "Licence Finder"
     end
 
-    it 'uses a prefix route' do
-      expect(subject.payload[:routes].first[:type]).to eql('prefix')
+    it "uses a prefix route" do
+      expect(subject.payload[:routes].first[:type]).to eql("prefix")
     end
   end
 
-  describe '#content_id' do
-    it 'has the expected content_id' do
+  describe "#content_id" do
+    it "has the expected content_id" do
       expect(subject.content_id).to eql("4ade13fa-7e79-4bee-b809-61dbe5c3aa22")
     end
   end

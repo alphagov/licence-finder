@@ -1,4 +1,4 @@
-require 'csv'
+require "csv"
 
 class DataImporter
   def self.update
@@ -11,7 +11,7 @@ class DataImporter
   end
 
   def self.data_file_path(filename)
-    Rails.root.join('data', filename)
+    Rails.root.join("data", filename)
   end
 
   def initialize(filehandle, output_stream = $stdout)

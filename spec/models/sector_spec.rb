@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Sector, type: :model do
   it "should use the correct field types on the model" do
     Sector.create!(
       public_id: 42,
       correlation_id: 24,
-      name: "Some Sector"
+      name: "Some Sector",
     )
     sector = Sector.first
     expect(sector.public_id).to eq(42)
@@ -35,7 +35,7 @@ RSpec.describe Sector, type: :model do
     end
 
     it "should require a name" do
-      @sector.name = ''
+      @sector.name = ""
       expect(@sector).not_to be_valid
     end
   end

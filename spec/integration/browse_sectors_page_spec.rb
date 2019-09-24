@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Sector browse page", type: :request do
   before(:each) do
-    @s1 = FactoryBot.create(:sector, layer: 1, name: 'First top level')
-    @s2 = FactoryBot.create(:sector, layer: 2, name: 'First child', parents: [@s1])
-    @s3 = FactoryBot.create(:sector, layer: 3, name: 'First grand child', parents: [@s2])
-    @s4 = FactoryBot.create(:sector, layer: 2, name: 'Second child', parents: [@s1])
-    @s5 = FactoryBot.create(:sector, layer: 3, name: 'Second grand child', parents: [@s4])
-    @s6 = FactoryBot.create(:sector, layer: 1, name: 'Second top level')
+    @s1 = FactoryBot.create(:sector, layer: 1, name: "First top level")
+    @s2 = FactoryBot.create(:sector, layer: 2, name: "First child", parents: [@s1])
+    @s3 = FactoryBot.create(:sector, layer: 3, name: "First grand child", parents: [@s2])
+    @s4 = FactoryBot.create(:sector, layer: 2, name: "Second child", parents: [@s1])
+    @s5 = FactoryBot.create(:sector, layer: 3, name: "Second grand child", parents: [@s4])
+    @s6 = FactoryBot.create(:sector, layer: 1, name: "Second top level")
   end
 
   specify "when browsing the main sectors page" do
@@ -44,7 +44,7 @@ RSpec.describe "Sector browse page", type: :request do
 
     click_on "Add"
 
-    within '.picked-items' do
+    within ".picked-items" do
       expect(page).to have_content @s3.name
     end
   end
@@ -74,10 +74,10 @@ RSpec.describe "Sector browse page", type: :request do
 
     click_on @s1.name # first top level
     click_on @s2.name # first child
-    expect(find('span#sector-3')).to have_text(@s3.name) # first grand child
+    expect(find("span#sector-3")).to have_text(@s3.name) # first grand child
 
     click_on @s4.name # second child
-    expect(find('span#sector-5')).to have_text(@s5.name) # second grand child
+    expect(find("span#sector-5")).to have_text(@s5.name) # second grand child
     expect(page).not_to have_content @s3.name # first grand child
   end
 

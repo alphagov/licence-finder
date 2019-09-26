@@ -25,7 +25,7 @@ else
 end
 
 gem 'sass-rails', '~> 5.0.7'
-gem 'uglifier', '~> 4.1.20'
+gem 'uglifier', '~> 4.2.0'
 
 gem 'govuk_frontend_toolkit', '~> 9.0.0'
 gem 'govuk_publishing_components', '~> 17.21.0'

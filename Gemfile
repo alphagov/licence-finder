@@ -39,5 +39,5 @@ group :development, :test do
   gem 'govuk_test'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.8.2'
-  gem 'webmock', '~> 3.7.5'
+  gem 'webmock', '~> 3.7.6'
 end

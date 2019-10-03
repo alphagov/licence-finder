@@ -2,7 +2,7 @@
 
 library("govuk")
 
-node('elasticsearch-5.6') {
+node('elasticsearch-6.7') {
   govuk.buildProject(
     sassLint: false,
     rubyLintDiff: false,

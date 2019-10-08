@@ -1,7 +1,7 @@
 development:
   clients:
     default:
-      uri: mongodb://localhost/licence_finder_development
+      uri: <%= ENV["MONGODB_URI"] || "mongodb://localhost/licence_finder_development" %>
       options:
         write:
           w: 1
@@ -10,7 +10,7 @@ development:
 test:
   clients:
     default:
-      uri: mongodb://localhost/licence_finder_test
+      uri: <%= ENV["MONGODB_URI"] || "mongodb://localhost/licence_finder_test" %>
       options:
         write:
           w: 1

@@ -38,6 +38,6 @@ group :development, :test do
   gem 'govuk-content-schema-test-helpers'
   gem 'govuk_test'
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.8.2'
+  gem 'rspec-rails', '~> 3.9.0'
   gem 'webmock', '~> 3.7.6'
 end

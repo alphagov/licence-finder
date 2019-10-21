@@ -12,7 +12,12 @@ class ApplicationController < ActionController::Base
 
 protected
 
+  rescue_from GdsApi::HTTPForbidden, with: :error_403
   rescue_from GdsApi::TimedOutException, with: :error_503
+
+  def error_403
+    render status: :forbidden, plain: "403 forbidden"
+  end
 
   def error_503(exception = nil)
     error(503, exception)

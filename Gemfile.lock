@@ -96,7 +96,7 @@ GEM
       activesupport (>= 4.2.0)
     govuk-content-schema-test-helpers (1.6.1)
       json-schema (~> 2.8.0)
-    govuk-lint (4.2.0)
+    govuk-lint (4.3.0)
       rubocop (~> 0.76)
       rubocop-rails (~> 2)
       rubocop-rspec (~> 1.28)
@@ -348,7 +348,7 @@ DEPENDENCIES
   factory_bot_rails
   gds-api-adapters (~> 61.0)
   govuk-content-schema-test-helpers
-  govuk-lint (~> 4.2.0)
+  govuk-lint (~> 4.3.0)
   govuk_app_config (~> 2.0.1)
   govuk_frontend_toolkit (~> 9.0.0)
   govuk_publishing_components (~> 17.21.0)

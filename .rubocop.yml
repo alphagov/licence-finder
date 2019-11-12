@@ -1,2 +1,7 @@
 AllCops:
   TargetRubyVersion: 2.3
+
+inherit_gem:
+  rubocop-govuk:
+    - config/default.yml
+    # - config/rails.yml # add this once we're ready to add Rails cops

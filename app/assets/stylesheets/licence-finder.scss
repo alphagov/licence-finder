@@ -1,13 +1,12 @@
-@import "_conditionals";
-@import "_typography";
-@import "_css3";
+$govuk-use-legacy-palette: true;
+$govuk-typography-use-rem: false;
 
 @import "govuk_publishing_components/all_components";
 
 /* see multi-step.css.erb in the static repo for most of these styles */
 
 #content {
-  margin-bottom: $gutter;
+  margin-bottom: govuk-spacing(3);
 }
 
 .current-question h2 {
@@ -45,10 +44,6 @@ a.add {
   padding-left: 1%;
   width: 22%;
 
-  @include ie(7) {
-    float: none;
-  }
-
   &:focus {
     background-color: transparent;
   }
@@ -70,11 +65,8 @@ a.add {
   width: 38%;
   overflow: hidden;
 
-  @include ie-lte(7) {
-    padding: 8px 10px 24px 10px;
-  }
 
-  @include media(mobile) {
+  @include govuk-media-query($until: mobile) {
     width: auto;
   }
 
@@ -86,7 +78,7 @@ a.add {
   }
 
   h3 {
-    @include core-19;
+    @include govuk-font(19);
   }
 
   .button {
@@ -98,7 +90,7 @@ a.add {
     margin-bottom: 0.75em;
 
     li {
-      @include core-16;
+      @include govuk-font(16);
 
       &:nth-child(even) {
         background-color: #e8f0f0;
@@ -107,10 +99,6 @@ a.add {
       a {
         float: right;
         padding-left: 0.25em;
-
-        @include ie(7) {
-          float: none;
-        }
 
         &.add,
         &.remove {
@@ -132,7 +120,7 @@ a.add {
 
 .picked-items ul li,
 .search-picker ul li {
-  @include core-16;
+  @include govuk-font(19);
   padding: 0.25em 0.3em;
   margin-bottom: 0.25em;
   list-style-type: none;
@@ -161,7 +149,8 @@ a.add {
   width: 57%;
   margin-right: 4%;
 
-  @include media(mobile) {
+
+  @include govuk-media-query($until: mobile) {
     width: auto;
     float: none;
   }
@@ -179,7 +168,7 @@ a.add {
   }
 
   h3 {
-    @include core-19;
+    @include govuk-font(19);
     margin-top: 0;
   }
 }
@@ -195,12 +184,13 @@ a.add {
 }
 
 #sector-navigation {
-  @include media(mobile) {
+
+  @include govuk-media-query($until: mobile) {
     margin-bottom: 1em;
   }
 
   li {
-    @include core-16;
+    @include govuk-font(19);
     display: block;
     margin: 0.5em 0;
     overflow: hidden;
@@ -243,10 +233,10 @@ a.add {
   margin-right: 23em;
 
   label, input {
-    @include core-19;
+    @include govuk-font(19);
   }
 
-  @include media(mobile) {
+  @include govuk-media-query($until: mobile) {
     margin-left: 0;
     margin-right: 0;
   }

@@ -5,9 +5,27 @@ $govuk-typography-use-rem: false;
 
 /* see multi-step.css.erb in the static repo for most of these styles */
 
+/* Fixes an override from govuk-template */
+a:link {
+  &:focus {
+    @include govuk-focused-text;
+  }
+}
+
 #content {
   margin-bottom: govuk-spacing(3);
 }
+
+.lf--start-again {
+  text-align: right;
+
+  .govuk-link {
+    padding: govuk-spacing(3) govuk-spacing(6) 0 govuk-spacing(6);
+    margin-right: govuk-spacing(2);
+    @include govuk-font(19);
+  }
+}
+
 
 .current-question h2 {
   width: 100%;
@@ -44,9 +62,6 @@ a.add {
   padding-left: 1%;
   width: 22%;
 
-  &:focus {
-    background-color: transparent;
-  }
 }
 
 .search-picker li:nth-child(even),
@@ -90,7 +105,7 @@ a.add {
     margin-bottom: 0.75em;
 
     li {
-      @include govuk-font(16);
+      @include govuk-font(14);
 
       &:nth-child(even) {
         background-color: #e8f0f0;
@@ -120,7 +135,7 @@ a.add {
 
 .picked-items ul li,
 .search-picker ul li {
-  @include govuk-font(19);
+  @include govuk-font(16);
   padding: 0.25em 0.3em;
   margin-bottom: 0.25em;
   list-style-type: none;

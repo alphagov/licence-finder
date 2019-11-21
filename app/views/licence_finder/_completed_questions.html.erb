@@ -1,6 +1,6 @@
 <%- if @completed_questions.present? -%>
   <div class="done-questions">
-    <div class="start-again"><%= link_to 'Start again', start_path %></div>
+    <div class="lf--start-again"><%= link_to 'Start again', start_path, class: "govuk-link" %></div>
     <ol>
       <%- @completed_questions.each_with_index do |question_details, index| -%>
         <li class="done">

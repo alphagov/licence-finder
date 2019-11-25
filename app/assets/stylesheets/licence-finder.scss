@@ -194,21 +194,19 @@ a.add {
   margin: 0;
   padding: 0;
   list-style: none;
-  overflow: hidden;
   zoom: 1;
 }
 
 #sector-navigation {
-
+  @include govuk-font(16);
   @include govuk-media-query($until: mobile) {
     margin-bottom: 1em;
   }
 
   li {
-    @include govuk-font(19);
+    @include govuk-font(16);
     display: block;
     margin: 0.5em 0;
-    overflow: hidden;
     zoom: 1;
     clear: both; /* clear under floated "add" links */
 
@@ -230,6 +228,7 @@ a.add {
       &.add {
         background-image: none;
         padding-left: 1%;
+        line-height: 1.6;
       }
     }
   }

@@ -137,7 +137,7 @@ $(function() {
 
             // move the item
             newli.append(oldli.find("span:first").clone().attr('id',  prefix + '-' + itemId + '-selected')).append(" ")
-                 .append($('<a href="" >' + event.data.linkText + '</a>'));
+                 .append($('<a href="" class="govuk-link">' + event.data.linkText + '</a>'));
             targetList.append(newli);
 
             $('li', targetList).each(function() {
@@ -224,7 +224,7 @@ $(function() {
         if (el.is('li.open>a')) {
             url = el.data('old-url');
             el.siblings('ul').remove();
-            var a = $('<a href="'+url+'" data-public-id="'+publicId+'">'+el.text()+'</a>');
+            var a = $('<a class="govuk-link" href="'+url+'" data-public-id="'+publicId+'">'+el.text()+'</a>');
             el.replaceWith(a);
 
             a.parent().removeClass('open');
@@ -283,7 +283,7 @@ $(function() {
 
                         var children = data.sectors,
                             name = $a.text(),
-                            $openA = $('<a data-public-id="' + publicId + '" data-old-url="' + $a.attr('href')+'">' + name + '</a>'),
+                            $openA = $('<a class="govuk-link" data-public-id="' + publicId + '" data-old-url="' + $a.attr('href')+'">' + name + '</a>'),
                             ul = $('<ul />');
 
                         for (i=0, l=children.length; i<l; i++) {
@@ -295,12 +295,12 @@ $(function() {
                                 linkText = (isActive) ? 'Remove' : 'Add';
 
                             if (typeof leaf.url !== 'undefined') {
-                                elString = '<a data-public-id="' + leaf['public-id'] + '" href="' + leaf.url + '">' + leaf.name + '</a>';
+                                elString = '<a class="govuk-link" data-public-id="' + leaf['public-id'] + '" href="' + leaf.url + '">' + leaf.name + '</a>';
                             }
                             else {
                                 elString = '<span class="sector-name" id="sector-'+leaf['public-id']+'">' +
                                     leaf.name +
-                                    '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" rel="nofollow" class="' + linkClass  + '">' +
+                                    '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" rel="nofollow" class="govuk-link ' + linkClass  + '">' +
                                     linkText +
                                     '</a>';
                             }

@@ -54,7 +54,7 @@ protected
     new_params = params.permit(:sectors, :activities, :q).to_h
     new_params[key_name.pluralize.to_s] = extract_public_ids(new_params, key_name, model, block).join("_")
     extra_params["aria-labelledby"] = model_id.to_s
-    extra_params["class"] = "govuk-link"
+    extra_params["class"] = "#{extra_params['class']} govuk-link"
     link_to(name, url_for(new_params.merge(action: key_name.pluralize)), extra_params)
   end
 

@@ -6,7 +6,9 @@
       <%= hidden_field_tag "sectors", params[:sectors], id: "hidden-sectors" %>
       <label class="visuallyhidden" for="search-sectors">Search for areas</label>
       <%= text_field_tag "q", params[:q], id: "search-sectors" %>
-      <%= button_tag params[:q].present? ? "Search again" : "Search", class: "button", id: "search-button" %>
+      <%= render "govuk_publishing_components/components/button", {
+        text: params[:q].present? ? "Search again" : "Search",
+      } %>
     <% end %>
 
     <% if !@sectors.empty? %>
@@ -42,11 +44,14 @@
         <%= basket_link sector %>
       <% end %>
     </ul>
-    <% unless @picked_sectors.empty? %>
-      <div class="button-container">
-        <%= link_to 'Next step', activities_path(sectors: params[:sectors]), class: 'button medium', id: "next-step"  %>
+
+      <div class="button-container js-hidden"><!-- FIXME - what about non-js? -->
+        <%= render "govuk_publishing_components/components/button", {
+          text: "Next step",
+          href: activities_path(sectors: params[:sectors])
+        } %>
       </div>
-    <% end %>
+
   </div>
 <% end %>
 

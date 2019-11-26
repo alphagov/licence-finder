@@ -130,7 +130,6 @@ $(function() {
             prefix = (pageName === 'activities') ? 'activity' : 'sector';
 
         if (event.data.action === 'add') {
-
             oldli = $(this).parent(); // the list item that is being moved
             itemId = oldli.data("public-id");
             newli = $('<li data-public-id="' + itemId + '"></li>'); // the target list item
@@ -190,14 +189,12 @@ $(function() {
         // update links and forms to reflect the move
         if (event.data.action === "add") {
             $(".hint", target).removeClass("hint").addClass("hidden");
-            if ($("#next-step").length === 0) {
-                target.append('<div class="button-container"><a class="button medium" id="next-step">Next step</a></div>');
-            }
+            $(".button-container", target).removeClass("js-hidden")
         } else if (target.find("li").length === 0) {
             $(".hidden", target).removeClass("hidden").addClass("hint");
-            $("#next-step").remove();
+            $(".button-container", target).addClass("js-hidden")
         }
-        $("#next-step").attr("href", createNextUrl());
+        $(".button-container .govuk-button").attr("href", createNextUrl());
         if (pageName === "sectors") {
             $("#search-again-button").attr(
                 "href", window.location.pathname + "?sectors=" + extractIds().join("_"));

@@ -81,7 +81,7 @@ a.add {
   overflow: hidden;
 
 
-  @include govuk-media-query($until: mobile) {
+  @include govuk-media-query($until: tablet) {
     width: auto;
   }
 
@@ -165,7 +165,7 @@ a.add {
   margin-right: 4%;
 
 
-  @include govuk-media-query($until: mobile) {
+  @include govuk-media-query($until: tablet) {
     width: auto;
     float: none;
   }
@@ -199,7 +199,7 @@ a.add {
 
 #sector-navigation {
   @include govuk-font(16);
-  @include govuk-media-query($until: mobile) {
+  @include govuk-media-query($until: tablet) {
     margin-bottom: 1em;
   }
 
@@ -250,7 +250,7 @@ a.add {
     @include govuk-font(19);
   }
 
-  @include govuk-media-query($until: mobile) {
+  @include govuk-media-query($until: tablet) {
     margin-left: 0;
     margin-right: 0;
   }

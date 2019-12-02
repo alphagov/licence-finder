@@ -1,14 +1,31 @@
-@import "_conditionals";
-@import "_typography";
-@import "_css3";
+$govuk-use-legacy-palette: true;
+$govuk-typography-use-rem: false;
 
 @import "govuk_publishing_components/all_components";
 
 /* see multi-step.css.erb in the static repo for most of these styles */
 
-#content {
-  margin-bottom: $gutter;
+/* Fixes an override from govuk-template */
+a:link {
+  &:focus {
+    @include govuk-focused-text;
+  }
 }
+
+#content {
+  margin-bottom: govuk-spacing(3);
+}
+
+.lf--start-again {
+  text-align: right;
+
+  .govuk-link {
+    padding: govuk-spacing(3) govuk-spacing(6) 0 govuk-spacing(6);
+    margin-right: govuk-spacing(2);
+    @include govuk-font(19);
+  }
+}
+
 
 .current-question h2 {
   width: 100%;
@@ -43,15 +60,8 @@ a.add {
   float: right;
   text-align: right;
   padding-left: 1%;
-  width: 22%;
+  width: 24%;
 
-  @include ie(7) {
-    float: none;
-  }
-
-  &:focus {
-    background-color: transparent;
-  }
 }
 
 .search-picker li:nth-child(even),
@@ -70,11 +80,8 @@ a.add {
   width: 38%;
   overflow: hidden;
 
-  @include ie-lte(7) {
-    padding: 8px 10px 24px 10px;
-  }
 
-  @include media(mobile) {
+  @include govuk-media-query($until: tablet) {
     width: auto;
   }
 
@@ -86,7 +93,7 @@ a.add {
   }
 
   h3 {
-    @include core-19;
+    @include govuk-font(19);
   }
 
   .button {
@@ -98,7 +105,7 @@ a.add {
     margin-bottom: 0.75em;
 
     li {
-      @include core-16;
+      @include govuk-font(14);
 
       &:nth-child(even) {
         background-color: #e8f0f0;
@@ -107,10 +114,6 @@ a.add {
       a {
         float: right;
         padding-left: 0.25em;
-
-        @include ie(7) {
-          float: none;
-        }
 
         &.add,
         &.remove {
@@ -132,7 +135,7 @@ a.add {
 
 .picked-items ul li,
 .search-picker ul li {
-  @include core-16;
+  @include govuk-font(16);
   padding: 0.25em 0.3em;
   margin-bottom: 0.25em;
   list-style-type: none;
@@ -150,8 +153,8 @@ a.add {
 #sector-navigation ul li span,
 .search-picker ul li span,
 .picked-items ul li span {
-  float: left;
-  width: 75%;
+  line-height: 1.8;
+  width: 73%;
 }
 
 .browse-container,
@@ -161,7 +164,8 @@ a.add {
   width: 57%;
   margin-right: 4%;
 
-  @include media(mobile) {
+
+  @include govuk-media-query($until: tablet) {
     width: auto;
     float: none;
   }
@@ -179,7 +183,7 @@ a.add {
   }
 
   h3 {
-    @include core-19;
+    @include govuk-font(19);
     margin-top: 0;
   }
 }
@@ -190,20 +194,19 @@ a.add {
   margin: 0;
   padding: 0;
   list-style: none;
-  overflow: hidden;
   zoom: 1;
 }
 
 #sector-navigation {
-  @include media(mobile) {
+  @include govuk-font(16);
+  @include govuk-media-query($until: tablet) {
     margin-bottom: 1em;
   }
 
   li {
-    @include core-16;
+    @include govuk-font(16);
     display: block;
     margin: 0.5em 0;
-    overflow: hidden;
     zoom: 1;
     clear: both; /* clear under floated "add" links */
 
@@ -225,6 +228,7 @@ a.add {
       &.add {
         background-image: none;
         padding-left: 1%;
+        line-height: 1.6;
       }
     }
   }
@@ -243,10 +247,10 @@ a.add {
   margin-right: 23em;
 
   label, input {
-    @include core-19;
+    @include govuk-font(19);
   }
 
-  @include media(mobile) {
+  @include govuk-media-query($until: tablet) {
     margin-left: 0;
     margin-right: 0;
   }

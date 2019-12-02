@@ -7,9 +7,39 @@
     <%= hidden_field_tag(:sectors, @sectors.map(&:public_id).join(controller.class::SEPARATOR)) %>
     <%= hidden_field_tag(:activities, @activities.map(&:public_id).join(controller.class::SEPARATOR)) %>
     <div class="find-location-for-service">
-      <label for="select-location">Select a location
-        <%= select_tag(:location, options_for_select([['Select one...', ''], %w(England england), %w(Scotland scotland), %w(Wales wales), ['Northern Ireland', 'northern_ireland']]), :id => "select-location") %></label>
+
+    <%= render "govuk_publishing_components/components/select", {
+      id: "select-location",
+      label: "Select a location",
+      name: "location",
+      options: [
+        {
+          text: "Select one...",
+          value: ""
+        },
+        {
+          text: "England",
+          value: "england"
+        },
+        {
+          text: "Scotland",
+          value: "scotland"
+        },
+        {
+          text: "Wales",
+          value: "wales"
+        },
+        {
+          text: "Northern Ireland",
+          value: "northern_ireland"
+        },
+      ]
+    } %>
+
+
     </div>
-    <%= button_tag 'Find licences', :class => 'button medium' %>
+    <%= render "govuk_publishing_components/components/button", {
+        text: "Find licences",
+      } %>
   <% end %>
 <% end %>

@@ -57,7 +57,7 @@ private
     element = find(:xpath, ".//li[span/text() = '#{label}']")
     expect(element).not_to be_nil
     expect(element).to have_xpath("a[text() = '#{type}']")
-    expect(element).to have_xpath("a[@class = '#{type_class}']")
+    expect(element).to have_selector(:css, "a.govuk-link.#{type_class}")
   end
 
   def check_selected_link(id, type)

@@ -130,14 +130,13 @@ $(function() {
             prefix = (pageName === 'activities') ? 'activity' : 'sector';
 
         if (event.data.action === 'add') {
-
             oldli = $(this).parent(); // the list item that is being moved
             itemId = oldli.data("public-id");
             newli = $('<li data-public-id="' + itemId + '"></li>'); // the target list item
 
             // move the item
             newli.append(oldli.find("span:first").clone().attr('id',  prefix + '-' + itemId + '-selected')).append(" ")
-                 .append($('<a href="" >' + event.data.linkText + '</a>'));
+                 .append($('<a href="" class="govuk-link">' + event.data.linkText + '</a>'));
             targetList.append(newli);
 
             $('li', targetList).each(function() {
@@ -190,14 +189,12 @@ $(function() {
         // update links and forms to reflect the move
         if (event.data.action === "add") {
             $(".hint", target).removeClass("hint").addClass("hidden");
-            if ($("#next-step").length === 0) {
-                target.append('<div class="button-container"><a class="button medium" id="next-step">Next step</a></div>');
-            }
+            $(".button-container", target).removeClass("js-hidden")
         } else if (target.find("li").length === 0) {
             $(".hidden", target).removeClass("hidden").addClass("hint");
-            $("#next-step").remove();
+            $(".button-container", target).addClass("js-hidden")
         }
-        $("#next-step").attr("href", createNextUrl());
+        $(".button-container .govuk-button").attr("href", createNextUrl());
         if (pageName === "sectors") {
             $("#search-again-button").attr(
                 "href", window.location.pathname + "?sectors=" + extractIds().join("_"));
@@ -224,7 +221,7 @@ $(function() {
         if (el.is('li.open>a')) {
             url = el.data('old-url');
             el.siblings('ul').remove();
-            var a = $('<a href="'+url+'" data-public-id="'+publicId+'">'+el.text()+'</a>');
+            var a = $('<a class="govuk-link" href="'+url+'" data-public-id="'+publicId+'">'+el.text()+'</a>');
             el.replaceWith(a);
 
             a.parent().removeClass('open');
@@ -283,7 +280,7 @@ $(function() {
 
                         var children = data.sectors,
                             name = $a.text(),
-                            $openA = $('<a data-public-id="' + publicId + '" data-old-url="' + $a.attr('href')+'">' + name + '</a>'),
+                            $openA = $('<a class="govuk-link" data-public-id="' + publicId + '" data-old-url="' + $a.attr('href')+'">' + name + '</a>'),
                             ul = $('<ul />');
 
                         for (i=0, l=children.length; i<l; i++) {
@@ -295,12 +292,12 @@ $(function() {
                                 linkText = (isActive) ? 'Remove' : 'Add';
 
                             if (typeof leaf.url !== 'undefined') {
-                                elString = '<a data-public-id="' + leaf['public-id'] + '" href="' + leaf.url + '">' + leaf.name + '</a>';
+                                elString = '<a class="govuk-link" data-public-id="' + leaf['public-id'] + '" href="' + leaf.url + '">' + leaf.name + '</a>';
                             }
                             else {
                                 elString = '<span class="sector-name" id="sector-'+leaf['public-id']+'">' +
                                     leaf.name +
-                                    '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" rel="nofollow" class="' + linkClass  + '">' +
+                                    '</span> <a aria-labelledby="sector-'+leaf['public-id']+'" href="' + createAddRemoveUrl(leaf['public-id']) + '" rel="nofollow" class="govuk-link ' + linkClass  + '">' +
                                     linkText +
                                     '</a>';
                             }

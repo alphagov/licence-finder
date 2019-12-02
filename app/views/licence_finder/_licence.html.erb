@@ -1,5 +1,5 @@
 <%- if licence.published? -%>
-  <%= link_to licence.title, licence.url %>
+  <%= link_to licence.title, licence.url, class: "govuk-link" %>
   <p><%= licence.short_description %></p>
 <%- else -%>
   <%= licence.title %>

@@ -30,11 +30,14 @@
         <%= basket_link activity %>
       <% end %>
     </ul>
-    <% unless @picked_activities.empty? %>
-      <div class="button-container">
-        <%= link_to 'Next step', business_location_path(sectors: params[:sectors], activities: params[:activities]), class: 'button medium', id: "next-step"  %>
-      </div>
-    <% end %>
+
+    <div class="button-container js-hidden">
+      <%= render "govuk_publishing_components/components/button", {
+        text: "Next step",
+        href: business_location_path(sectors: params[:sectors], activities: params[:activities])
+      } %>
+    </div>
+
   </div>
 <% end %>
 

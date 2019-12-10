@@ -1,6 +1,6 @@
 require "gds_api/content_store"
 require "gds_api/publishing_api_v2"
-require "gds_api/rummager"
+require "gds_api/search"
 
 module Services
   def self.content_store
@@ -17,6 +17,6 @@ module Services
   end
 
   def self.rummager
-    @rummager ||= GdsApi::Rummager.new(Plek.find("search"))
+    @rummager ||= GdsApi::Search.new(Plek.find("search"))
   end
 end

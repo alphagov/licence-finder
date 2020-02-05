@@ -1,5 +1,9 @@
 # licence-finder
 
+Licence finder provides the pages that follow https://www.gov.uk/licence-finder (which is served by `frontend`), specifically starting at https://www.gov.uk/licence-finder/sectors.
+
+## Local setup
+
 To get set up with Licence Finder, first make sure you're up to date with puppet.
 
 Load the data into MongoDB

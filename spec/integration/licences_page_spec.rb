@@ -34,10 +34,10 @@ RSpec.describe "Licences page", type: :request do
     visit licence_finder_url_for("licences", [@s1], [@a1], "scotland")
 
     within_section "completed questions" do
-      expect(page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
-        "What is your activity or business?",
-        "What would you like to do?",
-        "Where will you be located?",
+      expect(page.all(:xpath, ".//h3[contains(@class, 'gem-c-heading')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
+        "1. What is your activity or business?",
+        "2. What would you like to do?",
+        "3. Where will you be located?",
       ])
     end
     within_section "completed question 1" do

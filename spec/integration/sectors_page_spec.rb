@@ -35,9 +35,9 @@ RSpec.describe "Sector selection page", type: :request do
     end
 
     within_section "upcoming questions" do
-      expect(page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
-        "What would you like to do?",
-        "Where will you be located?",
+      expect(page.all(:xpath, ".//h3[contains(@class, 'gem-c-heading')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
+        "2. What would you like to do?",
+        "3. Where will you be located?",
       ])
     end
   end

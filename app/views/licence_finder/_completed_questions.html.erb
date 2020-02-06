@@ -4,9 +4,12 @@
     <ol>
       <%- @completed_questions.each_with_index do |question_details, index| -%>
         <li class="done">
-          <h3 class="question">
-            <span class="question-number"><%= index + 1 %></span><%= question_details[0] %>
-          </h3>
+          <%= render "govuk_publishing_components/components/heading", {
+            text: "#{index + 1}. #{question_details[0]}",
+            padding: true,
+            font_size: 19,
+            heading_level: 3
+          } %>          
           <div class="answer multiple">
             <ul>
               <% question_details[1].each do |answer| %>

@@ -1,7 +1,7 @@
 <% content_for :page_title, "What is your activity or business? - Licence Finder" %>
 
 <div class="step current">
-  <div class="current-question group">
+  <div class="group">
     <div class="search-container" role="search">
       <%= form_tag sectors_path, method: :get do %>
         <%= hidden_field_tag "sectors", params[:sectors], id: "hidden-sectors" %>

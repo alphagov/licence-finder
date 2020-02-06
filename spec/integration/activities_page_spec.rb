@@ -18,8 +18,8 @@ RSpec.describe "Activity selection page", type: :request do
     visit licence_finder_url_for("activities", [@s1, @s3])
 
     within_section "completed questions" do
-      expect(page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
-        "What is your activity or business?",
+      expect(page.all(:xpath, ".//h3[contains(@class, 'gem-c-heading')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
+        "1. What is your activity or business?",
       ])
     end
     within_section "completed question 1" do
@@ -42,8 +42,8 @@ RSpec.describe "Activity selection page", type: :request do
     end
 
     within_section "upcoming questions" do
-      expect(page.all(:xpath, ".//h3[contains(@class, 'question')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
-        "Where will you be located?",
+      expect(page.all(:xpath, ".//h3[contains(@class, 'gem-c-heading')]/text()").map(&:text).map(&:strip).reject(&:blank?)).to eq([
+        "3. Where will you be located?",
       ])
     end
 

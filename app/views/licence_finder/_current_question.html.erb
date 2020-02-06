@@ -1,9 +1,10 @@
 <div class="step current">
-  <div class="current-question group">
-    <h2>
-      <span class="question-number"><%= @current_question_number %> </span><%= @current_question %>
-    </h2>
+  <div class="group">
+    <%= render "govuk_publishing_components/components/heading", {
+      text: "#{@current_question_number}. #{@current_question}",
+      padding: true,
+      font_size: 19
+    } %>
     <%= body %>
   </div>
 </div>
-

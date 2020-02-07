@@ -7,7 +7,7 @@
         <%= hidden_field_tag "sectors", params[:sectors], id: "hidden-sectors" %>
 
         <%= render "govuk_publishing_components/components/input", {
-            label: { text: "#{@current_question_number} #{@current_question}" },
+            label: { text: "#{@current_question_number}. #{@current_question}" },
             name: "q",
             id: "search-sectors",
             heading_size: "s"

@@ -90,10 +90,6 @@ a.add {
     @include govuk-font(19);
   }
 
-  .button {
-    display: inline-block;
-  }
-
   ul {
     margin-top: 0.75em;
     margin-bottom: 0.75em;
@@ -230,10 +226,6 @@ a.add {
   ul ul li {
     padding: 0 0.25em;
   }
-}
-
-.search-container .button {
-  margin-left: 0.5em;
 }
 
 .find-location-for-service {

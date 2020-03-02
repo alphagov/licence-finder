@@ -127,7 +127,7 @@ GEM
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
-    json (2.2.0)
+    json (2.3.0)
     json-schema (2.8.0)
       addressable (>= 2.4)
     kgio (2.11.3)
@@ -168,7 +168,7 @@ GEM
     multipart-post (2.1.1)
     netrc (0.11.0)
     nio4r (2.5.2)
-    nokogiri (1.10.8)
+    nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     null_logger (0.0.1)
     parallel (1.19.1)
@@ -291,7 +291,7 @@ GEM
       rubyzip (>= 1.2.2)
     sentry-raven (2.13.0)
       faraday (>= 0.7.6, < 1.0)
-    slimmer (13.2.0)
+    slimmer (13.2.1)
       activesupport
       json
       nokogiri (~> 1.7)
@@ -357,7 +357,7 @@ DEPENDENCIES
   rspec-rails (~> 3.9.0)
   rubocop-govuk
   sass-rails (~> 5.0.7)
-  slimmer (= 13.2.0)
+  slimmer (= 13.2.1)
   uglifier (~> 4.2.0)
   webmock (~> 3.8.2)
 

@@ -35,4 +35,4 @@ private
   end
 end
 
-Dir[File.join(File.dirname(__FILE__), "data_importer/**/*.rb")].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), "data_importer/**/*.rb")].sort.each { |f| require f }

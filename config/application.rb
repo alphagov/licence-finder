@@ -12,7 +12,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-APP_SLUG = "licence-finder"
+APP_SLUG = "licence-finder".freeze
 
 module LicenceFinder
   class Application < Rails::Application

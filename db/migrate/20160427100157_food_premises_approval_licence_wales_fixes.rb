@@ -19,7 +19,7 @@ class FoodPremisesApprovalLicenceWalesFixes < Mongoid::Migration
     welsh_licence.da_northern_ireland = false
     welsh_licence.regulation_area = english_licence.regulation_area
     welsh_licence.save!
-    LicenceLink.where(:licence_id => english_licence.id).each do |link|
+    LicenceLink.where(licence_id: english_licence.id).each do |link|
       ll = LicenceLink.new
       ll.licence = welsh_licence
       ll.sector_id = link.sector_id
@@ -38,7 +38,7 @@ class FoodPremisesApprovalLicenceWalesFixes < Mongoid::Migration
     scottish_licence.da_northern_ireland = false
     scottish_licence.regulation_area = english_licence.regulation_area
     scottish_licence.save!
-    LicenceLink.where(:licence_id => english_licence.id).each do |link|
+    LicenceLink.where(licence_id: english_licence.id).each do |link|
       ll = LicenceLink.new
       ll.licence = scottish_licence
       ll.sector_id = link.sector_id
@@ -57,7 +57,7 @@ class FoodPremisesApprovalLicenceWalesFixes < Mongoid::Migration
     northern_irish_licence.da_northern_ireland = true
     northern_irish_licence.regulation_area = english_licence.regulation_area
     northern_irish_licence.save!
-    LicenceLink.where(:licence_id => english_licence.id).each do |link|
+    LicenceLink.where(licence_id: english_licence.id).each do |link|
       ll = LicenceLink.new
       ll.licence = northern_irish_licence
       ll.sector_id = link.sector_id
@@ -66,6 +66,5 @@ class FoodPremisesApprovalLicenceWalesFixes < Mongoid::Migration
     end
   end
 
-  def self.down
-  end
+  def self.down; end
 end

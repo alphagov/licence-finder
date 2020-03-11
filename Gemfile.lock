@@ -104,7 +104,7 @@ GEM
     govuk_frontend_toolkit (9.0.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
-    govuk_publishing_components (21.27.1)
+    govuk_publishing_components (21.28.1)
       gds-api-adapters
       govuk_app_config
       kramdown
@@ -112,6 +112,7 @@ GEM
       rails (>= 5.0.0.1)
       rake
       rouge
+      sass (= 3.7.4)
       sassc-rails (>= 2.0.1)
       sprockets (< 4)
     govuk_test (1.0.3)
@@ -231,7 +232,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.4)
-    rouge (3.16.0)
+    rouge (3.17.0)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
     rspec-expectations (3.9.0)
@@ -348,7 +349,7 @@ DEPENDENCIES
   govuk-content-schema-test-helpers
   govuk_app_config (~> 2.1.0)
   govuk_frontend_toolkit (~> 9.0.0)
-  govuk_publishing_components (~> 21.27.1)
+  govuk_publishing_components (~> 21.28.1)
   govuk_test
   mongoid (~> 6.2.0)
   mongoid_rails_migrations (~> 1.1.0)

@@ -40,7 +40,7 @@ class DataFixes1 < Mongoid::Migration
     l2.name = "Hairdresser registration (Wales)"
     l2.regulation_area = l.regulation_area
     l2.save!
-    LicenceLink.where(:licence_id => l.id).each do |link|
+    LicenceLink.where(licence_id: l.id).each do |link|
       ll = LicenceLink.new
       ll.licence = l2
       ll.sector_id = link.sector_id
@@ -65,7 +65,7 @@ class DataFixes1 < Mongoid::Migration
     l2.name = "Registration of goat holdings (Northern Ireland)"
     l2.regulation_area = l.regulation_area
     l2.save!
-    LicenceLink.where(:licence_id => l.id).each do |link|
+    LicenceLink.where(licence_id: l.id).each do |link|
       ll = LicenceLink.new
       ll.licence = l2
       ll.sector_id = link.sector_id
@@ -74,6 +74,5 @@ class DataFixes1 < Mongoid::Migration
     end
   end
 
-  def self.down
-  end
+  def self.down; end
 end

@@ -28,7 +28,7 @@ gem "sass-rails", "~> 5.0.7"
 gem "uglifier", "~> 4.2.0"
 
 gem "govuk_frontend_toolkit", "~> 9.0.0"
-gem "govuk_publishing_components", "~> 21.30.0"
+gem "govuk_publishing_components", "~> 21.34.0"
 
 gem "rubocop-govuk"
 

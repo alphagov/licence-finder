@@ -33,7 +33,7 @@ gem "govuk_publishing_components", "~> 21.38.3"
 gem "rubocop-govuk"
 
 group :development, :test do
-  gem "database_cleaner", "~> 1.8.3"
+  gem "database_cleaner", "~> 1.8.4"
   gem "factory_bot_rails"
   gem "govuk-content-schema-test-helpers"
   gem "govuk_test"

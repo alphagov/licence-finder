@@ -295,7 +295,7 @@ GEM
       rubyzip (>= 1.2.2)
     sentry-raven (3.0.0)
       faraday (>= 1.0)
-    slimmer (13.2.2)
+    slimmer (13.3.0)
       activesupport
       json
       nokogiri (~> 1.7)
@@ -361,7 +361,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.0)
   rubocop-govuk
   sass-rails (~> 5.0.7)
-  slimmer (= 13.2.2)
+  slimmer (= 13.3.0)
   uglifier (~> 4.2.0)
   webmock (~> 3.8.3)
 

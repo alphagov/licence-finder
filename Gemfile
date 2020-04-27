@@ -8,7 +8,7 @@ gem "rails", "5.2.4.2"
 gem "rails-controller-testing"
 
 gem "elasticsearch"
-gem "mongoid", "~> 6.2.0"
+gem "mongoid", "~> 7.1.0"
 
 gem "mongoid_rails_migrations", "~> 1.1.0"
 

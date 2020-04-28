@@ -17,7 +17,6 @@ RSpec.describe Search::Client do
     expect(client.extra_terms_for_sector(FactoryBot.build(:sector, public_id: 123))).to eq([])
   end
 
-
   describe "with a stubbed out path" do
     before(:each) do
       source = StringIO.new(<<~CSV)

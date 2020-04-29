@@ -15,11 +15,11 @@ class Sector
   validates :name, presence: true
 
   def self.find_by_public_id(public_id)
-    self.find_by_public_ids([public_id]).first
+    find_by_public_ids([public_id]).first
   end
 
   def self.find_by_public_ids(public_ids)
-    self.any_in public_id: public_ids
+    any_in public_id: public_ids
   end
 
   def self.find_by_correlation_id(correlation_id)
@@ -39,14 +39,14 @@ class Sector
   end
 
   def children
-    Sector.where(parent_ids: self.id)
+    Sector.where(parent_ids: id)
   end
 
   def parents
-    Sector.where(_id: { "$in" => self.parent_ids || [] })
+    Sector.where(_id: { "$in" => parent_ids || [] })
   end
 
   def to_s
-    self.name
+    name
   end
 end

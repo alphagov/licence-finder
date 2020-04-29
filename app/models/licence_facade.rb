@@ -21,7 +21,7 @@ class LicenceFacade
 
     Services.rummager.search(
       filter_licence_identifier: licences.map(&:gds_id).map(&:to_s),
-      fields: %w(title licence_short_description licence_identifier link),
+      fields: %w[title licence_short_description licence_identifier link],
     ).to_h
   rescue GdsApi::BaseError => e
     message = e.class.name

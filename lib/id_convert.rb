@@ -9,7 +9,7 @@ class IdConvert
     revised_codes = CSV.read("data/revised_codes.csv", headers: true)
     match = 0
     in_db = 0
-    mappings_headers = %w(correlation_id legal_ref_id gds_id)
+    mappings_headers = %w[correlation_id legal_ref_id gds_id]
     correlation_to_gds_id = {}
     CSV.open("data/correlation_id_to_gds_id_mappings.csv", "wb") do |mappings_csv|
       mappings_csv << CSV::Row.new(mappings_headers, mappings_headers, headers: true)

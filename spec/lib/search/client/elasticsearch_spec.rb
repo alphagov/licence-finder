@@ -5,7 +5,7 @@ RSpec.describe Search::Client::Elasticsearch do
   before(:each) do
     @index_name = "test-index"
     @es_config = {
-        url:    "localhost",
+        url: "localhost",
     }
     @client = Search::Client::Elasticsearch.new(
       index_name: @index_name,
@@ -76,7 +76,7 @@ RSpec.describe Search::Client::Elasticsearch do
 
     it "adds extra_terms to document when available" do
       allow(@client).to receive(:extra_terms).and_return(
-        123 => %w(foo bar monkey),
+        123 => %w[foo bar monkey],
       )
       document = @client.to_document(
         FactoryBot.build(
@@ -93,7 +93,7 @@ RSpec.describe Search::Client::Elasticsearch do
         body: {
           public_id: 321,
           title: "Test Sector",
-          extra_terms: %w(foo bar monkey),
+          extra_terms: %w[foo bar monkey],
           activities: [],
         },
       )
@@ -134,7 +134,7 @@ RSpec.describe Search::Client::Elasticsearch do
         body: {
           query: {
             multi_match: {
-              fields: %w(title extra_terms activities),
+              fields: %w[title extra_terms activities],
               query: "query",
             },
           },

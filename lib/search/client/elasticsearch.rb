@@ -62,7 +62,7 @@ class Search
           body: {
             query: {
               multi_match: {
-                fields: %w(title extra_terms activities),
+                fields: %w[title extra_terms activities],
                 query: query,
               },
             },

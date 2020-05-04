@@ -14,8 +14,8 @@ RSpec.describe Search::Client::Elasticsearch do
     FactoryBot.create(:activity, public_id: 7124, correlation_id: 982, name: "Unrelated terms", sectors: [s3])
 
     @search = $search.clone
-    allow(@search.client).to receive(:extra_terms).and_return(987 => %w(foo bar),
-      986 => %w(monkey))
+    allow(@search.client).to receive(:extra_terms).and_return(987 => %w[foo bar],
+                                                              986 => %w[monkey])
     @search.index_all
   end
 

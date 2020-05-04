@@ -9,7 +9,7 @@ RSpec.describe Search::Client do
 
   it "allows no extra terms to be provided" do
     client = Search::Client.new
-    expect(client.extra_terms).to eq(Hash.new)
+    expect(client.extra_terms).to eq({})
   end
 
   it "returns an empty array if no extra terms are found for a sector" do
@@ -28,13 +28,13 @@ RSpec.describe Search::Client do
     end
 
     it "provides extra terms" do
-      expect(@client.extra_terms).to eq(123 => %w{foo bar monkey},
-          321 => %w{bottle mouse keyboard})
+      expect(@client.extra_terms).to eq(123 => %w[foo bar monkey],
+                                        321 => %w[bottle mouse keyboard])
     end
 
     it "finds extra terms for a sector" do
       sector = FactoryBot.build(:sector, public_id: 321, correlation_id: 123)
-      expect(@client.extra_terms_for_sector(sector)).to eq(%w(foo bar monkey))
+      expect(@client.extra_terms_for_sector(sector)).to eq(%w[foo bar monkey])
     end
   end
 end

@@ -9,10 +9,10 @@ class LicenceFinderController < ApplicationController
     "What would you like to do?",
     "Where will you be located?",
   ].freeze
-  ACTIONS = %w(sectors activities business_location).freeze
+  ACTIONS = %w[sectors activities business_location].freeze
 
-  before_action :extract_and_validate_sector_ids, except: %i(sectors browse_sector_index browse_sector browse_sector_child browse_sector_grandchild)
-  before_action :extract_and_validate_activity_ids, except: %i(sectors sectors_submit activities browse_sector_index browse_sector browse_sector_child browse_sector_grandchild)
+  before_action :extract_and_validate_sector_ids, except: %i[sectors browse_sector_index browse_sector browse_sector_child browse_sector_grandchild]
+  before_action :extract_and_validate_activity_ids, except: %i[sectors sectors_submit activities browse_sector_index browse_sector browse_sector_child browse_sector_grandchild]
   before_action :set_expiry
   before_action :setup_content_item
   after_action :add_analytics_headers
@@ -43,7 +43,7 @@ class LicenceFinderController < ApplicationController
   # is this action necessary?
   def business_location_submit
     next_params = { sectors: @sector_ids.join(SEPARATOR), activities: @activity_ids.join(SEPARATOR) }
-    if %w(england scotland wales northern_ireland).include? params[:location]
+    if %w[england scotland wales northern_ireland].include? params[:location]
       redirect_to({ action: "licences", location: params[:location] }.merge(next_params))
     else
       redirect_to({ action: "business_location" }.merge(next_params))

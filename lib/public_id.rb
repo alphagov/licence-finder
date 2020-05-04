@@ -15,7 +15,7 @@ module PublicId
 private
 
   def set_public_id
-    if self.public_id.nil?
+    if public_id.nil?
       counters = Mongoid::Clients.default["counters"]
       counter = counters.find_one_and_update(
         {

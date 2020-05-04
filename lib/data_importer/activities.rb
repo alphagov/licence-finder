@@ -24,7 +24,7 @@ private
       counter += 1
     end
     if sector.activities.nil?
-      sector.activities = Array.new
+      sector.activities = []
     end
     unless sector.activities.include? activity
       sector.activities << activity

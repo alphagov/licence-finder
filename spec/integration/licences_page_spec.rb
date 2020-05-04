@@ -108,8 +108,8 @@ RSpec.describe "Licences page", type: :request do
     end
 
     specify "gracefully handling Rummager errors" do
-      WebMock.stub_request(:get, %r[\A#{GdsApi::TestHelpers::Search::SEARCH_ENDPOINT}]).
-        to_return(status: [500, "Internal Server Error"])
+      WebMock.stub_request(:get, %r{\A#{GdsApi::TestHelpers::Search::SEARCH_ENDPOINT}})
+        .to_return(status: [500, "Internal Server Error"])
 
       visit licence_finder_url_for("licences", [@s1], [@a1, @a2], "england")
 

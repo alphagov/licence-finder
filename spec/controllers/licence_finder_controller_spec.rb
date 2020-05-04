@@ -127,8 +127,8 @@ RSpec.describe LicenceFinderController, type: :controller do
 
     context "when content store returns forbidden response" do
       it "returns a 403 status code" do
-        stub_request(:get, "#{Plek.find('content-store')}/content/licence-finder").
-          to_return(status: 403, headers: {})
+        stub_request(:get, "#{Plek.find('content-store')}/content/licence-finder")
+          .to_return(status: 403, headers: {})
 
         get :activities, params: { sectors: "1234_2345_3456" }
         expect(response).to be_forbidden

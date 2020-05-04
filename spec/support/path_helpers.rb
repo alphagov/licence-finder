@@ -11,7 +11,7 @@ module PathHelpers
 
   # Build a licence finder URL with sectors, activities and location parameters
   def licence_finder_url_for(action, sectors = nil, activities = nil, location = nil)
-    params = Hash.new
+    params = {}
     unless sectors.nil?
       params["sectors"] = sectors.map(&:public_id).join("_")
     end

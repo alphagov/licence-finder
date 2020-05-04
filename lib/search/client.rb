@@ -17,7 +17,7 @@ class Search
     def extra_terms
       return @extra_terms unless @extra_terms.nil?
 
-      @extra_terms = Hash.new
+      @extra_terms = {}
       begin
         CSV.new(extra_terms_handle).each do |row|
           @extra_terms[row[0].to_i] = row[1..-1].map(&:strip)

@@ -175,8 +175,8 @@ RSpec.describe LicenceFinderController, type: :controller do
         do_get
         expect(assigns[:current_question_number]).to eq(3)
         expect(assigns[:completed_questions]).to eq([
-            [@question1, :some_sectors, "sectors"],
-            [@question2, :some_activities, "activities"],
+          [@question1, :some_sectors, "sectors"],
+          [@question2, :some_activities, "activities"],
         ])
         expect(assigns[:current_question]).to eq(@question3)
         expect(assigns[:upcoming_questions]).to eq([])
@@ -255,9 +255,9 @@ RSpec.describe LicenceFinderController, type: :controller do
       it "sets up the questions correctly" do
         do_get
         expect(assigns[:completed_questions]).to eq([
-            [@question1, :some_sectors, "sectors"],
-            [@question2, :some_activities, "activities"],
-            [@question3, ["Northern Ireland"], "business_location"],
+          [@question1, :some_sectors, "sectors"],
+          [@question2, :some_activities, "activities"],
+          [@question3, ["Northern Ireland"], "business_location"],
         ])
       end
     end

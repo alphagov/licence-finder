@@ -5,7 +5,7 @@ RSpec.describe Search::Client::Elasticsearch do
   before(:each) do
     @index_name = "test-index"
     @es_config = {
-        url: "localhost",
+      url: "localhost",
     }
     @client = Search::Client::Elasticsearch.new(
       index_name: @index_name,

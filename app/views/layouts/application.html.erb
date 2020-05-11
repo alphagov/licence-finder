@@ -5,6 +5,7 @@
     <meta name="description" content="Find out which licences you might need for your activity or business.">
     <meta name="robots" content="noindex">
     <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "print.css", :media => "print" %>
     <%= javascript_include_tag 'application', defer: true %>
     <%= yield :head %>
     <%= render 'govuk_publishing_components/components/meta_tags', content_item: @content_item %>

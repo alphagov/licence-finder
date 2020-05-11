@@ -32,6 +32,7 @@ module LicenceFinder
     config.assets.prefix = "/licencefinder" # this has to match the path configured in puppet and deploy scripts.
     config.assets.precompile += %w[
       application.css
+      print.css
       application.js
     ]
 

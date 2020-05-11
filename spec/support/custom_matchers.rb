@@ -11,9 +11,9 @@ module CustomMatchers
       expect(field.tag_name).to eq("input")
       expect(field["type"]).to eq(options[:type].to_s)
     end
-    if options.has_key?(:value)
+    if options.key?(:value)
       expect(field.value).to eq(options[:value])
-    elsif options.has_key?(:checked)
+    elsif options.key?(:checked)
       expect(field["checked"]).to eq(options[:checked])
     end
   end

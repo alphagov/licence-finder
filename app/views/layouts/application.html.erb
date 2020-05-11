@@ -4,8 +4,8 @@
     <title><%= content_for?(:page_title) ? yield(:page_title) : "Licence Finder" %> - GOV.UK</title>
     <meta name="description" content="Find out which licences you might need for your activity or business.">
     <meta name="robots" content="noindex">
-    <%= stylesheet_link_tag "licence-finder" %>
-    <%= javascript_include_tag 'licence-finder', defer: true %>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag 'application', defer: true %>
     <%= yield :head %>
     <%= render 'govuk_publishing_components/components/meta_tags', content_item: @content_item %>
     <% if @meta_section %>

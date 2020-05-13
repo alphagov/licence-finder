@@ -72,7 +72,7 @@ RSpec.describe "Sector browse page", type: :request do
   specify "clicking on sibling sectors collapses other sectors", js: true do
     visit "/#{APP_SLUG}/browse-sectors"
 
-    click_on @s1.name #  first top level
+    click_on @s1.name # first top level
     click_on @s2.name # first child
     expect(find("span#sector-3")).to have_text(@s3.name) # first grand child
 

@@ -28,8 +28,10 @@ RSpec.describe Search::Client do
     end
 
     it "provides extra terms" do
-      expect(@client.extra_terms).to eq(123 => %w[foo bar monkey],
-                                        321 => %w[bottle mouse keyboard])
+      expect(@client.extra_terms).to eq(
+        123 => %w[foo bar monkey],
+        321 => %w[bottle mouse keyboard],
+      )
     end
 
     it "finds extra terms for a sector" do

@@ -22,8 +22,8 @@ RSpec.describe LicenceDataMigrator do
 
   describe "run" do
     it "updates the gds_id_id on licence records" do
-      l1 = FactoryBot.create(:licence, name: "Licence One", correlation_id: 1083741393)
-      l2 = FactoryBot.create(:licence, name: "Licence Two", correlation_id: 1075329002)
+      l1 = FactoryBot.create(:licence, name: "Licence One", correlation_id: 1_083_741_393)
+      l2 = FactoryBot.create(:licence, name: "Licence Two", correlation_id: 1_075_329_002)
 
       @migrator.run
 

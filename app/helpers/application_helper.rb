@@ -4,9 +4,10 @@ module ApplicationHelper
   end
 
   def current_question(&block)
-    render partial: "current_question", locals: {
-      body: capture(&block),
-    }
+    render partial: "current_question",
+           locals: {
+             body: capture(&block),
+           }
   end
 
   def show_link_item(action, model, extra_params, &block)

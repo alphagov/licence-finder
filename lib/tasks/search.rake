@@ -4,6 +4,6 @@ task search: %w[search::index]
 namespace :search do
   desc "Index all Sectors"
   task index: :environment do
-    $search.index_all
+    Search.instance.index_all
   end
 end

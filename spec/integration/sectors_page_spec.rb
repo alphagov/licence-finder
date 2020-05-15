@@ -3,17 +3,16 @@ require "rails_helper"
 RSpec.describe "Sector selection page", type: :request do
   before(:each) do
     WebMock.allow_net_connect!
-    $search = Search.create
 
     FactoryBot.create(:sector, public_id: 123, name: "Fooey Sector", layer: 3)
     FactoryBot.create(:sector, public_id: 234, name: "Kablooey Sector", layer: 3)
     FactoryBot.create(:sector, public_id: 345, name: "Gooey Sector", layer: 3)
 
-    $search.index_all
+    Search.instance.index_all
   end
 
   after(:each) do
-    $search.delete_index
+    Search.instance.delete_index
   end
 
   specify "inspecting the page" do

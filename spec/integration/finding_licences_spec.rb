@@ -6,7 +6,6 @@ RSpec.describe "Finding licences", type: :request do
 
   specify "Simple happy path through the app" do
     WebMock.allow_net_connect!
-    $search = Search.create
 
     s1 = FactoryBot.create(:sector, name: "Fooey Sector", layer: 3)
     s2 = FactoryBot.create(:sector, name: "Kablooey Sector", layer: 3)
@@ -28,7 +27,7 @@ RSpec.describe "Finding licences", type: :request do
     FactoryBot.create(:licence_link, sector: s2, activity: a1, licence: l3)
     FactoryBot.create(:licence_link, sector: s1, activity: a1, licence: l4)
 
-    $search.index_all
+    Search.instance.index_all
     rummager_has_licences([], when_searching_for: [l1])
 
     visit "/#{APP_SLUG}/sectors"
@@ -118,6 +117,6 @@ RSpec.describe "Finding licences", type: :request do
       ])
     end
 
-    $search.delete_index
+    Search.instance.delete_index
   end
 end

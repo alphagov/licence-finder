@@ -20,7 +20,7 @@ class LicenceFinderController < ApplicationController
   def sectors
     @picked_sectors = Sector.find_by_public_ids(extract_ids(:sector)).ascending(:name).to_a
     @sectors = if params[:q].present?
-                 $search.search(params[:q])
+                 Search.instance.search(params[:q])
                else
                  []
                end

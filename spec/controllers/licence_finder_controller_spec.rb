@@ -23,7 +23,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       @s2 = FactoryBot.create(:sector, name: "Charlie")
       @s3 = FactoryBot.create(:sector, name: "Bravo")
 
-      expect($search).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
+      expect(Search.instance).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
 
       get :sectors, params: { q: "test query" }
       expect(response).to be_successful
@@ -48,7 +48,7 @@ RSpec.describe LicenceFinderController, type: :controller do
     end
 
     it "returns slimmer headers" do
-      expect($search).to receive(:search).with("test query").and_return([])
+      expect(Search.instance).to receive(:search).with("test query").and_return([])
 
       get :sectors, params: { q: "test query" }
 
@@ -66,7 +66,7 @@ RSpec.describe LicenceFinderController, type: :controller do
       @s2 = FactoryBot.create(:sector, name: "Charlie")
       @s3 = FactoryBot.create(:sector, name: "Bravo")
 
-      expect($search).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
+      expect(Search.instance).to receive(:search).with("test query").and_return([@s1, @s2, @s3])
 
       get :sectors, params: { q: "test query" }
       expect(response.headers["X-Slimmer-Result-Count"]).to eq("3")

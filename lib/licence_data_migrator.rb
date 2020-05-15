@@ -50,7 +50,7 @@ class LicenceDataMigrator
   end
 
   # https://docs.google.com/a/digital.cabinet-office.gov.uk/spreadsheet/ccc?key=0AiNczyuLA7LTdGwtVXItMnBPcXVIcV9RR19NbkZDWXc#gid=1
-  def country_code licence
+  def country_code(licence)
     return 7 if licence.da_northern_ireland && licence.da_england # All UK
     return 6 if licence.da_wales && licence.da_scotland # England Scotland and Wales
     return 5 if licence.da_wales && licence.da_england # England and Wales

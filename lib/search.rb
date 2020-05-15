@@ -2,9 +2,12 @@ require "search/client/elasticsearch"
 require "erb"
 
 class Search
+  include Singleton
+
   attr_accessor :client
 
-  def self.create(environment = Rails.env)
+  def initialize
+    environment = Rails.env
     config_path = Rails.root + "config" + "elasticsearch.yml"
     client_config = HashWithIndifferentAccess.new(YAML.safe_load(ERB.new(File.read(config_path)).result))
     client_config = client_config[environment].merge(client_config[:all_envs])
@@ -16,7 +19,7 @@ class Search
       alias :write :info
     end
 
-    client = Search::Client::Elasticsearch.new(
+    @client = Search::Client::Elasticsearch.new(
       index_name: index_name,
       settings: settings,
       type: type,
@@ -25,26 +28,20 @@ class Search
         log: true,
       ),
     )
-
-    Search.new(client)
-  end
-
-  def initialize(client)
-    @client = client
   end
 
   def index_all
-    @client.pre_index
-    @client.index(Sector.find_layer3_sectors)
-    @client.post_index
+    client.pre_index
+    client.index(Sector.find_layer3_sectors)
+    client.post_index
   end
 
   def delete_index
-    @client.delete_index
+    client.delete_index
   end
 
   def search(query)
-    public_ids = @client.search(query)
+    public_ids = client.search(query)
 
     Sector.find_by_public_ids(public_ids).to_a.sort do |a, b|
       public_ids.index(a.public_id) <=> public_ids.index(b.public_id)

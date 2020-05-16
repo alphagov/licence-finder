@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby File.read(".ruby-version").strip
 
-gem "govuk_app_config", "~> 2.1.2"
+gem "govuk_app_config", "~> 2.2.0"
 gem "plek", "3.0.0"
 gem "rails", "5.2.4.2"
 gem "rails-controller-testing"

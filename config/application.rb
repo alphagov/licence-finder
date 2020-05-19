@@ -31,8 +31,9 @@ module LicenceFinder
 
     config.assets.prefix = "/licencefinder" # this has to match the path configured in puppet and deploy scripts.
     config.assets.precompile += %w[
-      licence-finder.css
-      licence-finder.js
+      application.css
+      print.css
+      application.js
     ]
 
     # Disable Rack::Cache

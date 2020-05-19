@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").strip
 
 gem "govuk_app_config", "~> 2.2.0"
 gem "plek", "3.0.0"
-gem "rails", "5.2.4.2"
+gem "rails", "5.2.4.3"
 gem "rails-controller-testing"
 
 gem "elasticsearch"

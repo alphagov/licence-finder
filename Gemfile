@@ -2,35 +2,20 @@ source "https://rubygems.org"
 
 ruby File.read(".ruby-version").strip
 
+gem "elasticsearch"
+gem "gds-api-adapters", "~> 63.6"
 gem "govuk_app_config", "~> 2.2.0"
+gem "govuk_frontend_toolkit", "~> 9.0.0"
+gem "govuk_publishing_components", "~> 21.47.0"
+gem "mongoid", "~> 6.2.0"
+gem "mongoid_rails_migrations", "~> 1.1.0"
 gem "plek", "3.0.0"
 gem "rails", "5.2.4.3"
 gem "rails-controller-testing"
-
-gem "elasticsearch"
-gem "mongoid", "~> 6.2.0"
-
-gem "mongoid_rails_migrations", "~> 1.1.0"
-
-if ENV["API_DEV"]
-  gem "gds-api-adapters", path: "../gds-api-adapters"
-else
-  gem "gds-api-adapters", "~> 63.6"
-end
-
-if ENV["SLIMMER_DEV"]
-  gem "slimmer", path: "../slimmer"
-else
-  gem "slimmer", "14.0.0"
-end
-
-gem "sass-rails", "~> 5.0.7"
-gem "uglifier", "~> 4.2.0"
-
-gem "govuk_frontend_toolkit", "~> 9.0.0"
-gem "govuk_publishing_components", "~> 21.47.0"
-
 gem "rubocop-govuk"
+gem "sass-rails", "~> 5.0.7"
+gem "slimmer", "14.0.0"
+gem "uglifier", "~> 4.2.0"
 
 group :development, :test do
   gem "database_cleaner", "~> 1.8.5"

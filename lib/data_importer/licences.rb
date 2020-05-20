@@ -36,13 +36,13 @@ private
     licence.save!
 
     sectors.each do |sector|
-      if find_licence_link(sector, activity, licence).empty?
-        licence_join = LicenceLink.new
-        licence_join.sector = sector
-        licence_join.activity = activity
-        licence_join.licence = licence
-        licence_join.save!
-      end
+      next unless find_licence_link(sector, activity, licence).empty?
+
+      licence_join = LicenceLink.new
+      licence_join.sector = sector
+      licence_join.activity = activity
+      licence_join.licence = licence
+      licence_join.save!
     end
     counter
   end

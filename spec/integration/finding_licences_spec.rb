@@ -1,4 +1,4 @@
-require "services"
+require "search"
 require "rails_helper"
 
 RSpec.describe "Finding licences", type: :request do

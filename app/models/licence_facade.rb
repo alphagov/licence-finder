@@ -1,6 +1,3 @@
-require "gds_api/exceptions"
-require "services"
-
 class LicenceFacade
   def self.create_for_licences(licences)
     search_results = search_licences(licences)["results"]
@@ -19,7 +16,7 @@ class LicenceFacade
 
     return raw_data if licences.empty?
 
-    Services.rummager.search(
+    GdsApi.search.search(
       filter_licence_identifier: licences.map(&:gds_id).map(&:to_s),
       fields: %w[title licence_short_description licence_identifier link],
     ).to_h

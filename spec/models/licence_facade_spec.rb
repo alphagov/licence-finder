@@ -16,9 +16,9 @@ RSpec.describe LicenceFacade, type: :model do
     end
 
     it "should skip querying Rummager if not given any licences" do
-      allow(Services.rummager).to receive(:search).and_call_original # clear the stub above, otherwise the next line won't work
-      expect(Services.rummager).not_to receive(:search)
+      request = stub_any_search
       LicenceFacade.create_for_licences([])
+      expect(request).not_to have_been_made
     end
 
     it "should construct Facades for each licence maintaining order" do
@@ -39,11 +39,7 @@ RSpec.describe LicenceFacade, type: :model do
     end
 
     context "when the Search API errors" do
-      before :each do
-        allow(Services.rummager).to receive(:search).and_raise(
-          GdsApi::BaseError,
-        )
-      end
+      before { stub_any_search.to_raise(GdsApi::BaseError) }
 
       it "should continue with no search API data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
@@ -62,11 +58,7 @@ RSpec.describe LicenceFacade, type: :model do
     end
 
     context "when Rummager times out" do
-      before :each do
-        allow(Services.rummager).to receive(:search).and_raise(
-          GdsApi::TimedOutException,
-        )
-      end
+      before { stub_any_search.to_timeout }
 
       it "should continue with no Rummager data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
@@ -85,11 +77,7 @@ RSpec.describe LicenceFacade, type: :model do
     end
 
     context "when Rummager errors" do
-      before :each do
-        allow(Services.rummager).to receive(:search).and_raise(
-          GdsApi::HTTPErrorResponse.new(503),
-        )
-      end
+      before { stub_any_search.to_return(status: 503) }
 
       it "should continue with no Rummager data" do
         result = LicenceFacade.create_for_licences([@l1, @l2])
@@ -101,7 +89,7 @@ RSpec.describe LicenceFacade, type: :model do
 
       it "should log the error" do
         expect(Rails.logger).to receive(:warn).with(
-          "GdsApi::HTTPErrorResponse(503) fetching licence details from Rummager",
+          "GdsApi::HTTPUnavailable(503) fetching licence details from Rummager",
         )
         LicenceFacade.create_for_licences([@l1, @l2])
       end

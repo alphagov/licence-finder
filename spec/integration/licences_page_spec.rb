@@ -1,6 +1,5 @@
 require "rails_helper"
 require "gds_api/test_helpers/search"
-require "services"
 
 RSpec.describe "Licences page", type: :request do
   include RummagerHelpers

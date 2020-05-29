@@ -1,5 +1,3 @@
-require "services"
-
 class PublishingApiNotifier
   LICENCE_FINDER_FORM_DETAILS = {
     "/licence-finder/sectors" => "4ade13fa-7e79-4bee-b809-61dbe5c3aa22",
@@ -16,7 +14,7 @@ class PublishingApiNotifier
   end
 
   def publish(presenter)
-    Services.publishing_api.put_content(presenter.content_id, presenter.payload)
-    Services.publishing_api.publish(presenter.content_id)
+    GdsApi.publishing_api.put_content(presenter.content_id, presenter.payload)
+    GdsApi.publishing_api.publish(presenter.content_id)
   end
 end

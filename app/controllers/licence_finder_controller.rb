@@ -1,5 +1,3 @@
-require "services"
-
 class LicenceFinderController < ApplicationController
   include Slimmer::Headers
 
@@ -129,7 +127,7 @@ protected
   end
 
   def setup_content_item
-    @content_item = Services.content_store.content_item("/licence-finder").to_hash
+    @content_item = GdsApi.content_store.content_item("/licence-finder").to_hash
     section_name = @content_item.dig("links", "parent", 0, "links", "parent", 0, "title")
     if section_name
       @meta_section = section_name.downcase

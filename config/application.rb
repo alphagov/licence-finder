@@ -34,6 +34,7 @@ module LicenceFinder
       application.css
       print.css
       application.js
+      test-dependencies.js
     ]
 
     # Disable Rack::Cache

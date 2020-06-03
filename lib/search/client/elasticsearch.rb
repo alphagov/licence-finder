@@ -1,7 +1,3 @@
-require "search/client"
-require "search/client/search_result"
-require "elasticsearch"
-
 class Search
   class Client
     class Elasticsearch < Search::Client

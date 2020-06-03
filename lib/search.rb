@@ -1,4 +1,3 @@
-require "search/client/elasticsearch"
 require "erb"
 
 class Search

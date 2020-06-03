@@ -1,6 +1,3 @@
-require "data_importer"
-require "licence_data_migrator"
-
 desc "Import all data from the CSV files"
 task data_import: ["data_import:sectors", "data_import:activities", "data_import:licences"]
 

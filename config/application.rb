@@ -29,7 +29,12 @@ module LicenceFinder
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.assets.prefix = "/licencefinder" # this has to match the path configured in puppet and deploy scripts.
+    config.assets.prefix = "/assets/licencefinder"
+
+    # allow overriding the asset host with an enironment variable, useful for
+    # when router is proxying to this app but asset proxying isn't set up.
+    config.asset_host = ENV["ASSET_HOST"]
+
     config.assets.precompile += %w[
       application.css
       print.css

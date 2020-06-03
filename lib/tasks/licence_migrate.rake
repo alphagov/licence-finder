@@ -1,5 +1,3 @@
-require "licence_data_migrator"
-
 desc "Import all data from the CSV files"
 task licence_migrate: ["licence_migrate:all"]
 

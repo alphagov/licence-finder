@@ -1,5 +1,3 @@
-require "public_id"
-
 class Activity
   include Mongoid::Document
   include PublicId

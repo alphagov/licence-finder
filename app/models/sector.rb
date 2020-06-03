@@ -1,5 +1,3 @@
-require "public_id"
-
 class Sector
   include Mongoid::Document
   include PublicId

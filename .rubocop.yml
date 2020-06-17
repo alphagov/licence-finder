@@ -8,9 +8,5 @@ inherit_mode:
     - Exclude
 
 # This is not supported for Mongoid
-Rails/DynamicFindBy:
-  Enabled: false
-
-# This is not supported for Mongoid
 Rails/FindBy:
   Enabled: false

@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 ruby File.read(".ruby-version").strip
 
+gem "rails", "6.0.3.2"
+
 gem "elasticsearch"
 gem "gds-api-adapters"
 gem "govuk_app_config"
@@ -10,7 +12,6 @@ gem "govuk_publishing_components"
 gem "mongoid"
 gem "mongoid_rails_migrations"
 gem "plek"
-gem "rails", "5.2.4.3"
 gem "rails-controller-testing"
 gem "rubocop-govuk"
 gem "sass-rails"

@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").strip
 
 gem "elasticsearch", "~> 6"
 gem "gds-api-adapters", "~> 67.0"
-gem "govuk_app_config", "~> 2.2.0"
+gem "govuk_app_config", "~> 2.2.1"
 gem "govuk_frontend_toolkit", "~> 9.0.0"
 gem "govuk_publishing_components", "~> 21.59.0"
 gem "mongoid", "~> 7.1.2"

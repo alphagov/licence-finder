@@ -12,7 +12,7 @@ RSpec.describe DataImporter do
       expect(importer).to receive(:run)
       expect(DataImporter).to receive(:new).and_return(importer)
 
-      DataImporter.update
+      DataImporter.update!
     end
 
     it "closes import file even if an exception is raised" do

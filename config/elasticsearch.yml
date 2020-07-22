@@ -28,7 +28,7 @@ all_envs:
                         filter: [asciifolding, lowercase]
                     my_snowball:
                         tokenizer: standard
-                        filter: [standard, lowercase, stop, my_synonym, my_snowball]
+                        filter: [lowercase, stop, my_synonym, my_snowball]
                 filter:
                     my_edge:
                         type: edgeNGram

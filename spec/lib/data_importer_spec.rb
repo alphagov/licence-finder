@@ -2,7 +2,7 @@ require "spec_helper"
 require "data_importer"
 
 RSpec.describe DataImporter do
-  describe "update" do
+  describe "call" do
     it "imports relevant file and then close it" do
       fh = double
       expect(fh).to receive(:close)
@@ -12,7 +12,7 @@ RSpec.describe DataImporter do
       expect(importer).to receive(:run)
       expect(DataImporter).to receive(:new).and_return(importer)
 
-      DataImporter.update
+      DataImporter.call
     end
 
     it "closes import file even if an exception is raised" do
@@ -25,7 +25,7 @@ RSpec.describe DataImporter do
       expect(DataImporter).to receive(:new).and_return(importer)
 
       expect {
-        DataImporter.update
+        DataImporter.call
       }.to raise_error(RuntimeError)
     end
   end

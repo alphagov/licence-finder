@@ -10,3 +10,7 @@ inherit_mode:
 # This is not supported for Mongoid
 Rails/FindBy:
   Enabled: false
+
+Rails/SaveBang:
+  AllowedReceivers:
+    - indices # for elasticsearch

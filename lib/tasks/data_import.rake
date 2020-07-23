@@ -4,24 +4,24 @@ task data_import: ["data_import:sectors", "data_import:activities", "data_import
 namespace :data_import do
   desc "Import all data"
   task all: :environment do
-    DataImporter::Sectors.update!
-    DataImporter::Activities.update!
-    DataImporter::Licences.update!
+    DataImporter::Sectors.call
+    DataImporter::Activities.call
+    DataImporter::Licences.call
   end
 
   desc "Import all sector data"
   task sectors: :environment do
-    DataImporter::Sectors.update
+    DataImporter::Sectors.call
   end
 
   desc "Import all activity data"
   task activities: :environment do
-    DataImporter::Activities.update
+    DataImporter::Activities.call
   end
 
   desc "Import all licence data"
   task licences: :environment do
-    DataImporter::Licences.update!
+    DataImporter::Licences.call
     # Now migrate the imported licences to use the new gds_id
     LicenceDataMigrator.migrate
   end

@@ -1,7 +1,7 @@
 require "csv"
 
 class DataImporter
-  def self.update
+  def self.call
     fh = open_data_file
     begin
       new(fh).run

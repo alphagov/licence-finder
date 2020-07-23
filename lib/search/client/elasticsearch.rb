@@ -18,7 +18,7 @@ class Search
 
       def pre_index
         delete_index
-        index = client.indices.create!(
+        index = client.indices.create(
           index: index_name,
           body: settings,
         )

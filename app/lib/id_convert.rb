@@ -40,7 +40,7 @@ class IdConvert
     end
 
     # puts correlation_to_gds_id.inspect
-    puts "Matched #{match}/#{revised_codes.count}"
-    puts "In db   #{in_db}/#{match}"
+    logger.info "Matched #{match}/#{revised_codes.count}"
+    logger.info "In db   #{in_db}/#{match}"
   end
 end

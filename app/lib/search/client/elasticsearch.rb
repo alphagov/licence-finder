@@ -21,6 +21,7 @@ class Search
         index = client.indices.create(
           index: index_name,
           body: settings,
+          include_type_name: true,
         )
         raise unless index
 

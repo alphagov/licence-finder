@@ -23,7 +23,7 @@ RSpec.describe Search::Client::Elasticsearch do
 
       allow_any_instance_of(
         Elasticsearch::API::Indices::IndicesClient,
-      ).to receive(:create).with(index: @index_name, body: /.*/).and_return(true)
+      ).to receive(:create).with(index: @index_name, include_type_name: true, body: /.*/).and_return(true)
 
       @client.pre_index
     end

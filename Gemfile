@@ -13,7 +13,7 @@ gem "rails", "5.2.4.3"
 gem "rails-controller-testing"
 gem "rubocop-govuk"
 gem "sass-rails", "~> 5.0.7"
-gem "slimmer", "15.0.0"
+gem "slimmer", "15.1.0"
 gem "uglifier", "~> 4.2.0"
 
 group :development, :test do

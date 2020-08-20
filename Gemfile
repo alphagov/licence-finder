@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").strip
 
 gem "rails", "6.0.3.2"
 
-gem "elasticsearch"
+gem "elasticsearch", "~> 6"
 gem "gds-api-adapters"
 gem "govuk_app_config"
 gem "govuk_frontend_toolkit"

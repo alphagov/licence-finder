@@ -80,12 +80,12 @@ GEM
     diff-lcs (1.4.4)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    elasticsearch (7.8.0)
-      elasticsearch-api (= 7.8.0)
-      elasticsearch-transport (= 7.8.0)
-    elasticsearch-api (7.8.0)
+    elasticsearch (6.8.2)
+      elasticsearch-api (= 6.8.2)
+      elasticsearch-transport (= 6.8.2)
+    elasticsearch-api (6.8.2)
       multi_json
-    elasticsearch-transport (7.8.0)
+    elasticsearch-transport (6.8.2)
       faraday (~> 1)
       multi_json
     erubi (1.9.0)
@@ -355,7 +355,7 @@ PLATFORMS
 
 DEPENDENCIES
   database_cleaner
-  elasticsearch
+  elasticsearch (~> 6)
   factory_bot_rails
   gds-api-adapters
   govuk-content-schema-test-helpers

@@ -21,7 +21,7 @@ class LicenceFacade
       fields: %w[title licence_short_description licence_identifier link],
     ).to_h
   rescue GdsApi::BaseError => e
-    message = e.class.name
+    message = e.class.name.dup
     message << "(#{e.code})" if e.respond_to?(:code)
     Rails.logger.warn "#{message} fetching licence details from Rummager"
     raw_data

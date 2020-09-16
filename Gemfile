@@ -23,5 +23,6 @@ group :development, :test do
   gem "govuk_test"
   gem "pry-rails"
   gem "rspec-rails"
+  gem "simplecov"
   gem "webmock"
 end

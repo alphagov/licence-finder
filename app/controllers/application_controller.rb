@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Slimmer::Template
 
-  slimmer_template "wrapper"
+  slimmer_template "core_layout"
 
   if ENV["BASIC_AUTH_USERNAME"]
     http_basic_authenticate_with(

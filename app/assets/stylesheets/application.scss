@@ -1,5 +1,5 @@
-$govuk-typography-use-rem: false;
 $govuk-compatibility-govuktemplate: true;
+$govuk-use-legacy-palette: false;
 
 @import 'govuk_publishing_components/govuk_frontend_support';
 @import 'govuk_publishing_components/component_support';
@@ -13,6 +13,24 @@ $govuk-compatibility-govuktemplate: true;
 @import 'govuk_publishing_components/components/label';
 @import 'govuk_publishing_components/components/select';
 @import 'govuk_publishing_components/components/step-by-step-nav-header';
+
+// Map a few legacy variables to `govuk-frontend` equivalents
+// to avoid introducing a dependency on govuk_frontend_toolkit
+$text-colour: $govuk-text-colour;
+$secondary-text-colour: $govuk-secondary-text-colour;
+$link-visited-colour: $govuk-link-visited-colour;
+$link-hover-colour: $govuk-link-colour;
+$border-colour: $govuk-border-colour;
+$link-colour: $govuk-link-colour;
+$canvas-colour: govuk-colour('light-grey');
+$panel-colour: govuk-colour('light-grey');
+
+// Ported from static layout
+@import 'conditionals';
+@import 'core';
+@import 'multi-step';
+@import 'publisher';
+@import 'text';
 
 /* see multi-step.css.erb in the static repo for most of these styles */
 

@@ -1,10 +1,3 @@
-// Media query helpers. These make producing IE layouts
-// super easy.
-
-// These are desktop and down media queries
-
-// There is also a local version of this in Smartanswers.
-
 $is-ie: false !default;
 
 @mixin media-down($size: false, $max-width: false, $min-width: false) {
@@ -17,16 +10,6 @@ $is-ie: false !default;
       @media (max-width: 800px) {
         @content;
       }
-    }
-  }
-}
-
-// mixins from toolkit, only used now by static and whitehall
-
-@mixin ie-lte($version) {
-  @if $is-ie {
-    @if $ie-version <= $version {
-      @content;
     }
   }
 }

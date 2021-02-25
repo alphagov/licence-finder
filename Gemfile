@@ -11,7 +11,6 @@ gem "mongoid"
 gem "mongoid_rails_migrations"
 gem "plek"
 gem "rails-controller-testing"
-gem "rubocop-govuk"
 gem "sass-rails"
 gem "slimmer"
 gem "uglifier"
@@ -23,6 +22,7 @@ group :development, :test do
   gem "govuk_test"
   gem "pry-rails"
   gem "rspec-rails"
+  gem "rubocop-govuk", "4.0.0.pre.1", require: false # Trialling pre-release
   gem "simplecov"
   gem "webmock"
 end

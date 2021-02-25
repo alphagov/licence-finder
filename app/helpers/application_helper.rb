@@ -67,9 +67,10 @@ protected
   end
 
   def model_key_name(model)
-    if model.is_a?(Sector)
+    case model
+    when Sector
       "sector"
-    elsif model.is_a?(Activity)
+    when Activity
       "activity"
     else
       raise "Invalid model provided to add / remove link helper."

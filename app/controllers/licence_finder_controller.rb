@@ -99,7 +99,7 @@ protected
     @current_question_number = answers.size + 1
     @completed_questions = QUESTIONS[0...(@current_question_number - 1)].zip(answers, ACTIONS)
     @current_question = QUESTIONS[@current_question_number - 1]
-    @upcoming_questions = QUESTIONS[@current_question_number..-1]
+    @upcoming_questions = QUESTIONS[@current_question_number..]
   end
 
   def extract_and_validate_sector_ids

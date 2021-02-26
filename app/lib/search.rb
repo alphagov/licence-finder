@@ -7,7 +7,7 @@ class Search
 
   def initialize
     environment = Rails.env
-    config_path = Rails.root + "config" + "elasticsearch.yml"
+    config_path = Rails.root.join("config/elasticsearch.yml")
     client_config = HashWithIndifferentAccess.new(YAML.safe_load(ERB.new(File.read(config_path)).result))
     client_config = client_config[environment].merge(client_config[:all_envs])
     index_name = client_config.delete(:index)

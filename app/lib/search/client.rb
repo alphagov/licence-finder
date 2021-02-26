@@ -20,7 +20,7 @@ class Search
       @extra_terms = {}
       begin
         CSV.new(extra_terms_handle).each do |row|
-          @extra_terms[row[0].to_i] = row[1..-1].map(&:strip)
+          @extra_terms[row[0].to_i] = row[1..].map(&:strip)
         end
       rescue StandardError => e
         Rails.logger.warn("Exception #{e.message} raised while searching for extra terms")

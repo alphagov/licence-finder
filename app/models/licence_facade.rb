@@ -28,6 +28,7 @@ class LicenceFacade
   end
 
   attr_reader :licence, :search_result
+
   def initialize(licence, search_result = nil)
     @licence = licence
     @search_result = search_result

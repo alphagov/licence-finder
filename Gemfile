@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "6.1.3"
+gem "rails", "6.1.3.1"
 
 gem "elasticsearch", "~> 6" # We need a 6.x release to interface with Elasticsearch 6
 gem "gds-api-adapters"

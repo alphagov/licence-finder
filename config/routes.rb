@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  get "/healthcheck/live", to: proc { [200, {}, %w[OK]] }
+  get "/healthcheck/ready", to: GovukHealthcheck.rack_response
+
   mount GovukPublishingComponents::Engine, at: "/component-guide"
 
   get "#{APP_SLUG}/sectors" => "licence_finder#sectors", :as => :sectors

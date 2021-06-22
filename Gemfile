@@ -22,7 +22,7 @@ group :development, :test do
   gem "govuk_test"
   gem "pry-rails"
   gem "rspec-rails"
-  gem "rubocop-govuk", "4.0.0", require: false # Trialling pre-release
+  gem "rubocop-govuk"
   gem "simplecov"
   gem "webmock"
 end

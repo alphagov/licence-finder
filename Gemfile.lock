@@ -161,6 +161,9 @@ GEM
     kramdown (2.3.1)
       rexml
     link_header (0.0.8)
+    listen (3.5.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     logstasher (2.1.5)
       activesupport (>= 5.2)
       request_store
@@ -245,6 +248,9 @@ GEM
     rainbow (3.0.0)
     raindrops (0.19.2)
     rake (13.0.6)
+    rb-fsevent (0.11.0)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
     regexp_parser (2.1.1)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -378,6 +384,7 @@ DEPENDENCIES
   govuk_frontend_toolkit
   govuk_publishing_components
   govuk_test
+  listen
   mongoid
   mongoid_rails_migrations
   plek

@@ -20,6 +20,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "govuk-content-schema-test-helpers"
   gem "govuk_test"
+  gem "listen"
   gem "pry-rails"
   gem "rspec-rails"
   gem "rubocop-govuk"

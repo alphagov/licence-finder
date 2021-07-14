@@ -9,8 +9,8 @@ class LicenceFinderController < ApplicationController
   ].freeze
   ACTIONS = %w[sectors activities business_location].freeze
 
-  before_action :extract_and_validate_sector_ids, except: %i[sectors browse_sector_index browse_sector browse_sector_child]
-  before_action :extract_and_validate_activity_ids, except: %i[sectors activities browse_sector_index browse_sector browse_sector_child]
+  before_action :extract_and_validate_sector_ids, except: %i[sectors browse_sector_index browse_sector browse_sector_child browse_licences]
+  before_action :extract_and_validate_activity_ids, except: %i[sectors activities browse_sector_index browse_sector browse_sector_child browse_licences]
   before_action :set_expiry
   before_action :setup_content_item
   after_action :add_analytics_headers
@@ -91,6 +91,18 @@ class LicenceFinderController < ApplicationController
     @grandchild_sectors = @current_sector.children.ascending(:name).to_a
 
     render "browse_sectors"
+  end
+
+  def browse_licences
+    response.set_header("X-Robots-Tag", "noindex")
+
+    # There are < 500 licences, so it's fine to load all of this into memory
+    licences = Licence.order_by([%i[name asc]]).all
+
+    search_api_batch_size = 100
+    @licences = licences
+      .each_slice(search_api_batch_size)
+      .flat_map { |batch| LicenceFacade.create_for_licences(batch) }
   end
 
 protected

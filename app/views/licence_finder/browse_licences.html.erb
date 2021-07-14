@@ -1,0 +1,10 @@
+<% content_for :page_title, "All licences - Licence Finder" %>
+
+<article>
+  <h2>All Licences</h2>
+  <ul>
+    <% @licences.each do |licence| %>
+      <li><%= render :partial => 'licence', :object => licence %></li>
+    <% end %>
+  </ul>
+</article>

@@ -310,4 +310,24 @@ RSpec.describe LicenceFinderController, type: :controller do
       end
     end
   end
+
+  describe "GET 'browse licences'" do
+    it "gets fewer than 100 licences" do
+      allow(Licence).to receive(:order_by).and_return(Licence)
+      allow(Licence).to receive(:all).and_return(%i[a b c])
+      allow(LicenceFacade).to receive(:create_for_licences).and_return(%i[d e f])
+
+      get :browse_licences
+      expect(assigns[:licences]).to eq(%i[d e f])
+    end
+
+    it "batches requests for more than 100 licences to avoid overloading search api" do
+      allow(Licence).to receive(:order_by).and_return(Licence)
+      allow(Licence).to receive(:all).and_return((1..200))
+      expect(LicenceFacade).to receive(:create_for_licences).twice.and_return(%i[a b c], %i[d e f])
+
+      get :browse_licences
+      expect(assigns[:licences]).to eq(%i[a b c d e f])
+    end
+  end
 end

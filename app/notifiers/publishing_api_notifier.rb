@@ -5,6 +5,7 @@ class PublishingApiNotifier
     "/licence-finder/location" => "45cb0572-d71a-4c22-a84f-fdc53c2e7bc4",
     "/licence-finder/licences" => "e1dc997a-3afe-4180-8c8d-880e7c1ca5a1",
     "/licence-finder/browse-sectors" => "2cae8a3f-1231-4379-bdca-1de9b4668508",
+    "/licence-finder/browse-licences" => "8fbc9c1d-4816-4692-82f0-5cc8358a47cc",
   }.freeze
 
   def self.publish

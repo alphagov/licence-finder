@@ -1,6 +1,6 @@
 class LicenceFacade
   def self.create_for_licences(licences)
-    search_results = search_licences(licences)["results"]
+    search_results = search_licences(licences)
 
     licences.map do |licence|
       matching_search_data = search_results.find do |search_result|
@@ -12,14 +12,14 @@ class LicenceFacade
   end
 
   def self.search_licences(licences)
-    raw_data = { "results" => [] }
+    raw_data = []
 
     return raw_data if licences.empty?
 
-    GdsApi.search.search(
+    GdsApi.search.search_enum(
       filter_licence_identifier: licences.map(&:gds_id).map(&:to_s),
       fields: %w[title licence_short_description licence_identifier link],
-    ).to_h
+    ).to_a
   rescue GdsApi::BaseError => e
     message = e.class.name.dup
     message << "(#{e.code})" if e.respond_to?(:code)

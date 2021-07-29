@@ -41,10 +41,12 @@ header.page-header div { // stylelint-disable-line selector-no-qualifying-type
   }
 
   h1 {
-    @extend %govuk-heading-xl;
+    @include govuk-text-colour;
+    @include govuk-font($size: 48, $weight: bold);
+    @include govuk-responsive-margin(8, "bottom");
     background-repeat: no-repeat;
-    color: $text-colour;
-    font-weight: 600;
+    display: block;
+    margin-top: 0;
 
     span {
       @include govuk-font($size: 27, $line-height: 1);

@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "name": "licence-finder",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "1.12.4"
+  }
+}

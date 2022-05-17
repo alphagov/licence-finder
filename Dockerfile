@@ -26,7 +26,7 @@ RUN GOVUK_WEBSITE_ROOT=https://www.gov.uk \
     bundle exec rails assets:precompile
 
 FROM $base_image
-ENV RAILS_ENV=production GOVUK_APP_NAME=licencefinder
+ENV GOVUK_PROMETHEUS_EXPORTER=true RAILS_ENV=production GOVUK_APP_NAME=licencefinder
 RUN apt-get update -qy && \
     apt-get upgrade -y && \
     apt-get install -y nodejs && \

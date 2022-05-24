@@ -13,6 +13,7 @@ gem "plek"
 gem "rails-controller-testing"
 gem "sass-rails"
 gem "slimmer"
+gem "sprockets-rails"
 gem "uglifier"
 
 group :development, :test do

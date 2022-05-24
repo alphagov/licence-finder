@@ -439,6 +439,7 @@ DEPENDENCIES
   sass-rails
   simplecov
   slimmer
+  sprockets-rails
   uglifier
   webmock
 

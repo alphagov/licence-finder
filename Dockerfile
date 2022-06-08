@@ -14,7 +14,8 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 RUN apt-get update -qy && \
     apt-get upgrade -y && \
     apt-get install -y build-essential yarn
-RUN mkdir /app
+
+RUN mkdir -p /app && ln -fs /tmp /app/tmp && ln -fs /tmp /home/app
 WORKDIR /app
 COPY Gemfile* .ruby-version package.json yarn.lock /app/
 
@@ -35,10 +36,10 @@ RUN apt-get update -qy && \
     apt-get install -y nodejs && \
     apt-get clean
 
+RUN mkdir -p /app && ln -fs /tmp /app/tmp && ln -fs /tmp /home/app
+
 COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
 COPY --from=builder /app /app/
-
-RUN cp -r /app/tmp/* /tmp && rm -rf /app/tmp && ln -fs /tmp /app/tmp
 
 WORKDIR /app
 

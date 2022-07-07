@@ -1,6 +1,5 @@
 //= require jquery/dist/jquery
 //= require govuk_publishing_components/lib
-//= require govuk_publishing_components/components/button
 
 /*globals $ */
 /*jslint

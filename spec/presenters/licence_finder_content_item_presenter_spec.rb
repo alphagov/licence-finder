@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 RSpec.describe LicenceFinderContentItemPresenter do
   let(:subject) { LicenceFinderContentItemPresenter.new("/licence-finder/sectors", "4ade13fa-7e79-4bee-b809-61dbe5c3aa22") }
@@ -11,7 +11,7 @@ RSpec.describe LicenceFinderContentItemPresenter do
 
   describe "#payload" do
     it "is valid against the schema" do
-      expect(subject.payload).to be_valid_against_schema("generic")
+      expect(subject.payload).to be_valid_against_publisher_schema("generic")
     end
 
     it "has the correct data" do

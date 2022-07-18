@@ -20,7 +20,7 @@ gem "uglifier"
 group :development, :test do
   gem "database_cleaner-mongoid"
   gem "factory_bot_rails"
-  gem "govuk-content-schema-test-helpers"
+  gem "govuk_schemas"
   gem "govuk_test"
   gem "listen"
   gem "pry-rails"

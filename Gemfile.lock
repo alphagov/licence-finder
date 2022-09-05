@@ -96,13 +96,13 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    elasticsearch (6.8.3)
-      elasticsearch-api (= 6.8.3)
-      elasticsearch-transport (= 6.8.3)
-    elasticsearch-api (6.8.3)
+    elastic-transport (8.1.0)
+      faraday (< 3)
       multi_json
-    elasticsearch-transport (6.8.3)
-      faraday (~> 1)
+    elasticsearch (8.3.0)
+      elastic-transport (~> 8)
+      elasticsearch-api (= 8.3.0)
+    elasticsearch-api (8.3.0)
       multi_json
     erubi (1.11.0)
     execjs (2.8.1)
@@ -111,29 +111,10 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (1.10.0)
-      faraday-em_http (~> 1.0)
-      faraday-em_synchrony (~> 1.0)
-      faraday-excon (~> 1.1)
-      faraday-httpclient (~> 1.0)
-      faraday-multipart (~> 1.0)
-      faraday-net_http (~> 1.0)
-      faraday-net_http_persistent (~> 1.0)
-      faraday-patron (~> 1.0)
-      faraday-rack (~> 1.0)
-      faraday-retry (~> 1.0)
+    faraday (2.5.2)
+      faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-em_http (1.0.0)
-    faraday-em_synchrony (1.0.0)
-    faraday-excon (1.1.0)
-    faraday-httpclient (1.0.1)
-    faraday-multipart (1.0.3)
-      multipart-post (>= 1.2, < 3)
-    faraday-net_http (1.0.1)
-    faraday-net_http_persistent (1.2.0)
-    faraday-patron (1.0.0)
-    faraday-rack (1.0.0)
-    faraday-retry (1.0.3)
+    faraday-net_http (3.0.0)
     ffi (1.15.5)
     gds-api-adapters (81.0.4)
       addressable
@@ -217,7 +198,6 @@ GEM
       rails (>= 4.2.0)
       railties (>= 4.2.0)
     multi_json (1.15.0)
-    multipart-post (2.1.1)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -421,7 +401,7 @@ PLATFORMS
 
 DEPENDENCIES
   database_cleaner-mongoid
-  elasticsearch (~> 6)
+  elasticsearch (~> 8)
   factory_bot_rails
   gds-api-adapters
   govuk_app_config

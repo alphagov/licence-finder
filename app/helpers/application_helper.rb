@@ -44,7 +44,7 @@ module ApplicationHelper
 
   def change_answer_url(action)
     new_params = params.permit(:activities, :location, :sectors)
-    url_for action: action, params: new_params
+    url_for action:, params: new_params
   end
 
 protected

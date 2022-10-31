@@ -34,7 +34,7 @@ private
 
   module ClassMethods
     def find_by_public_id(public_id)
-      where(public_id: public_id).first
+      where(public_id:).first
     end
   end
 end

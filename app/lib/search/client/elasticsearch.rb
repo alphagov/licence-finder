@@ -39,7 +39,7 @@ class Search
       def to_document(sector)
         {
           id: sector.public_id,
-          type: type,
+          type:,
           body: {
             public_id: sector.public_id,
             title: sector.name,
@@ -60,7 +60,7 @@ class Search
             query: {
               multi_match: {
                 fields: %w[title extra_terms activities],
-                query: query,
+                query:,
               },
             },
           },

@@ -16,10 +16,10 @@ class LicenceFacade
 
     return raw_data if licences.empty?
 
-    GdsApi.search.search_enum(
+    GdsApi.search.search_enum({
       filter_licence_identifier: licences.map(&:gds_id).map(&:to_s),
       fields: %w[title licence_short_description licence_identifier link],
-    ).to_a
+    }).to_a
   rescue GdsApi::BaseError => e
     message = e.class.name.dup
     message << "(#{e.code})" if e.respond_to?(:code)

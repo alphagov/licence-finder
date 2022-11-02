@@ -13,7 +13,7 @@ class Activity
   end
 
   def self.find_by_correlation_id(correlation_id)
-    where(correlation_id: correlation_id).first
+    where(correlation_id:).first
   end
 
   def self.find_by_sectors(sectors)

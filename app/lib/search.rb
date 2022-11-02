@@ -19,9 +19,9 @@ class Search
     end
 
     @client = Search::Client::Elasticsearch.new(
-      index_name: index_name,
-      settings: settings,
-      type: type,
+      index_name:,
+      settings:,
+      type:,
       config: client_config.merge(
         logger: Rails.logger,
         log: true,

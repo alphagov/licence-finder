@@ -22,7 +22,7 @@ class IdConvert
               match += 1
               correlation_id = result["GDS ID"]
               correlation_to_gds_id[correlation_id] = row["New code?"]
-              licence = Licence.where(correlation_id: correlation_id).first
+              licence = Licence.where(correlation_id:).first
               if licence
                 in_db += 1
                 unless row["New code?"] =~ /ignore/

@@ -8,7 +8,7 @@ class LicenceFinderContentItemPresenter
 
   def payload
     {
-      base_path: base_path,
+      base_path:,
       title: metadata[:title],
       description: metadata[:description],
       document_type: "license_finder",

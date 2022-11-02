@@ -16,11 +16,11 @@ class Licence
   validates :regulation_area, presence: true
 
   def self.find_by_correlation_id(correlation_id)
-    where(correlation_id: correlation_id).first
+    where(correlation_id:).first
   end
 
   def self.find_by_gds_id(gds_id)
-    where(gds_id: gds_id).first
+    where(gds_id:).first
   end
 
   def self.find_by_sectors_activities_and_location(sectors, activities, location)

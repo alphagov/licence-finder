@@ -24,4 +24,4 @@ WORKDIR /app
 
 USER app
 
-CMD bundle exec puma
+CMD ["bundle", "exec", "puma"]

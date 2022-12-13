@@ -40,7 +40,6 @@ module LicenceFinder
 
     config.assets.precompile += %w[
       application.css
-      print.css
       application.js
       test-dependencies.js
     ]

@@ -11,6 +11,7 @@ class LicenceFinderController < ApplicationController
 
   before_action :extract_and_validate_sector_ids, except: %i[sectors browse_sector_index browse_sector browse_sector_child browse_licences]
   before_action :extract_and_validate_activity_ids, except: %i[sectors activities browse_sector_index browse_sector browse_sector_child browse_licences]
+  before_action :set_noindex_nofollow, except: %i[browse_licences]
   before_action :set_expiry
   before_action :setup_content_item
   after_action :add_analytics_headers
@@ -150,5 +151,9 @@ protected
     if @sectors && params[:q].present?
       set_slimmer_headers(result_count: @sectors.length)
     end
+  end
+
+  def set_noindex_nofollow
+    response.set_header("X-Robots-Tag", "noindex,nofollow")
   end
 end

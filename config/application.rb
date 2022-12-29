@@ -34,10 +34,6 @@ module LicenceFinder
     # config.eager_load_paths << Rails.root.join("extras")
     config.assets.prefix = "/assets/licencefinder"
 
-    # allow overriding the asset host with an enironment variable, useful for
-    # when router is proxying to this app but asset proxying isn't set up.
-    config.asset_host = ENV["ASSET_HOST"]
-
     config.assets.precompile += %w[
       application.css
       application.js

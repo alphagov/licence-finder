@@ -13,7 +13,7 @@ $(function() {
 
     // $('el:bottom-offscreen') will return true if the element's
     // bottom box border is off the screen
-    $.expr.filters['bottom-offscreen'] = function(el) {
+    $.expr.pseudos['bottom-offscreen'] = function(el) {
         var $window = $(window),
             $el = $(el),
             bottomOfWindow = ($window.scrollTop() + $window.height()),

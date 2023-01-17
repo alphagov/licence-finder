@@ -8,7 +8,6 @@ gem "gds-api-adapters"
 gem "govuk_app_config"
 gem "govuk_frontend_toolkit"
 gem "govuk_publishing_components"
-gem "mail", "~> 2.7.1"  # TODO: remove once https://github.com/mikel/mail/issues/1489 is fixed.
 gem "mongo", "2.14.0"
 gem "mongoid", "7.5.2"
 gem "mongoid_rails_migrations"

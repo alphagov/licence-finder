@@ -9,6 +9,7 @@ class DataExporter
       {
         licence_identifier: licence.gds_id,
         locations: locations(licence),
+        industry_sectors: level_two_sectors(licence),
       }
     end
   end
@@ -23,5 +24,13 @@ private
     locations << "northern-ireland" if licence.da_northern_ireland
 
     locations
+  end
+
+  def level_two_sectors(licence)
+    sectors = Sector.in(id: LicenceLink.where(licence_id: licence.id).pluck(:sector_id))
+    sectors.filter_map do |sector|
+      parent_sectors = sector.parents.to_a
+      parent_sectors.first.name.parameterize if parent_sectors.first&.layer == 2
+    end
   end
 end

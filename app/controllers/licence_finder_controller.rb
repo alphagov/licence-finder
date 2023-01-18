@@ -9,8 +9,8 @@ class LicenceFinderController < ApplicationController
   ].freeze
   ACTIONS = %w[sectors activities business_location].freeze
 
-  before_action :extract_and_validate_sector_ids, except: %i[sectors browse_sector_index browse_sector browse_sector_child browse_licences]
-  before_action :extract_and_validate_activity_ids, except: %i[sectors activities browse_sector_index browse_sector browse_sector_child browse_licences]
+  before_action :extract_and_validate_sector_ids, except: %i[sectors browse_sector_index browse_sector browse_sector_child browse_licences licences_api]
+  before_action :extract_and_validate_activity_ids, except: %i[sectors activities browse_sector_index browse_sector browse_sector_child browse_licences licences_api]
   before_action :set_noindex_nofollow, except: %i[browse_licences]
   before_action :set_expiry
   before_action :setup_content_item
@@ -104,6 +104,10 @@ class LicenceFinderController < ApplicationController
     @licences = licences
       .each_slice(search_api_batch_size)
       .flat_map { |batch| LicenceFacade.create_for_licences(batch) }
+  end
+
+  def licences_api
+    render json: DataExporter.call
   end
 
 protected

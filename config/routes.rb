@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   get "#{APP_SLUG}/browse-sectors/:sector" => "licence_finder#browse_sector", :as => :browse_sector
   get "#{APP_SLUG}/browse-sectors/:sector_parent/:sector" => "licence_finder#browse_sector_child", :as => :browse_sector_child
   get "#{APP_SLUG}/browse-licences" => "licence_finder#browse_licences", :as => :browse_licences
+
+  get "#{APP_SLUG}/licences-api" => "licence_finder#licences_api", :as => :licences_api
 end

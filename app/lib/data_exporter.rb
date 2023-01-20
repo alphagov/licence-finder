@@ -28,9 +28,11 @@ private
 
   def level_two_sectors(licence)
     sectors = Sector.in(id: LicenceLink.where(licence_id: licence.id).pluck(:sector_id))
-    sectors.filter_map do |sector|
+    level_two_sectors = sectors.filter_map do |sector|
       parent_sectors = sector.parents.to_a
       parent_sectors.first.name.parameterize if parent_sectors.first&.layer == 2
     end
+
+    level_two_sectors.uniq
   end
 end

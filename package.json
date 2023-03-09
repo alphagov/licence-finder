@@ -3,7 +3,7 @@
   "name": "licence-finder",
   "license": "MIT",
   "dependencies": {
-    "jquery": "3.6.3"
+    "jquery": "3.6.4"
   },
   "packageManager": "yarn@3.4.1"
 }

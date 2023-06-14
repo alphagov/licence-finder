@@ -14,8 +14,18 @@ class PublishingApiNotifier
     end
   end
 
+  def self.unpublish
+    LICENCE_FINDER_FORM_DETAILS.each do |_base_path, content_id|
+      new.unpublish(content_id)
+    end
+  end
+
   def publish(presenter)
     GdsApi.publishing_api.put_content(presenter.content_id, presenter.payload)
     GdsApi.publishing_api.publish(presenter.content_id)
+  end
+
+  def unpublish(content_id)
+    GdsApi.publishing_api.unpublish(content_id, type: "redirect", alternative_path: "/find-licences")
   end
 end

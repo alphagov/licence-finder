@@ -3,4 +3,9 @@ namespace :publishing_api do
   task publish: :environment do
     PublishingApiNotifier.publish
   end
+
+  desc "Unpublishes Licence Finder pages in the Publishing API"
+  task unpublish: :environment do
+    PublishingApiNotifier.unpublish
+  end
 end

@@ -1,3 +1,6 @@
+**Licence Finder is retired and licence searches are handled by [Finder Frontend](https://github.com/alphagov/finder-frontend/)**
+
+
 # Licence Finder
 
 Licence Finder is a public facing GOV.UK application that helps users determine whether an activity they want to undertake requires a licence. Licence Finder renders the frontend of its pages, starting at https://www.gov.uk/licence-finder/sectors. Note that the [start page](https://www.gov.uk/licence-finder) is served by [Frontend][].

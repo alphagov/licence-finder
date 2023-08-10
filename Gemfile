@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "rails", "7.0.6"
 
 gem "bootsnap", require: false
-gem "elasticsearch", "~> 6" # We need a 6.x release to interface with Elasticsearch 6
+gem "elasticsearch", "~> 8" # We need a 6.x release to interface with Elasticsearch 6
 gem "gds-api-adapters"
 gem "govuk_app_config"
 gem "govuk_frontend_toolkit"

@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "7.0.6"
+gem "rails", "7.0.7"
 
 gem "bootsnap", require: false
 gem "elasticsearch", "~> 6" # We need a 6.x release to interface with Elasticsearch 6
